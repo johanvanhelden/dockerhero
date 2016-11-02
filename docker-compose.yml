@@ -1,0 +1,74 @@
+version: '2'
+
+services:
+  workspace:
+    container_name: dockerhero_workspace
+    image: johanvanhelden/dockerhero-workspace:latest
+    volumes:
+      - ./crons:/var/crons
+      - ./databases:/var/www/databases
+      - ./.phpmyadmin:/var/www/phpmyadmin
+      - ./../:/var/www/projects
+      - /etc/localtime:/etc/localtime:ro
+    tty: true
+
+  php:
+    container_name: dockerhero_php
+    image: johanvanhelden/dockerhero-php-5.6-fpm:latest
+    links:
+      - db
+      - workspace
+    volumes_from:
+      - workspace
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    dns: 8.8.8.8
+
+  web:
+    container_name: dockerhero_web
+    image: johanvanhelden/dockerhero-nginx:latest
+    links:
+      - php
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d/dockerhero/custom
+      - nginx_logs:/var/log/nginx
+      - /etc/localtime:/etc/localtime:ro
+    volumes_from:
+      - php
+      - workspace
+    ports:
+      - "80:80"
+      - "443:443"
+    dns: 8.8.8.8
+
+  db:
+    container_name: dockerhero_db
+    image: mysql:5.6
+    volumes:
+      - "database:/var/lib/mysql"
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dockerhero
+      MYSQL_DATABASE: dockerhero
+      MYSQL_USER: dockerhero
+      MYSQL_PASSWORD: dockerhero
+    dns: 8.8.8.8
+
+  mail:
+    container_name: dockerhero_mail
+    image: mailhog/mailhog
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    links:
+      - php
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    dns: 8.8.8.8
+
+volumes:
+  database:
+    driver: "local"
+  nginx_logs:
+    driver: "local"

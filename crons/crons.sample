@@ -1,0 +1,8 @@
+#----------------------------------------------------------------------------------------------------------------------
+# Duplicate this file in this directory to "crons" and enter the proper cronjobs you wish to add to crontab.
+# Some samples are shown below.
+#----------------------------------------------------------------------------------------------------------------------
+* * * * * echo "hello world" >> /var/www/test.cron.txt
+*/5 * * * * php /var/www/projects/myproject/public_html/dosomething.php > /var/cron/log.txt
+*/1 * * * * SERVER_NAME=codeigniter.dev2web.nl php /var/www/projects/codeiginiter/public_html/index.php cronjobs verwerkinschrijvingen > /var/cron/log.txt
+*/1 * * * * php /var/www/projects/laravel/artisan queue:work --queue=emails -q
