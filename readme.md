@@ -128,5 +128,9 @@ Feel free to send in pull requests! Either to the image repos or the dockerhero 
 - [Dockerhero - PHP 5.6-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.6-fpm)
 
 ### Todo
-- Make the timezone a setting that can be overwritten when starting containers
+- NodeJS to 6.* LTS
+- Make a seperate php 7-fpm image to give users a choice
 - Actually re-read the documentation and make sure everything is grammatically correct
+- Make the timezone a setting that can be overwritten when starting containers
+- Figure out why mysql sometimes does not persist
+- Set up a GitHub page
