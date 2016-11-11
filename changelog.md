@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Mercurial added to workspace image.
 
 ### Changed
-- NodeJs to 6.\*.
+- Node.js to 6.\* on workspace image.
 - Readme.md tweaks.
 
 ## 0.8.1 - 2016-11-04
