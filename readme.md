@@ -1,5 +1,5 @@
 # Dockerhero
-#### Version 0.8.1
+#### Version 1.0.0
 
 ### What is Dockerhero?
 Dockerhero is a local development tool. Out of the box, it should only take a "docker-compose start" to get all your local PHP projects working. Yes, all of them. At the same time.
@@ -21,7 +21,7 @@ Dockerhero includes the following useful tools:
 - Mailhog
 - Composer
 - Xdebug
-- NodeJS 4.*
+- NodeJS 6.*
 - NPM
 - Gulp
 - Bower
@@ -51,7 +51,7 @@ This part is however entirely optional, and you do not have to do this. You can 
 
     $ docker-compose up
 
-This will give you real-time log information and usefull when debugging something. If anything fails, you can simply ctrl-c docker and it will shut down.
+This will give you real-time log information and useful when debugging something. If anything fails, you can simply ctrl-c docker and it will shut down.
 
 If you would rather prefer to run everything in the background, use:
 
@@ -128,9 +128,6 @@ Feel free to send in pull requests! Either to the image repos or the dockerhero 
 - [Dockerhero - PHP 5.6-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.6-fpm)
 
 ### Todo
-- NodeJS to 6.* LTS
 - Make a seperate php 7-fpm image to give users a choice
-- Actually re-read the documentation and make sure everything is grammatically correct
 - Make the timezone a setting that can be overwritten when starting containers
-- Figure out why mysql sometimes does not persist
 - Set up a GitHub page

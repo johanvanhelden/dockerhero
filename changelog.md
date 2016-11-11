@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - nothing
 
+## 1.0.0 - 2016-11-11
+### Added
+- Mercurial added to workspace image.
+
+### Changed
+- NodeJs to 6.\*.
+- Readme.md tweaks.
+
 ## 0.8.1 - 2016-11-04
 ### Added
 - Soap extension added to workspace and php-5.6-fpm images.
