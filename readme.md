@@ -21,7 +21,7 @@ Dockerhero includes the following useful tools:
 - Mailhog
 - Composer
 - Xdebug
-- NodeJS 6.*
+- Node.js 6.*
 - NPM
 - Gulp
 - Bower
