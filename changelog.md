@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - nothing
 
+## 1.0.1 - 2016-11-18
+### Changed
+- Allow file uploads up to 8MB in nginx image.
+
 ## 1.0.0 - 2016-11-11
 ### Added
 - Mercurial added to workspace image.
