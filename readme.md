@@ -1,5 +1,5 @@
 # Dockerhero
-#### Version 1.0.1
+#### Version 1.0.2
 
 ### What is Dockerhero?
 Dockerhero is a local development tool. Out of the box, it should only take a "docker-compose start" to get all your local PHP projects working. Yes, all of them. At the same time.
