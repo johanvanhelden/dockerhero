@@ -11,6 +11,7 @@ services:
       - ./../:/var/www/projects
       - /etc/localtime:/etc/localtime:ro
     tty: true
+    dns: 8.8.8.8
 
   php:
     container_name: dockerhero_php
