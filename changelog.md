@@ -8,6 +8,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.0.3 - 2016-11-24
+
+### Changed
+
+- Add the dns option to the workspace image to fix dns issues on OSX.
+- Add a better update section to the readme.
+- Increased xdebug dumping depth to show everything when dumping data. (php-5.6-fpm image)
+- Ensure all e-mail is caught by Mailhog by default and update the readme to reflect this change. (php-5.6-fpm image)
+
 ## 1.0.2 - 2016-11-21
 
 ### Added

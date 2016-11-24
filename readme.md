@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.0.2
+## Version 1.0.3
 
 ### What is Dockerhero?
 
@@ -37,7 +37,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 ## Table of Contents
 
 1. [Installation](#installation)
-2. [Updating images](#updating-images)
+2. [Updating](#updating)
 3. [Usage](#usage)
 4. [Databases](#databases)
 5. [CLI Access](#cli-access)
@@ -69,7 +69,11 @@ Dockerhero has full support for https. This is done with a self-signed certifica
 
 This part is however entirely optional, and you do not have to do this. You can simply ignore the browser warning and continue.
 
-## Updating images
+## Updating
+
+Simply download or pull the latest release from [GitHub](https://github.com/johanvanhelden/dockerhero) and [update the images](#updating-images).
+
+### Updating images
 
 To ensure you have the latest images, you can run `docker-compose pull` in the dockerhero folder.
 
@@ -145,14 +149,7 @@ Create a new file in `./crons/` called `crons`. In this file, define all the cro
 
 ## Mailhog
 
-You can catch your application e-mail with the following e-mail settings:
-
-```
-SMTP Host: dockerhero_mail
-SMTP Port: 1025
-```
-
-Next, visit the mailhog GUI by going to `http://localhost:8025`
+All outgoing mail is caught by default. You do not need to configure anything. To view the e-mail that has been send, visit the [Mailhog GUI](http://localhost:8025)
 
 ## Contributing
 

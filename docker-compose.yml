@@ -11,6 +11,7 @@ services:
       - ./../:/var/www/projects
       - /etc/localtime:/etc/localtime:ro
     tty: true
+    dns: 8.8.8.8
 
   php:
     container_name: dockerhero_php
@@ -58,10 +59,6 @@ services:
   mail:
     container_name: dockerhero_mail
     image: mailhog/mailhog
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-    links:
-      - php
     ports:
       - "1025:1025"
       - "8025:8025"
