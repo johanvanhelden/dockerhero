@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.0.4 - 2016-11-24
+
+### Changed
+
+- Added instructions to make mailcatching work with Laravel artisan commands (like queue workers).
+
 ## 1.0.3 - 2016-11-24
 
 ### Changed
