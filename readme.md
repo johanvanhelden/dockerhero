@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.0.3
+## Version 1.0.4
 
 ### What is Dockerhero?
 
@@ -150,6 +150,14 @@ Create a new file in `./crons/` called `crons`. In this file, define all the cro
 ## Mailhog
 
 All outgoing mail is caught by default. You do not need to configure anything. To view the e-mail that has been send, visit the [Mailhog GUI](http://localhost:8025)
+
+For some reason, this autocatching does not work properly with Laravel artisan commands (like queue workers). In order to make it work, you can set the .env settings like so:
+
+```
+MAIL_DRIVER=smtp
+MAIL_HOST=dockerhero_mail
+MAIL_PORT=1025
+```
 
 ## Contributing
 
