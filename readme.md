@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.0.4
+## Version 1.0.5
 
 ### What is Dockerhero?
 
@@ -30,6 +30,7 @@ Dockerhero includes the following useful tools:
 - Gulp
 - Bower
 - Vue-cli
+- Laravel Artisan autocompletion
 - and more to come!
 
 Localtest.me is used to make everything work without editing your hosts file! Just like magic!
@@ -126,6 +127,10 @@ All projects are available in `/var/www/projects/`
 You can replace `dockerhero_workspace` with any container name. The `--user=dockerhero` part is needed to prevent files from being generated with the root user and group. You will need to leave out this argument for other containers.
 
 When you enter the bash environment, you will be starting in `/var/www/projects`
+
+### Artisan autocompletion
+
+If you are inside a Laravel folder, you can type `artisan` (instead of `./artisan` or `php artisan`) and tab to autocomplete.
 
 ### Protip! Make yourself a bash alias!
 
