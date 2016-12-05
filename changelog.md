@@ -8,13 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
-## 1.0.5 - 2016-12-05
-
-### Added
-
-- Laravel Artisan autocompletion. (workspace image)
-
-## 1.0.4 - 2016-11-24
+## 1.0.4 - 2016-11-29
 
 ### Changed
 
