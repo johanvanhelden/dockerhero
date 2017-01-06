@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.0.6 - 2017-01-06
+
+### Added
+
+- PHP zip extension. (php-5.6-fpm image)
+- Section to the readme on how to forward requests to nginx container from PHP.
+
 ## 1.0.5 - 2016-12-05
 
 ### Added
