@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.0.5
+## Version 1.0.6
 
 ### What is Dockerhero?
 
@@ -45,10 +45,11 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 6. [Custom nginx configs](#custom-nginx-configs)
 7. [Cronjobs](#cronjobs)
 8. [Mailhog](#mailhog)
-9. [Contributing](#contributing)
-10. [Thank you](#thank-you)
-11. [Project links](#project-links)
-12. [Todo](#todo)
+9. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
+10. [Contributing](#contributing)
+11. [Thank you](#thank-you)
+12. [Project links](#project-links)
+13. [Todo](#todo)
 
 ## Installation
 
@@ -163,6 +164,17 @@ MAIL_DRIVER=smtp
 MAIL_HOST=dockerhero_mail
 MAIL_PORT=1025
 ```
+
+## Connecting from PHP to a local project via URL
+
+Add the following entry to the docker-compose.yml file in the `php:` section:
+
+```
+extra_hosts:
+  - "projectname.localtest.me:172.18.0.6"
+```
+
+Where 172.18.0.6 is the IP of the dockerhero_web container. Now, if PHP attempts to connect to projectname.localtest.me, it will not connect to his localhost, but to the nginx container.
 
 ## Contributing
 
