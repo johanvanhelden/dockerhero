@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.0.6
+## Version 1.0.7
 
 ### What is Dockerhero?
 
@@ -27,6 +27,7 @@ Dockerhero includes the following useful tools:
 - Xdebug
 - Node.js 6.*
 - NPM
+- Yarn
 - Gulp
 - Bower
 - Vue-cli

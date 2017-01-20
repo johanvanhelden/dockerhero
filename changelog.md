@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.0.7 - 2017-01-20
+
+### Added
+
+- Yarn (workspace image)
+
 ## 1.0.6 - 2017-01-06
 
 ### Added
