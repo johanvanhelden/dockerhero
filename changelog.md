@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.1.1 - 2017-01-25
+
+### Added
+
+- Subdomain support (nginx image)
+
 ## 1.1.0 - 2017-01-20
 
 ### Changed
