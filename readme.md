@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.1.1
+## Version 1.1.2
 
 ### What is Dockerhero?
 
@@ -32,6 +32,7 @@ Dockerhero includes the following useful tools:
 - Bower
 - Vue-cli
 - Laravel Artisan autocompletion
+- Laravel Dusk support
 - and more to come!
 
 Localtest.me is used to make everything work without editing your hosts file! Just like magic!
@@ -47,10 +48,11 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 7. [Cronjobs](#cronjobs)
 8. [Mailhog](#mailhog)
 9. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
-10. [Contributing](#contributing)
-11. [Thank you](#thank-you)
-12. [Project links](#project-links)
-13. [Todo](#todo)
+10. [Using Laravel Dusk](#using-laravel-dusk)
+11. [Contributing](#contributing)
+12. [Thank you](#thank-you)
+13. [Project links](#project-links)
+14. [Todo](#todo)
 
 ## Installation
 
@@ -175,7 +177,30 @@ extra_hosts:
   - "projectname.localtest.me:172.18.0.6"
 ```
 
-Where 172.18.0.6 is the IP of the dockerhero_web container. Now, if PHP attempts to connect to projectname.localtest.me, it will not connect to his localhost, but to the nginx container.
+Instead, it would be better to create a new docker-compose.override.yml file in order to keep the original docker-compose.yml untouched and update-able.
+Your docker-compose.override.yml might look like this:
+
+```
+version: '2'
+
+services:
+  php:
+    extra_hosts:
+      - "projectname.localtest.me:172.18.0.6"
+  workspace:
+    extra_hosts:
+      - "projectname.localtest.me:172.18.0.6"
+```
+
+Where 172.18.0.6 is the IP of the dockerhero_web container. To find the IP address you could use:
+
+`$ docker inspect dockerhero_web | grep IPAddress`
+
+Now, if PHP attempts to connect to projectname.localtest.me, it will not connect to his localhost, but to the nginx container.
+
+## Using Laravel Dusk
+
+In order to make Laravel Dusk work, you need to add your Laravel project URL to the "extra_hosts" section of the docker compose workspace section, as explained in the "[Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)" section.
 
 ## Contributing
 
