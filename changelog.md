@@ -8,11 +8,24 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.1.2 - 2017-02-10
+
+### Added
+
+- Chrome in order to support Laravel Dusk. (workspace image)
+- A using Laravel Dusk section to the readme.
+
+### Changed
+
+- Ignore docker-compose.override.yml file - in order to make it easy to make changes to settings.
+- No longer force SSL. (nginx image)
+- Better explanation on how to connect to projects from within containers in the readme.
+
 ## 1.1.1 - 2017-01-25
 
 ### Added
 
-- Subdomain support (nginx image)
+- Subdomain support. (nginx image)
 
 ## 1.1.0 - 2017-01-20
 
