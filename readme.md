@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.1.2
+## Version 1.1.3
 
 ### What is Dockerhero?
 
@@ -14,6 +14,7 @@ Dockerhero includes the following software (containers):
 
 - nginx (latest)
 - mySQL (5.6)
+- Redis (latest)
 - PHP (5.6-fpm)
 - Mailhog
 - and more to come!
@@ -48,11 +49,12 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 7. [Cronjobs](#cronjobs)
 8. [Mailhog](#mailhog)
 9. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
-10. [Using Laravel Dusk](#using-laravel-dusk)
-11. [Contributing](#contributing)
-12. [Thank you](#thank-you)
-13. [Project links](#project-links)
-14. [Todo](#todo)
+10. [Making a local website publicly available](#making-a-local-website publicly-available)
+11. [Using Laravel Dusk](#using-laravel-dusk)
+12. [Contributing](#contributing)
+13. [Thank you](#thank-you)
+14. [Project links](#project-links)
+15. [Todo](#todo)
 
 ## Installation
 
@@ -105,7 +107,7 @@ $ docker-compose stop
 ```
 
 ## Databases
-
+### MySQL
 Via phpMyAdmin you can create new databases and users. The database host you would need to use in your projects would be:
 
 ```
@@ -117,6 +119,13 @@ You can visit phpMyAdmin by going to `https://phpmyadmin.localtest.me`
 If you want to import databases from the file system, place them in `./databases/upload`.
 
 Any exported databases to the file system can be found in `./databases/save`
+
+### Redis
+In order to use Redis in your projects, you need to define the following host:
+
+```
+mySQL host: dockerhero_redis
+```
 
 ## CLI Access
 
@@ -197,6 +206,21 @@ Where 172.18.0.6 is the IP of the dockerhero_web container. To find the IP addre
 `$ docker inspect dockerhero_web | grep IPAddress`
 
 Now, if PHP attempts to connect to projectname.localtest.me, it will not connect to his localhost, but to the nginx container.
+
+## Making a local website publicly available
+
+If you are developing for an API, webhook or if you want to demonstrate something to someone, it can be extremely useful to forward your local website to the public internet.
+
+In order to do this:
+- Download ngrok from: https://ngrok.com/
+- Extract the zip file
+- Run the following command from the command line:
+
+```$ ./ngrok http 127.0.0.1:80 -host-header=project.localtest.me```
+
+Where the host-header flag contains the URL of the project you would like to forward.
+
+Ngrok will now present you with a unique ngrok URL. This is the URL you can give out to clients or use in the API/webhook settings.
 
 ## Using Laravel Dusk
 
