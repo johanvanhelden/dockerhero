@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.1.3 - 2017-03-04
+
+### Added
+
+- Added a redis container.
+- Added instructions on how to make a local website publicly available using ngrok.
+
 ## 1.1.2 - 2017-02-10
 
 ### Added
