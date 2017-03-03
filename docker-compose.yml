@@ -19,6 +19,7 @@ services:
     links:
       - db
       - workspace
+      - redis
     volumes_from:
       - workspace
     volumes:
@@ -64,8 +65,19 @@ services:
       - "8025:8025"
     dns: 8.8.8.8
 
+  redis:
+    container_name: dockerhero_redis
+    image: redis:latest
+    volumes:
+      - redis:/data
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+
 volumes:
   database:
     driver: "local"
   nginx_logs:
+    driver: "local"
+  redis:
     driver: "local"
