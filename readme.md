@@ -49,7 +49,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 7. [Cronjobs](#cronjobs)
 8. [Mailhog](#mailhog)
 9. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
-10. [Making a local website publicly available](#making-a-local-website publicly-available)
+10. [Making a local website publicly available](#making-a-local-website-publicly-available)
 11. [Using Laravel Dusk](#using-laravel-dusk)
 12. [Contributing](#contributing)
 13. [Thank you](#thank-you)

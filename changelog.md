@@ -12,8 +12,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- Added a redis container.
-- Added instructions on how to make a local website publicly available using ngrok.
+- A redis container.
+- Instructions on how to make a local website publicly available using ngrok.
 
 ## 1.1.2 - 2017-02-10
 
