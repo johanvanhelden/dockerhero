@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.1.3
+## Version 1.1.4
 
 ### What is Dockerhero?
 
@@ -22,6 +22,7 @@ Dockerhero includes the following software (containers):
 Dockerhero includes the following useful tools:
 
 - phpMyAdmin
+- phpRedisAdmin
 - Cron
 - Mailhog
 - Composer
@@ -107,7 +108,9 @@ $ docker-compose stop
 ```
 
 ## Databases
+
 ### MySQL
+
 Via phpMyAdmin you can create new databases and users. The database host you would need to use in your projects would be:
 
 ```
@@ -121,11 +124,14 @@ If you want to import databases from the file system, place them in `./databases
 Any exported databases to the file system can be found in `./databases/save`
 
 ### Redis
+
 In order to use Redis in your projects, you need to define the following host:
 
 ```
 mySQL host: dockerhero_redis
 ```
+
+You can visit phpRedisAdmin by going to `https://phpredisadmin.localtest.me`
 
 ## CLI Access
 
@@ -186,8 +192,7 @@ extra_hosts:
   - "projectname.localtest.me:172.18.0.6"
 ```
 
-Instead, it would be better to create a new docker-compose.override.yml file in order to keep the original docker-compose.yml untouched and update-able.
-Your docker-compose.override.yml might look like this:
+Instead, it would be better to create a new docker-compose.override.yml file in order to keep the original docker-compose.yml untouched and update-able. Your docker-compose.override.yml might look like this:
 
 ```
 version: '2'
@@ -212,11 +217,12 @@ Now, if PHP attempts to connect to projectname.localtest.me, it will not connect
 If you are developing for an API, webhook or if you want to demonstrate something to someone, it can be extremely useful to forward your local website to the public internet.
 
 In order to do this:
-- Download ngrok from: https://ngrok.com/
+
+- Download ngrok from: <https://ngrok.com/>
 - Extract the zip file
 - Run the following command from the command line:
 
-```$ ./ngrok http 127.0.0.1:80 -host-header=project.localtest.me```
+`$ ./ngrok http 127.0.0.1:80 -host-header=project.localtest.me`
 
 Where the host-header flag contains the URL of the project you would like to forward.
 

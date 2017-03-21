@@ -8,6 +8,7 @@ services:
       - ./crons:/var/crons
       - ./databases:/var/www/databases
       - ./.phpmyadmin:/var/www/phpmyadmin
+      - ./.phpredisadmin:/var/www/phpredisadmin
       - ./../:/var/www/projects
       - /etc/localtime:/etc/localtime:ro
     tty: true
@@ -28,7 +29,8 @@ services:
 
   web:
     container_name: dockerhero_web
-    image: johanvanhelden/dockerhero-nginx:latest
+    #image: johanvanhelden/dockerhero-nginx:latest
+    build:  ../dockerhero-nginx
     links:
       - php
     volumes:
