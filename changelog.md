@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.1.4 - 2017-03-21
+
+### Added
+
+- Redis PHP extension (php and workspace image) - @pkeulers.
+- Proper sendmail path to mailhog in php.ini (php image) - this will allow crons to send mail as well.
+- phpRedisAdmin (<http://phpredisadmin.localtest.me>)
+
 ## 1.1.3 - 2017-03-04
 
 ### Added
