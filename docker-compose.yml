@@ -29,8 +29,7 @@ services:
 
   web:
     container_name: dockerhero_web
-    #image: johanvanhelden/dockerhero-nginx:latest
-    build:  ../dockerhero-nginx
+    image: johanvanhelden/dockerhero-nginx:latest
     links:
       - php
     volumes:
