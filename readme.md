@@ -73,8 +73,12 @@ This is because dockhero mounts its parent folder (`./../`) as `/var/www/project
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
 ### Picking a PHP version
-By default, PHP 5.6 is active. If you would like to change this to PHP 7.1, you can do so by overriding the option using the docker-compose.override.yml to change image. For more information, please see this section: [Overriding default settings](#overriding-default-settings)
+By default, PHP 5.6 is active. If you would like to change this to PHP 7.1, you can do so by overriding the option using the docker-compose.override.yml to change image.
+
+For more information, please see this section: [Overriding default settings](#overriding-default-settings)
+
 The PHP 5.6 image is: `johanvanhelden/dockerhero-php-5.6-fpm:latest`
+
 The PHP 7.1 image is: `johanvanhelden/dockerhero-php-7.1-fpm:latest`
 
 ### Trusting the self-signed certificate
