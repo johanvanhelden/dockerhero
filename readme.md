@@ -121,6 +121,7 @@ Via phpMyAdmin you can create new databases and users. The database host you wou
 
 ```
 mySQL host: dockerhero_db
+mySQL port: 3306
 ```
 
 You can visit phpMyAdmin by going to `https://phpmyadmin.localtest.me`
@@ -135,6 +136,7 @@ In order to use Redis in your projects, you need to define the following host:
 
 ```
 Redis host: dockerhero_redis
+Redis port: 6379
 ```
 
 You can visit phpRedisAdmin by going to `https://phpredisadmin.localtest.me`
@@ -187,6 +189,9 @@ For some reason, this autocatching does not work properly with Laravel artisan c
 MAIL_DRIVER=smtp
 MAIL_HOST=dockerhero_mail
 MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
 ```
 
 ## Overriding default settings
