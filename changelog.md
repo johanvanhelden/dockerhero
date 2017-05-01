@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.1.5 - 2017-05-01
+
+### Added
+
+- A PHP 7.1 container option.
+
 ## 1.1.4 - 2017-03-21
 
 ### Added

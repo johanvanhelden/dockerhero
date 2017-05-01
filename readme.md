@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.1.4
+## Version 1.1.5
 
 ### What is Dockerhero?
 
@@ -15,7 +15,7 @@ Dockerhero includes the following software (containers):
 - nginx (latest)
 - mySQL (5.6)
 - Redis (latest)
-- PHP (5.6-fpm)
+- PHP (5.6-fpm or 7.1-fpm)
 - Mailhog
 - and more to come!
 
@@ -49,13 +49,14 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 6. [Custom nginx configs](#custom-nginx-configs)
 7. [Cronjobs](#cronjobs)
 8. [Mailhog](#mailhog)
-9. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
-10. [Making a local website publicly available](#making-a-local-website-publicly-available)
-11. [Using Laravel Dusk](#using-laravel-dusk)
-12. [Contributing](#contributing)
-13. [Thank you](#thank-you)
-14. [Project links](#project-links)
-15. [Todo](#todo)
+9. [Overriding default settings](#overriding-default-settings)
+10. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
+11. [Making a local website publicly available](#making-a-local-website-publicly-available)
+12. [Using Laravel Dusk](#using-laravel-dusk)
+13. [Contributing](#contributing)
+14. [Thank you](#thank-you)
+15. [Project links](#project-links)
+16. [Todo](#todo)
 
 ## Installation
 
@@ -70,6 +71,15 @@ Next, it is essential to make sure dockerhero is inside the folder containing al
 This is because dockhero mounts its parent folder (`./../`) as `/var/www/projects/`, which is the location nginx will look for when it receives a request on `http://*.localtest.me`
 
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
+
+### Picking a PHP version
+By default, PHP 5.6 is active. If you would like to change this to PHP 7.1, you can do so by overriding the option using the docker-compose.override.yml to change image.
+
+For more information, please see this section: [Overriding default settings](#overriding-default-settings)
+
+The PHP 5.6 image is: `johanvanhelden/dockerhero-php-5.6-fpm:latest`
+
+The PHP 7.1 image is: `johanvanhelden/dockerhero-php-7.1-fpm:latest`
 
 ### Trusting the self-signed certificate
 
@@ -86,7 +96,7 @@ Simply download or pull the latest release from [GitHub](https://github.com/joha
 To ensure you have the latest images, you can run `docker-compose pull` in the dockerhero folder.
 
 ## Usage
-
+### Starting
 `$ cd` into the dockerhero folder on your local machine and execute:
 
 ```
@@ -115,6 +125,7 @@ Via phpMyAdmin you can create new databases and users. The database host you wou
 
 ```
 mySQL host: dockerhero_db
+mySQL port: 3306
 ```
 
 You can visit phpMyAdmin by going to `https://phpmyadmin.localtest.me`
@@ -128,7 +139,8 @@ Any exported databases to the file system can be found in `./databases/save`
 In order to use Redis in your projects, you need to define the following host:
 
 ```
-mySQL host: dockerhero_redis
+Redis host: dockerhero_redis
+Redis port: 6379
 ```
 
 You can visit phpRedisAdmin by going to `https://phpredisadmin.localtest.me`
@@ -181,24 +193,21 @@ For some reason, this autocatching does not work properly with Laravel artisan c
 MAIL_DRIVER=smtp
 MAIL_HOST=dockerhero_mail
 MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
 ```
 
-## Connecting from PHP to a local project via URL
-
-Add the following entry to the docker-compose.yml file in the `php:` section:
-
-```
-extra_hosts:
-  - "projectname.localtest.me:172.18.0.6"
-```
-
-Instead, it would be better to create a new docker-compose.override.yml file in order to keep the original docker-compose.yml untouched and update-able. Your docker-compose.override.yml might look like this:
+## Overriding default settings
+You can create a brand new docker-compose.override.yml in the root of dockerhero to override default settings or customize things.
+It might look a bit like this:
 
 ```
 version: '2'
 
 services:
   php:
+    image: johanvanhelden/dockerhero-php-7.1-fpm:latest
     extra_hosts:
       - "projectname.localtest.me:172.18.0.6"
   workspace:
@@ -206,6 +215,14 @@ services:
       - "projectname.localtest.me:172.18.0.6"
 ```
 
+## Connecting from PHP to a local project via URL
+
+Add the following entry to the docker-compose.override.yml file in the `php:` section:
+
+```
+extra_hosts:
+  - "projectname.localtest.me:172.18.0.6"
+```
 Where 172.18.0.6 is the IP of the dockerhero_web container. To find the IP address you could use:
 
 `$ docker inspect dockerhero_web | grep IPAddress`
@@ -252,6 +269,7 @@ Feel free to send in pull requests! Either to the image repos or the dockerhero 
 - [Dockerhero - Workspace GitHub](https://github.com/johanvanhelden/dockerhero-workspace)
 - [Dockerhero - Nginx GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
 - [Dockerhero - PHP 5.6-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.6-fpm)
+- [Dockerhero - PHP 7.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.1-fpm)
 
 ## Todo
 
