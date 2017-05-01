@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
-## 1.1.5 - 2017-04-26
+## 1.1.5 - 2017-05-01
 
 ### Added
 
