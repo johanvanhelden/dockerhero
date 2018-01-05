@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.1.5
+## Version 1.2.0
 
 ### What is Dockerhero?
 
@@ -15,7 +15,7 @@ Dockerhero includes the following software (containers):
 - nginx (latest)
 - mySQL (5.6)
 - Redis (latest)
-- PHP (5.6-fpm or 7.1-fpm)
+- PHP (7.1-fpm or 5.6-fpm)
 - Mailhog
 - and more to come!
 
@@ -73,13 +73,13 @@ This is because dockhero mounts its parent folder (`./../`) as `/var/www/project
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
 ### Picking a PHP version
-By default, PHP 5.6 is active. If you would like to change this to PHP 7.1, you can do so by overriding the option using the docker-compose.override.yml to change image.
+By default, PHP 7.1 is active. If you would like to change this to PHP 5.6, you can do so by overriding the option using the docker-compose.override.yml to change image.
 
 For more information, please see this section: [Overriding default settings](#overriding-default-settings)
 
-The PHP 5.6 image is: `johanvanhelden/dockerhero-php-5.6-fpm:latest`
-
 The PHP 7.1 image is: `johanvanhelden/dockerhero-php-7.1-fpm:latest`
+
+The PHP 5.6 image is: `johanvanhelden/dockerhero-php-5.6-fpm:latest`
 
 ### Trusting the self-signed certificate
 
@@ -268,11 +268,10 @@ Feel free to send in pull requests! Either to the image repos or the dockerhero 
 - [Dockerhero - GitHub](https://github.com/johanvanhelden/dockerhero)
 - [Dockerhero - Workspace GitHub](https://github.com/johanvanhelden/dockerhero-workspace)
 - [Dockerhero - Nginx GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
-- [Dockerhero - PHP 5.6-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.6-fpm)
 - [Dockerhero - PHP 7.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.1-fpm)
+- [Dockerhero - PHP 5.6-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.6-fpm)
 
 ## Todo
 
-- Make a seperate php 7-fpm image to give users a choice
 - Make the timezone a setting that can be overwritten when starting containers
 - Set up a GitHub page
