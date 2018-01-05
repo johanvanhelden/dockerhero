@@ -16,7 +16,7 @@ services:
 
   php:
     container_name: dockerhero_php
-    image: johanvanhelden/dockerhero-php-5.6-fpm:latest
+    image: johanvanhelden/dockerhero-php-7.1-fpm:latest
     links:
       - db
       - workspace

@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.2.0 - 2018-01-05
+
+### Changed
+
+- Made PHP 7.1 the default version.
+- Rebuild workspace and PHP 7.1 images (updated PHP 7.1 to 7.1.12 and Yarn to 1.3.2).
+
 ## 1.1.5 - 2017-05-01
 
 ### Added
