@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## 1.2.1 - 2018-01-10
 
 ### Added
+
 - PHP imap extention to the workspace image
 
 ## 1.2.0 - 2018-01-05
