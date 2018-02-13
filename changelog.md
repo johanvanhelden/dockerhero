@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.2.2 - 2018-02-13
+
+### Added
+
+- PHP 5.4 image
+
 ## 1.2.1 - 2018-01-10
 
 ### Added
