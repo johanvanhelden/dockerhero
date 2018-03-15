@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.2.2
+## Version 1.2.3
 
 ### What is Dockerhero?
 
@@ -15,7 +15,7 @@ Dockerhero includes the following software (containers):
 - nginx (latest)
 - mySQL (5.6)
 - Redis (latest)
-- PHP (7.1-fpm, 5.6-fpm or 5.4-fpm)
+- PHP (7.1-fpm by default, or pick: 7.2-fpm, 5.6-fpm or 5.4-fpm)
 - Mailhog
 - and more to come!
 
@@ -66,7 +66,7 @@ Follow the instructions on the docker website to install [docker](https://docs.d
 
 ### Folder placement
 
-Next, it is essential to make sure dockerhero is inside the folder containing all the projects you wish to use with dockerhero. So if you want `https://mysuperproject.localtest.me` to be accessible, place and run dockerhero inside the same folder `mysuperproject` is located. For example, if the path to `mysuperproject` is: `/home/john/webdev/mysuperproject` - dockerhero needs to be located in `/home/john/webdev/dockerhero`.
+Next, it is essential to make sure Dockerhero is inside the folder containing all the projects you wish to use with Dockerhero. So if you want `https://mysuperproject.localtest.me` to be accessible, place and run Dockerhero inside the same folder `mysuperproject` is located. For example, if the path to `mysuperproject` is: `/home/john/webdev/mysuperproject` - Dockerhero needs to be located in `/home/john/webdev/dockerhero`.
 
 This is because dockhero mounts its parent folder (`./../`) as `/var/www/projects/`, which is the location nginx will look for when it receives a request on `http://*.localtest.me`
 
@@ -78,6 +78,8 @@ By default, PHP 7.1 is active. If you would like to change this to another versi
 For more information, please see this section: [Overriding default settings](#overriding-default-settings)
 
 Available PHP Images:
+
+PHP 7.2: `johanvanhelden/dockerhero-php-7.2-fpm:latest`
 
 PHP 7.1: `johanvanhelden/dockerhero-php-7.1-fpm:latest`
 
@@ -98,11 +100,11 @@ Simply download or pull the latest release from [GitHub](https://github.com/joha
 
 ### Updating images
 
-To ensure you have the latest images, you can run `docker-compose pull` in the dockerhero folder.
+To ensure you have the latest images, you can run `docker-compose pull` in the Dockerhero folder.
 
 ## Usage
 ### Starting
-`$ cd` into the dockerhero folder on your local machine and execute:
+`$ cd` into the Dockerhero folder on your local machine and execute:
 
 ```
 $ docker-compose up
@@ -121,6 +123,14 @@ And to stop the containers:
 ```
 $ docker-compose stop
 ```
+
+### Laravel's public folder
+If you are working with a default Laravel project, you will probably get a `File not found.` error. This is because Laravel uses a `public` folder instead of a `public_html` folder. Dockerhero is configured out-of-the-box to use a `public_html` as the root.
+
+There are a few ways to solve this:
+- Either reconfigure Laravel to use a public_html folder, for instructions, view this [Gist](https://gist.github.com/johanvanhelden/29096a9ff31eac9b039d36056919abbb#file-reconfigure-laravel-instructions-md)
+- Or create a symbolic link, for instructions, view this [Gist](https://gist.github.com/johanvanhelden/29096a9ff31eac9b039d36056919abbb#file-symlink-instructions-md)
+- Or add a custom nginx vhost to use the public folder, for instructions, view this [Gist](https://gist.github.com/johanvanhelden/29096a9ff31eac9b039d36056919abbb#file-vhost-instructions-md)
 
 ## Databases
 
@@ -204,7 +214,7 @@ MAIL_ENCRYPTION=null
 ```
 
 ## Overriding default settings
-You can create a brand new docker-compose.override.yml in the root of dockerhero to override default settings or customize things.
+You can create a brand new docker-compose.override.yml in the root of Dockerhero to override default settings or customize things.
 It might look a bit like this:
 
 ```
@@ -256,7 +266,7 @@ In order to make Laravel Dusk work, you need to add your Laravel project URL to 
 
 ## Contributing
 
-Feel free to send in pull requests! Either to the image repos or the dockerhero repo itself. Do keep the following in mind:
+Feel free to send in pull requests! Either to the image repos or the Dockerhero repo itself. Do keep the following in mind:
 
 - Everything needs to be as generic as possible, so do not try and add something that is super specific to your own use that no-one else will use.
 - Everyone needs to be able to use it out of the box, without additional configuration. However, it is fine if a feature would be disabled without configuring. As long as users can still just clone the project and "go".
@@ -273,6 +283,7 @@ Feel free to send in pull requests! Either to the image repos or the dockerhero 
 - [Dockerhero - GitHub](https://github.com/johanvanhelden/dockerhero)
 - [Dockerhero - Workspace GitHub](https://github.com/johanvanhelden/dockerhero-workspace)
 - [Dockerhero - Nginx GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
+- [Dockerhero - PHP 7.2-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.2-fpm)
 - [Dockerhero - PHP 7.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.1-fpm)
 - [Dockerhero - PHP 5.6-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.6-fpm)
 - [Dockerhero - PHP 5.4-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.4-fpm)
