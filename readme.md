@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.2.2
+## Version 1.2.3
 
 ### What is Dockerhero?
 
@@ -15,7 +15,7 @@ Dockerhero includes the following software (containers):
 - nginx (latest)
 - mySQL (5.6)
 - Redis (latest)
-- PHP (7.1-fpm, 5.6-fpm or 5.4-fpm)
+- PHP (7.1-fpm by default, or pick: 7.2-fpm, 5.6-fpm or 5.4-fpm)
 - Mailhog
 - and more to come!
 
@@ -78,6 +78,8 @@ By default, PHP 7.1 is active. If you would like to change this to another versi
 For more information, please see this section: [Overriding default settings](#overriding-default-settings)
 
 Available PHP Images:
+
+PHP 7.2: `johanvanhelden/dockerhero-php-7.2-fpm:latest`
 
 PHP 7.1: `johanvanhelden/dockerhero-php-7.1-fpm:latest`
 
@@ -273,6 +275,7 @@ Feel free to send in pull requests! Either to the image repos or the dockerhero 
 - [Dockerhero - GitHub](https://github.com/johanvanhelden/dockerhero)
 - [Dockerhero - Workspace GitHub](https://github.com/johanvanhelden/dockerhero-workspace)
 - [Dockerhero - Nginx GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
+- [Dockerhero - PHP 7.2-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.2-fpm)
 - [Dockerhero - PHP 7.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.1-fpm)
 - [Dockerhero - PHP 5.6-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.6-fpm)
 - [Dockerhero - PHP 5.4-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.4-fpm)
