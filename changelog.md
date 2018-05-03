@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.2.4 - 2018-05-03
+
+### Added
+
+- mysql-client to the workspace, php 5.6, php 7.1 and php 7.2 image
+
 ## 1.2.3 - 2018-03-15
 
 ### Added
