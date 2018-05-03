@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- mysql-client to the workspace image
+- mysql-client to the workspace, php 5.6, php 7.1 and php 7.2 image
 
 ## 1.2.3 - 2018-03-15
 
