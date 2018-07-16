@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.2.4
+## Version 1.2.5
 
 ### What is Dockerhero?
 
@@ -27,7 +27,7 @@ Dockerhero includes the following useful tools:
 - Mailhog
 - Composer
 - Xdebug
-- Node.js 6.*
+- NVM (the default node version is 6)
 - NPM
 - Yarn
 - Gulp
@@ -35,6 +35,7 @@ Dockerhero includes the following useful tools:
 - Vue-cli
 - Laravel Artisan autocompletion
 - Laravel Dusk support
+- laravel-dump-server support
 - and more to come!
 
 Localtest.me is used to make everything work without editing your hosts file! Just like magic!
