@@ -42,9 +42,20 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 ## Table of Contents
 
 1. [Installation](#installation)
+    1. [Docker and Docker Compose](#docker-and-docker-compose)
+    2. [Folder placement](#folder-placement)
+    3. [Picking a PHP version](#picking-a-php-version)
+    4. [Trusting the self-signed certificate](#trusting-the-self-signed-certificate)
 2. [Updating](#updating)
+    1. [Dockerhero itself](#dockerhero-itself)
+    2. [Dockerhero images](#dockerhero-images)
 3. [Usage](#usage)
+    1. [Starting](#starting)
+    2. [Stopping](#stopping)
+    3. [Laravel public folder](#laravel-public-folder)
 4. [Databases](#databases)
+    1. [MySQL](#mysql)
+    2. [Redis](#redis)
 5. [CLI Access](#cli-access)
 6. [Custom nginx configs](#custom-nginx-configs)
 7. [Cronjobs](#cronjobs)
@@ -52,7 +63,9 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 9. [Overriding default settings](#overriding-default-settings)
 10. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
 11. [Making a local website publicly available](#making-a-local-website-publicly-available)
-12. [Using Laravel Dusk](#using-laravel-dusk)
+12. [Miscellaneous](#miscellaneous)
+    1. [Laravel Dusk](#laravel-dusk)
+    2. [laravel-dump-server](#laravel-dump-server)
 13. [Contributing](#contributing)
 14. [Thank you](#thank-you)
 15. [Project links](#project-links)
@@ -96,9 +109,11 @@ This part is however entirely optional, and you do not have to do this. You can 
 
 ## Updating
 
+### Dockerhero itself
+
 Simply download or pull the latest release from [GitHub](https://github.com/johanvanhelden/dockerhero) and [update the images](#updating-images).
 
-### Updating images
+### Dockerhero images
 
 To ensure you have the latest images, you can run `docker-compose pull` in the Dockerhero folder.
 
@@ -110,7 +125,7 @@ To ensure you have the latest images, you can run `docker-compose pull` in the D
 $ docker-compose up
 ```
 
-This will give you real-time log information and useful when debugging something. If anything fails, you can simply ctrl-c docker and it will shut down.
+This will give you real-time log information and useful when debugging something. If anything fails, you can simply `ctrl-c` docker and it will shut down.
 
 If you would rather prefer to run everything in the background, use:
 
@@ -118,13 +133,17 @@ If you would rather prefer to run everything in the background, use:
 $ docker-compose start
 ```
 
-And to stop the containers:
+### Stopping
+
+To stop the containers, simple stop the `docker-compose up` process using `ctrl-c`.
+
+If you had it running in the background, you can use:
 
 ```
-$ docker-compose stop
+$ docker-compose start
 ```
 
-### Laravel's public folder
+### Laravel public folder
 If you are working with a default Laravel project, you will probably get a `File not found.` error. This is because Laravel uses a `public` folder instead of a `public_html` folder. Dockerhero is configured out-of-the-box to use a `public_html` as the root.
 
 There are a few ways to solve this:
@@ -260,9 +279,22 @@ Where the host-header flag contains the URL of the project you would like to for
 
 Ngrok will now present you with a unique ngrok URL. This is the URL you can give out to clients or use in the API/webhook settings.
 
-## Using Laravel Dusk
+## Miscellaneous
+
+### Laravel Dusk
 
 In order to make Laravel Dusk work, you need to add your Laravel project URL to the "extra_hosts" section of the docker compose workspace section, as explained in the "[Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)" section.
+
+### laravel-dump-server
+
+[laravel-dump-server](https://github.com/beyondcode/laravel-dump-server) is a great package that allows you to capture dump contents so that it does not interfere with HTTP / API responses.
+
+In order to make it work with dockerhero, simply override the config and point it to the workspace container, like so:
+```
+'host' => 'tcp://dockerhero_workspace:9912',
+```
+
+Next, ssh into to workspace image, and simply run: `$ artisan dump-server` and start dumping to your heart's content.
 
 ## Contributing
 

@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.2.5 - 2018-07-16
+
+### Changed
+
+- Expose the default laravel-dump-server port for the PHP image.
+- Expand the readme's ToC and restructure it.
+
+### Added
+
+- Include a section in the readme with help on how to make the laravel-dump-server work
+
 ## 1.2.4 - 2018-05-03
 
 ### Added

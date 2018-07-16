@@ -26,6 +26,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
     dns: 8.8.8.8
+    ports:
+      - "9912:9912"
 
   web:
     container_name: dockerhero_web
