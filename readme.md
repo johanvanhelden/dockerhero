@@ -141,7 +141,7 @@ To stop the containers, simple stop the `docker-compose up` process using `ctrl-
 If you had it running in the background, you can use:
 
 ```
-$ docker-compose start
+$ docker-compose stop
 ```
 
 ### Laravel public folder
