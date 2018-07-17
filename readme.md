@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.2.5
+## Version 1.2.6
 
 ### What is Dockerhero?
 
@@ -27,7 +27,7 @@ Dockerhero includes the following useful tools:
 - Mailhog
 - Composer
 - Xdebug
-- NVM (the default node version is 6)
+- NVM (the default node version is 8)
 - NPM
 - Yarn
 - Gulp
