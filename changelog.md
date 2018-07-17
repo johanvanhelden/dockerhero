@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.2.6 - 2018-07-17
+
+### Changed
+
+- Node 8 is now the default version in the workspace image.
+
+### Added
+
+- bcmath extension to the workspace, php 7.1 and php 7.2 image
+
 ## 1.2.5 - 2018-07-16
 
 ### Changed
