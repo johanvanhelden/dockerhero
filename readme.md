@@ -327,7 +327,7 @@ Next, ssh into to workspace image, and simply run: `$ artisan dump-server` and s
 ## Known issues
 
 ### MacOS
-On MacOS there is an issue with linking the timezone. I do now own a Mac myself, so I am unable to produce a proper solution, but for now, I suggest you override the `volumes:` section for each container (`workspace`, `php`, `web`, `db`) that links the timezones, and simply remove the timezone link. There should be no need to edit the default `docker-compose.yml`. If you are someone who owns a Mac, please let me know how I can properly address this.
+On MacOS there is an issue with linking the timezone. I do now own a Mac myself, so I am unable to produce a proper solution, but for now, I suggest you override the `volumes:` section for each container (`workspace`, `php`, `web`, `db`) that links the time-zones, and simply remove the timezone link. There should be no need to edit the default `docker-compose.yml`. If you are someone who owns a Mac, please let me know how I can properly address this.
 
 ## Contributing
 
