@@ -89,7 +89,7 @@ This is because dockhero mounts its parent folder (`./../`) as `/var/www/project
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
 ### Picking a PHP version
-By default, PHP 7.1 is active. If you would like to change this to another version, you can do so by overriding the option using the docker-compose.override.yml to change image.
+By default, PHP 7.1 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change image.
 
 For more information, please see this section: [Overriding default settings](#overriding-default-settings)
 
@@ -259,7 +259,7 @@ MAIL_ENCRYPTION=null
 ```
 
 ## Overriding default settings
-You can create a brand new docker-compose.override.yml in the root of Dockerhero to override default settings or customize things.
+You can create a brand new `docker-compose.override.yml` in the root of Dockerhero to override default settings or customize things.
 It might look a bit like this:
 
 ```
@@ -277,7 +277,7 @@ services:
 
 ## Connecting from PHP to a local project via URL
 
-Add the following entry to the docker-compose.override.yml file in the `php:` section:
+Add the following entry to the `docker-compose.override.yml` file in the `php:` section:
 
 ```
 extra_hosts:
