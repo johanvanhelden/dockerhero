@@ -48,7 +48,8 @@ services:
 
   db:
     container_name: dockerhero_db
-    image: mysql:5.6
+    image: mysql:5.7
+    command: --sql_mode="NO_ENGINE_SUBSTITUTION"
     volumes:
       - "database:/var/lib/mysql"
       - /etc/localtime:/etc/localtime:ro

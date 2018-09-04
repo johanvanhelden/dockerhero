@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.2.6
+## Version 1.3.0
 
 ### What is Dockerhero?
 
@@ -13,7 +13,7 @@ The goal is also to make it customizable. You can easily add your own nginx conf
 Dockerhero includes the following software (containers):
 
 - nginx (latest)
-- mySQL (5.6)
+- mySQL (5.7)
 - Redis (latest)
 - PHP (7.1-fpm by default, or pick: 7.2-fpm, 5.6-fpm or 5.4-fpm)
 - Mailhog
@@ -56,6 +56,8 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
     3. [Laravel public folder](#laravel-public-folder)
 4. [Databases](#databases)
     1. [MySQL](#mysql)
+        1. [Changing the MySQL version](#changing-the-mysql-version)
+        2. [Changing the SQL mode](#changing-the-sql-mode)
     2. [Redis](#redis)
 5. [CLI Access](#cli-access)
 6. [Custom nginx configs](#custom-nginx-configs)
@@ -168,6 +170,29 @@ You can visit phpMyAdmin by going to `https://phpmyadmin.localtest.me`
 If you want to import databases from the file system, place them in `./databases/upload`.
 
 Any exported databases to the file system can be found in `./databases/save`
+
+#### Changing the MySQL version
+If you would like to change the MySQL version, you can do so by editing the `docker-compose.override.yml` (if you do not
+have one, [please create it](#overriding-default-settings)) like so:
+```
+version: '2'
+
+services:
+  db:
+    image: mysql:5.6
+```
+
+#### Changing the SQL mode
+By default, I've set the same SQL mode as MySQL 5.6 to ensure maximum backwards compatibility. If you would like to
+set it to the 5.7 default setting, you can do so by editing the `docker-compose.override.yml` (if you do not have one,
+[please create it](#overriding-default-settings)) like so:
+```
+version: '2'
+
+services:
+  db:
+    command: --sql_mode="ONLY_FULL_GROUP_BY"
+```
 
 ### Redis
 
