@@ -69,10 +69,12 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 12. [Miscellaneous](#miscellaneous)
     1. [Laravel Dusk](#laravel-dusk)
     2. [laravel-dump-server](#laravel-dump-server)
-13. [Contributing](#contributing)
-14. [Thank you](#thank-you)
-15. [Project links](#project-links)
-16. [Todo](#todo)
+13. [Know issues](#known-issues)
+    1. [MacOS](#mac-os)
+14. [Contributing](#contributing)
+15. [Thank you](#thank-you)
+16. [Project links](#project-links)
+17. [Todo](#todo)
 
 ## Installation
 
@@ -321,6 +323,11 @@ In order to make it work with dockerhero, simply override the config and point i
 ```
 
 Next, ssh into to workspace image, and simply run: `$ artisan dump-server` and start dumping to your heart's content.
+
+## Known issues
+
+### MacOS
+On MacOS there is an issue with linking the timezone. I do now own a Mac myself, so I am unable to produce a proper solution, but for now, I suggest you override the `volumes:` section for each container (`workspace`, `php`, `web`, `db`) that links the timezones, and simply remove the timezone link. There should be no need to edit the default `docker-compose.yml`. If you are someone who owns a Mac, please let me know how I can properly address this.
 
 ## Contributing
 

@@ -13,7 +13,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Changed
 
 - The default MySQL version is now 5.7
+
+### Added
+
 - Added sections to the readme on how to change the MySQL version and SQL mode.
+- Added a known issues section to the readme with a known MacOS issue.
 
 ## 1.2.6 - 2018-07-17
 
