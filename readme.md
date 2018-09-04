@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.2.6
+## Version 1.3.0
 
 ### What is Dockerhero?
 
@@ -13,7 +13,7 @@ The goal is also to make it customizable. You can easily add your own nginx conf
 Dockerhero includes the following software (containers):
 
 - nginx (latest)
-- mySQL (5.6)
+- mySQL (5.7)
 - Redis (latest)
 - PHP (7.1-fpm by default, or pick: 7.2-fpm, 5.6-fpm or 5.4-fpm)
 - Mailhog
@@ -56,6 +56,8 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
     3. [Laravel public folder](#laravel-public-folder)
 4. [Databases](#databases)
     1. [MySQL](#mysql)
+        1. [Changing the MySQL version](#changing-the-mysql-version)
+        2. [Changing the SQL mode](#changing-the-sql-mode)
     2. [Redis](#redis)
 5. [CLI Access](#cli-access)
 6. [Custom nginx configs](#custom-nginx-configs)
@@ -67,10 +69,12 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 12. [Miscellaneous](#miscellaneous)
     1. [Laravel Dusk](#laravel-dusk)
     2. [laravel-dump-server](#laravel-dump-server)
-13. [Contributing](#contributing)
-14. [Thank you](#thank-you)
-15. [Project links](#project-links)
-16. [Todo](#todo)
+13. [Known issues](#known-issues)
+    1. [MacOS](#macos)
+14. [Contributing](#contributing)
+15. [Thank you](#thank-you)
+16. [Project links](#project-links)
+17. [Todo](#todo)
 
 ## Installation
 
@@ -87,7 +91,7 @@ This is because dockhero mounts its parent folder (`./../`) as `/var/www/project
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
 ### Picking a PHP version
-By default, PHP 7.1 is active. If you would like to change this to another version, you can do so by overriding the option using the docker-compose.override.yml to change image.
+By default, PHP 7.1 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change image.
 
 For more information, please see this section: [Overriding default settings](#overriding-default-settings)
 
@@ -169,6 +173,29 @@ If you want to import databases from the file system, place them in `./databases
 
 Any exported databases to the file system can be found in `./databases/save`
 
+#### Changing the MySQL version
+If you would like to change the MySQL version, you can do so by editing the `docker-compose.override.yml` (if you do not
+have one, [please create it](#overriding-default-settings)) like so:
+```
+version: '2'
+
+services:
+  db:
+    image: mysql:5.6
+```
+
+#### Changing the SQL mode
+By default, I've set the same SQL mode as MySQL 5.6 to ensure maximum backwards compatibility. If you would like to
+set it to the 5.7 default setting, you can do so by editing the `docker-compose.override.yml` (if you do not have one,
+[please create it](#overriding-default-settings)) like so:
+```
+version: '2'
+
+services:
+  db:
+    command: --sql_mode="ONLY_FULL_GROUP_BY"
+```
+
 ### Redis
 
 In order to use Redis in your projects, you need to define the following host:
@@ -234,7 +261,7 @@ MAIL_ENCRYPTION=null
 ```
 
 ## Overriding default settings
-You can create a brand new docker-compose.override.yml in the root of Dockerhero to override default settings or customize things.
+You can create a brand new `docker-compose.override.yml` in the root of Dockerhero to override default settings or customize things.
 It might look a bit like this:
 
 ```
@@ -252,7 +279,7 @@ services:
 
 ## Connecting from PHP to a local project via URL
 
-Add the following entry to the docker-compose.override.yml file in the `php:` section:
+Add the following entry to the `docker-compose.override.yml` file in the `php:` section:
 
 ```
 extra_hosts:
@@ -296,6 +323,11 @@ In order to make it work with dockerhero, simply override the config and point i
 ```
 
 Next, ssh into to workspace image, and simply run: `$ artisan dump-server` and start dumping to your heart's content.
+
+## Known issues
+
+### MacOS
+On MacOS there is an issue with linking the timezone. I do now own a Mac myself, so I am unable to produce a proper solution, but for now, I suggest you timezone links from the `volumes:` section for each container (`workspace`, `php`, `web`, `db`) that links the time-zones. If you are someone who owns a Mac, please let me know how I can properly address this, if you can.
 
 ## Contributing
 
