@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-- Increase the default upload size from 8m to 64m in the nginx image.
+- Increased the default upload size from 8m to 64m in the nginx image.
 
 ## 1.3.0 - 2018-09-04
 
