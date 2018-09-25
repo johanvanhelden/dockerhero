@@ -54,6 +54,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
     1. [Starting](#starting)
     2. [Stopping](#stopping)
     3. [Laravel public folder](#laravel-public-folder)
+    4. [Private composer packages](#private-composer-packages)
 4. [Databases](#databases)
     1. [MySQL](#mysql)
         1. [Changing the MySQL version](#changing-the-mysql-version)
@@ -155,6 +156,21 @@ There are a few ways to solve this:
 - Either reconfigure Laravel to use a public_html folder, for instructions, view this [Gist](https://gist.github.com/johanvanhelden/29096a9ff31eac9b039d36056919abbb#file-reconfigure-laravel-instructions-md)
 - Or create a symbolic link, for instructions, view this [Gist](https://gist.github.com/johanvanhelden/29096a9ff31eac9b039d36056919abbb#file-symlink-instructions-md)
 - Or add a custom nginx vhost to use the public folder, for instructions, view this [Gist](https://gist.github.com/johanvanhelden/29096a9ff31eac9b039d36056919abbb#file-vhost-instructions-md)
+
+### Private composer packages
+If you need to access private composer packages, you might want to link your local `/home/username/.composer` folder (containing your auth.json file) to Dockerhero. You can do so by adding a new volume to the workspace image in your `docker-compose.override.yml`  (if you do not have one,
+[please create it](#overriding-default-settings)) like so:
+
+```
+version: '2'
+
+services:
+  workspace:
+    volumes:
+      - /home/username/.composer:/home/dockerhero/.composer
+```
+
+You will now be able to install and update private packages inside Dockerhero.
 
 ## Databases
 
