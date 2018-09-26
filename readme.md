@@ -206,10 +206,10 @@ If you changed the MySQL image to a newer version, it will be necessary to upgra
 You can do so by logging into the database container and running the `mysql_upgrade` command, like so:
 `docker exec -it dockerhero_db bash`
 
-Once inside the database container, run:
+Once inside the database container you need to run the following command:
 `mysql_upgrade -u root -pdockerhero`
 
-After the upgrade is done, please restart dockerhero.
+After the upgrade is done, please restart Dockerhero.
 
 #### Changing the SQL mode
 By default, I've set the same SQL mode as MySQL 5.6 to ensure maximum backwards compatibility. If you would like to
