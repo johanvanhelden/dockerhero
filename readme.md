@@ -58,7 +58,8 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 4. [Databases](#databases)
     1. [MySQL](#mysql)
         1. [Changing the MySQL version](#changing-the-mysql-version)
-        2. [Changing the SQL mode](#changing-the-sql-mode)
+        2. [Upgrading MySQL](#upgrading-mysql)
+        3. [Changing the SQL mode](#changing-the-sql-mode)
     2. [Redis](#redis)
 5. [CLI Access](#cli-access)
 6. [Custom nginx configs](#custom-nginx-configs)
@@ -199,6 +200,16 @@ services:
   db:
     image: mysql:5.6
 ```
+
+#### Upgrading MySQL
+If you changed the MySQL image to a newer version, it will be necessary to upgrade your current databases.
+You can do so by logging into the database container and running the `mysql_upgrade` command, like so:
+`docker exec -it dockerhero_db bash`
+
+Once inside the database container, run:
+`mysql_upgrade -u root -pdockerhero`
+
+After the upgrade is done, please restart dockerhero.
 
 #### Changing the SQL mode
 By default, I've set the same SQL mode as MySQL 5.6 to ensure maximum backwards compatibility. If you would like to
