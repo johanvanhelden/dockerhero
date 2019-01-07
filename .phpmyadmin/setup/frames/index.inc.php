@@ -6,37 +6,34 @@
  * @package PhpMyAdmin-Setup
  */
 
-use PMA\libraries\config\ConfigFile;
-use PMA\libraries\config\FormDisplay;
-use PMA\libraries\config\ServerConfigChecks;
-use PMA\libraries\LanguageManager;
+use PhpMyAdmin\Config\ConfigFile;
+use PhpMyAdmin\Config\FormDisplay;
+use PhpMyAdmin\Config\FormDisplayTemplate;
+use PhpMyAdmin\Config\ServerConfigChecks;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\LanguageManager;
+use PhpMyAdmin\Sanitize;
+use PhpMyAdmin\Setup\Index as SetupIndex;
+use PhpMyAdmin\Url;
 
 if (!defined('PHPMYADMIN')) {
     exit;
 }
-
-/**
- * Core libraries.
- */
-require_once './libraries/display_select_lang.lib.php';
-require_once './setup/lib/index.lib.php';
-require_once './libraries/config/FormDisplay.tpl.php';
 
 // prepare unfiltered language list
 $all_languages = LanguageManager::getInstance()->sortedLanguages();
 
 /** @var ConfigFile $cf */
 $cf = $GLOBALS['ConfigFile'];
-$separator = PMA_URL_getArgSeparator('html');
 
 // message handling
-PMA_messagesBegin();
+SetupIndex::messagesBegin();
 
 //
 // Check phpMyAdmin version
 //
 if (isset($_GET['version_check'])) {
-    PMA_versionCheck();
+    SetupIndex::versionCheck();
 }
 
 //
@@ -46,54 +43,22 @@ $configChecker = new ServerConfigChecks($GLOBALS['ConfigFile']);
 $configChecker->performConfigChecks();
 
 //
-// Check whether we can read/write configuration
+// Https connection warning (check done on the client side)
 //
-$config_readable = false;
-$config_writable = false;
-$config_exists = false;
-PMA_checkConfigRw($config_readable, $config_writable, $config_exists);
-if (!$config_writable || !$config_readable) {
-    PMA_messagesSet(
-        'error', 'config_rw', __('Cannot load or save configuration'),
-        PMA_sanitize(
-            __(
-                'Please create web server writable folder [em]config[/em] in '
-                . 'phpMyAdmin top level directory as described in '
-                . '[doc@setup_script]documentation[/doc]. Otherwise you will be '
-                . 'only able to download or display it.'
-            )
-        )
-    );
-}
-//
-// Check https connection
-//
-$is_https = !empty($_SERVER['HTTPS'])
-    && mb_strtolower($_SERVER['HTTPS']) == 'on';
-if (!$is_https) {
-    $text = __(
-        'You are not using a secure connection; all data (including potentially '
-        . 'sensitive information, like passwords) is transferred unencrypted!'
-    );
+$text = __(
+    'You are not using a secure connection; all data (including potentially '
+    . 'sensitive information, like passwords) is transferred unencrypted!'
+);
+$text .= ' <a href="#">';
+$text .= __(
+    'If your server is also configured to accept HTTPS requests '
+    . 'follow this link to use a secure connection.'
+);
+$text .= '</a>';
+SetupIndex::messagesSet('notice', 'no_https', __('Insecure connection'), $text);
 
-    $text .= ' <a href="#" onclick="window.location.href = \'https:\' + window.location.href.substring(window.location.protocol.length);">';
-
-    // Temporary workaround to use tranlated message in older releases
-    $text .= str_replace(
-        array('[a@%s]', '[/a]'),
-        array('', ''),
-        __(
-            'If your server is also configured to accept HTTPS requests '
-            . 'follow [a@%s]this link[/a] to use a secure connection.'
-        )
-    );
-    $text .= '</a>';
-    PMA_messagesSet('notice', 'no_https', __('Insecure connection'), $text);
-}
-
-echo '<form id="select_lang" method="post" action="'
-    , htmlspecialchars($_SERVER['REQUEST_URI']) , '">';
-echo PMA_URL_getHiddenInputs();
+echo '<form id="select_lang" method="post">';
+echo Url::getHiddenInputs();
 echo '<bdo lang="en" dir="ltr"><label for="lang">';
 echo __('Language') , (__('Language') != 'Language' ? ' - Language' : '');
 echo '</label></bdo><br />';
@@ -115,9 +80,9 @@ echo '</form>';
 switch ($action_done) {
 case 'config_saved':
     /* Use uniqid to display this message every time configuration is saved */
-    PMA_messagesSet(
+    SetupIndex::messagesSet(
         'notice', uniqid('config_saved'), __('Configuration saved.'),
-        PMA_sanitize(
+        Sanitize::sanitize(
             __(
                 'Configuration saved to file config/config.inc.php in phpMyAdmin '
                 . 'top level directory, copy it to top level one and delete '
@@ -128,9 +93,9 @@ case 'config_saved':
     break;
 case 'config_not_saved':
     /* Use uniqid to display this message every time configuration is saved */
-    PMA_messagesSet(
+    SetupIndex::messagesSet(
         'notice', uniqid('config_not_saved'), __('Configuration not saved!'),
-        PMA_sanitize(
+        Sanitize::sanitize(
             __(
                 'Please create web server writable folder [em]config[/em] in '
                 . 'phpMyAdmin top level directory as described in '
@@ -147,10 +112,10 @@ default:
 echo '<h2>' , __('Overview') , '</h2>';
 
 // message handling
-PMA_messagesEnd();
-PMA_messagesShowHtml();
+SetupIndex::messagesEnd();
+SetupIndex::messagesShowHtml();
 
-echo '<a href="#" id="show_hidden_messages" style="display:none">';
+echo '<a href="#" id="show_hidden_messages" class="hide">';
 echo __('Show hidden messages (#MSG_COUNT)');
 echo '</a>';
 
@@ -161,7 +126,7 @@ echo '</legend>';
 //
 // Display server list
 //
-echo PMA_displayFormTop(
+echo FormDisplayTemplate::displayFormTop(
     'index.php', 'get',
     array(
         'page' => 'servers',
@@ -170,7 +135,7 @@ echo PMA_displayFormTop(
 );
 echo '<div class="form">';
 if ($cf->getServerCount() > 0) {
-    echo '<table cellspacing="0" class="datatable" style="table-layout: fixed">';
+    echo '<table cellspacing="0" class="datatable">';
     echo '<tr>';
     echo '<th>#</th>';
     echo '<th>' , __('Name') , '</th>';
@@ -186,14 +151,12 @@ if ($cf->getServerCount() > 0) {
             , htmlspecialchars($cf->getValue("Servers/$id/auth_type"))
             ,  '</td>';
         echo '<td>' , htmlspecialchars($cf->getServerDSN($id)) , '</td>';
-        echo '<td style="white-space: nowrap">';
+        echo '<td class="nowrap">';
         echo '<small>';
-        echo '<a href="' , PMA_URL_getCommon() , $separator , 'page=servers'
-            , $separator , 'mode=edit' , $separator , 'id=' , $id , '">'
+        echo '<a href="' , Url::getCommon(array('page' => 'servers', 'mode' => 'edit', 'id' => $id)), '">'
             , __('Edit') , '</a>';
         echo ' | ';
-        echo '<a href="' , PMA_URL_getCommon() , $separator , 'page=servers'
-            , $separator , 'mode=remove' , $separator , 'id=' , $id , '">'
+        echo '<a href="' , Url::getCommon(array('page' => 'servers', 'mode' => 'remove', 'id' => $id)), '">'
             , __('Delete') , '</a>';
         echo '</small>';
         echo '</td>';
@@ -212,14 +175,14 @@ if ($cf->getServerCount() > 0) {
 
 echo '<table width="100%">';
 echo '<tr>';
-echo '<td class="lastrow" style="text-align: left">';
+echo '<td class="lastrow left">';
 echo '<input type="submit" name="submit" value="' , __('New server') , '" />';
 echo '</td>';
 echo '</tr>';
 echo '</table>';
 echo '</div>';
 
-echo PMA_displayFormBottom();
+echo FormDisplayTemplate::displayFormBottom();
 
 echo '</fieldset>';
 
@@ -230,7 +193,7 @@ echo '<fieldset class="simple"><legend>' , __('Configuration file') , '</legend>
 //
 $form_display = new FormDisplay($cf);
 
-echo PMA_displayFormTop('config.php');
+echo FormDisplayTemplate::displayFormTop('config.php');
 echo '<table width="100%" cellspacing="0">';
 
 // Display language list
@@ -241,7 +204,7 @@ $opts = array(
 foreach ($all_languages as $each_lang) {
     $opts['values'][$each_lang->getCode()] = $each_lang->getName();
 }
-echo PMA_displayInput(
+echo FormDisplayTemplate::displayInput(
     'DefaultLang', __('Default language'), 'select',
     $cf->getValue('DefaultLang'), '', true, $opts
 );
@@ -266,7 +229,7 @@ if ($cf->getServerCount() > 0) {
     $opts['values']['1'] = __('- none -');
     $opts['values_escaped'] = true;
 }
-echo PMA_displayInput(
+echo FormDisplayTemplate::displayInput(
     'ServerDefault', __('Default server'), 'select',
     $cf->getValue('ServerDefault'), '', true, $opts
 );
@@ -277,36 +240,16 @@ $opts = array(
         'unix' => 'UNIX / Linux (\n)',
         'win' => 'Windows (\r\n)'),
     'values_escaped' => true);
-$eol = PMA_ifSetOr($_SESSION['eol'], (PMA_IS_WINDOWS ? 'win' : 'unix'));
-echo PMA_displayInput(
+$eol = Core::ifSetOr($_SESSION['eol'], (PMA_IS_WINDOWS ? 'win' : 'unix'));
+echo FormDisplayTemplate::displayInput(
     'eol', __('End of line'), 'select',
     $eol, '', true, $opts
 );
 
 echo '<tr>';
-echo '<td colspan="2" class="lastrow" style="text-align: left">';
+echo '<td colspan="2" class="lastrow left">';
 echo '<input type="submit" name="submit_display" value="' , __('Display') , '" />';
 echo '<input type="submit" name="submit_download" value="' , __('Download') , '" />';
-echo '&nbsp; &nbsp;';
-
-echo '<input type="submit" name="submit_save" value="' , __('Save') , '"';
-if (!$config_writable) {
-    echo ' disabled="disabled"';
-}
-echo '/>';
-
-echo '<input type="submit" name="submit_load" value="' , __('Load') , '"';
-if (!$config_exists) {
-    echo ' disabled="disabled"';
-}
-echo '/>';
-
-echo '<input type="submit" name="submit_delete" value="' , __('Delete') , '"';
-if (!$config_exists || !$config_writable) {
-    echo ' disabled="disabled"';
-}
-echo '/>';
-
 echo '&nbsp; &nbsp;';
 echo '<input type="submit" name="submit_clear" value="' , __('Clear')
     , '" class="red" />';
@@ -314,13 +257,13 @@ echo '</td>';
 echo '</tr>';
 echo '</table>';
 
-echo PMA_displayFormBottom();
+echo FormDisplayTemplate::displayFormBottom();
 
 echo '</fieldset>';
 echo '<div id="footer">';
 echo '<a href="../url.php?url=https://www.phpmyadmin.net/">' , __('phpMyAdmin homepage') , '</a>';
 echo '<a href="../url.php?url=https://www.phpmyadmin.net/donate/">'
     ,  __('Donate') , '</a>';
-echo '<a href="' ,  PMA_URL_getCommon() , $separator , 'version_check=1">'
+echo '<a href="' ,  Url::getCommon(array('version_check' => '1')), '">'
     , __('Check for latest version') , '</a>';
 echo '</div>';

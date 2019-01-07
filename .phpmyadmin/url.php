@@ -6,26 +6,26 @@
  * @package PhpMyAdmin
  */
 
+use PhpMyAdmin\Core;
+use PhpMyAdmin\Sanitize;
+use PhpMyAdmin\Response;
+
 /**
  * Gets core libraries and defines some variables
  */
 define('PMA_MINIMUM_COMMON', true);
 require_once './libraries/common.inc.php';
-/**
- * JavaScript escaping.
- */
-require_once './libraries/js_escape.lib.php';
 
 // Only output the http headers
-$response = PMA\libraries\Response::getInstance();
+$response = Response::getInstance();
 $response->getHeader()->sendHttpHeaders();
 $response->disable();
 
-if (! PMA_isValid($_REQUEST['url'])
-    || ! preg_match('/^https:\/\/[^\n\r]*$/', $_REQUEST['url'])
-    || ! PMA_isAllowedDomain($_REQUEST['url'])
+if (! Core::isValid($_GET['url'])
+    || ! preg_match('/^https:\/\/[^\n\r]*$/', $_GET['url'])
+    || ! Core::isAllowedDomain($_GET['url'])
 ) {
-    PMA_sendHeaderLocation('./');
+    Core::sendHeaderLocation('./');
 } else {
     // JavaScript redirection is necessary. Because if header() is used
     //  then web browser sometimes does not change the HTTP_REFERER
@@ -33,11 +33,11 @@ if (! PMA_isValid($_REQUEST['url'])
     //  external site.
     echo "<script type='text/javascript'>
             window.onload=function(){
-                window.location='" , PMA_escapeJsString($_REQUEST['url']) , "';
+                window.location='" , Sanitize::escapeJsString($_GET['url']) , "';
             }
         </script>";
     // Display redirecting msg on screen.
-    // Do not display the value of $_REQUEST['url'] to avoid showing injected content
+    // Do not display the value of $_GET['url'] to avoid showing injected content
     echo __('Taking you to the target site.');
 }
 die();

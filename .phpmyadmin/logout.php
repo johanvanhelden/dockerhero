@@ -5,11 +5,13 @@
  *
  * @package PhpMyAdmin
  */
+
+use PhpMyAdmin\Core;
+
 require_once 'libraries/common.inc.php';
 
-if ($token_mismatch) {
-    PMA_sendHeaderLocation('./index.php');
+if ($_SERVER['REQUEST_METHOD'] != 'POST' || $token_mismatch) {
+    Core::sendHeaderLocation('./index.php');
 } else {
     $auth_plugin->logOut();
 }
-
