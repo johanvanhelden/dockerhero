@@ -4,7 +4,7 @@
  */
 
 // show this window in top frame
-if (top != self) {
+if (top !== self) {
     window.top.location.href = location;
 }
 
@@ -12,32 +12,36 @@ if (top != self) {
 // Messages
 //
 
-// stores hidden message ids
-var hiddenMessages = [];
-
 $(function () {
-    var hidden = hiddenMessages.length;
-    for (var i = 0; i < hidden; i++) {
-        $('#' + hiddenMessages[i]).css('display', 'none');
+    if (window.location.protocol === 'https:') {
+        $('#no_https').remove();
+    } else {
+        $('#no_https a').click(function () {
+            var old_location = window.location;
+            window.location.href = 'https:' + old_location.href.substring(old_location.protocol.length);
+            return false;
+        });
     }
-    if (hidden > 0) {
+
+    var hiddenmessages = $('.hiddenmessage');
+
+    if (hiddenmessages.length > 0) {
+        hiddenmessages.hide();
         var link = $('#show_hidden_messages');
         link.click(function (e) {
             e.preventDefault();
-            for (var i = 0; i < hidden; i++) {
-                $('#' + hiddenMessages[i]).show(500);
-            }
+            hiddenmessages.show();
             $(this).remove();
         });
-        link.html(link.html().replace('#MSG_COUNT', hidden));
-        link.css('display', '');
+        link.html(link.html().replace('#MSG_COUNT', hiddenmessages.length));
+        link.show();
     }
 });
 
-//set document width
-$(document).ready(function(){
+// set document width
+$(document).ready(function () {
     width = 0;
-    $('ul.tabs li').each(function(){
+    $('ul.tabs li').each(function () {
         width += $(this).width() + 10;
     });
     var contentWidth = width;
@@ -61,11 +65,10 @@ $(document).ready(function(){
  * @param {String}  id      validator id
  * @param {Object}  values  values hash {element1_id: value, ...}
  */
-function ajaxValidate(parent, id, values)
-{
+function ajaxValidate (parent, id, values) {
     parent = $(parent);
     // ensure that parent is a fieldset
-    if (parent.attr('tagName') != 'FIELDSET') {
+    if (parent.attr('tagName') !== 'FIELDSET') {
         parent = parent.closest('fieldset');
         if (parent.length === 0) {
             return false;
@@ -91,9 +94,9 @@ function ajaxValidate(parent, id, values)
             }
 
             var error = {};
-            if (typeof response != 'object') {
+            if (typeof response !== 'object') {
                 error[parent.id] = [response];
-            } else if (typeof response.error != 'undefined') {
+            } else if (typeof response.error !== 'undefined') {
                 error[parent.id] = [response.error];
             } else {
                 for (var key in response) {
@@ -199,7 +202,7 @@ $.extend(true, validators, {
 
 $(function () {
     $('.userprefs-allow').click(function (e) {
-        if (this != e.target) {
+        if (this !== e.target) {
             return;
         }
         var el = $(this).find('input');

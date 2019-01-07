@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+
+## 1.3.2 - 2019-01-07
+
+### Changed
+
+- Updated PHPMyAdmin version to 4.8.4
+
+### Added
+
+- PHP 7.3 image
+
 ## 1.3.1 - 2018-09-04
 
 ### Changed

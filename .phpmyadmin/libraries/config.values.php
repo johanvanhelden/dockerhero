@@ -23,7 +23,6 @@ $cfg_db = array();
 $cfg_db['Servers'] = array(
     1 => array(
         'port'         => 'integer',
-        'connect_type' => array('tcp', 'socket'),
         'auth_type'    => array('config', 'http', 'signon', 'cookie'),
         'AllowDeny'    => array(
             'order' => array('', 'deny,allow', 'allow,deny', 'explicit')
@@ -52,6 +51,7 @@ $cfg_db['NavigationTreeDefaultTabTable2'] = array(
 );
 $cfg_db['NavigationTreeDbSeparator'] = 'short_string';
 $cfg_db['NavigationTreeTableSeparator'] = 'short_string';
+$cfg_db['NavigationWidth'] = 'integer';
 $cfg_db['TableNavigationLinksMode'] = array(
     'icons' => __('Icons'),
     'text'  => __('Text'),
@@ -174,7 +174,7 @@ $cfg_db['Export']['method'] = array(
 );
 $cfg_db['Export']['format'] = array(
     'codegen', 'csv', 'excel', 'htmlexcel','htmlword', 'latex', 'ods',
-    'odt', 'pdf', 'sql', 'texytext', 'xls', 'xml', 'yaml'
+    'odt', 'pdf', 'sql', 'texytext', 'xml', 'yaml'
 );
 $cfg_db['Export']['compression'] = array('none', 'zip', 'gzip');
 $cfg_db['Export']['charset'] = array_merge(
@@ -203,8 +203,6 @@ $cfg_db['Export']['sql_insert_syntax'] = array(
     'both'     => __('both of the above'),
     'none'     => __('neither of the above')
 );
-$cfg_db['Export']['xls_null'] = 'short_string';
-$cfg_db['Export']['xlsx_null'] = 'short_string';
 $cfg_db['Export']['htmlword_structure_or_data'] = $cfg_db['Export']['_sod_select'];
 $cfg_db['Export']['htmlword_null'] = 'short_string';
 $cfg_db['Export']['ods_null'] = 'short_string';
@@ -212,6 +210,13 @@ $cfg_db['Export']['odt_null'] = 'short_string';
 $cfg_db['Export']['odt_structure_or_data'] = $cfg_db['Export']['_sod_select'];
 $cfg_db['Export']['texytext_structure_or_data'] = $cfg_db['Export']['_sod_select'];
 $cfg_db['Export']['texytext_null'] = 'short_string';
+
+$cfg_db['Console']['Mode'] = array(
+    'info', 'show', 'collapse'
+);
+$cfg_db['Console']['Height'] = 'integer';
+$cfg_db['Console']['OrderBy'] = ['exec', 'time', 'count'];
+$cfg_db['Console']['Order'] = ['asc', 'desc'];
 
 /**
  * Default values overrides
@@ -251,6 +256,7 @@ $cfg_db['_validators'] = array(
     'MaxTableList' => 'validatePositiveNumber',
     'MemoryLimit' => array(array('validateByRegex', '/^(-1|(\d+(?:[kmg])?))$/i')),
     'NavigationTreeTableLevel' => 'validatePositiveNumber',
+    'NavigationWidth' => 'validateNonNegativeNumber',
     'QueryHistoryMax' => 'validatePositiveNumber',
     'RepeatCells' => 'validateNonNegativeNumber',
     'Server' => 'validateServer',
@@ -259,6 +265,7 @@ $cfg_db['_validators'] = array(
     'Servers/1/hide_db' => 'validateRegex',
     'TextareaCols' => 'validatePositiveNumber',
     'TextareaRows' => 'validatePositiveNumber',
+    'FontSize' => array(array('validateByRegex', '/^[0-9.]+(px|em|pt|\%)$/')),
     'TrustedProxies' => 'validateTrustedProxies');
 
 /**

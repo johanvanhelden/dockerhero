@@ -1,23 +1,24 @@
 <?php
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
- * A caching proxy for retrieving version information from phpmyadmin.net
+ * A caching proxy for retrieving version information from https://www.phpmyadmin.net/
  *
  * @package PhpMyAdmin
  */
 
-// Sets up the session
-use PMA\libraries\VersionInformation;
+use PhpMyAdmin\Core;
+use PhpMyAdmin\VersionInformation;
+use PhpMyAdmin\Response;
 
 $_GET['ajax_request'] = 'true';
 
 require_once 'libraries/common.inc.php';
 
 // Disabling standard response.
-PMA\libraries\Response::getInstance()->disable();
+Response::getInstance()->disable();
 
 // Always send the correct headers
-PMA_headerJSON();
+Core::headerJSON();
 
 $versionInformation = new VersionInformation();
 $versionDetails = $versionInformation->getLatestVersion();
