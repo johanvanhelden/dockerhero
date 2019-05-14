@@ -9,6 +9,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - nothing
 
 
+## 1.4.0 - 2019-05-14
+
+This is a pretty major release that sets PHP 7.2 as the default version for both the PHP and the Workspace container.
+If you are not ready yet for this change, you can roll back to PHP 7.1 by adding a `docker-composer.override.yml` with
+the following contents:
+
+```
+version: '2'
+
+services:
+  php:
+	image: johanvanhelden/dockerhero-php-7.1-fpm:latest
+
+  workspace:
+	image: johanvanhelden/dockerhero-workspace:php7.1
+```
+
+### Changed
+
+- Update to PHP 7.2 (workspace image)
+- Set PHP 7.2 as the default version for the PHP image.
+
 ## 1.3.2 - 2019-01-07
 
 ### Changed
