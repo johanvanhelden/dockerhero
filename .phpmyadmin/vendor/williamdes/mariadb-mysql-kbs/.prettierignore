@@ -1,0 +1,7 @@
+/tmp
+/build
+/docs
+vendor
+node_modules
+dist
+data

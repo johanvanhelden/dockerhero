@@ -5,35 +5,37 @@
  *
  * @package PhpMyAdmin
  */
+declare(strict_types=1);
 
-use PhpMyAdmin\Message;
+use PhpMyAdmin\Controllers\Server\Status\AdvisorController;
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Response;
-use PhpMyAdmin\Server\Status\Advisor;
 use PhpMyAdmin\Server\Status\Data;
 
-require_once 'libraries/common.inc.php';
-require_once 'libraries/replication.inc.php';
+if (! defined('ROOT_PATH')) {
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+}
 
-$serverStatusData = new Data();
+require_once ROOT_PATH . 'libraries/common.inc.php';
+require_once ROOT_PATH . 'libraries/replication.inc.php';
 
-$response = Response::getInstance();
+$container = Container::getDefaultContainer();
+$container->set(Response::class, Response::getInstance());
+
+/** @var Response $response */
+$response = $container->get(Response::class);
+
+/** @var DatabaseInterface $dbi */
+$dbi = $container->get(DatabaseInterface::class);
+
 $scripts = $response->getHeader()->getScripts();
 $scripts->addFile('server_status_advisor.js');
 
-/**
- * Output
- */
-$response->addHTML('<div>');
-$response->addHTML($serverStatusData->getMenuHtml());
-if ($serverStatusData->dataLoaded) {
-    $response->addHTML(Advisor::getHtml());
-} else {
-    $response->addHTML(
-        Message::error(
-            __('Not enough privilege to view the advisor.')
-        )->getDisplay()
-    );
-}
-$response->addHTML('</div>');
+$controller = new AdvisorController(
+    $response,
+    $dbi,
+    new Data()
+);
 
-exit;
+$response->addHTML($controller->index());

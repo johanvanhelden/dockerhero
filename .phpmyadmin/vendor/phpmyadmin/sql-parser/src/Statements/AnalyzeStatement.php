@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `ANALYZE` statement.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -26,12 +26,12 @@ class AnalyzeStatement extends Statement
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static $OPTIONS = [
         'TABLE' => 1,
 
         'NO_WRITE_TO_BINLOG' => 2,
         'LOCAL' => 3,
-    );
+    ];
 
     /**
      * Analyzed tables.

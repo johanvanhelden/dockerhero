@@ -5,36 +5,53 @@
  *
  * @package PhpMyAdmin
  */
+declare(strict_types=1);
 
 use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Mime;
 use PhpMyAdmin\Response;
+
+if (! defined('ROOT_PATH')) {
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+}
 
 /**
  * Common functions.
  */
-require_once 'libraries/common.inc.php';
+require_once ROOT_PATH . 'libraries/common.inc.php';
 
-// we don't want the usual PhpMyAdmin\Response-generated HTML above the column's
-// data
-$response = Response::getInstance();
+$container = Container::getDefaultContainer();
+$container->set(Response::class, Response::getInstance());
+
+/** @var Response $response */
+$response = $container->get(Response::class);
+
+/** @var DatabaseInterface $dbi */
+$dbi = $container->get(DatabaseInterface::class);
+
 $response->disable();
 
 /* Check parameters */
 PhpMyAdmin\Util::checkParameters(
-    array('db', 'table')
+    [
+        'db',
+        'table',
+    ]
 );
 
 /* Select database */
-if (!$GLOBALS['dbi']->selectDb($db)) {
+if (! $dbi->selectDb($db)) {
     PhpMyAdmin\Util::mysqlDie(
         sprintf(__('\'%s\' database does not exist.'), htmlspecialchars($db)),
-        '', false
+        '',
+        false
     );
 }
 
 /* Check if table exists */
-if (!$GLOBALS['dbi']->getColumns($db, $table)) {
+if (! $dbi->getColumns($db, $table)) {
     PhpMyAdmin\Util::mysqlDie(__('Invalid table name'));
 }
 
@@ -42,12 +59,13 @@ if (!$GLOBALS['dbi']->getColumns($db, $table)) {
 $sql = 'SELECT ' . PhpMyAdmin\Util::backquote($_GET['transform_key'])
     . ' FROM ' . PhpMyAdmin\Util::backquote($table)
     . ' WHERE ' . $_GET['where_clause'] . ';';
-$result = $GLOBALS['dbi']->fetchValue($sql);
+$result = $dbi->fetchValue($sql);
 
 /* Check return code */
 if ($result === false) {
     PhpMyAdmin\Util::mysqlDie(
-        __('MySQL returned an empty result set (i.e. zero rows).'), $sql
+        __('MySQL returned an empty result set (i.e. zero rows).'),
+        $sql
     );
 }
 
@@ -55,7 +73,7 @@ if ($result === false) {
 ini_set('url_rewriter.tags', '');
 
 Core::downloadHeader(
-    $table . '-' .  $_GET['transform_key'] . '.bin',
+    $table . '-' . $_GET['transform_key'] . '.bin',
     Mime::detect($result),
     strlen($result)
 );

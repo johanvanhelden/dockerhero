@@ -1,3 +1,12 @@
+/* vim: set expandtab sw=4 ts=4 sts=4: */
+/**
+ * @fileoverview    Javascript functions used in server user groups page
+ * @name            Server User Groups
+ *
+ * @requires    jQuery
+ * @requires    jQueryUI
+ */
+
 /**
  * Unbind all event handlers before tearing down a page
  */
@@ -24,7 +33,7 @@ AJAX.registerOnload('server_user_groups.js', function () {
         buttonOptions[PMA_messages.strClose] = function () {
             $(this).dialog('close');
         };
-        $('<div/>')
+        $('<div></div>')
             .attr('id', 'confirmUserGroupDeleteDialog')
             .append(PMA_sprintf(PMA_messages.strDropUserGroupWarning, escapeHtml(groupName)))
             .dialog({

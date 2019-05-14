@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Exception thrown by the lexer.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Exceptions;
 
@@ -26,7 +26,7 @@ class LoaderException extends \Exception
      * Constructor.
      *
      * @param string $msg  the message of this exception
-     * @param string $name   the character that produced this exception
+     * @param string $name the character that produced this exception
      * @param int    $code the code of this error
      */
     public function __construct($msg = '', $name = '', $code = 0)

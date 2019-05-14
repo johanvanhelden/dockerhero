@@ -5,88 +5,53 @@
  *
  * @package PhpMyAdmin
  */
+declare(strict_types=1);
 
+use PhpMyAdmin\Controllers\Server\ReplicationController;
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\ReplicationGui;
 use PhpMyAdmin\Response;
-use PhpMyAdmin\Server\Common;
-use PhpMyAdmin\Template;
 
-/**
- * include files
- */
-require_once 'libraries/common.inc.php';
-require_once 'libraries/server_common.inc.php';
-require_once 'libraries/replication.inc.php';
+if (! defined('ROOT_PATH')) {
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+}
 
-/**
- * Does the common work
- */
-$response = Response::getInstance();
-$header   = $response->getHeader();
-$scripts  = $header->getScripts();
+require_once ROOT_PATH . 'libraries/common.inc.php';
+require_once ROOT_PATH . 'libraries/server_common.inc.php';
+require_once ROOT_PATH . 'libraries/replication.inc.php';
+
+$container = Container::getDefaultContainer();
+$container->set(Response::class, Response::getInstance());
+
+/** @var Response $response */
+$response = $container->get(Response::class);
+
+/** @var DatabaseInterface $dbi */
+$dbi = $container->get(DatabaseInterface::class);
+
+$controller = new ReplicationController(
+    $response,
+    $dbi
+);
+
+$header = $response->getHeader();
+$scripts = $header->getScripts();
 $scripts->addFile('server_privileges.js');
 $scripts->addFile('replication.js');
 $scripts->addFile('vendor/zxcvbn.js');
 
-/**
- * Checks if the user is allowed to do what he tries to...
- */
-if (! $GLOBALS['dbi']->isSuperuser()) {
-    $html = Template::get('server/sub_page_header')->render([
-        'type' => 'replication',
-    ]);
-    $html .= PhpMyAdmin\Message::error(__('No Privileges'))->getDisplay();
-    $response->addHTML($html);
-    exit;
-}
-
-// change $GLOBALS['url_params'] with $_POST['url_params']
-// only if it is an array
 if (isset($_POST['url_params']) && is_array($_POST['url_params'])) {
     $GLOBALS['url_params'] = $_POST['url_params'];
 }
 
-/**
- * Handling control requests
- */
-ReplicationGui::handleControlRequest();
+if ($dbi->isSuperuser()) {
+    $replicationGui = new ReplicationGui();
+    $replicationGui->handleControlRequest();
+}
 
-/**
- * start output
- */
-$response->addHTML('<div id="replication">');
-$response->addHTML(Template::get('server/sub_page_header')->render([
-    'type' => 'replication',
+$response->addHTML($controller->index([
+    'mr_configure' => $_POST['mr_configure'] ?? null,
+    'sl_configure' => $_POST['sl_configure'] ?? null,
+    'repl_clear_scr' => $_POST['repl_clear_scr'] ?? null,
 ]));
-
-// Display error messages
-$response->addHTML(ReplicationGui::getHtmlForErrorMessage());
-
-if ($GLOBALS['replication_info']['master']['status']) {
-    $response->addHTML(ReplicationGui::getHtmlForMasterReplication());
-} elseif (! isset($_POST['mr_configure'])
-    && ! isset($_POST['repl_clear_scr'])
-) {
-    $response->addHTML(ReplicationGui::getHtmlForNotServerReplication());
-}
-
-if (isset($_POST['mr_configure'])) {
-    // Render the 'Master configuration' section
-    $response->addHTML(ReplicationGui::getHtmlForMasterConfiguration());
-    exit;
-}
-
-$response->addHTML('</div>');
-
-if (! isset($_POST['repl_clear_scr'])) {
-    // Render the 'Slave configuration' section
-    $response->addHTML(
-        ReplicationGui::getHtmlForSlaveConfiguration(
-            $GLOBALS['replication_info']['slave']['status'],
-            $server_slave_replication
-        )
-    );
-}
-if (isset($_POST['sl_configure'])) {
-    $response->addHTML(ReplicationGui::getHtmlForReplicationChangeMaster("slave_changemaster"));
-}

@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `SHOW` statement.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -20,7 +20,7 @@ class ShowStatement extends NotImplementedStatement
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static $OPTIONS = [
         'CREATE' => 1,
         'AUTHORS' => 2,
         'BINARY' => 2,
@@ -62,5 +62,5 @@ class ShowStatement extends NotImplementedStatement
         'VARIABLES' => 2,
         'VIEW' => 2,
         'WARNINGS' => 2,
-    );
+    ];
 }

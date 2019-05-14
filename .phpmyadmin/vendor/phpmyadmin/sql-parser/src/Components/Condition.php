@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `WHERE` keyword parser.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -25,14 +25,20 @@ class Condition extends Component
      *
      * @var array
      */
-    public static $DELIMITERS = array('&&', '||', 'AND', 'OR', 'XOR');
+    public static $DELIMITERS = [
+        '&&',
+        '||',
+        'AND',
+        'OR',
+        'XOR',
+    ];
 
     /**
      * List of allowed reserved keywords in conditions.
      *
      * @var array
      */
-    public static $ALLOWED_KEYWORDS = array(
+    public static $ALLOWED_KEYWORDS = [
         'ALL' => 1,
         'AND' => 1,
         'BETWEEN' => 1,
@@ -51,14 +57,14 @@ class Condition extends Component
         'REGEXP' => 1,
         'RLIKE' => 1,
         'XOR' => 1,
-    );
+    ];
 
     /**
      * Identifiers recognized.
      *
      * @var array
      */
-    public $identifiers = array();
+    public $identifiers = [];
 
     /**
      * Whether this component is an operator.
@@ -81,7 +87,7 @@ class Condition extends Component
      */
     public function __construct($expr = null)
     {
-        $this->expr = trim($expr);
+        $this->expr = trim((string) $expr);
     }
 
     /**
@@ -91,9 +97,9 @@ class Condition extends Component
      *
      * @return Condition[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = array();
+        $ret = [];
 
         $expr = new self();
 
@@ -142,13 +148,13 @@ class Condition extends Component
 
             // Conditions are delimited by logical operators.
             if (in_array($token->value, static::$DELIMITERS, true)) {
-                if (($betweenBefore) && ($token->value === 'AND')) {
+                if ($betweenBefore && ($token->value === 'AND')) {
                     // The syntax of keyword `BETWEEN` is hard-coded.
                     $betweenBefore = false;
                 } else {
                     // The expression ended.
                     $expr->expr = trim($expr->expr);
-                    if (!empty($expr->expr)) {
+                    if (! empty($expr->expr)) {
                         $ret[] = $expr;
                     }
 
@@ -165,12 +171,12 @@ class Condition extends Component
 
             if (($token->type === Token::TYPE_KEYWORD)
                 && ($token->flags & Token::FLAG_KEYWORD_RESERVED)
-                && !($token->flags & Token::FLAG_KEYWORD_FUNCTION)
+                && ! ($token->flags & Token::FLAG_KEYWORD_FUNCTION)
             ) {
                 if ($token->value === 'BETWEEN') {
                     $betweenBefore = true;
                 }
-                if (($brackets === 0) && (empty(static::$ALLOWED_KEYWORDS[$token->value]))) {
+                if (($brackets === 0) && empty(static::$ALLOWED_KEYWORDS[$token->value])) {
                     break;
                 }
             }
@@ -179,7 +185,7 @@ class Condition extends Component
                 if ($token->value === '(') {
                     ++$brackets;
                 } elseif ($token->value === ')') {
-                    if ($brackets == 0) {
+                    if ($brackets === 0) {
                         break;
                     }
                     --$brackets;
@@ -189,11 +195,11 @@ class Condition extends Component
             $expr->expr .= $token->token;
             if (($token->type === Token::TYPE_NONE)
                 || (($token->type === Token::TYPE_KEYWORD)
-                && (!($token->flags & Token::FLAG_KEYWORD_RESERVED)))
+                && (! ($token->flags & Token::FLAG_KEYWORD_RESERVED)))
                 || ($token->type === Token::TYPE_STRING)
                 || ($token->type === Token::TYPE_SYMBOL)
             ) {
-                if (!in_array($token->value, $expr->identifiers)) {
+                if (! in_array($token->value, $expr->identifiers)) {
                     $expr->identifiers[] = $token->value;
                 }
             }
@@ -201,7 +207,7 @@ class Condition extends Component
 
         // Last iteration was not processed.
         $expr->expr = trim($expr->expr);
-        if (!empty($expr->expr)) {
+        if (! empty($expr->expr)) {
             $ret[] = $expr;
         }
 
@@ -216,7 +222,7 @@ class Condition extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         if (is_array($component)) {
             return implode(' ', $component);

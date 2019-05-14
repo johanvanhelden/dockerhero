@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.3.2
+## Version 1.4.0
 
 ### What is Dockerhero?
 
@@ -15,7 +15,7 @@ Dockerhero includes the following software (containers):
 - nginx (latest)
 - mySQL (5.7)
 - Redis (latest)
-- PHP (7.1-fpm by default, [or choose a different version](#picking-a-php-version))
+- PHP (7.2-fpm by default, [or choose a different version](#picking-a-php-version))
 - Mailhog
 - and more to come!
 
@@ -93,7 +93,7 @@ This is because dockhero mounts its parent folder (`./../`) as `/var/www/project
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
 ### Picking a PHP version
-By default, PHP 7.1 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change image.
+By default, PHP 7.2 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change image.
 
 For more information, please see this section: [Overriding default settings](#overriding-default-settings)
 
@@ -108,6 +108,10 @@ PHP 7.1: `johanvanhelden/dockerhero-php-7.1-fpm:latest`
 PHP 5.6: `johanvanhelden/dockerhero-php-5.6-fpm:latest`
 
 PHP 5.4: `johanvanhelden/dockerhero-php-5.4-fpm:latest`
+
+There is also a PHP 7.1 version of the workspace available for backward compatibility:
+
+`johanvanhelden/dockerhero-workspace:php7.1`
 
 
 ### Trusting the self-signed certificate

@@ -1,0 +1,87 @@
+{
+    "$id": "urn:williamdes:mariadb-mysql-kbs:slimdata",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "definitions": {
+        "linkedKeyVar": {
+            "type": "object",
+            "properties": {
+                "patternProperties": {
+                    "^([a-zA-Z_]+)": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "docURL": {
+            "type": "string",
+            "pattern": "^(https|http)://(mariadb.com|dev.mysql.com)"
+        }
+    },
+    "properties": {
+        "vars": {
+            "$id": "/properties/vars",
+            "type": "object",
+            "patternProperties": {
+                "^([a-zA-Z_]+)": {
+                    "type": "object",
+                    "properties": {
+                        "t": {
+                            "type": "integer"
+                        },
+                        "d": {
+                            "type": "boolean"
+                        },
+                        "a": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "a": {
+                                        "type": "string"
+                                    },
+                                    "u": {
+                                        "type": "integer"
+                                    },
+                                    "t": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "additionalProperties": false
+                            }
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "version": {
+            "$id": "/properties/version",
+            "type": "number",
+            "title": "The Version Schema ",
+            "description": "Version of file",
+            "default": 1,
+            "examples": [
+                1,
+                1.1,
+                2.9,
+                3
+            ]
+        },
+        "urls": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/docURL"
+            }
+        },
+        "types": {
+            "$ref": "#/definitions/linkedKeyVar"
+        },
+        "varTypes": {
+            "$ref": "#/definitions/linkedKeyVar"
+        }
+    },
+    "additionalProperties": false
+}

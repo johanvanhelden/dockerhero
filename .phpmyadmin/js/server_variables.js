@@ -1,5 +1,12 @@
 /* vim: set expandtab sw=4 ts=4 sts=4: */
-
+/**
+ * @fileoverview    Javascript functions used in server variables page
+ * @name            Server Replication
+ *
+ * @requires    jQuery
+ * @requires    jQueryUI
+ * @requires    js/functions.js
+ */
 /**
  * Unbind all event handlers before tearing down a page
  */
@@ -9,7 +16,6 @@ AJAX.registerTeardown('server_variables.js', function () {
 });
 
 AJAX.registerOnload('server_variables.js', function () {
-    var $editLink = $('a.editLink');
     var $saveLink = $('a.saveLink');
     var $cancelLink = $('a.cancelLink');
 
@@ -37,7 +43,7 @@ AJAX.registerOnload('server_variables.js', function () {
         $cell.addClass('edit'); // variable is being edited
         $myEditLink.remove(); // remove edit link
 
-        $mySaveLink.click(function () {
+        $mySaveLink.on('click', function () {
             var $msgbox = PMA_ajaxShowMessage(PMA_messages.strProcessingRequest);
             $.post($(this).attr('href'), {
                 ajax_request: true,
@@ -63,7 +69,7 @@ AJAX.registerOnload('server_variables.js', function () {
             return false;
         });
 
-        $myCancelLink.click(function () {
+        $myCancelLink.on('click', function () {
             $valueCell.html($valueCell.data('content'));
             $cell.removeClass('edit').html($myEditLink);
             return false;
@@ -75,14 +81,14 @@ AJAX.registerOnload('server_variables.js', function () {
             varName: varName
         }, function (data) {
             if (typeof data !== 'undefined' && data.success === true) {
-                var $links = $('<div />')
+                var $links = $('<div></div>')
                     .append($myCancelLink)
                     .append('&nbsp;&nbsp;&nbsp;')
                     .append($mySaveLink);
-                var $editor = $('<div />', { 'class': 'serverVariableEditor' })
+                var $editor = $('<div></div>', { 'class': 'serverVariableEditor' })
                     .append(
-                        $('<div/>').append(
-                            $('<input />', { type: 'text' }).val(data.message)
+                        $('<div></div>').append(
+                            $('<input>', { type: 'text' }).val(data.message)
                         )
                     );
                     // Save and replace content
@@ -95,7 +101,7 @@ AJAX.registerOnload('server_variables.js', function () {
                     .html($editor)
                     .find('input')
                     .focus()
-                    .keydown(function (event) { // Keyboard shortcuts
+                    .on('keydown', function (event) { // Keyboard shortcuts
                         if (event.keyCode === 13) { // Enter key
                             $mySaveLink.trigger('click');
                         } else if (event.keyCode === 27) { // Escape key

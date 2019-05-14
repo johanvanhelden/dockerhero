@@ -5,26 +5,39 @@
  *
  * @package PhpMyAdmin
  */
+declare(strict_types=1);
 
-use PhpMyAdmin\Controllers\Server\ServerCollationsController;
 use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Response;
 
-require_once 'libraries/common.inc.php';
+if (! defined('ROOT_PATH')) {
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+}
+
+require_once ROOT_PATH . 'libraries/common.inc.php';
 
 $container = Container::getDefaultContainer();
 $container->factory(
-    'PhpMyAdmin\Controllers\Server\ServerBinlogController'
+    'PhpMyAdmin\Controllers\Server\BinlogController'
 );
 $container->alias(
-    'ServerBinlogController',
-    'PhpMyAdmin\Controllers\Server\ServerBinlogController'
+    'BinlogController',
+    'PhpMyAdmin\Controllers\Server\BinlogController'
 );
 $container->set('PhpMyAdmin\Response', Response::getInstance());
 $container->alias('response', 'PhpMyAdmin\Response');
 
-/** @var ServerBinlogController $controller */
+/** @var \PhpMyAdmin\Controllers\Server\BinlogController $controller */
 $controller = $container->get(
-    'ServerBinlogController', array()
+    'BinlogController',
+    []
 );
-$controller->indexAction();
+
+/** @var Response $response */
+$response = $container->get('response');
+
+$response->addHTML($controller->indexAction([
+    'log' => $_POST['log'] ?? null,
+    'pos' => $_POST['pos'] ?? null,
+    'is_full_query' => $_POST['is_full_query'] ?? null,
+]));

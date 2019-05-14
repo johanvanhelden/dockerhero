@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Implementation for UTF-8 strings.
  *
@@ -10,6 +9,7 @@
  * Because the lexer relies on the subscript operator this class had to be
  * implemented.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser;
 
@@ -75,7 +75,7 @@ class UtfString implements \ArrayAccess
         $this->byteIdx = 0;
         $this->charIdx = 0;
         $this->byteLen = mb_strlen($str, '8bit');
-        if (!mb_check_encoding($str, 'UTF-8')) {
+        if (! mb_check_encoding($str, 'UTF-8')) {
             $this->charLen = 0;
         } else {
             $this->charLen = mb_strlen($str, 'UTF-8');

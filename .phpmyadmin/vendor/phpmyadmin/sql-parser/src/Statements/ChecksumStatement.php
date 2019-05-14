@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `CHECKSUM` statement.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -22,10 +22,10 @@ class ChecksumStatement extends MaintenanceStatement
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static $OPTIONS = [
         'TABLE' => 1,
 
         'QUICK' => 2,
         'EXTENDED' => 3,
-    );
+    ];
 }

@@ -85,9 +85,6 @@ var grid_size = 10;
 
 // window.captureEvents(Event.MOUSEDOWN | Event.MOUSEUP);
 // ---CROSS
-document.onmousedown = MouseDown;
-document.onmouseup   = MouseUp;
-document.onmousemove = MouseMove;
 
 var isIE = document.all && !window.opera;
 
@@ -155,6 +152,11 @@ function MouseMove (e) {
             new_y = parseInt(new_y / grid_size) * grid_size;
         }
 
+        if (new_x < 0) {
+            new_x = 0;
+        } else if (new_y < 0) {
+            new_y = 0;
+        }
         $cur_click.css('left', new_x + 'px');
         $cur_click.css('top', new_y + 'px');
     } else if (layer_menu_cur_click) {
@@ -248,14 +250,14 @@ function setDefaultValuesFromSavedState () {
 
     var $key_SB_all = $('#key_SB_all');
     if ($key_SB_all.attr('class') === 'M_butt_Selected_down') {
-        $key_SB_all.click();
+        $key_SB_all.trigger('click');
         $key_SB_all.toggleClass('M_butt_Selected_down');
         $key_SB_all.toggleClass('M_butt');
     }
 
     var $key_Left_Right = $('#key_Left_Right');
     if ($key_Left_Right.attr('class') === 'M_butt_Selected_down') {
-        $key_Left_Right.click();
+        $key_Left_Right.trigger('click');
     }
 }
 
@@ -561,7 +563,8 @@ function Add_Other_db_tables () {
             'ajax_request' : true,
             'dialog' : 'add_table',
             'db' : db,
-            'table' : table
+            'table' : table,
+            'server': PMA_commonParams.get('server')
         }, function (data) {
             $new_table_dom = $(data.message);
             $new_table_dom.find('a').first().remove();
@@ -593,7 +596,8 @@ function Add_Other_db_tables () {
 
     $.post('sql.php', {
         'ajax_request' : true,
-        'sql_query' : 'SHOW databases;'
+        'sql_query' : 'SHOW databases;',
+        'server': PMA_commonParams.get('server')
     }, function (data) {
         $(data.message).find('table.table_results.data.ajax').find('td.data').each(function () {
             var val = $(this)[0].innerHTML;
@@ -616,14 +620,15 @@ function Add_Other_db_tables () {
             }
         });
 
-    $('#add_table_from').change(function () {
+    $('#add_table_from').on('change', function () {
         if ($(this).val()) {
             var db_name = $(this).val();
             var sql_query = 'SHOW tables;';
             $.post('sql.php', {
                 'ajax_request' : true,
                 'sql_query': sql_query,
-                'db' : db_name
+                'db' : db_name,
+                'server': PMA_commonParams.get('server')
             }, function (data) {
                 $select_table.html('');
                 $(data.message).find('table.table_results.data.ajax').find('td.data').each(function () {
@@ -769,12 +774,12 @@ function Save3 (callback) {
         };
 
         var $form = $('<form action="db_designer.php" method="post" name="save_page" id="save_page" class="ajax"></form>')
-            .append('<input type="hidden" name="server" value="' + server + '" />')
-            .append('<input type="hidden" name="db" value="' + db + '" />')
-            .append('<input type="hidden" name="operation" value="savePage" />')
-            .append('<input type="hidden" name="save_page" value="new" />')
+            .append('<input type="hidden" name="server" value="' + server + '">')
+            .append('<input type="hidden" name="db" value="' + db + '">')
+            .append('<input type="hidden" name="operation" value="savePage">')
+            .append('<input type="hidden" name="save_page" value="new">')
             .append('<label for="selected_value">' + PMA_messages.strPageName +
-                '</label>:<input type="text" name="selected_value" />');
+                '</label>:<input type="text" name="selected_value">');
         $form.on('submit', function (e) {
             e.preventDefault();
             submitSaveDialogAndClose(callback);
@@ -813,9 +818,12 @@ function Edit_pages () {
         };
 
         var $msgbox = PMA_ajaxShowMessage();
-        var argsep = PMA_commonParams.get('arg_separator');
-        var params = 'ajax_request=true' + argsep + 'dialog=edit' + argsep + 'server=' + server + argsep + 'db=' + db;
-        $.get('db_designer.php', params, function (data) {
+        $.post('db_designer.php', {
+            'ajax_request': true,
+            'server': server,
+            'db': db,
+            'dialog': 'edit'
+        }, function (data) {
             if (data.success === false) {
                 PMA_ajaxShowMessage(data.error, false);
             } else {
@@ -893,9 +901,12 @@ function Delete_pages () {
     };
 
     var $msgbox = PMA_ajaxShowMessage();
-    var argsep = PMA_commonParams.get('arg_separator');
-    var params = 'ajax_request=true' + argsep + 'dialog=delete' + argsep + 'server=' + server + argsep + 'db=' + db;
-    $.get('db_designer.php', params, function (data) {
+    $.post('db_designer.php', {
+        'ajax_request': true,
+        'server': server,
+        'db': db,
+        'dialog': 'delete'
+    }, function (data) {
         if (data.success === false) {
             PMA_ajaxShowMessage(data.error, false);
         } else {
@@ -992,9 +1003,12 @@ function Save_as () {
     };
 
     var $msgbox = PMA_ajaxShowMessage();
-    var argsep = PMA_commonParams.get('arg_separator');
-    var params = 'ajax_request=true' + argsep + 'dialog=save_as' + argsep + 'server=' + server + argsep + 'token=' + argsep + 'db=' + db;
-    $.get('db_designer.php', params, function (data) {
+    $.post('db_designer.php', {
+        'ajax_request': true,
+        'server': server,
+        'db': db,
+        'dialog': 'save_as'
+    }, function (data) {
         if (data.success === false) {
             PMA_ajaxShowMessage(data.error, false);
         } else {
@@ -1069,8 +1083,14 @@ function Export_pages () {
     };
     var $msgbox = PMA_ajaxShowMessage();
     var argsep = PMA_commonParams.get('arg_separator');
-    var params = 'ajax_request=true' + argsep + 'dialog=export' + argsep + 'server=' + server + argsep + 'db=' + db + argsep + 'selected_page=' + selected_page;
-    $.get('db_designer.php', params, function (data) {
+
+    $.post('db_designer.php', {
+        'ajax_request': true,
+        'server': server,
+        'db': db,
+        'dialog': 'export',
+        'selected_page': selected_page
+    }, function (data) {
         if (data.success === false) {
             PMA_ajaxShowMessage(data.error, false);
         } else {
@@ -1078,17 +1098,17 @@ function Export_pages () {
 
             var $form = $(data.message);
             if (!designer_tables_enabled) {
-                $form.append('<input type="hidden" name="offline_export" value="true" />');
+                $form.append('<input type="hidden" name="offline_export" value="true">');
             }
             $.each(Get_url_pos(true).substring(1).split(argsep), function () {
                 var pair = this.split('=');
-                var input = $('<input type="hidden" />');
+                var input = $('<input type="hidden">');
                 input.attr('name', pair[0]);
                 input.attr('value', pair[1]);
                 $form.append(input);
             });
             var $formatDropDown = $form.find('#plugins');
-            $formatDropDown.change(function () {
+            $formatDropDown.on('change', function () {
                 var format = $formatDropDown.val();
                 $form.find('.format_specific_options').hide();
                 $form.find('#' + format + '_options').show();
@@ -1119,7 +1139,7 @@ function Load_page (page) {
         }
         $('<a href="db_designer.php?server=' + server + argsep + 'db=' + encodeURI(db) + param_page + '"></a>')
             .appendTo($('#page_content'))
-            .click();
+            .trigger('click');
     } else {
         if (page === null) {
             Show_tables_in_landing_page(db);
@@ -1203,7 +1223,7 @@ function Click_field (db, T, f, PK) {
                 alert(PMA_messages.strPleaseSelectPrimaryOrUniqueKey);
                 return;// 0;
             }// PK
-            if (j_tabs[db + '.' + T] !== '1') {
+            if (j_tabs[db + '.' + T] !== 1) {
                 document.getElementById('foreign_relation').style.display = 'none';
             }
             click_field = 1;
@@ -1211,7 +1231,7 @@ function Click_field (db, T, f, PK) {
             document.getElementById('designer_hint').innerHTML = PMA_messages.strSelectForeignKey;
         } else {
             Start_relation(); // hidden hint...
-            if (j_tabs[db + '.' + T] !== '1' || !PK) {
+            if (j_tabs[db + '.' + T] !== 1 || !PK) {
                 document.getElementById('foreign_relation').style.display = 'none';
             }
             var left = Glob_X - (document.getElementById('layer_new_relation').offsetWidth >> 1);
@@ -1750,7 +1770,6 @@ function Close_option () {
     document.getElementById('h_operator').value = '---';
     document.getElementById('having').value = '';
     document.getElementById('orderby').value = '---';
-
 }
 
 function Select_all (id_this, owner) {
@@ -1943,84 +1962,87 @@ AJAX.registerTeardown('designer/move.js', function () {
     $('#cancel_close_option').off('click');
     $('#ok_new_rel_panel').off('click');
     $('#cancel_new_rel_panel').off('click');
+    $('#page_content').off('mouseup');
+    $('#page_content').off('mousedown');
+    $('#page_content').off('mousemove');
 });
 
 AJAX.registerOnload('designer/move.js', function () {
-    $('#key_Show_left_menu').click(function () {
+    $('#key_Show_left_menu').on('click', function () {
         Show_left_menu(this);
         return false;
     });
-    $('#toggleFullscreen').click(function () {
+    $('#toggleFullscreen').on('click', function () {
         Toggle_fullscreen();
         return false;
     });
-    $('#addOtherDbTables').click(function () {
+    $('#addOtherDbTables').on('click', function () {
         Add_Other_db_tables();
         return false;
     });
-    $('#newPage').click(function () {
+    $('#newPage').on('click', function () {
         New();
         return false;
     });
-    $('#editPage').click(function () {
+    $('#editPage').on('click', function () {
         Edit_pages();
         return false;
     });
-    $('#savePos').click(function () {
+    $('#savePos').on('click', function () {
         Save3();
         return false;
     });
-    $('#SaveAs').click(function () {
+    $('#SaveAs').on('click', function () {
         Save_as();
         return false;
     });
-    $('#delPages').click(function () {
+    $('#delPages').on('click', function () {
         Delete_pages();
         return false;
     });
-    $('#StartTableNew').click(function () {
+    $('#StartTableNew').on('click', function () {
         Start_table_new();
         return false;
     });
-    $('#rel_button').click(function () {
+    $('#rel_button').on('click', function () {
         Start_relation();
         return false;
     });
-    $('#display_field_button').click(function () {
+    $('#display_field_button').on('click', function () {
         Start_display_field();
         return false;
     });
-    $('#reloadPage').click(function () {
-        $('#designer_tab').click();
+    $('#reloadPage').on('click', function () {
+        $('#designer_tab').trigger('click');
     });
-    $('#angular_direct_button').click(function () {
+    $('#angular_direct_button').on('click', function () {
         Angular_direct();
         return false;
     });
-    $('#grid_button').click(function () {
+    $('#grid_button').on('click', function () {
         Grid();
         return false;
     });
-    $('#key_SB_all').click(function () {
+    $('#key_SB_all').on('click', function () {
         Small_tab_all(this);
         return false;
     });
-    $('#SmallTabInvert').click(function () {
+    $('#SmallTabInvert').on('click', function () {
         Small_tab_invert();
         return false;
     });
-    $('#relLineInvert').click(function () {
+    $('#relLineInvert').on('click', function () {
         Relation_lines_invert();
         return false;
     });
-    $('#exportPages').click(function () {
+    $('#exportPages').on('click', function () {
         Export_pages();
         return false;
     });
-    $('#query_builder').click(function () {
+    $('#query_builder').on('click', function () {
         build_query('SQL Query on Database', 0);
     });
-    $('#key_Left_Right').click(function () {
+    $('#key_Left_Right').on('click', function () {
         Side_menu_right(this);
         return false;
     });
@@ -2031,25 +2053,25 @@ AJAX.registerOnload('designer/move.js', function () {
         Hide_text();
         return false;
     });
-    $('#pin_Text').click(function () {
+    $('#pin_Text').on('click', function () {
         Pin_text(this);
         return false;
     });
-    $('#canvas').click(function (event) {
+    $('#canvas').on('click', function (event) {
         Canvas_click(this, event);
     });
-    $('#key_HS_all').click(function () {
+    $('#key_HS_all').on('click', function () {
         Hide_tab_all(this);
         return false;
     });
-    $('#key_HS').click(function () {
+    $('#key_HS').on('click', function () {
         No_have_constr(this);
         return false;
     });
-    $('.scroll_tab_struct').click(function () {
+    $('.scroll_tab_struct').on('click', function () {
         Start_tab_upd($(this).attr('table_name'));
     });
-    $('.scroll_tab_checkbox').click(function () {
+    $('.scroll_tab_checkbox').on('click', function () {
         VisibleTab(this,$(this).val());
     });
     $('#id_scroll_tab').find('tr').on('click', '.designer_Tabs2,.designer_Tabs', function () {
@@ -2088,23 +2110,32 @@ AJAX.registerOnload('designer/move.js', function () {
         var params = ($(this).attr('Click_option_param')).split(',');
         Click_option(params[0], params[1], params[2]);
     });
-    $('input#del_button').click(function () {
+    $('input#del_button').on('click', function () {
         Upd_relation();
     });
-    $('input#cancel_button').click(function () {
+    $('input#cancel_button').on('click', function () {
         document.getElementById('layer_upd_relation').style.display = 'none';
         Re_load();
     });
-    $('input#ok_add_object').click(function () {
+    $('input#ok_add_object').on('click', function () {
         add_object();
     });
-    $('input#cancel_close_option').click(function () {
+    $('input#cancel_close_option').on('click', function () {
         Close_option();
     });
-    $('input#ok_new_rel_panel').click(function () {
+    $('input#ok_new_rel_panel').on('click', function () {
         New_relation();
     });
-    $('input#cancel_new_rel_panel').click(function () {
+    $('input#cancel_new_rel_panel').on('click', function () {
         document.getElementById('layer_new_relation').style.display = 'none';
+    });
+    $('#page_content').on('mousedown', function (e) {
+        MouseDown(e);
+    });
+    $('#page_content').on('mouseup', function (e) {
+        MouseUp(e);
+    });
+    $('#page_content').on('mousemove', function (e) {
+        MouseMove(e);
     });
 });

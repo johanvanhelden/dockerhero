@@ -5,54 +5,47 @@
  *
  * @package PhpMyAdmin
  */
+declare(strict_types=1);
 
+use PhpMyAdmin\Controllers\Server\Status\VariablesController;
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Response;
-use PhpMyAdmin\Message;
 use PhpMyAdmin\Server\Status\Data;
-use PhpMyAdmin\Server\Status\Variables;
 
-require_once 'libraries/common.inc.php';
-require_once 'libraries/server_common.inc.php';
-require_once 'libraries/replication.inc.php';
-
-/**
- * flush status variables if requested
- */
-if (isset($_POST['flush'])) {
-    $_flush_commands = array(
-        'STATUS',
-        'TABLES',
-        'QUERY CACHE',
-    );
-
-    if (in_array($_POST['flush'], $_flush_commands)) {
-        $GLOBALS['dbi']->query('FLUSH ' . $_POST['flush'] . ';');
-    }
-    unset($_flush_commands);
+if (! defined('ROOT_PATH')) {
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 }
 
-$serverStatusData = new Data();
+require_once ROOT_PATH . 'libraries/common.inc.php';
+require_once ROOT_PATH . 'libraries/server_common.inc.php';
+require_once ROOT_PATH . 'libraries/replication.inc.php';
 
-$response = Response::getInstance();
-$header   = $response->getHeader();
-$scripts  = $header->getScripts();
+$container = Container::getDefaultContainer();
+$container->set(Response::class, Response::getInstance());
+
+/** @var Response $response */
+$response = $container->get(Response::class);
+
+/** @var DatabaseInterface $dbi */
+$dbi = $container->get(DatabaseInterface::class);
+
+$controller = new VariablesController(
+    $response,
+    $dbi,
+    new Data()
+);
+
+$header = $response->getHeader();
+$scripts = $header->getScripts();
 $scripts->addFile('server_status_variables.js');
 $scripts->addFile('vendor/jquery/jquery.tablesorter.js');
 $scripts->addFile('server_status_sorter.js');
 
-$response->addHTML('<div>');
-$response->addHTML($serverStatusData->getMenuHtml());
-if ($serverStatusData->dataLoaded) {
-    $response->addHTML(Variables::getHtmlForFilter($serverStatusData));
-    $response->addHTML(Variables::getHtmlForLinkSuggestions($serverStatusData));
-    $response->addHTML(Variables::getHtmlForVariablesList($serverStatusData));
-} else {
-    $response->addHTML(
-        Message::error(
-            __('Not enough privilege to view status variables.')
-        )->getDisplay()
-    );
-}
-$response->addHTML('</div>');
-
-exit;
+$response->addHTML($controller->index([
+    'flush' => $_POST['flush'] ?? null,
+    'filterAlert' => $_POST['filterAlert'] ?? null,
+    'filterText' => $_POST['filterText'] ?? null,
+    'filterCategory' => $_POST['filterCategory'] ?? null,
+    'dontFormat' => $_POST['dontFormat'] ?? null,
+]));
