@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `TRUNCATE` statement.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -23,9 +23,9 @@ class TruncateStatement extends Statement
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static $OPTIONS = [
         'TABLE' => 1,
-    );
+    ];
 
     /**
      * The name of the truncated table.

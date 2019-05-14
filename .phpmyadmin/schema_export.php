@@ -5,29 +5,39 @@
  *
  * @package PhpMyAdmin
  */
+declare(strict_types=1);
 
+use PhpMyAdmin\DatabaseInterface;
+use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Export;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Util;
 
-/**
- * Gets some core libraries
- */
-require_once 'libraries/common.inc.php';
+if (! defined('ROOT_PATH')) {
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+}
+
+require_once ROOT_PATH . 'libraries/common.inc.php';
+
+$container = Container::getDefaultContainer();
+
+/** @var DatabaseInterface $dbi */
+$dbi = $container->get(DatabaseInterface::class);
 
 /**
  * get all variables needed for exporting relational schema
  * in $cfgRelation
  */
-$relation = new Relation();
+$relation = new Relation($dbi);
 $cfgRelation = $relation->getRelationsParam();
 
 if (! isset($_REQUEST['export_type'])) {
-    Util::checkParameters(array('export_type'));
+    Util::checkParameters(['export_type']);
 }
 
 /**
  * Include the appropriate Schema Class depending on $export_type
  * default is PDF
  */
-Export::processExportSchema($_REQUEST['export_type']);
+$export = new Export($dbi);
+$export->processExportSchema($_REQUEST['export_type']);

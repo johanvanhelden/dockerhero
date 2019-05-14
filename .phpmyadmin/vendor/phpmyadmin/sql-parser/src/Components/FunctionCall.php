@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Parses a function call.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -57,7 +57,7 @@ class FunctionCall extends Component
      *
      * @return FunctionCall
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
         $ret = new self();
 
@@ -112,7 +112,7 @@ class FunctionCall extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         return $component->name . $component->parameters;
     }

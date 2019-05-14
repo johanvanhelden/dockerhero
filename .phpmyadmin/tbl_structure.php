@@ -6,26 +6,32 @@
  *
  * @package PhpMyAdmin
  */
+declare(strict_types=1);
 
-use PhpMyAdmin\Controllers\Table\TableStructureController;
+use PhpMyAdmin\Controllers\Table\StructureController;
+use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Response;
 
-require_once 'libraries/common.inc.php';
+if (! defined('ROOT_PATH')) {
+    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+}
+
+global $db, $table, $db_is_system_schema, $tbl_is_view, $tbl_storage_engine;
+global $table_info_num_rows, $tbl_collation, $showtable;
+
+require_once ROOT_PATH . 'libraries/common.inc.php';
 
 $container = Container::getDefaultContainer();
-$container->factory('PhpMyAdmin\Controllers\Table\TableStructureController');
-$container->alias(
-    'TableStructureController',
-    'PhpMyAdmin\Controllers\Table\TableStructureController'
-);
-$container->set('PhpMyAdmin\Response', Response::getInstance());
-$container->alias('response', 'PhpMyAdmin\Response');
+$container->factory(StructureController::class);
+$container->set(Response::class, Response::getInstance());
+$container->alias('response', Response::class);
 
-global $db, $table, $db_is_system_schema, $tbl_is_view, $tbl_storage_engine,
-    $table_info_num_rows, $tbl_collation, $showtable;
-$GLOBALS['dbi']->selectDb($GLOBALS['db']);
-$table_class_object = $GLOBALS['dbi']->getTable(
+/** @var DatabaseInterface $dbi */
+$dbi = $container->get(DatabaseInterface::class);
+
+$dbi->selectDb($GLOBALS['db']);
+$table_class_object = $dbi->getTable(
     $GLOBALS['db'],
     $GLOBALS['table']
 );
@@ -41,7 +47,7 @@ if ($table_class_object->isView()) {
 $tbl_collation = $table_class_object->getCollation();
 $table_info_num_rows = $table_class_object->getNumRows();
 /* Define dependencies for the concerned controller */
-$dependency_definitions = array(
+$dependency_definitions = [
     'db' => $db,
     'table' => $table,
     'db_is_system_schema' => $db_is_system_schema,
@@ -50,8 +56,8 @@ $dependency_definitions = array(
     'table_info_num_rows' => $table_info_num_rows,
     'tbl_collation' => $tbl_collation,
     'showtable' => $GLOBALS['showtable']
-);
+];
 
-/** @var TableStructureController $controller */
-$controller = $container->get('TableStructureController', $dependency_definitions);
+/** @var StructureController $controller */
+$controller = $container->get(StructureController::class, $dependency_definitions);
 $controller->indexAction();

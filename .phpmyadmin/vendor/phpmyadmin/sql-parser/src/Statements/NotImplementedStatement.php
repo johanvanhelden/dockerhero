@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Not implemented (yet) statements.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -27,7 +27,7 @@ class NotImplementedStatement extends Statement
      *
      * @var Token[]
      */
-    public $unknown = array();
+    public $unknown = [];
 
     /**
      * @return string

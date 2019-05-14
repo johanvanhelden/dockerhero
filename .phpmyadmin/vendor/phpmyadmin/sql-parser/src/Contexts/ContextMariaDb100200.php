@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Context for MariaDB 10.2.
  *
@@ -7,6 +6,7 @@
  *
  * @see https://mariadb.com/kb/en/the-mariadb-library/reserved-words/
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Contexts;
 
@@ -33,7 +33,7 @@ class ContextMariaDb100200 extends Context
      *
      * @var array
      */
-    public static $KEYWORDS = array(
+    public static $KEYWORDS = [
         'AT' => 1, 'DO' => 1, 'IO' => 1, 'NO' => 1, 'XA' => 1,
         'ANY' => 1, 'CPU' => 1, 'END' => 1, 'IPC' => 1, 'NDB' => 1, 'NEW' => 1,
         'ONE' => 1, 'ROW' => 1, 'XID' => 1,
@@ -361,5 +361,5 @@ class ContextMariaDb100200 extends Context
         'CHAR' => 43,
         'BINARY' => 43,
         'INTERVAL' => 43,
-    );
+    ];
 }

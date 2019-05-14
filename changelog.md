@@ -29,7 +29,8 @@ services:
 ### Changed
 
 - Update to PHP 7.2 (workspace image)
-- Set PHP 7.2 as the default version for the PHP image.
+- Set PHP 7.2 as the default version for the PHP image
+- Switched to a development version of PHPMyAdmin (5.0.0-dev) to have an upgraded jQuery version (CVE-2019-11358)
 
 ## 1.3.2 - 2019-01-07
 

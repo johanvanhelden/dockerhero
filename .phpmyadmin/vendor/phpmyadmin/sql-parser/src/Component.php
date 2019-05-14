@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Defines a component that is later extended to parse specialized components or
  * keywords.
@@ -8,6 +7,7 @@
  * *Component parsers can be reused in multiple  situations and *Keyword parsers
  * count on the *Component classes to do their job.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser;
 
@@ -36,7 +36,7 @@ abstract class Component
     public static function parse(
         Parser $parser,
         TokensList $list,
-        array $options = array()
+        array $options = []
     ) {
         // This method should be abstract, but it can't be both static and
         // abstract.
@@ -56,7 +56,7 @@ abstract class Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         // This method should be abstract, but it can't be both static and
         // abstract.

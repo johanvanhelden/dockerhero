@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Defines the localization helper infrastructure of the library.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser;
 
@@ -58,7 +58,7 @@ class Translator
      */
     public static function gettext($msgid)
     {
-        if (!class_exists('\PhpMyAdmin\MoTranslator\Loader', true)) {
+        if (! class_exists('\PhpMyAdmin\MoTranslator\Loader', true)) {
             return $msgid;
         }
 

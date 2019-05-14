@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `JOIN` keyword parser.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -25,7 +25,7 @@ class JoinKeyword extends Component
      *
      * @var array
      */
-    public static $JOINS = array(
+    public static $JOINS = [
         'CROSS JOIN' => 'CROSS',
         'FULL JOIN' => 'FULL',
         'FULL OUTER JOIN' => 'FULL',
@@ -41,7 +41,7 @@ class JoinKeyword extends Component
         'NATURAL LEFT OUTER JOIN' => 'NATURAL LEFT OUTER',
         'NATURAL RIGHT OUTER JOIN' => 'NATURAL RIGHT OUTER',
         'STRAIGHT_JOIN' => 'STRAIGHT',
-    );
+    ];
 
     /**
      * Type of this join.
@@ -98,9 +98,9 @@ class JoinKeyword extends Component
      *
      * @return JoinKeyword[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = array();
+        $ret = [];
 
         $expr = new self();
 
@@ -151,7 +151,7 @@ class JoinKeyword extends Component
 
             if ($state === 0) {
                 if (($token->type === Token::TYPE_KEYWORD)
-                    && (!empty(static::$JOINS[$token->keyword]))
+                    && ! empty(static::$JOINS[$token->keyword])
                 ) {
                     $expr->type = static::$JOINS[$token->keyword];
                     $state = 1;
@@ -159,26 +159,29 @@ class JoinKeyword extends Component
                     break;
                 }
             } elseif ($state === 1) {
-                $expr->expr = Expression::parse($parser, $list, array('field' => 'table'));
+                $expr->expr = Expression::parse($parser, $list, ['field' => 'table']);
                 $state = 2;
             } elseif ($state === 2) {
                 if ($token->type === Token::TYPE_KEYWORD) {
-                    if ($token->keyword === 'ON') {
-                        $state = 3;
-                    } elseif ($token->keyword === 'USING') {
-                        $state = 4;
-                    } else {
-                        if (($token->type === Token::TYPE_KEYWORD)
-                            && (!empty(static::$JOINS[$token->keyword]))
-                        ) {
-                            $ret[] = $expr;
-                            $expr = new self();
-                            $expr->type = static::$JOINS[$token->keyword];
-                            $state = 1;
-                        } else {
-                            /* Next clause is starting */
+                    switch ($token->keyword) {
+                        case 'ON':
+                            $state = 3;
                             break;
-                        }
+                        case 'USING':
+                            $state = 4;
+                            break;
+                        default:
+                            if (! empty(static::$JOINS[$token->keyword])
+                            ) {
+                                $ret[] = $expr;
+                                $expr = new self();
+                                $expr->type = static::$JOINS[$token->keyword];
+                                $state = 1;
+                            } else {
+                                /* Next clause is starting */
+                                break 2;
+                            }
+                            break;
                     }
                 }
             } elseif ($state === 3) {
@@ -194,7 +197,7 @@ class JoinKeyword extends Component
             }
         }
 
-        if (!empty($expr->type)) {
+        if (! empty($expr->type)) {
             $ret[] = $expr;
         }
 
@@ -209,14 +212,14 @@ class JoinKeyword extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
-        $ret = array();
+        $ret = [];
         foreach ($component as $c) {
             $ret[] = array_search($c->type, static::$JOINS) . ' ' . $c->expr
-                . (!empty($c->on)
+                . (! empty($c->on)
                     ? ' ON ' . Condition::build($c->on) : '')
-                . (!empty($c->using)
+                . (! empty($c->using)
                     ? ' USING ' . ArrayObj::build($c->using) : '');
         }
 

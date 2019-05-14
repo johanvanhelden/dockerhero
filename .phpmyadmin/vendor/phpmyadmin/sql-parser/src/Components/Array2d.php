@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `VALUES` keyword parser.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -28,9 +28,9 @@ class Array2d extends Component
      *
      * @return ArrayObj[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = array();
+        $ret = [];
 
         /**
          * The number of values in each set.
@@ -82,7 +82,7 @@ class Array2d extends Component
                     $arrCount = count($arr->values);
                     if ($count === -1) {
                         $count = $arrCount;
-                    } elseif ($arrCount != $count) {
+                    } elseif ($arrCount !== $count) {
                         $parser->error(
                             sprintf(
                                 Translator::gettext('%1$d values were expected, but found %2$d.'),
@@ -124,7 +124,7 @@ class Array2d extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         return ArrayObj::build($component);
     }

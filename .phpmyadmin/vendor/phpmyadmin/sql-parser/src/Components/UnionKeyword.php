@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `UNION` keyword builder.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -23,11 +23,11 @@ class UnionKeyword extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
-        $tmp = array();
-        foreach ($component as $component) {
-            $tmp[] = $component[0] . ' ' . $component[1];
+        $tmp = [];
+        foreach ($component as $componentPart) {
+            $tmp[] = $componentPart[0] . ' ' . $componentPart[1];
         }
 
         return implode(' ', $tmp);

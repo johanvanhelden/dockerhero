@@ -131,6 +131,15 @@ AJAX.registerOnload('server_privileges.js', function () {
         checkPasswordStrength($(this).val(), meter_obj, meter_obj_label, username);
     });
 
+    /**
+     * Automatically switching to 'Use Text field' from 'No password' once start writing in text area
+     */
+    $('#text_pma_pw').on('input', function () {
+        if ($('#text_pma_pw').val() !== '') {
+            $('#select_pred_password').val('userdefined');
+        }
+    });
+
     $('#text_pma_change_pw').on('keyup', function () {
         meter_obj = $('#change_password_strength_meter');
         meter_obj_label = $('#change_password_strength');
@@ -255,7 +264,7 @@ AJAX.registerOnload('server_privileges.js', function () {
                     buttonOptions[PMA_messages.strClose] = function () {
                         $(this).dialog('close');
                     };
-                    var $dialog = $('<div/>')
+                    var $dialog = $('<div></div>')
                         .attr('id', 'changeUserGroupDialog')
                         .append(data.message)
                         .dialog({
@@ -304,7 +313,7 @@ AJAX.registerOnload('server_privileges.js', function () {
             $(this.form).serialize() + argsep + 'submit_mult=export' + argsep + 'ajax_request=true',
             function (data) {
                 if (typeof data !== 'undefined' && data.success === true) {
-                    var $ajaxDialog = $('<div />')
+                    var $ajaxDialog = $('<div></div>')
                         .append(data.message)
                         .dialog({
                             title: data.title,
@@ -338,7 +347,7 @@ AJAX.registerOnload('server_privileges.js', function () {
         };
         $.get($(this).attr('href'), { 'ajax_request': true }, function (data) {
             if (typeof data !== 'undefined' && data.success === true) {
-                var $ajaxDialog = $('<div />')
+                var $ajaxDialog = $('<div></div>')
                     .append(data.message)
                     .dialog({
                         title: data.title,
@@ -424,22 +433,22 @@ AJAX.registerOnload('server_privileges.js', function () {
         }
 
         // construct a submenu from the existing fieldsets
-        $topmenu2 = $('<ul/>').prop('id', 'topmenu2');
+        $topmenu2 = $('<ul></ul>').prop('id', 'topmenu2');
 
         $('#edit_user_dialog .submenu-item').each(function () {
             submenu_label = $(this).find('legend[data-submenu-label]').data('submenu-label');
 
-            submenu_link = $('<a/>')
+            submenu_link = $('<a></a>')
                 .prop('href', '#')
                 .html(submenu_label);
 
-            $('<li/>')
+            $('<li></li>')
                 .append(submenu_link)
                 .appendTo($topmenu2);
         });
 
         // click handlers for submenu
-        $topmenu2.find('a').click(function (e) {
+        $topmenu2.find('a').on('click', function (e) {
             e.preventDefault();
             // if already active, ignore click
             if ($(this).hasClass('tabactive')) {

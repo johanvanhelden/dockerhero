@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Transaction statement.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -60,7 +60,7 @@ class TransactionStatement extends Statement
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static $OPTIONS = [
         'START TRANSACTION' => 1,
         'BEGIN' => 1,
         'COMMIT' => 1,
@@ -71,7 +71,7 @@ class TransactionStatement extends Statement
         'AND CHAIN' => 3,
         'RELEASE' => 4,
         'NO RELEASE' => 4,
-    );
+    ];
 
     /**
      * @param Parser     $parser the instance that requests parsing
@@ -82,12 +82,12 @@ class TransactionStatement extends Statement
         parent::parse($parser, $list);
 
         // Checks the type of this query.
-        if (($this->options->has('START TRANSACTION'))
-            || ($this->options->has('BEGIN'))
+        if ($this->options->has('START TRANSACTION')
+            || $this->options->has('BEGIN')
         ) {
             $this->type = self::TYPE_BEGIN;
-        } elseif (($this->options->has('COMMIT'))
-            || ($this->options->has('ROLLBACK'))
+        } elseif ($this->options->has('COMMIT')
+            || $this->options->has('ROLLBACK')
         ) {
             $this->type = self::TYPE_END;
         }

@@ -1,5 +1,4 @@
 <?php
-
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  * phpMyAdmin sample configuration, you can use it as base for
@@ -10,15 +9,13 @@
  *
  * @package PhpMyAdmin
  */
+declare(strict_types=1);
 
 /**
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
 $cfg['blowfish_secret'] = ''; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
-
-// Set the DefaultLang
-$cfg['DefaultLang'] = 'en';
 
 /**
  * Servers configuration
@@ -79,8 +76,8 @@ $cfg['Servers'][$i]['AllowNoPassword'] = false;
 /**
  * Directories for saving/loading files from server
  */
-$cfg['UploadDir'] = '/var/www/databases/upload';
-$cfg['SaveDir'] = '/var/www/databases/save';
+$cfg['UploadDir'] = '';
+$cfg['SaveDir'] = '';
 
 /**
  * Whether to display icons or text or both icons and text in table row

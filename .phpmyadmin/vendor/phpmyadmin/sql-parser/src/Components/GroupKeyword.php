@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `GROUP BY` keyword parser.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -44,9 +44,9 @@ class GroupKeyword extends Component
      *
      * @return GroupKeyword[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = array();
+        $ret = [];
 
         $expr = new self();
 
@@ -93,7 +93,7 @@ class GroupKeyword extends Component
                 } elseif (($token->type === Token::TYPE_OPERATOR)
                     && ($token->value === ',')
                 ) {
-                    if (!empty($expr->expr)) {
+                    if (! empty($expr->expr)) {
                         $ret[] = $expr;
                     }
                     $expr = new self();
@@ -105,7 +105,7 @@ class GroupKeyword extends Component
         }
 
         // Last iteration was not processed.
-        if (!empty($expr->expr)) {
+        if (! empty($expr->expr)) {
             $ret[] = $expr;
         }
 
@@ -120,12 +120,12 @@ class GroupKeyword extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         if (is_array($component)) {
             return implode(', ', $component);
         }
 
-        return trim($component->expr);
+        return trim((string) $component->expr);
     }
 }

@@ -1,8 +1,8 @@
 <?php
-
 /**
  * `RENAME` statement.
  */
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -46,5 +46,13 @@ class RenameStatement extends Statement
             // Checking if it is the beginning of the query.
             $list->getNextOfTypeAndValue(Token::TYPE_KEYWORD, 'TABLE');
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function build()
+    {
+        return 'RENAME TABLE ' . RenameOperation::build($this->renames);
     }
 }

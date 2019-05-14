@@ -5,6 +5,8 @@
  *
  * @package PhpMyAdmin
  */
+declare(strict_types=1);
+
 namespace PhpMyAdmin;
 
 use ZipArchive;
@@ -55,20 +57,26 @@ class ZipExtension
             if ($this->zip->numFiles === 0) {
                 $error_message = __('No files found inside ZIP archive!');
                 $this->zip->close();
-                return (['error' => $error_message, 'data' => $file_data]);
+                return [
+                    'error' => $error_message,
+                    'data' => $file_data,
+                ];
             }
 
             /* Is the the zip really an ODS file? */
             $ods_mime = 'application/vnd.oasis.opendocument.spreadsheet';
             $first_zip_entry = $this->zip->getFromIndex(0);
-            if (!strcmp($ods_mime, $first_zip_entry)) {
+            if (! strcmp($ods_mime, $first_zip_entry)) {
                 $specific_entry = '/^content\.xml$/';
             }
 
-            if (!isset($specific_entry)) {
+            if (! isset($specific_entry)) {
                 $file_data = $first_zip_entry;
                 $this->zip->close();
-                return (['error' => $error_message, 'data' => $file_data]);
+                return [
+                    'error' => $error_message,
+                    'data' => $file_data,
+                ];
             }
 
             /* Return the correct contents, not just the first entry */
@@ -86,11 +94,17 @@ class ZipExtension
             }
 
             $this->zip->close();
-            return (['error' => $error_message, 'data' => $file_data]);
+            return [
+                'error' => $error_message,
+                'data' => $file_data,
+            ];
         } else {
             $error_message = __('Error in ZIP archive:') . ' ' . $this->zip->getStatusString();
             $this->zip->close();
-            return (['error' => $error_message, 'data' => $file_data]);
+            return [
+                'error' => $error_message,
+                'data' => $file_data,
+            ];
         }
     }
 
@@ -198,8 +212,8 @@ class ZipExtension
         foreach ($data as $table => $dump) {
             $temp_name = str_replace('\\', '/', $table);
 
-            /* Convert Unix timestamp to DOS timestamp */
-            $timearray = ($time == 0) ? getdate() : getdate($time);
+            /* Get Local Time */
+            $timearray = getdate();
 
             if ($timearray['year'] < 1980) {
                 $timearray['year'] = 1980;
