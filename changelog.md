@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## 1.4.0 - 2019-05-14
 
 This is a pretty major release that sets PHP 7.2 as the default version for both the PHP and the Workspace container.
-If you are not ready yet for this change, you can roll back to PHP 7.1 by adding a `docker-composer.override.yml` with
+If you are not ready yet for this change, you can roll back to PHP 7.1 by adding a `docker-compose.override.yml` with
 the following contents:
 
 ```
