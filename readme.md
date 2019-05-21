@@ -4,7 +4,6 @@
 
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-workspace.svg?label=dockerhero-workspace&style=flat-square)
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-nginx.svg?label=dockerhero-nginx&style=flat-square)
-![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-php-7.3-fpm.svg?label=dockerhero-php-7.3-fpm&style=flat-square)
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-php-7.2-fpm.svg?label=dockerhero-php-7.2-fpm&style=flat-square)
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-php-7.1-fpm.svg?label=dockerhero-php-7.1-fpm&style=flat-square)
 
