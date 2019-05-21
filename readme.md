@@ -79,6 +79,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 13. [Known issues](#known-issues)
     1. [MacOS](#macos)
 14. [Contributing](#contributing)
+    1. [Testing changes](#testing-changes)
 15. [Thank you](#thank-you)
 16. [Project links](#project-links)
 17. [Todo](#todo)
