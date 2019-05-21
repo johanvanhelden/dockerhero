@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.4.1 - 2019-05-21
+
+### Changed
+
+- Added Xdebug to the workspace container - @pkeulers
 
 ## 1.4.0 - 2019-05-14
 
@@ -46,7 +51,7 @@ services:
 
 ### Changed
 
-- Increased the default upload size from 8m to 64m in the nginx image.
+- Increased the default upload size from 8m to 64m in the nginx image
 
 ## 1.3.0 - 2018-09-04
 
@@ -56,14 +61,14 @@ services:
 
 ### Added
 
-- Added sections to the readme on how to change the MySQL version and SQL mode.
-- Added a known issues section to the readme with a known MacOS issue.
+- Added sections to the readme on how to change the MySQL version and SQL mode
+- Added a known issues section to the readme with a known MacOS issue
 
 ## 1.2.6 - 2018-07-17
 
 ### Changed
 
-- Node 8 is now the default version in the workspace image.
+- Node 8 is now the default version in the workspace image
 
 ### Added
 
@@ -73,8 +78,8 @@ services:
 
 ### Changed
 
-- Expose the default laravel-dump-server port for the PHP image.
-- Expand the readme's ToC and restructure it.
+- Expose the default laravel-dump-server port for the PHP image
+- Expand the readme's ToC and restructure it
 
 ### Added
 
@@ -109,42 +114,42 @@ services:
 
 ### Changed
 
-- Made PHP 7.1 the default version.
-- Rebuild workspace and PHP 7.1 images (updated PHP 7.1 to 7.1.12 and Yarn to 1.3.2).
+- Made PHP 7.1 the default version
+- Rebuild workspace and PHP 7.1 images (updated PHP 7.1 to 7.1.12 and Yarn to 1.3.2)
 
 ## 1.1.5 - 2017-05-01
 
 ### Added
 
-- A PHP 7.1 container option.
+- A PHP 7.1 container option
 
 ## 1.1.4 - 2017-03-21
 
 ### Added
 
-- Redis PHP extension (php and workspace image) - @pkeulers.
-- Proper sendmail path to mailhog in php.ini (php image) - this will allow crons to send mail as well.
+- Redis PHP extension (php and workspace image) - @pkeulers
+- Proper sendmail path to mailhog in php.ini (php image) - this will allow crons to send mail as well
 - phpRedisAdmin (<http://phpredisadmin.localtest.me>)
 
 ## 1.1.3 - 2017-03-04
 
 ### Added
 
-- A redis container.
-- Instructions on how to make a local website publicly available using ngrok.
+- A redis container
+- Instructions on how to make a local website publicly available using ngrok
 
 ## 1.1.2 - 2017-02-10
 
 ### Added
 
 - Chrome in order to support Laravel Dusk. (workspace image)
-- A using Laravel Dusk section to the readme.
+- A using Laravel Dusk section to the readme
 
 ### Changed
 
-- Ignore docker-compose.override.yml file - in order to make it easy to make changes to settings.
+- Ignore docker-compose.override.yml file - in order to make it easy to make changes to settings
 - No longer force SSL. (nginx image)
-- Better explanation on how to connect to projects from within containers in the readme.
+- Better explanation on how to connect to projects from within containers in the readme
 
 ## 1.1.1 - 2017-01-25
 
@@ -169,7 +174,7 @@ services:
 ### Added
 
 - PHP zip extension. (php-5.6-fpm image)
-- Section to the readme on how to forward requests to nginx container from PHP.
+- Section to the readme on how to forward requests to nginx container from PHP
 
 ## 1.0.5 - 2016-12-05
 
@@ -181,14 +186,14 @@ services:
 
 ### Changed
 
-- Added instructions to make mailcatching work with Laravel artisan commands (like queue workers).
+- Added instructions to make mailcatching work with Laravel artisan commands (like queue workers)
 
 ## 1.0.3 - 2016-11-24
 
 ### Changed
 
-- Add the dns option to the workspace image to fix dns issues on OSX.
-- Add a better update section to the readme.
+- Add the dns option to the workspace image to fix dns issues on OSX
+- Add a better update section to the readme
 - Increased xdebug dumping depth to show everything when dumping data. (php-5.6-fpm image)
 - Ensure all e-mail is caught by Mailhog by default and update the readme to reflect this change. (php-5.6-fpm image)
 
@@ -196,35 +201,35 @@ services:
 
 ### Added
 
-- Wordpress multisite support in nginx image.
-- mysql support (besides mysqli and pdo) in the php-5.6-fpm image.
+- Wordpress multisite support in nginx image
+- mysql support (besides mysqli and pdo) in the php-5.6-fpm image
 
 ## 1.0.1 - 2016-11-18
 
 ### Changed
 
-- Allow file uploads up to 8MB in nginx image.
+- Allow file uploads up to 8MB in nginx image
 
 ## 1.0.0 - 2016-11-11
 
 ### Added
 
-- Mercurial added to workspace image.
+- Mercurial added to workspace image
 
 ### Changed
 
-- Node.js to 6.* on workspace image.
-- Readme.md tweaks.
+- Node.js to 6.* on workspace image
+- Readme.md tweaks
 
 ## 0.8.1 - 2016-11-04
 
 ### Added
 
-- Soap extension added to workspace and php-5.6-fpm images.
+- Soap extension added to workspace and php-5.6-fpm images
 
 ### Changed
 
-- More items on the todo list.
+- More items on the todo list
 
 ## 0.8.0 - 2016-11-02
 

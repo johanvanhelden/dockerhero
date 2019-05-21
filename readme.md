@@ -1,6 +1,11 @@
 # Dockerhero
 
-## Version 1.4.0
+## Version 1.4.1
+
+![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-workspace.svg?label=dockerhero-workspace&style=flat-square)
+![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-nginx.svg?label=dockerhero-nginx&style=flat-square)
+![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-php-7.2-fpm.svg?label=dockerhero-php-7.2-fpm&style=flat-square)
+![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-php-7.1-fpm.svg?label=dockerhero-php-7.1-fpm&style=flat-square)
 
 ### What is Dockerhero?
 
@@ -74,6 +79,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 13. [Known issues](#known-issues)
     1. [MacOS](#macos)
 14. [Contributing](#contributing)
+    1. [Testing changes](#testing-changes)
 15. [Thank you](#thank-you)
 16. [Project links](#project-links)
 17. [Todo](#todo)
@@ -369,7 +375,17 @@ Feel free to send in pull requests! Either to the image repos or the Dockerhero 
 - Everything needs to be as generic as possible, so do not try and add something that is super specific to your own use that no-one else will use.
 - Everyone needs to be able to use it out of the box, without additional configuration. However, it is fine if a feature would be disabled without configuring. As long as users can still just clone the project and "go".
 - If something needs documentation, add it to the readme.md.
-- Test, test and test your changes.
+- Test, test and test your changes before you create the PR.
+- Always target your PR's to the `develop` branche.
+
+### Testing changes
+To test changes to Dockerhero images, you can either follow the instructions from the README of the images or, if you want to test those changes in the Dockerhero system itself, you can change the `image: johanvanhelden/dockerhero-*` lines in the `docker-compose.yml` to: `build: ../path-to-your-image-fork`.
+
+Next, start Dockerhero using the following command: `docker-compose up --build`.
+
+Once everything is tested and works properly, you can revert the changes to the `docker-compose.yml` and create the PR.
+
+Don't forget to stop and start Dockerhero again after reverting the `docker-compose.yml` file, otherwise you keep using the local forked image. For the first time, after reverting the changes, I recommend to use `docker-compose up --build --no-cache` to ensure everything is fresh again.
 
 ## Thank you
 
