@@ -2,6 +2,12 @@
 
 ## Version 1.4.1
 
+![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-workspace.svg?label=dockerhero-workspace&style=flat-square)
+![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-nginx.svg?label=dockerhero-nginx&style=flat-square)
+![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-php-7.3-fpm.svg?label=dockerhero-php-7.3-fpm&style=flat-square)
+![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-php-7.2-fpm.svg?label=dockerhero-php-7.2-fpm&style=flat-square)
+![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-php-7.1-fpm.svg?label=dockerhero-php-7.1-fpm&style=flat-square)
+
 ### What is Dockerhero?
 
 Dockerhero is a local development tool. Out of the box, it should only take a "docker-compose start" to get all your local PHP projects working. Yes, all of them. At the same time.
