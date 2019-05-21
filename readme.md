@@ -379,7 +379,13 @@ Feel free to send in pull requests! Either to the image repos or the Dockerhero 
 - Always target your PR's to the `develop` branche.
 
 ### Testing changes
-To test changes to Dockerhero images, you can either follow the instructions from the README of the images or, if you want to test those changes in the Dockerhero system itself, you can change the `image: johanvanhelden/dockerhero-*` lines in the `docker-compose.yml` to: `build: ../path-to-your-image-fork`. Next, start Dockerhero using the following command: `docker-compose up --build`. Once everything is tested and works properly, you can revert the changes to the `docker-compose.yml` and create the PR. Don't forget to stop and start Dockerhero again after reverting the `docker-compose.yml` file, otherwise you keep using the local forked image. For the first time, after reverting the changes, I recommend to use `docker-compose up --build --no-cache` to ensure everything is fresh again.
+To test changes to Dockerhero images, you can either follow the instructions from the README of the images or, if you want to test those changes in the Dockerhero system itself, you can change the `image: johanvanhelden/dockerhero-*` lines in the `docker-compose.yml` to: `build: ../path-to-your-image-fork`.
+
+Next, start Dockerhero using the following command: `docker-compose up --build`.
+
+Once everything is tested and works properly, you can revert the changes to the `docker-compose.yml` and create the PR.
+
+Don't forget to stop and start Dockerhero again after reverting the `docker-compose.yml` file, otherwise you keep using the local forked image. For the first time, after reverting the changes, I recommend to use `docker-compose up --build --no-cache` to ensure everything is fresh again.
 
 ## Thank you
 
