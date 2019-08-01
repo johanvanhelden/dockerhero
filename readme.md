@@ -407,3 +407,6 @@ Don't forget to stop and start Dockerhero again after reverting the `docker-comp
 
 - Make the timezone a setting that can be overwritten when starting containers
 - Set up a GitHub page
+- Add badges to the other repos
+- PR hooks for automated builds to ensure everything passes
+- Automate testing of Dockerhero itself
