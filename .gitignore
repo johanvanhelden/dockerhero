@@ -1,3 +1,4 @@
 .idea
 docker-compose.override.yml
 .phpmyadmin/tmp/twig/*
+.DS_store
