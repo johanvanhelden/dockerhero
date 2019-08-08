@@ -31,7 +31,7 @@ Dockerhero includes the following useful tools:
 - Cron
 - Mailhog
 - Composer
-- Xdebug (using port 9005)
+- Xdebug
 - NVM (the default node version is 8)
 - NPM
 - Yarn
@@ -76,6 +76,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 12. [Miscellaneous](#miscellaneous)
     1. [Laravel Dusk](#laravel-dusk)
     2. [laravel-dump-server](#laravel-dump-server)
+    3. [Remote Xdebug](#remote-xdebug)
 13. [Known issues](#known-issues)
     1. [MacOS](#macos)
 14. [Contributing](#contributing)
@@ -362,6 +363,22 @@ In order to make it work with dockerhero, simply override the config and point i
 ```
 
 Next, ssh into to workspace image, and simply run: `$ artisan dump-server` and start dumping to your heart's content.
+
+### Remote Xdebug
+It is possible to remotely debug your code using an IDE. This is a working config for VSCode:
+```
+{
+    "name": "Listen for XDebug",
+    "type": "php",
+    "request": "launch",
+    "port": 9005,
+    "pathMappings": {
+        "/var/www/projects": "/home/USERNAME/projects"
+    }
+},
+```
+
+So a special note is that you need to use port 9005. And don't forget to properly map your path from Dockerhero.
 
 ## Known issues
 
