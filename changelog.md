@@ -8,6 +8,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.4.2 - UNRELEASED
+
+### Added
+
+- Remote XDebug capabilities in the PHP 7.2 and php 7.3 images.
+
+### Changed
+
+- Replaced mysql-client with mariadb-client in PHP 7.2 and PHP 7.3 images due to deprication if the mysql-client package.
+- Replaced ssmtp with mhsendmail in PHP 7.2 and PHP 7.3 images due to deprication if the ssmtp package.
+
 ## 1.4.1 - 2019-05-21
 
 ### Changed

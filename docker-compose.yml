@@ -28,6 +28,8 @@ services:
     dns: 8.8.8.8
     ports:
       - "9912:9912"
+    expose:
+      - "9005"
 
   web:
     container_name: dockerhero_web

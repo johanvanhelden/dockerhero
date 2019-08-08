@@ -31,7 +31,7 @@ Dockerhero includes the following useful tools:
 - Cron
 - Mailhog
 - Composer
-- Xdebug
+- Xdebug (using port 9005)
 - NVM (the default node version is 8)
 - NPM
 - Yarn
