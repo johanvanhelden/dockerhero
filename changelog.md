@@ -8,11 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
-## 1.4.2 - UNRELEASED
+## 1.4.2 - 2019-08-09
 
 ### Added
 
-- Remote XDebug capabilities in the PHP 7.2 and php 7.3 images.
+- Remote XDebug capabilities in the PHP 7.2 and php 7.3 images and instructions to the readme.
 
 ### Changed
 
