@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.4.1
+## Version 1.4.2
 
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-workspace.svg?label=dockerhero-workspace&style=flat-square)
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-nginx.svg?label=dockerhero-nginx&style=flat-square)
@@ -31,7 +31,7 @@ Dockerhero includes the following useful tools:
 - Cron
 - Mailhog
 - Composer
-- Xdebug
+- Xdebug (with remote debugging support)
 - NVM (the default node version is 8)
 - NPM
 - Yarn
@@ -365,7 +365,11 @@ In order to make it work with dockerhero, simply override the config and point i
 Next, ssh into to workspace image, and simply run: `$ artisan dump-server` and start dumping to your heart's content.
 
 ### Remote Xdebug
-It is possible to remotely debug your code using an IDE. This is a working config for VSCode:
+It is possible to remotely debug your code using an IDE.
+You would have to set up your IDE to use port 9005.
+And you would have to properly map your local path to Dockerhero (the project root is always `/var/www/projects` in Dockerhero).
+
+For example, this is a working config for VSCode:
 ```
 {
     "name": "Listen for XDebug",
@@ -377,8 +381,6 @@ It is possible to remotely debug your code using an IDE. This is a working confi
     }
 },
 ```
-
-So a special note is that you need to use port 9005. And don't forget to properly map your path from Dockerhero.
 
 ## Known issues
 
