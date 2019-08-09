@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.4.2 - 2019-08-09
+
+### Added
+
+- Remote XDebug capabilities in the PHP 7.2 and php 7.3 images and instructions to the readme.
+
+### Changed
+
+- Replaced mysql-client with mariadb-client in PHP 7.2 and PHP 7.3 images due to deprication if the mysql-client package.
+- Replaced ssmtp with mhsendmail in PHP 7.2 and PHP 7.3 images due to deprication if the ssmtp package.
+- Updated phpMyAdmin to 5.0.0-alpha1
+
 ## 1.4.1 - 2019-05-21
 
 ### Changed
@@ -35,13 +47,13 @@ services:
 
 - Update to PHP 7.2 (workspace image)
 - Set PHP 7.2 as the default version for the PHP image
-- Switched to a development version of PHPMyAdmin (5.0.0-dev) to have an upgraded jQuery version (CVE-2019-11358)
+- Switched to a development version of phpMyAdmin (5.0.0-dev) to have an upgraded jQuery version (CVE-2019-11358)
 
 ## 1.3.2 - 2019-01-07
 
 ### Changed
 
-- Updated PHPMyAdmin version to 4.8.4
+- Updated phpMyAdmin version to 4.8.4
 
 ### Added
 

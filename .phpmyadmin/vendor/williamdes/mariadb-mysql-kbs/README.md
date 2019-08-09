@@ -10,6 +10,7 @@
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/williamdes/mariadb-mysql-kbs.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/williamdes/mariadb-mysql-kbs/context:javascript)
 [![Known Vulnerabilities](https://snyk.io/test/github/williamdes/mariadb-mysql-kbs/badge.svg)](https://snyk.io/test/github/williamdes/mariadb-mysql-kbs)
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
+[![dependencies Status](https://david-dm.org/williamdes/mariadb-mysql-kbs/status.svg)](https://david-dm.org/williamdes/mariadb-mysql-kbs)
 
 [API doc](https://williamdes.github.io/mariadb-mysql-kbs/Williamdes/MariaDBMySQLKBS.html)
 
@@ -23,14 +24,23 @@ Merged data : `/dist/`
 - JSON format (raw, slim, ultraslim)
 - PHP format (ultraslim)
 
+### Update the data
+
+```bash
+npm run build
+```
+
+```bash
+composer run build
+```
 
 ### Install
 
-```
+```bash
 composer require williamdes/mariadb-mysql-kbs
 ```
 
-```
+```bash
 npm install --save mariadb-mysql-kbs
 ```
 

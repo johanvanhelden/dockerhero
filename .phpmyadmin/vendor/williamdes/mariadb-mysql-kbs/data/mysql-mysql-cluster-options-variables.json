@@ -8,7 +8,7 @@
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-allow-copying-alter-table",
-      "name": "ndb_allow_copying_alter_table",
+      "name": "ndb-allow-copying-alter-table",
       "scope": [
         "global",
         "session"
@@ -17,7 +17,7 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-batch-size",
-      "name": "ndb_batch_size",
+      "name": "ndb-batch-size",
       "scope": [
         "global"
       ]
@@ -25,7 +25,7 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-cluster-connection-pool",
-      "name": "ndb_cluster_connection_pool",
+      "name": "ndb-cluster-connection-pool",
       "scope": [
         "global"
       ]
@@ -33,7 +33,7 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-cluster-connection-pool-nodeids",
-      "name": "ndb_cluster_connection_pool_nodeids",
+      "name": "ndb-cluster-connection-pool-nodeids",
       "scope": [
         "global"
       ]
@@ -41,7 +41,7 @@
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-blob-read-batch-bytes",
-      "name": "ndb_blob_read_batch_bytes",
+      "name": "ndb-blob-read-batch-bytes",
       "scope": [
         "global",
         "session"
@@ -50,7 +50,7 @@
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-blob-write-batch-bytes",
-      "name": "ndb_blob_write_batch_bytes",
+      "name": "ndb-blob-write-batch-bytes",
       "scope": [
         "global",
         "session"
@@ -59,12 +59,12 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-connectstring",
-      "name": "ndb_connectstring"
+      "name": "ndb-connectstring"
     },
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-default-column-format",
-      "name": "ndb_default_column_format",
+      "name": "ndb-default-column-format",
       "scope": [
         "global"
       ]
@@ -72,7 +72,7 @@
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-deferred-constraints",
-      "name": "ndb_deferred_constraints",
+      "name": "ndb-deferred-constraints",
       "scope": [
         "global",
         "session"
@@ -81,7 +81,7 @@
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-distribution",
-      "name": "ndb_distribution",
+      "name": "ndb-distribution",
       "scope": [
         "global"
       ]
@@ -89,7 +89,7 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-log-apply-status",
-      "name": "ndb_log_apply_status",
+      "name": "ndb-log-apply-status",
       "scope": [
         "global"
       ]
@@ -97,7 +97,7 @@
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-log-empty-epochs",
-      "name": "ndb_log_empty_epochs",
+      "name": "ndb-log-empty-epochs",
       "scope": [
         "global"
       ]
@@ -105,7 +105,7 @@
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-log-empty-update",
-      "name": "ndb_log_empty_update",
+      "name": "ndb-log-empty-update",
       "scope": [
         "global"
       ]
@@ -113,7 +113,7 @@
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-log-exclusive-reads",
-      "name": "ndb_log_exclusive_reads",
+      "name": "ndb-log-exclusive-reads",
       "scope": [
         "global",
         "session"
@@ -122,7 +122,7 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-log-orig",
-      "name": "ndb_log_orig",
+      "name": "ndb-log-orig",
       "scope": [
         "global"
       ]
@@ -130,7 +130,7 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-log-transaction-id",
-      "name": "ndb_log_transaction_id",
+      "name": "ndb-log-transaction-id",
       "scope": [
         "global"
       ]
@@ -138,7 +138,7 @@
     {
       "dynamic": true,
       "id": "option_mysqld_ndb-log-update-minimal",
-      "name": "ndb_log_update_minimal",
+      "name": "ndb-log-update-minimal",
       "scope": [
         "global"
       ]
@@ -146,20 +146,20 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-mgmd-host",
-      "name": "ndb_mgmd_host"
+      "name": "ndb-mgmd-host"
     },
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-nodeid",
-      "name": "ndb_nodeid",
+      "name": "ndb-nodeid",
       "scope": [
         "global"
       ]
     },
     {
       "dynamic": true,
-      "id": "option_mysqld_ndb_optimization_delay",
-      "name": "ndb_optimization_delay",
+      "id": "option_mysqld_ndb-optimization-delay",
+      "name": "ndb-optimization-delay",
       "scope": [
         "global"
       ]
@@ -167,22 +167,22 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-recv-thread-activation-threshold",
-      "name": "ndb_recv_thread_activation_threshold"
+      "name": "ndb-recv-thread-activation-threshold"
     },
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-recv-thread-cpu-mask",
-      "name": "ndb_recv_thread_cpu_mask"
+      "name": "ndb-recv-thread-cpu-mask"
     },
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-transid-mysql-connection-map",
-      "name": "ndb-transid-mysql-connection-map=state"
+      "name": "ndb-transid-mysql-connection-map"
     },
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-wait-connected",
-      "name": "ndb_wait_connected",
+      "name": "ndb-wait-connected",
       "scope": [
         "global"
       ]
@@ -190,7 +190,7 @@
     {
       "dynamic": false,
       "id": "option_mysqld_ndb-wait-setup",
-      "name": "ndb_wait_setup",
+      "name": "ndb-wait-setup",
       "scope": [
         "global"
       ]
@@ -198,7 +198,7 @@
     {
       "dynamic": false,
       "id": "option_mysqld_server-id-bits",
-      "name": "server_id_bits",
+      "name": "server-id-bits",
       "scope": [
         "global"
       ]
@@ -206,7 +206,7 @@
     {
       "dynamic": false,
       "id": "option_mysqld_skip-ndbcluster",
-      "name": "skip_ndbcluster"
+      "name": "skip-ndbcluster"
     },
     {
       "dynamic": true,
@@ -454,7 +454,7 @@
       "scope": [
         "global"
       ],
-      "type": "boolean"
+      "type": "integer"
     },
     {
       "dynamic": true,

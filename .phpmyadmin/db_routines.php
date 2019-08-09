@@ -10,7 +10,6 @@ declare(strict_types=1);
 use PhpMyAdmin\CheckUserPrivileges;
 use PhpMyAdmin\Controllers\Database\RoutinesController;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
@@ -21,25 +20,26 @@ if (! defined('ROOT_PATH')) {
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->set(Response::class, Response::getInstance());
-
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
-$checkUserPrivileges = new CheckUserPrivileges($dbi);
+/** @var string $db */
+$db = $containerBuilder->getParameter('db');
+
+/** @var string $table */
+$table = $containerBuilder->getParameter('table');
+
+/** @var CheckUserPrivileges $checkUserPrivileges */
+$checkUserPrivileges = $containerBuilder->get('check_user_privileges');
 $checkUserPrivileges->getPrivileges();
 
 $_PMA_RTE = 'RTN';
 
-$controller = new RoutinesController(
-    $response,
-    $dbi,
-    $db
-);
+/** @var RoutinesController $controller */
+$controller = $containerBuilder->get(RoutinesController::class);
 
 if (! $response->isAjax()) {
     /**

@@ -11,6 +11,7 @@ use PhpMyAdmin\Config\ConfigFile;
 use PhpMyAdmin\Config\Forms\BaseForm;
 use PhpMyAdmin\Config\Forms\User\UserFormList;
 use PhpMyAdmin\Core;
+use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
@@ -26,7 +27,8 @@ if (! defined('ROOT_PATH')) {
  */
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$template = new Template();
+/** @var Template $template */
+$template = $containerBuilder->get('template');
 $userPreferences = new UserPreferences();
 
 $cf = new ConfigFile($GLOBALS['PMA_Config']->base_settings);
@@ -36,7 +38,7 @@ $userPreferences->pageInit($cf);
 
 $form_param = isset($_GET['form']) ? $_GET['form'] : null;
 $form_class = UserFormList::get($form_param);
-if (is_null($form_class)) {
+if ($form_class === null) {
     Core::fatalError(__('Incorrect form specified!'));
 }
 
@@ -81,7 +83,9 @@ $header   = $response->getHeader();
 $scripts  = $header->getScripts();
 $scripts->addFile('config.js');
 
-echo UserPreferencesHeader::getContent($template);
+/** @var Relation $relation */
+$relation = $containerBuilder->get('relation');
+echo UserPreferencesHeader::getContent($template, $relation);
 
 if ($form_display->hasErrors()) {
     $formErrors = $form_display->displayErrors();
@@ -97,7 +101,7 @@ echo $template->render('preferences/forms/main', [
 ]);
 
 if ($response->isAjax()) {
-    $response->addJSON('_disableNaviSettings', true);
+    $response->addJSON('disableNaviSettings', true);
 } else {
     define('PMA_DISABLE_NAVI_SETTINGS', true);
 }

@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 use PhpMyAdmin\Controllers\Database\EventsController;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
@@ -20,22 +19,22 @@ if (! defined('ROOT_PATH')) {
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->set(Response::class, Response::getInstance());
-
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
 $_PMA_RTE = 'EVN';
 
-$controller = new EventsController(
-    $response,
-    $dbi,
-    $db
-);
+/** @var EventsController $controller */
+$controller = $containerBuilder->get(EventsController::class);
+
+/** @var string $db */
+$db = $containerBuilder->getParameter('db');
+
+/** @var string $table */
+$table = $containerBuilder->getParameter('table');
 
 if (! $response->isAjax()) {
     /**

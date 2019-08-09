@@ -10,7 +10,6 @@ declare(strict_types=1);
 use PhpMyAdmin\CheckUserPrivileges;
 use PhpMyAdmin\Controllers\Server\DatabasesController;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Response;
 
 if (! defined('ROOT_PATH')) {
@@ -19,19 +18,14 @@ if (! defined('ROOT_PATH')) {
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->factory(DatabasesController::class);
-$container->set(Response::class, Response::getInstance());
-$container->alias('response', Response::class);
-
 /** @var DatabasesController $controller */
-$controller = $container->get(DatabasesController::class);
+$controller = $containerBuilder->get(DatabasesController::class);
 
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
 $checkUserPrivileges = new CheckUserPrivileges($dbi);
 $checkUserPrivileges->getPrivileges();
@@ -54,7 +48,7 @@ if (isset($_POST['drop_selected_dbs'])
 } else {
     $header = $response->getHeader();
     $scripts = $header->getScripts();
-    $scripts->addFile('server_databases.js');
+    $scripts->addFile('server/databases.js');
 
     $response->addHTML($controller->indexAction([
         'statistics' => $_REQUEST['statistics'] ?? null,

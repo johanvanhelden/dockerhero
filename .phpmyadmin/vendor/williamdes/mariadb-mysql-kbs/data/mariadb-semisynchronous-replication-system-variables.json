@@ -13,7 +13,7 @@
     },
     {
       "cli": "--rpl-semi-sync-master-timeout[=#]",
-      "default": "10000",
+      "default": "10000 (10 seconds)",
       "dynamic": true,
       "id": "rpl_semi_sync_master_timeout",
       "name": "rpl_semi_sync_master_timeout",
@@ -117,6 +117,30 @@
         "global"
       ],
       "type": "integer"
+    },
+    {
+      "cli": "--rpl-semi-sync-master=value",
+      "default": "ON",
+      "id": "rpl_semi_sync_master",
+      "name": "rpl_semi_sync_master",
+      "validValues": [
+        "OFF",
+        "ON",
+        "FORCE",
+        "FORCE_PLUS_PERMANENT"
+      ]
+    },
+    {
+      "cli": "--rpl-semi-sync-slave=value",
+      "default": "ON",
+      "id": "rpl_semi_sync_slave",
+      "name": "rpl_semi_sync_slave",
+      "validValues": [
+        "OFF",
+        "ON",
+        "FORCE",
+        "FORCE_PLUS_PERMANENT"
+      ]
     }
   ],
   "name": "semisynchronous-replication-system-variables",

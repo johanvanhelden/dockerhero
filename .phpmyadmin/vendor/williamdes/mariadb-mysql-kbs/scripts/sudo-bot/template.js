@@ -5,18 +5,14 @@
  * @returns {string} The commit message
  */
 const commitMessage = function(modifiedFiles) {
-    const nbrMySQLFiles = modifiedFiles.filter(file => file.match(/mysql-[a-z-]+.json$/g))
+    const nbrMySQLFiles = modifiedFiles.filter(file => file.match(/mysql-[a-z-]+.json$/g)).length;
+    const nbrMariaDBFiles = modifiedFiles.filter(file => file.match(/mariadb-[a-z-]+.json$/g)).length;
+    const nbrMergedData = modifiedFiles.filter(file => file.match(/merged-(slim|ultraslim|raw).(json|md|php)$/g))
         .length;
-    const nbrMariaDBFiles = modifiedFiles.filter(file => file.match(/mariadb-[a-z-]+.json$/g))
-        .length;
-    const nbrMergedData = modifiedFiles.filter(file =>
-        file.match(/merged-(slim|ultraslim|raw).(json|md|php)$/g)
-    ).length;
 
     const hasMySQLFiles = nbrMySQLFiles > 0;
     const hasMariaDBFiles = nbrMariaDBFiles > 0;
-    const hasOtherFiles =
-        nbrMySQLFiles + nbrMariaDBFiles + nbrMergedData !== modifiedFiles.length;
+    const hasOtherFiles = nbrMySQLFiles + nbrMariaDBFiles + nbrMergedData !== modifiedFiles.length;
     if (hasMariaDBFiles && hasMySQLFiles) {
         return 'update: [MariaDB] && [MySQL] updates' + (hasOtherFiles ? ' and other changes' : '');
     } else if (hasMariaDBFiles && !hasMySQLFiles) {
@@ -32,18 +28,14 @@ const commitMessage = function(modifiedFiles) {
  * @returns {string} The pr message
  */
 const prMessage = function(modifiedFiles) {
-    const nbrMySQLFiles = modifiedFiles.filter(file => file.match(/mysql-[a-z-]+.json$/g))
+    const nbrMySQLFiles = modifiedFiles.filter(file => file.match(/mysql-[a-z-]+.json$/g)).length;
+    const nbrMariaDBFiles = modifiedFiles.filter(file => file.match(/mariadb-[a-z-]+.json$/g)).length;
+    const nbrMergedData = modifiedFiles.filter(file => file.match(/merged-(slim|ultraslim|raw).(json|md|php)$/g))
         .length;
-    const nbrMariaDBFiles = modifiedFiles.filter(file => file.match(/mariadb-[a-z-]+.json$/g))
-        .length;
-    const nbrMergedData = modifiedFiles.filter(file =>
-        file.match(/merged-(slim|ultraslim|raw).(json|md|php)$/g)
-    ).length;
 
     const hasMySQLFiles = nbrMySQLFiles > 0;
     const hasMariaDBFiles = nbrMariaDBFiles > 0;
-    const hasOtherFiles =
-        nbrMySQLFiles + nbrMariaDBFiles + nbrMergedData !== modifiedFiles.length;
+    const hasOtherFiles = nbrMySQLFiles + nbrMariaDBFiles + nbrMergedData !== modifiedFiles.length;
     if (hasMariaDBFiles && hasMySQLFiles) {
         return '🤖 [MariaDB] && [MySQL] updates' + (hasOtherFiles ? ' 🚨🚨' : '');
     } else if (hasMariaDBFiles && !hasMySQLFiles) {

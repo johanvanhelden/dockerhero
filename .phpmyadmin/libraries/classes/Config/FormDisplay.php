@@ -61,7 +61,7 @@ class FormDisplay
     private $_systemPaths = [];
 
     /**
-     * Language strings which will be sent to PMA_messages JS variable
+     * Language strings which will be sent to Messages JS variable
      * Will be looked up in $GLOBALS: str{value} or strSetup{value}
      * @var array
      */
@@ -103,7 +103,7 @@ class FormDisplay
             'error_nan_nneg' => __('Not a non-negative number!'),
             'error_incorrect_port' => __('Not a valid port number!'),
             'error_invalid_value' => __('Incorrect value!'),
-            'error_value_lte' => __('Value must be less than or equal to %s!')
+            'error_value_lte' => __('Value must be less than or equal to %s!'),
         ];
         $this->_configFile = $cf;
         // initialize validators
@@ -351,7 +351,7 @@ class FormDisplay
             foreach ($this->_jsLangStrings as $strName => $strValue) {
                 $jsLang[] = "'$strName': '" . Sanitize::jsFormat($strValue, false) . '\'';
             }
-            $js[] = "$.extend(PMA_messages, {\n\t"
+            $js[] = "$.extend(Messages, {\n\t"
                 . implode(",\n\t", $jsLang) . '})';
         }
 
@@ -379,7 +379,7 @@ class FormDisplay
      * @param array     $jsDefault          array which stores JavaScript code
      *                                      to be displayed
      *
-     * @return string HTML for input field
+     * @return string|null HTML for input field
      */
     private function _displayFieldInput(
         Form $form,
@@ -406,7 +406,7 @@ class FormDisplay
             'doc' => $this->getDocLink($systemPath),
             'show_restore_default' => $showRestoreDefault,
             'userprefs_allow' => $userPrefsAllow,
-            'userprefs_comment' => Descriptions::get($systemPath, 'cmt')
+            'userprefs_comment' => Descriptions::get($systemPath, 'cmt'),
         ];
         if (isset($form->default[$systemPath])) {
             $opts['setvalue'] = (string) $form->default[$systemPath];
@@ -514,12 +514,12 @@ class FormDisplay
     /**
      * Displays errors
      *
-     * @return string HTML for errors
+     * @return string|null HTML for errors
      */
     public function displayErrors()
     {
         $this->_validate();
-        if (count($this->_errors) == 0) {
+        if (count($this->_errors) === 0) {
             return null;
         }
 
@@ -545,7 +545,7 @@ class FormDisplay
     public function fixErrors()
     {
         $this->_validate();
-        if (count($this->_errors) == 0) {
+        if (count($this->_errors) === 0) {
             return;
         }
 

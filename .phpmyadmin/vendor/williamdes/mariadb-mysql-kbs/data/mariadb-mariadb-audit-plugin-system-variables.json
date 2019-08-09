@@ -2,6 +2,7 @@
   "data": [
     {
       "cli": "--server-audit-events=value",
+      "default": "Empty string",
       "dynamic": true,
       "id": "server_audit_events",
       "name": "server_audit_events",
@@ -21,6 +22,7 @@
     },
     {
       "cli": "--server-audit-excl-users=value",
+      "default": "Empty string",
       "dynamic": true,
       "id": "server_audit_excl_users",
       "name": "server_audit_excl_users",
@@ -79,6 +81,7 @@
     },
     {
       "cli": "--server-audit-incl-users=value",
+      "default": "Empty string",
       "dynamic": true,
       "id": "server_audit_incl_users",
       "name": "server_audit_incl_users",
@@ -88,7 +91,7 @@
       "type": "string"
     },
     {
-      "cli": "n/a",
+      "default": "Empty string",
       "dynamic": false,
       "id": "server_audit_loc_info",
       "name": "server_audit_loc_info",
@@ -180,6 +183,7 @@
     },
     {
       "cli": "--server-audit-syslog-info=value",
+      "default": "Empty string",
       "dynamic": true,
       "id": "server_audit_syslog_info",
       "name": "server_audit_syslog_info",
@@ -206,6 +210,18 @@
         "LOG_NOTICE",
         "LOG_INFO",
         "LOG_DEBUG"
+      ]
+    },
+    {
+      "cli": "--server-audit=val",
+      "default": "ON",
+      "id": "server_audit",
+      "name": "server_audit",
+      "validValues": [
+        "OFF",
+        "ON",
+        "FORCE",
+        "FORCE_PLUS_PERMANENT"
       ]
     }
   ],

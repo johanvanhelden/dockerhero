@@ -14,7 +14,7 @@
       ]
     },
     {
-      "cli": "--mysqlx-bind-address=value",
+      "cli": "--mysqlx-bind-address=addr",
       "default": "*",
       "dynamic": false,
       "id": "sysvar_mysqlx_bind_address",
@@ -25,7 +25,7 @@
       "type": "string"
     },
     {
-      "cli": "--mysqlx-connect-timeout=value",
+      "cli": "--mysqlx-connect-timeout=#",
       "default": "30",
       "dynamic": true,
       "id": "sysvar_mysqlx_connect_timeout",
@@ -40,7 +40,7 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-document-id-unique-prefix=value",
+      "cli": "--mysqlx-document-id-unique-prefix=#",
       "default": "0",
       "dynamic": true,
       "id": "sysvar_mysqlx_document_id_unique_prefix",
@@ -55,7 +55,18 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-idle-worker-thread-timeout=value",
+      "cli": "--mysqlx-document-id-unique-prefix[={OFF|ON}]",
+      "default": "on",
+      "dynamic": true,
+      "id": "sysvar_mysqlx_enable_hello_notice",
+      "name": "mysqlx_enable_hello_notice",
+      "scope": [
+        "global"
+      ],
+      "type": "boolean"
+    },
+    {
+      "cli": "--mysqlx-idle-worker-thread-timeout=#",
       "default": "60",
       "dynamic": true,
       "id": "sysvar_mysqlx_idle_worker_thread_timeout",
@@ -70,7 +81,7 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-interactive-timeout=value",
+      "cli": "--mysqlx-interactive-timeout=#",
       "default": "28800",
       "dynamic": true,
       "id": "sysvar_mysqlx_interactive_timeout",
@@ -85,7 +96,7 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-max-allowed-packet=value",
+      "cli": "--mysqlx-max-allowed-packet=#",
       "default": "67108864",
       "dynamic": true,
       "id": "sysvar_mysqlx_max_allowed_packet",
@@ -100,7 +111,7 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-max-connections=value",
+      "cli": "--mysqlx-max-connections=#",
       "default": "100",
       "dynamic": true,
       "id": "sysvar_mysqlx_max_connections",
@@ -115,7 +126,7 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-min-worker-threads=value",
+      "cli": "--mysqlx-min-worker-threads=#",
       "default": "2",
       "dynamic": true,
       "id": "sysvar_mysqlx_min_worker_threads",
@@ -130,7 +141,7 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-port=value",
+      "cli": "--mysqlx-port=port_num",
       "default": "33060",
       "dynamic": false,
       "id": "sysvar_mysqlx_port",
@@ -145,7 +156,7 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-port-open-timeout=value",
+      "cli": "--mysqlx-port-open-timeout=#",
       "default": "0",
       "dynamic": false,
       "id": "sysvar_mysqlx_port_open_timeout",
@@ -160,7 +171,7 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-read-timeout=value",
+      "cli": "--mysqlx-read-timeout=#",
       "default": "28800",
       "dynamic": true,
       "id": "sysvar_mysqlx_read_timeout",
@@ -256,7 +267,7 @@
       "type": "file name"
     },
     {
-      "cli": "--mysqlx-wait-timeout=value",
+      "cli": "--mysqlx-wait-timeout=#",
       "default": "28800",
       "dynamic": true,
       "id": "sysvar_mysqlx_wait_timeout",
@@ -271,7 +282,7 @@
       "type": "integer"
     },
     {
-      "cli": "--mysqlx-write-timeout=value",
+      "cli": "--mysqlx-write-timeout=#",
       "default": "60",
       "dynamic": true,
       "id": "sysvar_mysqlx_write_timeout",

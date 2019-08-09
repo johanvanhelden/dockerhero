@@ -8,8 +8,9 @@
 declare(strict_types=1);
 
 use PhpMyAdmin\Message;
-use PhpMyAdmin\TwoFactor;
+use PhpMyAdmin\Relation;
 use PhpMyAdmin\Template;
+use PhpMyAdmin\TwoFactor;
 use PhpMyAdmin\UserPreferencesHeader;
 
 if (! defined('ROOT_PATH')) {
@@ -21,8 +22,11 @@ if (! defined('ROOT_PATH')) {
  */
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$template = new Template();
-echo UserPreferencesHeader::getContent($template);
+/** @var Template $template */
+$template = $containerBuilder->get('template');
+/** @var Relation $relation */
+$relation = $containerBuilder->get('relation');
+echo UserPreferencesHeader::getContent($template, $relation);
 
 $two_factor = new TwoFactor($GLOBALS['cfg']['Server']['user']);
 

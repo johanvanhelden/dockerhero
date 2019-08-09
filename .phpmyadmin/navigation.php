@@ -9,12 +9,11 @@ declare(strict_types=1);
 
 use PhpMyAdmin\Config\PageSettings;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Navigation\Navigation;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
-use PhpMyAdmin\Template;
+use PhpMyAdmin\Util;
 
 if (! defined('ROOT_PATH')) {
     define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
@@ -22,17 +21,14 @@ if (! defined('ROOT_PATH')) {
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->set(Response::class, Response::getInstance());
-
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
-$relation = new Relation($dbi);
-$navigation = new Navigation(new Template(), $relation, $dbi);
+/** @var Navigation $navigation */
+$navigation = $containerBuilder->get('navigation');
 if (! $response->isAjax()) {
     $response->addHTML(
         Message::error(
@@ -47,6 +43,12 @@ if (isset($_POST['getNaviSettings']) && $_POST['getNaviSettings']) {
     exit;
 }
 
+if (isset($_POST['reload'])) {
+    Util::cacheSet('dbs_to_test', false);// Empty database list cache, see #14252
+}
+
+/** @var Relation $relation */
+$relation = $containerBuilder->get('relation');
 $cfgRelation = $relation->getRelationsParam();
 if ($cfgRelation['navwork']) {
     if (isset($_POST['hideNavItem'])) {

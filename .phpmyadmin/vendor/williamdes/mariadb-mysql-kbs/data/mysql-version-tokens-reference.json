@@ -13,7 +13,7 @@
       "type": "string"
     },
     {
-      "cli": "--version-tokens-session-number=N",
+      "cli": "--version-tokens-session-number=#",
       "default": "0",
       "dynamic": false,
       "id": "sysvar_version_tokens_session_number",

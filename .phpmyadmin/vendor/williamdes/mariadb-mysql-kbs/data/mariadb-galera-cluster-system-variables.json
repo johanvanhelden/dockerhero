@@ -39,7 +39,7 @@
       ]
     },
     {
-      "cli": "--wsrep-certify-nonpk[={0|1}]",
+      "cli": "--wsrep-certify-nonPK[={0|1}]",
       "default": "ON",
       "dynamic": true,
       "id": "wsrep_certify_nonpk",
@@ -71,7 +71,7 @@
       "type": "string"
     },
     {
-      "cli": "--wsrep-convert-lock-to-trx[={0|1}]",
+      "cli": "--wsrep-convert-LOCK-to-trx[={0|1}]",
       "default": "OFF",
       "dynamic": true,
       "id": "wsrep_convert_lock_to_trx",
@@ -83,6 +83,7 @@
     },
     {
       "cli": "--wsrep-data-home-dir=value",
+      "default": "The datadir variable value.",
       "dynamic": false,
       "id": "wsrep_data_home_dir",
       "name": "wsrep_data_home_dir",
@@ -103,7 +104,7 @@
     },
     {
       "cli": "--wsrep-debug[={0|1}]",
-      "default": "OFF",
+      "default": "NONE (>= MariaDB 10.4.3),  OFF (<= MariaDB 10.4.2)",
       "dynamic": true,
       "id": "wsrep_debug",
       "name": "wsrep_debug",
@@ -208,7 +209,7 @@
     },
     {
       "cli": "--wsrep-load-data-splitting[={0|1}]",
-      "default": "ON",
+      "default": "OFF (>= MariaDB 10.4.3), ON (<= MariaDB 10.4.2)",
       "dynamic": true,
       "id": "wsrep_load_data_splitting",
       "name": "wsrep_load_data_splitting",
@@ -230,6 +231,7 @@
     },
     {
       "cli": "--wsrep-max-ws-rows=#",
+      "default": "0 (>= MariaDB Galera 10.0.27, MariaDB 10.1.17), 131072 (<= MariaDB Galera 10.0.26, MariaDB 10.1.16)",
       "dynamic": true,
       "id": "wsrep_max_ws_rows",
       "name": "wsrep_max_ws_rows",
@@ -244,6 +246,7 @@
     },
     {
       "cli": "--wsrep-max-ws-size=#",
+      "default": "2147483647 (2GB, >= MariaDB Galera 10.0.27, MariaDB 10.1.17), 1073741824 (1GB, <= MariaDB Galera 10.0.26, MariaDB 10.1.16)",
       "dynamic": true,
       "id": "wsrep_max_ws_size",
       "name": "wsrep_max_ws_size",
@@ -273,7 +276,7 @@
     },
     {
       "cli": "--wsrep-node-address=value",
-      "default": "0.0.0.0",
+      "default": "Primary network address, usually eth0 with a default port of 4567, or 0.0.0.0 if no IP address.",
       "dynamic": false,
       "id": "wsrep_node_address",
       "name": "wsrep_node_address",
@@ -295,6 +298,7 @@
     },
     {
       "cli": "--wsrep-node-name=value",
+      "default": "The server's hostname.",
       "dynamic": true,
       "id": "wsrep_node_name",
       "name": "wsrep_node_name",
@@ -305,6 +309,7 @@
     },
     {
       "cli": "--wsrep-notify-command=value",
+      "default": "Empty",
       "dynamic": true,
       "id": "wsrep_notify_cmd",
       "name": "wsrep_notify_cmd",
@@ -315,7 +320,7 @@
     },
     {
       "cli": "--wsrep-on[={0|1}]",
-      "default": "ON",
+      "default": "OFF (>= MariaDB 10.1), ON (<= MariaDB Galera Cluster 10.0),",
       "dynamic": true,
       "id": "wsrep_on",
       "name": "wsrep_on",
@@ -330,7 +335,7 @@
       ]
     },
     {
-      "cli": "--wsrep-osu-method[=value]",
+      "cli": "--wsrep-OSU-method[=value]",
       "default": "TOI",
       "dynamic": true,
       "id": "wsrep_osu_method",
@@ -345,7 +350,7 @@
       ]
     },
     {
-      "cli": "none",
+      "default": "None",
       "dynamic": false,
       "id": "wsrep_patch_version",
       "name": "wsrep_patch_version",
@@ -356,6 +361,7 @@
     },
     {
       "cli": "--wsrep-provider=value",
+      "default": "None",
       "dynamic": true,
       "id": "wsrep_provider",
       "name": "wsrep_provider",
@@ -366,6 +372,7 @@
     },
     {
       "cli": "--wsrep-provider-options=value",
+      "default": "Empty",
       "dynamic": false,
       "id": "wsrep_provider_options",
       "name": "wsrep_provider_options",
@@ -442,7 +449,8 @@
       "type": "integer"
     },
     {
-      "cli": "--wsrep-slave-fk-checks[={0|1}]",
+      "cli": "--wsrep-slave-FK-checks[={0|1}]",
+      "default": "ON",
       "dynamic": true,
       "id": "wsrep_slave_fk_checks",
       "name": "wsrep_slave_FK_checks",
@@ -467,7 +475,8 @@
       "type": "integer"
     },
     {
-      "cli": "--wsrep-slave-uk-checks[={0|1}]",
+      "cli": "--wsrep-slave-UK-checks[={0|1}]",
+      "default": "OFF",
       "dynamic": true,
       "id": "wsrep_slave_uk_checks",
       "name": "wsrep_slave_UK_checks",
@@ -492,6 +501,7 @@
     },
     {
       "cli": "--wsrep-sst-auth=value",
+      "default": "(Empty)",
       "dynamic": true,
       "id": "wsrep_sst_auth",
       "name": "wsrep_sst_auth",
@@ -502,6 +512,7 @@
     },
     {
       "cli": "--wsrep-sst-donor=value",
+      "default": "",
       "dynamic": true,
       "id": "wsrep_sst_donor",
       "name": "wsrep_sst_donor",
@@ -552,7 +563,7 @@
     },
     {
       "cli": "--wsrep-start-position=value",
-      "default": " 00000000-0000-0000-0000-000000000000:-1",
+      "default": "00000000-0000-0000-0000-000000000000:-1",
       "dynamic": true,
       "id": "wsrep_start_position",
       "name": "wsrep_start_position",
@@ -567,7 +578,10 @@
       "dynamic": true,
       "id": "wsrep_sync_wait",
       "name": "wsrep_sync_wait",
-      "range": {},
+      "range": {
+        "from": 0,
+        "to": 15
+      },
       "scope": [
         "global",
         "session"

@@ -9,37 +9,39 @@ declare(strict_types=1);
 
 use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Encoding;
 use PhpMyAdmin\Export;
 use PhpMyAdmin\Plugins;
 use PhpMyAdmin\Plugins\ExportPlugin;
 use PhpMyAdmin\Relation;
+use PhpMyAdmin\Response;
 use PhpMyAdmin\Sanitize;
+use PhpMyAdmin\SqlParser\Parser;
+use PhpMyAdmin\SqlParser\Statements\SelectStatement;
+use PhpMyAdmin\SqlParser\Utils\Misc;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
-use PhpMyAdmin\Response;
 
 if (! defined('ROOT_PATH')) {
     define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 }
 
+global $db, $sql_query;
+
 include_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->set(Response::class, Response::getInstance());
-
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
 $header = $response->getHeader();
 $scripts = $header->getScripts();
 $scripts->addFile('export_output.js');
 
-$export = new Export($dbi);
+/** @var Export $export */
+$export = $containerBuilder->get('export');
 
 //check if it's the GET request to check export time out
 if (isset($_GET['check_time_out'])) {
@@ -313,12 +315,12 @@ if ($export_type == 'server') {
 // Merge SQL Query aliases with Export aliases from
 // export page, Export page aliases are given more
 // preference over SQL Query aliases.
-$parser = new \PhpMyAdmin\SqlParser\Parser($sql_query);
+$parser = new Parser($sql_query);
 $aliases = [];
 if (! empty($parser->statements[0])
-    && ($parser->statements[0] instanceof \PhpMyAdmin\SqlParser\Statements\SelectStatement)
+    && ($parser->statements[0] instanceof SelectStatement)
 ) {
-    $aliases = \PhpMyAdmin\SqlParser\Utils\Misc::getAliases($parser->statements[0], $db);
+    $aliases = Misc::getAliases($parser->statements[0], $db);
 }
 if (! empty($_POST['aliases'])) {
     $aliases = $export->mergeAliases($aliases, $_POST['aliases']);
@@ -409,7 +411,7 @@ if ($save_on_server) {
         // HTML
         if ($export_type == 'database') {
             $num_tables = count($tables);
-            if ($num_tables == 0) {
+            if ($num_tables === 0) {
                 $message = PhpMyAdmin\Message::error(
                     __('No tables found in database.')
                 );
@@ -428,7 +430,8 @@ if ($save_on_server) {
     } // end download
 }
 
-$relation = new Relation($dbi);
+/** @var Relation $relation */
+$relation = $containerBuilder->get('relation');
 
 // Fake loop just to allow skip of remain of this code by break, I'd really
 // need exceptions here :-)

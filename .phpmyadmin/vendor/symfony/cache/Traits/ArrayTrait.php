@@ -123,12 +123,13 @@ trait ArrayTrait
             if ('N;' === $value || (isset($value[2]) && ':' === $value[1])) {
                 return serialize($value);
             }
-        } elseif (!\is_scalar($value)) {
+        } elseif (!is_scalar($value)) {
             try {
                 $serialized = serialize($value);
             } catch (\Exception $e) {
                 $type = \is_object($value) ? \get_class($value) : \gettype($value);
-                CacheItem::log($this->logger, 'Failed to save key "{key}" ({type})', ['key' => $key, 'type' => $type, 'exception' => $e]);
+                $message = sprintf('Failed to save key "{key}" of type %s: %s', $type, $e->getMessage());
+                CacheItem::log($this->logger, $message, ['key' => $key, 'exception' => $e]);
 
                 return;
             }
@@ -150,7 +151,7 @@ trait ArrayTrait
             try {
                 $value = unserialize($value);
             } catch (\Exception $e) {
-                CacheItem::log($this->logger, 'Failed to unserialize key "{key}"', ['key' => $key, 'exception' => $e]);
+                CacheItem::log($this->logger, 'Failed to unserialize key "{key}": '.$e->getMessage(), ['key' => $key, 'exception' => $e]);
                 $value = false;
             }
             if (false === $value) {

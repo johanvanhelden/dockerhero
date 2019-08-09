@@ -43,6 +43,24 @@
       ]
     },
     {
+      "cli": "thread-pool-dedicated-listener={0|1}",
+      "default": "0",
+      "dynamic": false,
+      "id": "thread_pool_dedicated_listener",
+      "name": "thread_pool_dedicated_listener",
+      "scope": [],
+      "type": "boolean"
+    },
+    {
+      "cli": "thread-pool-exact-stats={0|1}",
+      "default": "0",
+      "dynamic": false,
+      "id": "thread_pool_exact_stats",
+      "name": "thread_pool_exact_stats",
+      "scope": [],
+      "type": "boolean"
+    },
+    {
       "cli": "thread-pool-idle-timeout=#",
       "default": "60",
       "dynamic": true,
@@ -55,6 +73,7 @@
     },
     {
       "cli": "thread-pool-max-threads=#",
+      "default": "65536 (>= MariaDB 10.2.4), 1000 (<= MariaDB 10.2.3, >= MariaDB 10.1), 500 (<= MariaDB 10.0)",
       "dynamic": true,
       "id": "thread_pool_max_threads",
       "name": "thread_pool_max_threads",
@@ -120,6 +139,7 @@
     },
     {
       "cli": "--thread-pool-size=#",
+      "default": "Based on the number of processors (but see MDEV-7806).",
       "dynamic": true,
       "id": "thread_pool_size",
       "name": "thread_pool_size",
@@ -139,8 +159,8 @@
       "id": "thread_pool_stall_limit",
       "name": "thread_pool_stall_limit",
       "range": {
-        "from": 4,
-        "to": 600
+        "from": 10,
+        "to": 4294967295
       },
       "scope": [
         "global"

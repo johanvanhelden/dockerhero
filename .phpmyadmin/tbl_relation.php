@@ -17,11 +17,10 @@ declare(strict_types=1);
 
 use PhpMyAdmin\Controllers\Table\RelationController;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Relation;
-use PhpMyAdmin\Response;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Util;
+use Symfony\Component\DependencyInjection\Definition;
 
 if (! defined('ROOT_PATH')) {
     define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
@@ -29,17 +28,12 @@ if (! defined('ROOT_PATH')) {
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->factory(RelationController::class);
-$container->set(Response::class, Response::getInstance());
-$container->alias('response', Response::class);
-
 /* Define dependencies for the concerned controller */
-$db = $container->get('db');
-$table = $container->get('table');
+$db = $containerBuilder->getParameter('db');
+$table = $containerBuilder->getParameter('table');
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
 $options_array = [
     'CASCADE' => 'CASCADE',
@@ -47,18 +41,22 @@ $options_array = [
     'NO_ACTION' => 'NO ACTION',
     'RESTRICT' => 'RESTRICT',
 ];
-$relation = new Relation($dbi);
+/** @var Relation $relation */
+$relation = $containerBuilder->get('relation');
 $cfgRelation = $relation->getRelationsParam();
 $tbl_storage_engine = mb_strtoupper(
     $dbi->getTable($db, $table)->getStatusInfo('Engine')
 );
 $upd_query = new Table($table, $db, $dbi);
 
+/* Define dependencies for the concerned controller */
 $dependency_definitions = [
-    "options_array" => $options_array,
-    "cfgRelation" => $cfgRelation,
-    "tbl_storage_engine" => $tbl_storage_engine,
-    "upd_query" => $upd_query
+    'options_array' => $options_array,
+    'cfgRelation' => $cfgRelation,
+    'tbl_storage_engine' => $tbl_storage_engine,
+    'existrel' => [],
+    'existrel_foreign' => [],
+    'upd_query' => $upd_query,
 ];
 if ($cfgRelation['relwork']) {
     $dependency_definitions['existrel'] = $relation->getForeigners(
@@ -77,6 +75,16 @@ if (Util::isForeignKeySupported($tbl_storage_engine)) {
     );
 }
 
+/** @var Definition $definition */
+$definition = $containerBuilder->getDefinition(RelationController::class);
+array_map(
+    static function (string $parameterName, $value) use ($definition) {
+        $definition->replaceArgument($parameterName, $value);
+    },
+    array_keys($dependency_definitions),
+    $dependency_definitions
+);
+
 /** @var RelationController $controller */
-$controller = $container->get(RelationController::class, $dependency_definitions);
+$controller = $containerBuilder->get(RelationController::class);
 $controller->indexAction();

@@ -9,9 +9,7 @@ declare(strict_types=1);
 
 use PhpMyAdmin\Controllers\TransformationOverviewController;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Response;
-use PhpMyAdmin\Transformations;
 
 if (! defined('ROOT_PATH')) {
     define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
@@ -19,22 +17,16 @@ if (! defined('ROOT_PATH')) {
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->set(Response::class, Response::getInstance());
-
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
 $header = $response->getHeader();
 $header->disableMenuAndConsole();
 
-$controller = new TransformationOverviewController(
-    $response,
-    $dbi,
-    new Transformations()
-);
+/** @var TransformationOverviewController $controller */
+$controller = $containerBuilder->get(TransformationOverviewController::class);
 
 $response->addHTML($controller->indexAction());

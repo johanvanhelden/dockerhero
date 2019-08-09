@@ -10,15 +10,16 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use DirectoryIterator;
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Error;
 use PhpMyAdmin\LanguageManager;
+use PhpMyAdmin\Message;
 use PhpMyAdmin\ThemeManager;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\UserPreferences;
 use PhpMyAdmin\Util;
 use PhpMyAdmin\Utils\HttpRequest;
-use PhpMyAdmin\Config;
 
 /**
  * Indication for error handler (see end of this file).
@@ -112,7 +113,7 @@ class Config
      */
     public function checkSystem(): void
     {
-        $this->set('PMA_VERSION', '5.0.0-dev');
+        $this->set('PMA_VERSION', '5.0.0-alpha1');
         /* Major version */
         $this->set(
             'PMA_MAJOR_VERSION',
@@ -712,12 +713,12 @@ class Config
             $author = [
                 'name' => '',
                 'email' => '',
-                'date' => ''
+                'date' => '',
             ];
             $committer = [
                 'name' => '',
                 'email' => '',
-                'date' => ''
+                'date' => '',
             ];
 
             do {
@@ -730,7 +731,7 @@ class Config
                     $user2 = [
                         'name' => trim($user[1]),
                         'email' => trim($user[2]),
-                        'date' => date('Y-m-d H:i:s', (int) $user[3])
+                        'date' => date('Y-m-d H:i:s', (int) $user[3]),
                     ];
                     if (isset($user[4])) {
                         $user2['date'] .= $user[4];
@@ -743,12 +744,12 @@ class Config
             $author = [
                 'name' => $commit_json->author->name,
                 'email' => $commit_json->author->email,
-                'date' => $commit_json->author->date
+                'date' => $commit_json->author->date,
             ];
             $committer = [
                 'name' => $commit_json->committer->name,
                 'email' => $commit_json->committer->email,
-                'date' => $commit_json->committer->date
+                'date' => $commit_json->committer->date,
             ];
             $message = trim($commit_json->message);
         } else {
@@ -1042,7 +1043,7 @@ class Config
      * @param mixed       $new_cfg_value new value
      * @param mixed       $default_value default value
      *
-     * @return true|\PhpMyAdmin\Message
+     * @return true|Message
      */
     public function setUserValue(
         ?string $cookie_name,
@@ -1716,7 +1717,7 @@ class Config
     public function checkServers(): void
     {
         // Do we have some server?
-        if (! isset($this->settings['Servers']) || count($this->settings['Servers']) == 0) {
+        if (! isset($this->settings['Servers']) || count($this->settings['Servers']) === 0) {
             // No server => create one with defaults
             $this->settings['Servers'] = [1 => $this->default_server];
         } else {

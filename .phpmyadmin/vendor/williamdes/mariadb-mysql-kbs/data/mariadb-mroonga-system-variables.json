@@ -24,6 +24,7 @@
     },
     {
       "cli": "--mroonga-database-path-prefix=value",
+      "default": "(Empty)",
       "dynamic": true,
       "id": "mroonga_database_path_prefix",
       "name": "mroonga_database_path_prefix",
@@ -57,6 +58,7 @@
     },
     {
       "cli": "--mroonga-default-wrapper-engine=value",
+      "default": "(Empty)",
       "dynamic": false,
       "id": "mroonga_default_wrapper_engine",
       "name": "mroonga_default_wrapper_engine",
@@ -101,7 +103,6 @@
       "type": "boolean"
     },
     {
-      "cli": "none",
       "default": "ON",
       "dynamic": false,
       "id": "mroonga_libgroonga_embedded",
@@ -112,7 +113,6 @@
       "type": "boolean"
     },
     {
-      "cli": "none",
       "default": "OFF",
       "dynamic": false,
       "id": "mroonga_libgroonga_support_lz4",
@@ -123,7 +123,6 @@
       "type": "boolean"
     },
     {
-      "cli": "none",
       "default": "ON",
       "dynamic": false,
       "id": "mroonga_libgroonga_support_zlib",
@@ -134,7 +133,6 @@
       "type": "boolean"
     },
     {
-      "cli": "none",
       "default": "OFF",
       "dynamic": false,
       "id": "mroonga_libgroonga_support_zstd",
@@ -145,7 +143,6 @@
       "type": "boolean"
     },
     {
-      "cli": "none",
       "dynamic": false,
       "id": "mroonga_libgroonga_version",
       "name": "mroonga_libgroonga_version",
@@ -224,6 +221,7 @@
     },
     {
       "cli": "--mroonga-query-log-file=filename",
+      "default": "(Empty string)",
       "dynamic": true,
       "id": "mroonga_query_log_file",
       "name": "mroonga_query_log_file",
@@ -234,7 +232,7 @@
     },
     {
       "cli": "--mroonga-vector-column-delimiter=value",
-      "default": " ",
+      "default": "(white space)",
       "dynamic": true,
       "id": "mroonga_vector_column_delimiter",
       "name": "mroonga_vector_column_delimiter",
@@ -244,7 +242,6 @@
       "type": "string"
     },
     {
-      "cli": "none",
       "dynamic": false,
       "id": "mroonga_version",
       "name": "mroonga_version",

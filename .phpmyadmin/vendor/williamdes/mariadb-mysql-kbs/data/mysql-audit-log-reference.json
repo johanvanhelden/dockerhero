@@ -14,7 +14,7 @@
       ]
     },
     {
-      "cli": "--audit-log-buffer-size=value",
+      "cli": "--audit-log-buffer-size=#",
       "default": "1048576",
       "dynamic": false,
       "id": "sysvar_audit_log_buffer_size",
@@ -180,7 +180,7 @@
       "type": "integer"
     },
     {
-      "cli": "--audit-log-rotate-on-size=N",
+      "cli": "--audit-log-rotate-on-size=#",
       "default": "0",
       "dynamic": true,
       "id": "sysvar_audit_log_rotate_on_size",

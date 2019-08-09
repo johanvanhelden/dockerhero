@@ -38,6 +38,7 @@
     },
     {
       "cli": "--ssl-cert=name",
+      "default": "None",
       "dynamic": false,
       "id": "ssl_cert",
       "name": "ssl_cert",
@@ -48,6 +49,7 @@
     },
     {
       "cli": "--ssl-cipher=name",
+      "default": "None",
       "dynamic": false,
       "id": "ssl_cipher",
       "name": "ssl_cipher",
@@ -58,6 +60,7 @@
     },
     {
       "cli": "--ssl-crl=name",
+      "default": "None",
       "dynamic": false,
       "id": "ssl_crl",
       "name": "ssl_crl",
@@ -68,6 +71,7 @@
     },
     {
       "cli": "--ssl-crlpath=name",
+      "default": "None",
       "dynamic": false,
       "id": "ssl_crlpath",
       "name": "ssl_crlpath",
@@ -78,6 +82,7 @@
     },
     {
       "cli": "--ssl-key=name",
+      "default": "None",
       "dynamic": false,
       "id": "ssl_key",
       "name": "ssl_key",
@@ -87,6 +92,7 @@
       "type": "string"
     },
     {
+      "default": "None",
       "dynamic": false,
       "id": "version_ssl_library",
       "name": "version_ssl_library",

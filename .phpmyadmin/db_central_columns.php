@@ -14,30 +14,22 @@ if (! defined('ROOT_PATH')) {
 use PhpMyAdmin\CentralColumns;
 use PhpMyAdmin\Controllers\Database\CentralColumnsController;
 use PhpMyAdmin\Core;
-use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Response;
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->set(Response::class, Response::getInstance());
-
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
-/** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+/** @var CentralColumns $centralColumns */
+$centralColumns = $containerBuilder->get('central_columns');
 
-$centralColumns = new CentralColumns($dbi);
+/** @var CentralColumnsController $controller */
+$controller = $containerBuilder->get(CentralColumnsController::class);
 
-$controller = new CentralColumnsController(
-    $response,
-    $dbi,
-    $db,
-    $centralColumns
-);
+/** @var string $db */
+$db = $containerBuilder->getParameter('db');
 
 if (isset($_POST['edit_save'])) {
     echo $controller->editSave([
@@ -89,7 +81,7 @@ $header = $response->getHeader();
 $scripts = $header->getScripts();
 $scripts->addFile('vendor/jquery/jquery.uitablefilter.js');
 $scripts->addFile('vendor/jquery/jquery.tablesorter.js');
-$scripts->addFile('db_central_columns.js');
+$scripts->addFile('database/central_columns.js');
 
 if (isset($_POST['edit_central_columns_page'])) {
     $response->addHTML($controller->editPage([

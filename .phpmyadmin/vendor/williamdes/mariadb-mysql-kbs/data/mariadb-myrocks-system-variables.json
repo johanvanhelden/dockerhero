@@ -262,6 +262,7 @@
     },
     {
       "cli": "--rocksdb-compact-cf=value",
+      "default": "(Empty)",
       "dynamic": true,
       "id": "rocksdb_compact_cf",
       "name": "rocksdb_compact_cf",
@@ -354,6 +355,7 @@
     },
     {
       "cli": "--rocksdb-create-checkpoint=value",
+      "default": "(Empty)",
       "dynamic": true,
       "id": "rocksdb_create_checkpoint",
       "name": "rocksdb_create_checkpoint",
@@ -512,6 +514,7 @@
     },
     {
       "cli": "--rocksdb-default-cf-options=value",
+      "default": "(Empty)",
       "dynamic": false,
       "id": "rocksdb_default_cf_options",
       "name": "rocksdb_default_cf_options",
@@ -723,6 +726,7 @@
     },
     {
       "cli": "--rocksdb-git-hash=value=#",
+      "default": "As per git revision.",
       "dynamic": false,
       "id": "rocksdb_git_hash",
       "name": "rocksdb_git_hash",
@@ -1017,7 +1021,10 @@
       "dynamic": true,
       "id": "rocksdb_max_row_locks",
       "name": "rocksdb_max_row_locks",
-      "range": {},
+      "range": {
+        "from": 1,
+        "to": 1073741824
+      },
       "scope": [
         "global",
         "session"
@@ -1126,6 +1133,7 @@
     },
     {
       "cli": "--rocksdb-override-cf-options=value",
+      "default": "(Empty)",
       "dynamic": false,
       "id": "rocksdb_override_cf_options",
       "name": "rocksdb_override_cf_options",
@@ -1174,6 +1182,7 @@
     },
     {
       "cli": "--rocksdb-persistent-cache-path=value",
+      "default": "(Empty)",
       "dynamic": false,
       "id": "rocksdb_persistent_cache_path",
       "name": "rocksdb_persistent_cache_path",
@@ -1237,6 +1246,7 @@
     },
     {
       "cli": "--rocksdb-read-free-rpl-tables=value",
+      "default": "(Empty)",
       "dynamic": true,
       "id": "rocksdb_read_free_rpl_tables",
       "name": "rocksdb_read_free_rpl_tables",
@@ -1405,6 +1415,7 @@
     },
     {
       "cli": "--rocksdb-strict-collation-exceptions=value",
+      "default": "(Empty)",
       "dynamic": true,
       "id": "rocksdb_strict_collation_exceptions",
       "name": "rocksdb_strict_collation_exceptions",
@@ -1456,6 +1467,7 @@
     },
     {
       "cli": "--rocksdb-tmpdir[=value]",
+      "default": "(Empty)",
       "dynamic": true,
       "id": "rocksdb_tmpdir",
       "name": "rocksdb_tmpdir",
@@ -1491,6 +1503,7 @@
     },
     {
       "cli": "--rocksdb-update-cf-options=value",
+      "default": "(Empty)",
       "dynamic": true,
       "id": "rocksdb_update_cf_options",
       "name": "rocksdb_update_cf_options",
@@ -1597,6 +1610,7 @@
     },
     {
       "cli": "--rocksdb-wal-dir=value",
+      "default": "(Empty)",
       "dynamic": false,
       "id": "rocksdb_wal_dir",
       "name": "rocksdb_wal_dir",

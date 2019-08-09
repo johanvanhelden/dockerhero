@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "cli": "--log-slave-updates",
+      "cli": "--log-slave-updates[={OFF|ON}]",
       "dynamic": false,
       "id": "option_mysqld_log-slave-updates",
       "name": "log_slave_updates",
@@ -70,8 +70,8 @@
       "type": "file name"
     },
     {
-      "cli": "--relay-log-purge",
-      "default": "true",
+      "cli": "--relay-log-purge[={OFF|ON}]",
+      "default": "on",
       "dynamic": true,
       "id": "option_mysqld_relay-log-purge",
       "name": "relay_log_purge",
@@ -81,8 +81,8 @@
       "type": "boolean"
     },
     {
-      "cli": "--relay-log-recovery",
-      "default": "false",
+      "cli": "--relay-log-recovery[={OFF|ON}]",
+      "default": "off",
       "id": "option_mysqld_relay-log-recovery",
       "name": "relay_log_recovery",
       "type": "boolean"
@@ -132,8 +132,8 @@
       "type": "string"
     },
     {
-      "cli": "--replicate-same-server-id",
-      "default": "false",
+      "cli": "--replicate-same-server-id[={OFF|ON}]",
+      "default": "off",
       "id": "option_mysqld_replicate-same-server-id",
       "name": "replicate_same_server_id",
       "type": "boolean"
@@ -171,7 +171,7 @@
       "type": "string"
     },
     {
-      "cli": "--report-port=#",
+      "cli": "--report-port=port_num",
       "default": "[slave_port]",
       "dynamic": false,
       "id": "option_mysqld_report-port",
@@ -239,15 +239,15 @@
       "type": "integer"
     },
     {
-      "cli": "--skip-slave-start",
-      "default": "false",
+      "cli": "--skip-slave-start[={OFF|ON}]",
+      "default": "off",
       "id": "option_mysqld_skip-slave-start",
       "name": "skip_slave_start",
       "type": "boolean"
     },
     {
       "cli": "--slave-load-tmpdir=dir_name",
-      "default": "/tmp",
+      "default": "value of --tmpdir",
       "dynamic": false,
       "id": "option_mysqld_slave-load-tmpdir",
       "name": "slave_load_tmpdir",
@@ -260,7 +260,7 @@
       "cli": "--slave-max-allowed-packet=#",
       "default": "1073741824",
       "id": "option_mysqld_slave-max-allowed-packet",
-      "name": "slave-max-allowed-packet=bytes",
+      "name": "slave_max_allowed_packet",
       "range": {
         "from": 1024,
         "to": 1073741824
@@ -295,7 +295,7 @@
     {
       "cli": "--slave-rows-search-algorithms=list",
       "id": "option_mysqld_slave-rows-search-algorithms",
-      "name": "slave-rows-search-algorithms=list",
+      "name": "slave_rows_search_algorithms",
       "type": "set",
       "validValues": [
         "TABLE_SCAN,INDEX_SCAN",
@@ -322,15 +322,11 @@
       ]
     },
     {
-      "cli": "--slave-sql-verify-checksum=value",
-      "default": "1",
+      "cli": "--slave-sql-verify-checksum[={OFF|ON}]",
+      "default": "on",
       "id": "option_mysqld_slave-sql-verify-checksum",
       "name": "slave_sql_verify_checksum",
-      "type": "boolean",
-      "validValues": [
-        "0",
-        "1"
-      ]
+      "type": "boolean"
     },
     {
       "cli": "--abort-slave-event-count=#",
@@ -350,7 +346,7 @@
       "type": "integer"
     },
     {
-      "cli": "--master-info-repository=FILE|TABLE",
+      "cli": "--master-info-repository={FILE|TABLE}",
       "id": "option_mysqld_master-info-repository",
       "name": "master_info_repository",
       "type": "string",
@@ -360,7 +356,7 @@
       ]
     },
     {
-      "cli": "--relay-log-info-repository=FILE|TABLE",
+      "cli": "--relay-log-info-repository={FILE|TABLE}",
       "id": "option_mysqld_relay-log-info-repository",
       "name": "relay_log_info_repository",
       "type": "string",
@@ -380,6 +376,7 @@
       "type": "string"
     },
     {
+      "cli": "--log-slow-slave-statements[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_log_slow_slave_statements",
@@ -390,7 +387,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--master-info-repository=FILE|TABLE",
+      "cli": "--master-info-repository={FILE|TABLE}",
       "dynamic": true,
       "id": "sysvar_master_info_repository",
       "name": "master_info_repository",
@@ -439,7 +436,7 @@
       "type": "file name"
     },
     {
-      "cli": "--relay-log-index",
+      "cli": "--relay-log-index=file_name",
       "default": "*host_name*-relay-bin.index",
       "dynamic": false,
       "id": "sysvar_relay_log_index",
@@ -461,6 +458,7 @@
       "type": "file name"
     },
     {
+      "cli": "--relay-log-info-repository=value",
       "dynamic": true,
       "id": "sysvar_relay_log_info_repository",
       "name": "relay_log_info_repository",
@@ -474,8 +472,8 @@
       ]
     },
     {
-      "cli": "--relay-log-purge",
-      "default": "true",
+      "cli": "--relay-log-purge[={OFF|ON}]",
+      "default": "on",
       "dynamic": true,
       "id": "sysvar_relay_log_purge",
       "name": "relay_log_purge",
@@ -485,8 +483,8 @@
       "type": "boolean"
     },
     {
-      "cli": "--relay-log-recovery",
-      "default": "false",
+      "cli": "--relay-log-recovery[={OFF|ON}]",
+      "default": "off",
       "dynamic": false,
       "id": "sysvar_relay_log_recovery",
       "name": "relay_log_recovery",
@@ -530,7 +528,7 @@
       "type": "string"
     },
     {
-      "cli": "--report-port=#",
+      "cli": "--report-port=port_num",
       "default": "[slave_port]",
       "dynamic": false,
       "id": "sysvar_report_port",
@@ -570,6 +568,7 @@
       "type": "integer"
     },
     {
+      "cli": "--rpl-semi-sync-slave-enabled[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_rpl_semi_sync_slave_enabled",
@@ -580,6 +579,7 @@
       "type": "boolean"
     },
     {
+      "cli": "--rpl-semi-sync-slave-trace-level=#",
       "default": "32",
       "dynamic": true,
       "id": "sysvar_rpl_semi_sync_slave_trace_level",
@@ -635,7 +635,7 @@
       "type": "integer"
     },
     {
-      "cli": "--slave-compressed-protocol",
+      "cli": "--slave-compressed-protocol[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_slave_compressed_protocol",
@@ -662,7 +662,7 @@
     },
     {
       "cli": "--slave-load-tmpdir=dir_name",
-      "default": "/tmp",
+      "default": "value of --tmpdir",
       "dynamic": false,
       "id": "sysvar_slave_load_tmpdir",
       "name": "slave_load_tmpdir",
@@ -672,6 +672,7 @@
       "type": "directory name"
     },
     {
+      "cli": "--slave-max-allowed-packet=#",
       "default": "1073741824",
       "dynamic": true,
       "id": "sysvar_slave_max_allowed_packet",
@@ -703,7 +704,7 @@
       "cli": "--slave-parallel-type=type",
       "default": "database",
       "id": "sysvar_slave_parallel_type",
-      "name": "slave_parallel_type=type",
+      "name": "slave_parallel_type",
       "type": "enumeration",
       "validValues": [
         "DATABASE",
@@ -740,21 +741,18 @@
       "type": "integer"
     },
     {
-      "cli": "--slave-preserve-commit-order=value",
-      "default": "0",
+      "cli": "--slave-preserve-commit-order[={OFF|ON}]",
+      "default": "off",
       "dynamic": true,
       "id": "sysvar_slave_preserve_commit_order",
       "name": "slave_preserve_commit_order",
       "scope": [
         "global"
       ],
-      "type": "boolean",
-      "validValues": [
-        "0",
-        "1"
-      ]
+      "type": "boolean"
     },
     {
+      "cli": "--slave-rows-search-algorithms=value",
       "dynamic": true,
       "id": "sysvar_slave_rows_search_algorithms",
       "name": "slave_rows_search_algorithms",
@@ -787,18 +785,15 @@
       ]
     },
     {
-      "default": "1",
+      "cli": "--slave-sql-verify-checksum[={OFF|ON}]",
+      "default": "on",
       "dynamic": true,
       "id": "sysvar_slave_sql_verify_checksum",
       "name": "slave_sql_verify_checksum",
       "scope": [
         "global"
       ],
-      "type": "boolean",
-      "validValues": [
-        "0",
-        "1"
-      ]
+      "type": "boolean"
     },
     {
       "cli": "--slave-transaction-retries=#",

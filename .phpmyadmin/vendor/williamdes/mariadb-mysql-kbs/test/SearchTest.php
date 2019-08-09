@@ -1,8 +1,11 @@
 <?php
 declare(strict_types = 1);
-namespace Williamdes\MariaDBMySQLKBS;
+namespace Williamdes\MariaDBMySQLKBS\Test;
 
 use \PHPUnit\Framework\TestCase;
+use \Williamdes\MariaDBMySQLKBS\SlimData;
+use \Williamdes\MariaDBMySQLKBS\Search;
+use \Williamdes\MariaDBMySQLKBS\KBException;
 
 class SearchTest extends TestCase
 {
@@ -60,56 +63,56 @@ class SearchTest extends TestCase
     /**
      * test get by name
      *
-     * @expectedException     \Williamdes\MariaDBMySQLKBS\KBException
-     * @expectedExceptionCode 0
-     * @expectedExceptionMessageRegExp /(.+) does not exist for this type of documentation !/
      *
      * @return void
      */
     public function testException(): void
     {
+        $this->expectException(KBException::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessageRegExp('/(.+) does not exist for this type of documentation !/');
         Search::getByName("variable-3", Search::MARIADB);
     }
 
     /**
      * test get by name not found variable
      *
-     * @expectedException     \Williamdes\MariaDBMySQLKBS\KBException
-     * @expectedExceptionCode 0
-     * @expectedExceptionMessageRegExp /(.+) does not exist !/
      *
      * @return void
      */
     public function testExceptionNoFoundGetVariableType(): void
     {
+        $this->expectException(KBException::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessageRegExp('/(.+) does not exist !/');
         Search::getVariableType("acbdefghi0202");
     }
 
     /**
      * test get by name not found variable
      *
-     * @expectedException     \Williamdes\MariaDBMySQLKBS\KBException
-     * @expectedExceptionCode 0
-     * @expectedExceptionMessageRegExp /(.+) does not exist !/
      *
      * @return void
      */
     public function testExceptionNoFound(): void
     {
+        $this->expectException(KBException::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessageRegExp('/(.+) does not exist !/');
         Search::getByName("acbdefghi0202", Search::MARIADB);
     }
 
     /**
      * test get by name not found variable
      *
-     * @expectedException     \Williamdes\MariaDBMySQLKBS\KBException
-     * @expectedExceptionCode 0
-     * @expectedExceptionMessageRegExp /(.+) does not exist !/
      *
      * @return void
      */
     public function testExceptionNoFoundGetVariable(): void
     {
+        $this->expectException(KBException::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessageRegExp('/(.+) does not exist !/');
         Search::getVariable("acbdefghi0202");
     }
 
@@ -117,14 +120,14 @@ class SearchTest extends TestCase
      * test load data fail
      *
      * @runInSeparateProcess
-     * @expectedException     \Williamdes\MariaDBMySQLKBS\KBException
-     * @expectedExceptionCode 0
-     * @expectedExceptionMessageRegExp /(.+) does not exist !/
      *
      * @return void
      */
     public function testExceptionLoadData(): void
     {
+        $this->expectException(KBException::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessageRegExp('/(.+) does not exist !/');
         Search::$DATA_DIR = ".";
         Search::$loaded   = false;
         Search::loadData();
@@ -150,14 +153,14 @@ class SearchTest extends TestCase
     /**
      * test Exception get variable type has no type
      *
-     * @expectedException     \Williamdes\MariaDBMySQLKBS\KBException
-     * @expectedExceptionCode 0
-     * @expectedExceptionMessageRegExp /(.+) does have a known type !/
      *
      * @return void
      */
     public function testExceptionGetVariableType(): void
     {
+        $this->expectException(KBException::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessageRegExp('/(.+) does have a known type !/');
         Search::getVariableType("variable-2");
     }
 

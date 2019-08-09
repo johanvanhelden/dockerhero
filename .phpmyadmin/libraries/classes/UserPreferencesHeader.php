@@ -10,6 +10,10 @@ declare(strict_types=1);
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Config\Forms\User\UserFormList;
+use Throwable;
+use Twig_Error_Loader;
+use Twig_Error_Runtime;
+use Twig_Error_Syntax;
 
 /**
  * Functions for displaying user preferences header
@@ -22,28 +26,29 @@ class UserPreferencesHeader
      * Get HTML content
      *
      * @param Template $template Template object used to render data
+     * @param Relation $relation Relation object
      *
      * @return string
-     * @throws \Throwable
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws Throwable
+     * @throws Twig_Error_Loader
+     * @throws Twig_Error_Runtime
+     * @throws Twig_Error_Syntax
      */
-    public static function getContent(Template $template): string
+    public static function getContent(Template $template, Relation $relation): string
     {
         return self::displayTabs($template)
             . self::displayConfigurationSavedMessage()
-            . self::sessionStorageWarning();
+            . self::sessionStorageWarning($relation);
     }
 
     /**
      * @param Template $template Template object used to render data
      *
      * @return string
-     * @throws \Throwable
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws Throwable
+     * @throws Twig_Error_Loader
+     * @throws Twig_Error_Runtime
+     * @throws Twig_Error_Syntax
      */
     protected static function displayTabs(Template $template): string
     {
@@ -118,19 +123,20 @@ class UserPreferencesHeader
     }
 
     /**
+     * @param Relation $relation Relation instance
+     *
      * @return string|null
      */
-    protected static function sessionStorageWarning(): ?string
+    protected static function sessionStorageWarning(Relation $relation): ?string
     {
         // warn about using session storage for settings
-        $relation = new Relation($GLOBALS['dbi']);
         $cfgRelation = $relation->getRelationsParam();
         if (! $cfgRelation['userconfigwork']) {
             $msg = __(
                 'Your preferences will be saved for current session only. Storing them '
                 . 'permanently requires %sphpMyAdmin configuration storage%s.'
             );
-            $msg = Sanitize::sanitize(
+            $msg = Sanitize::sanitizeMessage(
                 sprintf($msg, '[doc@linked-tables]', '[/doc]')
             );
             return Message::notice($msg)

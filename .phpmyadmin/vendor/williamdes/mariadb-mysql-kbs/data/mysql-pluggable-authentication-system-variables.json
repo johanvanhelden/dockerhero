@@ -78,7 +78,7 @@
       "type": "string"
     },
     {
-      "cli": "--authentication-ldap-sasl-init-pool-size=value",
+      "cli": "--authentication-ldap-sasl-init-pool-size=#",
       "default": "10",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_sasl_init_pool_size",
@@ -93,7 +93,7 @@
       "type": "integer"
     },
     {
-      "cli": "--authentication-ldap-sasl-log-status=value",
+      "cli": "--authentication-ldap-sasl-log-status=#",
       "default": "1",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_sasl_log_status",
@@ -108,7 +108,7 @@
       "type": "integer"
     },
     {
-      "cli": "--authentication-ldap-sasl-max-pool-size=value",
+      "cli": "--authentication-ldap-sasl-max-pool-size=#",
       "default": "1000",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_sasl_max_pool_size",
@@ -123,7 +123,7 @@
       "type": "integer"
     },
     {
-      "cli": "--authentication-ldap-sasl-server-host=value",
+      "cli": "--authentication-ldap-sasl-server-host=host_name",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_sasl_server_host",
       "name": "authentication_ldap_sasl_server_host",
@@ -133,7 +133,7 @@
       "type": "string"
     },
     {
-      "cli": "--authentication-ldap-sasl-server-port=value",
+      "cli": "--authentication-ldap-sasl-server-port=port_num",
       "default": "389",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_sasl_server_port",
@@ -148,7 +148,7 @@
       "type": "integer"
     },
     {
-      "cli": "--authentication-ldap-sasl-tls=value",
+      "cli": "--authentication-ldap-sasl-tls[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_sasl_tls",
@@ -247,7 +247,7 @@
       "type": "string"
     },
     {
-      "cli": "--authentication-ldap-simple-init-pool-size=value",
+      "cli": "--authentication-ldap-simple-init-pool-size=#",
       "default": "10",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_simple_init_pool_size",
@@ -262,7 +262,7 @@
       "type": "integer"
     },
     {
-      "cli": "--authentication-ldap-simple-log-status=value",
+      "cli": "--authentication-ldap-simple-log-status=#",
       "default": "1",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_simple_log_status",
@@ -277,7 +277,7 @@
       "type": "integer"
     },
     {
-      "cli": "--authentication-ldap-simple-max-pool-size=value",
+      "cli": "--authentication-ldap-simple-max-pool-size=#",
       "default": "1000",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_simple_max_pool_size",
@@ -292,7 +292,7 @@
       "type": "integer"
     },
     {
-      "cli": "--authentication-ldap-simple-server-host=value",
+      "cli": "--authentication-ldap-simple-server-host=host_name",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_simple_server_host",
       "name": "authentication_ldap_simple_server_host",
@@ -302,7 +302,7 @@
       "type": "string"
     },
     {
-      "cli": "--authentication-ldap-simple-server-port=value",
+      "cli": "--authentication-ldap-simple-server-port=port_num",
       "default": "389",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_simple_server_port",
@@ -317,7 +317,7 @@
       "type": "integer"
     },
     {
-      "cli": "--authentication-ldap-simple-tls=value",
+      "cli": "--authentication-ldap-simple-tls[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_authentication_ldap_simple_tls",

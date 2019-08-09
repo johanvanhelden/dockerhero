@@ -34,6 +34,7 @@
     },
     {
       "cli": "--binlog-annotate-row-events[={0|1}]",
+      "default": "ON (>= MariaDB 10.2.4), OFF (<= MariaDB 10.2.3)",
       "id": "binlog_annotate_row_events",
       "name": "binlog_annotate_row_events",
       "scope": [
@@ -55,6 +56,7 @@
     },
     {
       "cli": "--binlog-checksum=name\n--binlog-checksum=[0|1]",
+      "default": "CRC32 (>= MariaDB 10.2.1), NONE (<= MariaDB 10.2.0)",
       "dynamic": true,
       "id": "binlog_checksum",
       "name": "binlog_checksum",
@@ -129,6 +131,7 @@
     },
     {
       "cli": "--binlog-format=format",
+      "default": "MIXED (>= MariaDB 10.2.4), STATEMENT (<= MariaDB 10.2.3)",
       "dynamic": true,
       "id": "binlog_format",
       "name": "binlog_format",
@@ -182,8 +185,7 @@
       "type": "integer"
     },
     {
-      "cli": "none",
-      "default": "''",
+      "default": "'' (empty string)",
       "dynamic": true,
       "id": "default_master_connection",
       "name": "default_master_connection",
@@ -240,7 +242,6 @@
       "type": "boolean"
     },
     {
-      "cli": "no commandline option",
       "dynamic": false,
       "id": "log_bin_basename",
       "name": "log_bin_basename",
@@ -294,6 +295,7 @@
     },
     {
       "cli": "--log-slow-slave-statements",
+      "default": "ON  (>= MariaDB 10.2.4), OFF (<= MariaDB 10.2.3)",
       "dynamic": true,
       "id": "log_slow_slave_statements",
       "name": "log_slow_slave_statements",
@@ -339,7 +341,7 @@
     },
     {
       "cli": "--max-binlog-size=#",
-      "default": "1073741824",
+      "default": "1073741824 (1GB)",
       "dynamic": true,
       "id": "max_binlog_size",
       "name": "max_binlog_size",
@@ -354,7 +356,7 @@
     },
     {
       "cli": "--max-binlog-stmt-cache-size=#",
-      "default": "4294963200",
+      "default": "18446744073709547520 (64 bit), 4294963200 (32 bit)",
       "dynamic": true,
       "id": "max_binlog_stmt_cache_size",
       "name": "max_binlog_stmt_cache_size",
@@ -385,7 +387,7 @@
     },
     {
       "cli": "--read-binlog-speed-limit=#",
-      "default": "0",
+      "default": "0 (no limit)",
       "dynamic": true,
       "id": "read_binlog_speed_limit",
       "name": "read_binlog_speed_limit",
@@ -400,7 +402,7 @@
     },
     {
       "cli": "--relay-log=file_name",
-      "default": "''",
+      "default": "'' (none)",
       "dynamic": false,
       "id": "relay_log",
       "name": "relay_log",
@@ -409,7 +411,6 @@
       ]
     },
     {
-      "cli": "no commandline option",
       "dynamic": false,
       "id": "relay_log_basename",
       "name": "relay_log_basename",
@@ -474,6 +475,7 @@
     },
     {
       "cli": "--replicate-annotate-row-events",
+      "default": "ON (>= MariaDB 10.2.4), OFF (<= MariaDB 10.2.3)",
       "dynamic": false,
       "id": "replicate_annotate_row_events",
       "name": "replicate_annotate_row_events",
@@ -484,7 +486,7 @@
     },
     {
       "cli": "--replicate-do-db=name",
-      "default": "''",
+      "default": "'' (empty)",
       "dynamic": true,
       "id": "replicate_do_db",
       "name": "replicate_do_db",
@@ -495,7 +497,7 @@
     },
     {
       "cli": "--replicate-do-table=name",
-      "default": "''",
+      "default": "'' (empty)",
       "dynamic": true,
       "id": "replicate_do_table",
       "name": "replicate_do_table",
@@ -522,7 +524,7 @@
     },
     {
       "cli": "--replicate-ignore-db=name",
-      "default": "''",
+      "default": "'' (empty)",
       "dynamic": true,
       "id": "replicate_ignore_db",
       "name": "replicate_ignore_db",
@@ -533,7 +535,7 @@
     },
     {
       "cli": "--replicate-ignore-table=name",
-      "default": "''",
+      "default": "'' (empty)",
       "dynamic": true,
       "id": "replicate_ignore_table",
       "name": "replicate_ignore_table",
@@ -548,7 +550,7 @@
     },
     {
       "cli": "--replicate-wild-do-table=name",
-      "default": "''",
+      "default": "'' (empty)",
       "dynamic": true,
       "id": "replicate_wild_do_table",
       "name": "replicate_wild_do_table",
@@ -559,7 +561,7 @@
     },
     {
       "cli": "--replicate-wild-ignore-table=name",
-      "default": "''",
+      "default": "'' (empty)",
       "dynamic": true,
       "id": "replicate_wild_ignore_table",
       "name": "replicate_wild_ignore_table",
@@ -615,7 +617,7 @@
     },
     {
       "cli": "--server-id =#",
-      "default": "0",
+      "default": "1 (>= MariaDB 10.2.2), 0 (<= MariaDB 10.2.1)",
       "dynamic": true,
       "id": "server_id",
       "name": "server_id",
@@ -630,7 +632,6 @@
       "type": "integer"
     },
     {
-      "cli": "none",
       "default": "OFF",
       "dynamic": true,
       "id": "skip_parallel_replication",
@@ -641,7 +642,6 @@
       "type": "boolean"
     },
     {
-      "cli": "none",
       "default": "OFF",
       "dynamic": true,
       "id": "skip_replication",
@@ -693,7 +693,7 @@
       ]
     },
     {
-      "default": "STRICT",
+      "default": "IDEMPOTENT (NDB), STRICT (All)",
       "dynamic": true,
       "id": "slave_exec_mode",
       "name": "slave_exec_mode",
@@ -734,11 +734,13 @@
     },
     {
       "cli": "--slave-net-timeout=#",
+      "default": "60 (1 minute) (>= MariaDB 10.2.4), 3600 (1 hour) (<= MariaDB 10.2.3)",
       "dynamic": true,
       "id": "slave_net_timeout",
       "name": "slave_net_timeout",
       "range": {
-        "from": 1
+        "from": 1,
+        "to": "upwards"
       },
       "scope": [
         "global"
@@ -761,7 +763,6 @@
       "type": "integer"
     },
     {
-      "cli": "none",
       "default": "conservative",
       "dynamic": false,
       "id": "slave_parallel_mode",
@@ -849,7 +850,7 @@
     },
     {
       "cli": "--slave-transaction_retry-errors=[error_code1,error_code2,...]",
-      "default": "1213,1205",
+      "default": "1158,1159,1160,1161,1205,1213,1429,2013,12701 (>= MariaDB 10.4.5), 1213,1205 (>= MariaDB 10.3.3)",
       "dynamic": false,
       "id": "slave_transaction_retry_errors",
       "name": "slave_transaction_retry_errors",
@@ -897,7 +898,8 @@
       "id": "sql_log_bin",
       "name": "sql_log_bin",
       "scope": [
-        "global"
+        "global",
+        "session"
       ],
       "type": "boolean"
     },
@@ -928,7 +930,7 @@
     },
     {
       "cli": "--sync-master-info=#",
-      "default": "0",
+      "default": "10000 (>= MariaDB 10.1.7), 0 (<= MariaDB 10.1.6)",
       "dynamic": true,
       "id": "sync_master_info",
       "name": "sync_master_info",
@@ -939,7 +941,7 @@
     },
     {
       "cli": "--sync-relay-log=#",
-      "default": "0",
+      "default": "10000 (>= MariaDB 10.1.7), 0 (<= MariaDB 10.1.6)",
       "dynamic": true,
       "id": "sync_relay_log",
       "name": "sync_relay_log",
@@ -950,7 +952,7 @@
     },
     {
       "cli": "--sync-relay-log-info=#",
-      "default": "0",
+      "default": "10000 (>= MariaDB 10.1.7), 0 (<= MariaDB 10.1.6)",
       "dynamic": true,
       "id": "sync_relay_log_info",
       "name": "sync_relay_log_info",

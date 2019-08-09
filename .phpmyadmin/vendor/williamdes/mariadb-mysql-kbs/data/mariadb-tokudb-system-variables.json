@@ -27,7 +27,7 @@
       "type": "integer"
     },
     {
-      "default": "4194304",
+      "default": "4194304 (4MB)",
       "dynamic": true,
       "id": "tokudb_block_size",
       "name": "tokudb_block_size",
@@ -53,6 +53,7 @@
       "type": "boolean"
     },
     {
+      "default": "Half of the total system memory",
       "dynamic": false,
       "id": "tokudb_cache_size",
       "name": "tokudb_cache_size",
@@ -158,6 +159,7 @@
       "type": "boolean"
     },
     {
+      "default": "Empty (the MariaDB datadir is used)",
       "dynamic": false,
       "id": "tokudb_data_dir",
       "name": "tokudb_data_dir",
@@ -284,6 +286,7 @@
       "type": "integer"
     },
     {
+      "default": "Empty",
       "dynamic": true,
       "id": "tokudb_last_lock_timeout",
       "name": "tokudb_last_lock_timeout",
@@ -304,7 +307,7 @@
       "type": "boolean"
     },
     {
-      "default": "100000000",
+      "default": "100000000 (100M)",
       "dynamic": true,
       "id": "tokudb_loader_memory_size",
       "name": "tokudb_loader_memory_size",
@@ -319,7 +322,7 @@
       "type": "integer"
     },
     {
-      "default": "4000",
+      "default": "4000 (4 seconds)",
       "dynamic": true,
       "id": "tokudb_lock_timeout",
       "name": "tokudb_lock_timeout",
@@ -345,6 +348,7 @@
       "type": "integer"
     },
     {
+      "default": "Empty (the MariaDB datadir is used)",
       "dynamic": false,
       "id": "tokudb_log_dir",
       "name": "tokudb_log_dir",
@@ -377,6 +381,7 @@
       "type": "integer"
     },
     {
+      "default": "None",
       "dynamic": true,
       "id": "tokudb_optimize_index_name",
       "name": "tokudb_optimize_index_name",
@@ -428,7 +433,7 @@
       "type": "boolean"
     },
     {
-      "default": "65536",
+      "default": "65536 (64KB)",
       "dynamic": true,
       "id": "tokudb_read_block_size",
       "name": "tokudb_read_block_size",
@@ -443,7 +448,7 @@
       "type": "integer"
     },
     {
-      "default": "131072",
+      "default": "131072 (128KB)",
       "dynamic": true,
       "id": "tokudb_read_buf_size",
       "name": "tokudb_read_buf_size",
@@ -557,6 +562,7 @@
       "type": "boolean"
     },
     {
+      "default": "Empty (the MariaDB datadir is used)",
       "dynamic": false,
       "id": "tokudb_tmp_dir",
       "name": "tokudb_tmp_dir",
