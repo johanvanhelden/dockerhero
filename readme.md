@@ -366,10 +366,10 @@ Next, ssh into to workspace image, and simply run: `$ artisan dump-server` and s
 
 ### Remote Xdebug
 It is possible to remotely debug your code using an IDE.
-You would have to set up your IDE to use port 9005.
+You would have to set up your IDE to use port *9005*.
 And you would have to properly map your local path to Dockerhero (the project root is always `/var/www/projects` in Dockerhero).
 
-For example, this is a working config for VSCode:
+This is a working config for VSCode for a Laravel project (but has also been tested for CodeIgniter projects):
 ```
 {
     "name": "Listen for XDebug",
@@ -377,8 +377,11 @@ For example, this is a working config for VSCode:
     "request": "launch",
     "port": 9005,
     "pathMappings": {
-        "/var/www/projects": "/home/USERNAME/projects"
-    }
+        "/var/www/projects/${workspaceFolderBasename}": "${workspaceFolder}"
+    },
+    "ignore": [
+        "**/vendor/**/*.php"
+    ]
 },
 ```
 
