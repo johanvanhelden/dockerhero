@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Replaced mysql-client with mariadb-client in PHP 7.2 and PHP 7.3 images due to deprication if the mysql-client package.
 - Replaced ssmtp with mhsendmail in PHP 7.2 and PHP 7.3 images due to deprication if the ssmtp package.
+- Updated PHPMyAdmin to 5.0.0-alpha1
 
 ## 1.4.1 - 2019-05-21
 
