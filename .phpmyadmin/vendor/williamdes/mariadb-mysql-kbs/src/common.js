@@ -1,12 +1,19 @@
+'use strict';
+
 const fs = require('fs');
+const Crawler = require('crawler');
+const path = require('path');
+
 /**
  * Sort the object keys
  * @see https://stackoverflow.com/a/48112249/5155484
- * @param {object} obj The object
- * @param {function} arraySorter The sorter callback
+ * @param {Object} obj The object
+ * @param {Function} arraySorter The sorter callback
  */
-function sortObject(obj, arraySorter) {
-    if (typeof obj !== 'object') return obj;
+const sortObject = function(obj, arraySorter) {
+    if (typeof obj !== 'object') {
+        return obj;
+    }
     if (Array.isArray(obj)) {
         if (arraySorter) {
             obj.sort(arraySorter);
@@ -18,20 +25,29 @@ function sortObject(obj, arraySorter) {
     }
     var temp = {};
     var keys = [];
-    for (var key in obj) keys.push(key);
+    for (var key in obj) {
+        keys.push(key);
+    }
     keys.sort();
-    for (var index in keys) temp[keys[index]] = sortObject(obj[keys[index]], arraySorter);
+    for (var index in keys) {
+        temp[keys[index]] = sortObject(obj[keys[index]], arraySorter);
+    }
     return temp;
-}
-exports.writeJSON = function writeJSON(filename, data) {
+};
+
+const writeJSON = function(filename, data, cbSuccess = null) {
     fs.writeFile(filename, JSON.stringify(sortObject(data), null, 2) + '\n', function(err) {
         if (err) {
             return console.log(err);
+        } else {
+            if (cbSuccess !== null) {
+                cbSuccess();
+            }
         }
     });
 };
 
-exports.readJSON = function readJSON(filename, callbackSuccess) {
+const readJSON = function(filename, callbackSuccess) {
     fs.readFile(filename, 'utf8', function(err, data) {
         if (err) {
             return console.log(err);
@@ -40,11 +56,58 @@ exports.readJSON = function readJSON(filename, callbackSuccess) {
     });
 };
 
-exports.listDirectory = function readJSON(dirname, callbackSuccess) {
+const listDirectory = function(dirname, callbackSuccess) {
     fs.readdir(dirname, (err, files) => {
         if (err) {
             return console.log(err);
         }
         callbackSuccess(files, dirname);
     });
+};
+
+const writePage = function(filePrefix, name, url, data, onWriteSuccess) {
+    let pageKB = {
+        url: url,
+        name: name,
+        data: data,
+    };
+    writeJSON(path.join(__dirname, '../', 'data', filePrefix + pageKB.name + '.json'), pageKB, onWriteSuccess);
+};
+
+const processDataExtraction = function(pages, filePrefix, parsePage) {
+    return new Promise(resolve => {
+        var nbrPagesProcessed = 0;
+        var crawler = new Crawler({
+            maxConnections: 1,
+            // This will be called for each crawled page
+            callback: function(error, res, done) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('URL : ' + res.options.url);
+                    parsePage(res.$, anchors => {
+                        writePage(filePrefix, res.options.name, res.options.url, anchors, () => {
+                            nbrPagesProcessed++;
+                            if (nbrPagesProcessed === pages.length) {
+                                resolve();
+                            }
+                        });
+                    });
+                }
+                done();
+            },
+        });
+        crawler.queue(
+            pages.map(page => {
+                return { uri: page.url, name: page.name, url: page.url };
+            })
+        );
+    });
+};
+
+module.exports = {
+    processDataExtraction: processDataExtraction,
+    listDirectory: listDirectory,
+    readJSON: readJSON,
+    writeJSON: writeJSON,
 };

@@ -11,13 +11,6 @@
       "type": "integer"
     },
     {
-      "cli": "--binlog-rows-query-log-events",
-      "default": "false",
-      "id": "option_mysqld_binlog-rows-query-log-events",
-      "name": "binlog_rows_query_log_events",
-      "type": "boolean"
-    },
-    {
       "cli": "--log-bin=file_name",
       "id": "option_mysqld_log-bin",
       "name": "log_bin",
@@ -30,8 +23,8 @@
       "type": "file name"
     },
     {
-      "cli": "--log-bin-trust-function-creators",
-      "default": "false",
+      "cli": "--log-bin-trust-function-creators[={OFF|ON}]",
+      "default": "off",
       "dynamic": true,
       "id": "option_mysqld_log-bin-trust-function-creators",
       "name": "log_bin_trust_function_creators",
@@ -41,8 +34,8 @@
       "type": "boolean"
     },
     {
-      "cli": "--log-bin-use-v1-row-events[={0|1}]",
-      "default": "0",
+      "cli": "--log-bin-use-v1-row-events[={OFF|ON}]",
+      "default": "off",
       "dynamic": false,
       "id": "option_mysqld_log-bin-use-v1-row-events",
       "name": "log_bin_use_v1_row_events",
@@ -75,7 +68,7 @@
       ]
     },
     {
-      "cli": "--master-verify-checksum=name",
+      "cli": "--master-verify-checksum[={OFF|ON}]",
       "default": "off",
       "id": "option_mysqld_master-verify-checksum",
       "name": "master_verify_checksum",
@@ -89,8 +82,8 @@
       "type": "integer"
     },
     {
-      "cli": "--sporadic-binlog-dump-fail",
-      "default": "false",
+      "cli": "--sporadic-binlog-dump-fail[={OFF|ON}]",
+      "default": "off",
       "id": "option_mysqld_sporadic-binlog-dump-fail",
       "name": "sporadic_binlog_dump_fail",
       "type": "boolean"
@@ -110,6 +103,7 @@
       "type": "integer"
     },
     {
+      "cli": "--binlog-checksum=name",
       "default": "crc32",
       "dynamic": true,
       "id": "sysvar_binlog_checksum",
@@ -124,7 +118,7 @@
       ]
     },
     {
-      "cli": "--binlog-direct-non-transactional-updates[=value]",
+      "cli": "--binlog-direct-non-transactional-updates[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_binlog_direct_non_transactional_updates",
@@ -136,7 +130,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--binlog-encryption",
+      "cli": "--binlog-encryption[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_binlog_encryption",
@@ -223,6 +217,7 @@
       "type": "integer"
     },
     {
+      "cli": "--binlog-max-flush-queue-time=#",
       "default": "0",
       "dynamic": true,
       "id": "sysvar_binlog_max_flush_queue_time",
@@ -237,6 +232,7 @@
       "type": "integer"
     },
     {
+      "cli": "--binlog-order-commits[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_binlog_order_commits",
@@ -247,7 +243,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--binlog-rotate-encryption-master-key-at-startup",
+      "cli": "--binlog-rotate-encryption-master-key-at-startup[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_binlog_rotate_encryption_master_key_at_startup",
@@ -260,15 +256,11 @@
     {
       "cli": "--binlog-row-event-max-size=#",
       "default": "8192",
-      "dynamic": false,
       "id": "sysvar_binlog_row_event_max_size",
       "name": "binlog_row_event_max_size",
       "range": {
         "from": 256
       },
-      "scope": [
-        "global"
-      ],
       "type": "integer"
     },
     {
@@ -319,8 +311,8 @@
       ]
     },
     {
-      "cli": "--binlog-rows-query-log-events",
-      "default": "false",
+      "cli": "--binlog-rows-query-log-events[={OFF|ON}]",
+      "default": "off",
       "dynamic": true,
       "id": "sysvar_binlog_rows_query_log_events",
       "name": "binlog_rows_query_log_events",
@@ -408,6 +400,7 @@
       "type": "file name"
     },
     {
+      "cli": "--log-bin-index=file_name",
       "dynamic": false,
       "id": "sysvar_log_bin_index",
       "name": "log_bin_index",
@@ -417,8 +410,8 @@
       "type": "file name"
     },
     {
-      "cli": "--log-bin-trust-function-creators",
-      "default": "false",
+      "cli": "--log-bin-trust-function-creators[={OFF|ON}]",
+      "default": "off",
       "dynamic": true,
       "id": "sysvar_log_bin_trust_function_creators",
       "name": "log_bin_trust_function_creators",
@@ -428,8 +421,8 @@
       "type": "boolean"
     },
     {
-      "cli": "--log-bin-use-v1-row-events[={0|1}]",
-      "default": "0",
+      "cli": "--log-bin-use-v1-row-events[={OFF|ON}]",
+      "default": "off",
       "dynamic": false,
       "id": "sysvar_log_bin_use_v1_row_events",
       "name": "log_bin_use_v1_row_events",
@@ -450,7 +443,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--log-slave-updates",
+      "cli": "--log-slave-updates[={OFF|ON}]",
       "dynamic": false,
       "id": "sysvar_log_slave_updates",
       "name": "log_slave_updates",
@@ -460,6 +453,7 @@
       "type": "boolean"
     },
     {
+      "cli": "--log-statements-unsafe-for-binlog[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_log_statements_unsafe_for_binlog",
@@ -470,6 +464,7 @@
       "type": "boolean"
     },
     {
+      "cli": "--master-verify-checksum[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_master_verify_checksum",
@@ -559,7 +554,7 @@
       "type": "integer"
     },
     {
-      "cli": "--transaction-write-set-extraction=[value]",
+      "cli": "--transaction-write-set-extraction[=value]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_transaction_write_set_extraction",

@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "cli": "--performance-schema=#",
+      "cli": "--performance-schema[={OFF|ON}]",
       "default": "on",
       "dynamic": false,
       "id": "sysvar_performance_schema",
@@ -42,7 +42,7 @@
       "type": "integer"
     },
     {
-      "cli": "--performance-schema-error-size",
+      "cli": "--performance-schema-error-size=#",
       "default": "number of server error codes",
       "dynamic": false,
       "id": "sysvar_performance_schema_error_size",

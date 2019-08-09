@@ -17,17 +17,6 @@
       ]
     },
     {
-      "cli": "--executed-gtids-compression-period=#",
-      "default": "1000",
-      "id": "option_mysqld_executed-gtids-compression-period",
-      "name": "executed_gtids_compression_period",
-      "range": {
-        "from": 0,
-        "to": 4294967295
-      },
-      "type": "integer"
-    },
-    {
       "cli": "--gtid-mode=MODE",
       "default": "off",
       "dynamic": true,
@@ -56,8 +45,8 @@
       "type": "integer"
     },
     {
-      "cli": "--binlog-gtid-simple-recovery",
-      "default": "true",
+      "cli": "--binlog-gtid-simple-recovery[={OFF|ON}]",
+      "default": "on",
       "dynamic": false,
       "id": "sysvar_binlog_gtid_simple_recovery",
       "name": "binlog_gtid_simple_recovery",
@@ -81,20 +70,6 @@
         "ON",
         "WARN"
       ]
-    },
-    {
-      "default": "1000",
-      "dynamic": true,
-      "id": "sysvar_executed_gtids_compression_period",
-      "name": "executed_gtids_compression_period",
-      "range": {
-        "from": 0,
-        "to": 4294967295
-      },
-      "scope": [
-        "global"
-      ],
-      "type": "integer"
     },
     {
       "dynamic": false,
@@ -169,17 +144,6 @@
         "global"
       ],
       "type": "string"
-    },
-    {
-      "cli": "--simplified-binlog-gtid-recovery",
-      "default": "false",
-      "dynamic": false,
-      "id": "sysvar_simplified_binlog_gtid_recovery",
-      "name": "simplified_binlog_gtid_recovery",
-      "scope": [
-        "global"
-      ],
-      "type": "boolean"
     }
   ],
   "name": "replication-options-gtids",

@@ -69,18 +69,26 @@
         "global"
       ],
       "type": "string",
-      "validValues": []
+      "validValues": [
+        "none",
+        "hard",
+        "soft"
+      ]
     },
     {
       "cli": "--aria_group_commit_interval=#",
+      "default": "0 (no waiting)",
       "dynamic": false,
       "id": "aria_group_commit_interval",
       "name": "aria_group_commit_interval",
+      "range": {
+        "from": 0,
+        "to": 4294967295
+      },
       "scope": [
         "global"
       ],
-      "type": "numeric",
-      "validValues": []
+      "type": "integer"
     },
     {
       "cli": "--aria-log-file-size=#",
@@ -152,7 +160,7 @@
     },
     {
       "cli": "--aria-pagecache-buffer-size=#",
-      "default": "134217720",
+      "default": "134217720 (128MB)",
       "dynamic": false,
       "id": "aria_pagecache_buffer_size",
       "name": "aria_pagecache_buffer_size",
@@ -201,6 +209,7 @@
     },
     {
       "cli": "--aria-recover[=#]",
+      "default": "BACKUP,QUICK (>= MariaDB 10.2.4), NORMAL (<= MariaDB 10.2.3)",
       "dynamic": true,
       "id": "aria_recover_options",
       "name": "aria_recover_options",
@@ -230,7 +239,7 @@
     },
     {
       "cli": "--aria-sort-buffer-size=#",
-      "default": "134217728",
+      "default": "268434432 (from MariaDB 10.0.3), 134217728 (before MariaDB 10.0.3)",
       "dynamic": true,
       "id": "aria_sort_buffer_size",
       "name": "aria_sort_buffer_size",
@@ -274,7 +283,6 @@
       ]
     },
     {
-      "cli": "no",
       "default": "ON",
       "dynamic": false,
       "id": "aria_used_for_temp_tables",

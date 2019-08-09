@@ -83,7 +83,7 @@ class Sql
      */
     public function parseAndAnalyze($sql_query, $db = null)
     {
-        if (is_null($db) && isset($GLOBALS['db']) && strlen($GLOBALS['db'])) {
+        if ($db === null && isset($GLOBALS['db']) && strlen($GLOBALS['db'])) {
             $db = $GLOBALS['db'];
         }
         list($analyzed_sql_results,,) = ParseAnalyze::sqlQuery($sql_query, $db);
@@ -527,9 +527,9 @@ class Sql
             && isset($analyzed_sql_results['select_expr'])
             && isset($analyzed_sql_results['select_tables'])
             && (empty($analyzed_sql_results['select_expr'])
-                || ((count($analyzed_sql_results['select_expr']) == 1)
+                || ((count($analyzed_sql_results['select_expr']) === 1)
                     && ($analyzed_sql_results['select_expr'][0] == '*')))
-            && count($analyzed_sql_results['select_tables']) == 1;
+            && count($analyzed_sql_results['select_tables']) === 1;
     }
 
     /**
@@ -574,7 +574,7 @@ class Sql
             && $analyzed_sql_results['select_from']
             && (count($analyzed_sql_results['select_tables']) === 1)
             && (empty($analyzed_sql_results['statement']->where)
-                || (count($analyzed_sql_results['statement']->where) == 1
+                || (count($analyzed_sql_results['statement']->where) === 1
                     && $analyzed_sql_results['statement']->where[0]->expr === '1'))
             && empty($analyzed_sql_results['group'])
             && ! isset($find_real_end)
@@ -679,7 +679,7 @@ class Sql
         }
 
         $response = Response::getInstance();
-        $response->setRequestStatus($retval == true);
+        $response->setRequestStatus($retval === true);
         exit;
     }
 
@@ -993,9 +993,9 @@ class Sql
      *
      * @param string $db the database in the query
      *
-     * @return int whether to reload the navigation(1) or not(0)
+     * @return bool whether to reload the navigation(1) or not(0)
      */
-    private function hasCurrentDbChanged($db)
+    private function hasCurrentDbChanged($db): bool
     {
         if (strlen($db) > 0) {
             $current_db = $GLOBALS['dbi']->fetchValue('SELECT DATABASE()');
@@ -1291,7 +1291,7 @@ class Sql
      * @param array  $analyzed_sql_results analyzed sql results
      * @param int    $num_rows             number of rows
      *
-     * @return string
+     * @return Message
      */
     private function getMessageForNoRowsReturned(
         $message_to_show,
@@ -1618,7 +1618,6 @@ class Sql
                 }
 
                 $GLOBALS['dbi']->freeResult($result);
-                unset($result);
             } while ($GLOBALS['dbi']->moreResults() && $GLOBALS['dbi']->nextResult());
         } else {
             $fields_meta = [];
@@ -1676,12 +1675,12 @@ class Sql
      */
     private function getHtmlForPreviousUpdateQuery(
         ?string $displayQuery,
-        $showSql,
+        bool $showSql,
         $sqlData,
         $displayMessage
     ): string {
         $output = '';
-        if (isset($displayQuery) && ($showSql == true) && empty($sqlData)) {
+        if (isset($displayQuery) && ($showSql === true) && empty($sqlData)) {
             $output = Util::getMessage(
                 $displayMessage,
                 $displayQuery,
@@ -1957,7 +1956,7 @@ class Sql
 
         $previousUpdateQueryHtml = $this->getHtmlForPreviousUpdateQuery(
             isset($disp_query) ? $disp_query : null,
-            $GLOBALS['cfg']['ShowSQL'],
+            (bool) $GLOBALS['cfg']['ShowSQL'],
             isset($sql_data) ? $sql_data : null,
             isset($disp_message) ? $disp_message : null
         );
@@ -2179,6 +2178,7 @@ class Sql
         $displayResultsObject = new DisplayResults(
             $GLOBALS['db'],
             $GLOBALS['table'],
+            $GLOBALS['server'],
             $goto,
             $sql_query
         );

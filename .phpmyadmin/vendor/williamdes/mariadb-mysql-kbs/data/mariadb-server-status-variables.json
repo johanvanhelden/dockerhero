@@ -17,6 +17,14 @@
       "type": "integer"
     },
     {
+      "id": "aborted_connects_preauth",
+      "name": "Aborted_connects_preauth",
+      "scope": [
+        "global"
+      ],
+      "type": "integer"
+    },
+    {
       "id": "access_denied_errors",
       "name": "Access_denied_errors",
       "scope": [
@@ -1825,6 +1833,15 @@
       "type": "integer"
     },
     {
+      "id": "feature_application_time_periods",
+      "name": "Feature_application_time_periods",
+      "scope": [
+        "global",
+        "session"
+      ],
+      "type": "integer"
+    },
+    {
       "id": "feature_check_constraint",
       "name": "Feature_check_constraint",
       "scope": [
@@ -2365,6 +2382,14 @@
       "type": "integer"
     },
     {
+      "id": "opened_plugin_libraries",
+      "name": "Opened_plugin_libraries",
+      "scope": [
+        "global"
+      ],
+      "type": "integer"
+    },
+    {
       "id": "opened_table_definitions",
       "name": "Opened_table_definitions",
       "scope": [
@@ -2502,6 +2527,15 @@
     {
       "id": "performance_schema_rwlock_instances_lost",
       "name": "Performance_schema_rwlock_instances_lost",
+      "scope": [
+        "global",
+        "session"
+      ],
+      "type": "integer"
+    },
+    {
+      "id": "performance_schema_session_connect_attrs_lost",
+      "name": "Performance_schema_session_connect_attrs_lost",
       "scope": [
         "global",
         "session"

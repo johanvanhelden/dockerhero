@@ -9,30 +9,25 @@ declare(strict_types=1);
 
 use PhpMyAdmin\Config\PageSettings;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\InsertEdit;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
-use PhpMyAdmin\Util;
 use PhpMyAdmin\Url;
+use PhpMyAdmin\Util;
 
 if (! defined('ROOT_PATH')) {
     define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 }
 
-/**
- * Gets the variables sent or posted to this script and displays the header
- */
+global $cfg, $containerBuilder, $db, $table, $text_dir;
+
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->set(Response::class, Response::getInstance());
-
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
 PageSettings::showGroup('Edit');
 
@@ -41,7 +36,8 @@ PageSettings::showGroup('Edit');
  */
 require_once ROOT_PATH . 'libraries/db_table_exists.inc.php';
 
-$insertEdit = new InsertEdit($dbi);
+/** @var InsertEdit $insertEdit */
+$insertEdit = $containerBuilder->get('insert_edit');
 
 /**
  * Determine whether Insert or Edit and set global variables
@@ -86,7 +82,7 @@ $comments_map = $insertEdit->getCommentsMap($db, $table);
 $header = $response->getHeader();
 $scripts = $header->getScripts();
 $scripts->addFile('sql.js');
-$scripts->addFile('tbl_change.js');
+$scripts->addFile('table/change.js');
 $scripts->addFile('vendor/jquery/additional-methods.js');
 $scripts->addFile('gis_data_editor.js');
 
@@ -102,7 +98,8 @@ if (! empty($disp_message)) {
 $table_columns = $insertEdit->getTableColumns($db, $table);
 
 // retrieve keys into foreign fields, if any
-$relation = new Relation($dbi);
+/** @var Relation $relation */
+$relation = $containerBuilder->get('relation');
 $foreigners = $relation->getForeigners($db, $table);
 
 // Retrieve form parameters for insert/edit form

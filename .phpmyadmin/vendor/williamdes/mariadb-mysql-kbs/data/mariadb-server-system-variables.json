@@ -59,6 +59,7 @@
     },
     {
       "cli": "--back-log=#",
+      "default": "The lower of 900 and (50 + max_connections/5) (>= MariaDB 10.1.7), The lower of 150 or the value of max_connections (beween MariaDB 10.0.8 and MariaDB 10.1.7), 50 (<= MariaDB 10.0.8)",
       "dynamic": false,
       "id": "back_log",
       "name": "back_log",
@@ -112,7 +113,7 @@
       "type": "integer"
     },
     {
-      "default": "utf8",
+      "default": "utf8 (>= MariaDB 5.5)",
       "dynamic": true,
       "id": "character_set_client",
       "name": "character_set_client",
@@ -123,7 +124,7 @@
       "type": "string"
     },
     {
-      "default": "utf8",
+      "default": "utf8 (>= MariaDB 5.5)",
       "dynamic": true,
       "id": "character_set_connection",
       "name": "character_set_connection",
@@ -201,6 +202,7 @@
     },
     {
       "cli": "--check-constraint-checks=[0|1]",
+      "default": "ON",
       "dynamic": true,
       "id": "check_constraint_checks",
       "name": "check_constraint_checks",
@@ -244,7 +246,7 @@
     },
     {
       "cli": "--completion-type=name",
-      "default": "0",
+      "default": "NO_CHAIN (>=MariaDB/MySQL 5.5.3), 0 (<= MariaDB/MySQL 5.5.2)",
       "dynamic": true,
       "id": "completion_type",
       "name": "completion_type",
@@ -263,7 +265,7 @@
     },
     {
       "cli": "--concurrent-insert[=name]",
-      "default": "1",
+      "default": "AUTO (>=MariaDB/MySQL 5.5.3), 1 (<= MariaDB/MySQL 5.5.2)",
       "dynamic": true,
       "id": "concurrent_insert",
       "name": "concurrent_insert",
@@ -288,11 +290,11 @@
       "scope": [
         "global"
       ],
-      "type": "numeric"
+      "type": "integer"
     },
     {
       "cli": "--core-file",
-      "default": "ON",
+      "default": "OFF, ON (Windows only >= MariaDB 10.4.3)",
       "dynamic": false,
       "id": "core_file",
       "name": "core_file",
@@ -321,7 +323,7 @@
     },
     {
       "cli": "-#, --debug[=debug_options]",
-      "default": "d:t:i:O,\\mysqld.trace",
+      "default": "d:t:i:o,/tmp/mysqld.trace (Unix) or d:t:i:O,\\mysqld.trace (Windows)",
       "dynamic": true,
       "id": "debug",
       "name": "debug",
@@ -343,7 +345,7 @@
       "type": "boolean"
     },
     {
-      "default": "ON - current signal signal name",
+      "default": "OFF or ON - current signal signal name",
       "dynamic": true,
       "id": "debug_sync",
       "name": "debug_sync",
@@ -365,7 +367,7 @@
       "scope": [
         "global"
       ],
-      "type": "numeric"
+      "type": "integer"
     },
     {
       "id": "default_regex_flags",
@@ -373,7 +375,7 @@
     },
     {
       "cli": "--default-storage-engine=name",
-      "default": "MyISAM",
+      "default": "InnoDB (>= MariaDB 5.5), MyISAM (<MariaDB 5.3)",
       "dynamic": true,
       "id": "default_storage_engine",
       "name": "default_storage_engine",
@@ -395,6 +397,7 @@
     },
     {
       "cli": "--default-tmp-storage-engine=name",
+      "default": "NULL",
       "dynamic": true,
       "id": "default_tmp_storage_engine",
       "name": "default_tmp_storage_engine",
@@ -475,7 +478,7 @@
       "scope": [
         "global"
       ],
-      "type": "numeric"
+      "type": "integer"
     },
     {
       "cli": "--disconnect-on-expired-password[={0|1}]",
@@ -517,7 +520,7 @@
     },
     {
       "cli": "--encrypt-tmp-files[={0|1}]",
-      "default": "ON",
+      "default": "OFF (>= MariaDB 10.1.7), ON (<= MariaDB 10.1.6)",
       "dynamic": false,
       "id": "encrypt_tmp_files",
       "name": "encrypt_tmp_files",
@@ -543,7 +546,6 @@
       ]
     },
     {
-      "cli": "none",
       "default": "none",
       "dynamic": true,
       "id": "enforce_storage_engine",
@@ -555,6 +557,7 @@
     },
     {
       "cli": "--engine-condition-pushdown",
+      "default": "OFF (MariaDB 5.5), ON (<= MariaDB 5.3)",
       "dynamic": true,
       "id": "engine_condition_pushdown",
       "name": "engine_condition_pushdown",
@@ -566,7 +569,7 @@
     },
     {
       "cli": "--eq-range-index-dive-limit=#",
-      "default": "0",
+      "default": "200 (>= MariaDB 10.4.3), 0 (<= MariaDB 10.4.2)",
       "dynamic": true,
       "id": "eq_range_index_dive_limit",
       "name": "eq_range_index_dive_limit",
@@ -666,7 +669,6 @@
       "type": "integer"
     },
     {
-      "cli": "none",
       "default": "1",
       "dynamic": true,
       "id": "foreign_key_checks",
@@ -760,6 +762,7 @@
     },
     {
       "cli": "--group-concat-max-len=#",
+      "default": "1048576 (1M) >= MariaDB 10.2.4, 1024 (1K) <= MariaDB 10.2.3",
       "dynamic": true,
       "id": "group_concat_max_len",
       "name": "group_concat_max_len",
@@ -859,7 +862,7 @@
     },
     {
       "cli": "--histogram-size=#",
-      "default": "0",
+      "default": "254 (>= MariaDB 10.4.3), 0 (<= MariaDB 10.4.2)",
       "dynamic": true,
       "id": "histogram_size",
       "name": "histogram_size",
@@ -875,7 +878,7 @@
     },
     {
       "cli": "--histogram-type=value",
-      "default": "SINGLE_PREC_HB",
+      "default": "DOUBLE_PREC_HB (>= MariaDB 10.4.3), SINGLE_PREC_HB(<= MariaDB 10.4.2)",
       "dynamic": true,
       "id": "histogram_type",
       "name": "histogram_type",
@@ -973,7 +976,6 @@
       "type": "string"
     },
     {
-      "cli": "no",
       "default": "0",
       "dynamic": false,
       "id": "in_transaction",
@@ -1026,7 +1028,7 @@
     },
     {
       "cli": "--join-buffer-size=#",
-      "default": "131072",
+      "default": "262144 (256kB) (>=MariaDB 10.1.7), 131072 (128kB) (<=MariaDB 10.1.6)",
       "dynamic": true,
       "id": "join_buffer_size",
       "name": "join_buffer_size",
@@ -1081,17 +1083,6 @@
       "type": "boolean"
     },
     {
-      "cli": "--language=name, -l",
-      "default": "/usr/local/mysql/share/mysql/english/",
-      "dynamic": false,
-      "id": "language",
-      "name": "language",
-      "scope": [
-        "global"
-      ],
-      "type": "directory name"
-    },
-    {
       "dynamic": false,
       "id": "large_files_support",
       "name": "large_files_support",
@@ -1100,6 +1091,7 @@
       ]
     },
     {
+      "default": "Autosized (see description)",
       "dynamic": false,
       "id": "large_page_size",
       "name": "large_page_size",
@@ -1184,10 +1176,14 @@
     },
     {
       "cli": "--lock-wait-timeout=#",
+      "default": "86400 (1 day) >= MariaDB 10.2.4, 31536000 (1 year) <= MariaDB 10.2.3",
       "dynamic": true,
       "id": "lock_wait_timeout",
       "name": "lock_wait_timeout",
-      "range": {},
+      "range": {
+        "from": 0,
+        "to": 31536000
+      },
       "scope": [
         "global",
         "session"
@@ -1218,6 +1214,7 @@
     },
     {
       "cli": "--log-disabled_statements=value",
+      "default": "(empty string)",
       "dynamic": false,
       "id": "log_disabled_statements",
       "name": "log_disabled_statements",
@@ -1229,6 +1226,7 @@
     },
     {
       "cli": "--log-error[=name], --skip-log-error",
+      "default": "(empty string)",
       "dynamic": false,
       "id": "log_error",
       "name": "log_error",
@@ -1266,6 +1264,7 @@
     },
     {
       "cli": "--log-slow-admin-statements",
+      "default": "ON  (>= MariaDB 10.2.4), OFF (<= MariaDB 10.2.3)",
       "dynamic": true,
       "id": "log_slow_admin_statements",
       "name": "log_slow_admin_statements",
@@ -1288,6 +1287,7 @@
     },
     {
       "cli": "log-slow-filter=value1[,value2...]",
+      "default": "admin, filesort, filesort_on_disk, full_join, full_scan, query_cache, query_cache_miss, tmp_table, tmp_table_on_disk (<= MariaDB 10.3.0), admin, filesort, filesort_on_disk, filesort_priority_queue, full_join, full_scan, query_cache, query_cache_miss, tmp_table, tmp_table_on_disk (>= MariaDB 10.3.1)",
       "dynamic": true,
       "id": "log_slow_filter",
       "name": "log_slow_filter",
@@ -1338,6 +1338,7 @@
     },
     {
       "cli": "log-slow-verbosity=value1[,value2...]",
+      "default": "(Empty)",
       "dynamic": true,
       "id": "log_slow_verbosity",
       "name": "log_slow_verbosity",
@@ -1368,7 +1369,8 @@
       "type": "integer"
     },
     {
-      "cli": "-w [level] or --log-warnings[=level]",
+      "cli": "-W [level] or --log-warnings[=level]",
+      "default": "2 (>= MariaDB 10.2.4), 1 (<= MariaDB 10.2.3)",
       "dynamic": true,
       "id": "log_warnings",
       "name": "log_warnings",
@@ -1384,7 +1386,7 @@
     },
     {
       "cli": "--long-query-time=#",
-      "default": "10",
+      "default": "10.000000 >= MariaDB 10.1.13, 10 <= MariaDB 10.1.12",
       "dynamic": true,
       "id": "long_query_time",
       "name": "long_query_time",
@@ -1422,7 +1424,7 @@
     },
     {
       "cli": "--lower-case-table-names[=#]",
-      "default": "2",
+      "default": "0 (Unix), 1 (Windows), 2 (Mac OS X)",
       "dynamic": false,
       "id": "lower_case_table_names",
       "name": "lower_case_table_names",
@@ -1437,6 +1439,7 @@
     },
     {
       "cli": "--max-allowed-packet=#",
+      "default": "16777216 (16M) >= MariaDB 10.2.4, 4194304 (4M) >= MariaDB 10.1.7, 1048576 (1MB) <= MariaDB 10.1.6, 1073741824 (1GB) (client-side)",
       "dynamic": false,
       "id": "max_allowed_packet",
       "name": "max_allowed_packet",
@@ -1452,7 +1455,7 @@
     },
     {
       "cli": "--max-connect-errors=#",
-      "default": "10",
+      "default": "100 (from MariaDB 10.0), 10 (before MariaDB 10.0)",
       "dynamic": true,
       "id": "max_connect_errors",
       "name": "max_connect_errors",
@@ -1467,7 +1470,10 @@
       "dynamic": true,
       "id": "max_connections",
       "name": "max_connections",
-      "range": {},
+      "range": {
+        "from": 10,
+        "to": 100000
+      },
       "scope": [
         "global"
       ],
@@ -1538,7 +1544,7 @@
     },
     {
       "cli": "--max-join-size=#",
-      "default": "4294967295",
+      "default": "18446744073709551615 (>= MariaDB/MySQL 5.5.0), 4294967295 (< MariaDB/MySQL 5.5.0)",
       "dynamic": true,
       "id": "max_join_size",
       "name": "max_join_size",
@@ -1570,6 +1576,7 @@
     },
     {
       "cli": "--max-long-data-size=#",
+      "default": "16777216 (16M) >= MariaDB 10.2.4, 4194304 (4M) <= MariaDB 10.2.3, >= MariaDB 10.1.7, 1048576 (1M) <= MariaDB 10.1.6",
       "dynamic": false,
       "id": "max_long_data_size",
       "name": "max_long_data_size",
@@ -1662,7 +1669,7 @@
     },
     {
       "cli": "--max-session-mem-used=#",
-      "default": "9223372036854775807",
+      "default": "9223372036854775807 (8192 PB)",
       "dynamic": true,
       "id": "max_session_mem_used",
       "name": "max_session_mem_used",
@@ -1710,7 +1717,7 @@
     },
     {
       "cli": "--max-statement-time[=#]",
-      "default": "0",
+      "default": "0.000000 >= MariaDB 10.1.13, 0 <= MariaDB 10.1.12",
       "dynamic": true,
       "id": "max_statement_time",
       "name": "max_statement_time",
@@ -1834,7 +1841,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--enable-named-pipe",
+      "cli": "--named-pipe",
       "default": "OFF",
       "dynamic": false,
       "id": "named_pipe",
@@ -1922,7 +1929,7 @@
     },
     {
       "cli": "--old-alter-table",
-      "default": "0",
+      "default": "See alter_algorithm (>= MariaDB 10.3.7), 0 (<= MariaDB 10.3.6)",
       "dynamic": true,
       "id": "old_alter_table",
       "name": "old_alter_table",
@@ -1958,6 +1965,7 @@
     },
     {
       "cli": "--open-files-limit=count",
+      "default": "Autosized (see description)",
       "dynamic": false,
       "id": "open_files_limit",
       "name": "open_files_limit",
@@ -2024,11 +2032,45 @@
         "session"
       ],
       "type": "string",
-      "validValues": []
+      "validValues": [
+        "condition_pushdown_for_derived={on|off}",
+        "condition_pushdown_for_subquery={on|off}",
+        "default",
+        "derived_merge={on|off}",
+        "derived_with_keys={on|off}",
+        "engine_condition_pushdown={on|off}",
+        "exists_to_in={on|off}",
+        "extended_keys={on|off}",
+        "firstmatch={on|off}",
+        "index_condition_pushdown={on|off}",
+        "index_merge={on|off}",
+        "index_merge_intersection={on|off}",
+        "index_merge_sort_intersection={on|off}",
+        "index_merge_sort_union={on|off}",
+        "index_merge_union={on|off}",
+        "in_to_exists={on|off}",
+        "join_cache_bka={on|off}",
+        "join_cache_hashed={on|off}",
+        "join_cache_incremental={on|off}",
+        "loosescan={on|off}",
+        "materialization={on|off}",
+        "mrr={on|off}",
+        "mrr_cost_based={on|off}",
+        "mrr_sort_keys={on|off}",
+        "optimize_join_buffer_size={on|off}",
+        "orderby_uses_equalities={on|off}",
+        "outer_join_with_cache={on|off}",
+        "partial_match_rowid_merge={on|off}",
+        "partial_match_table_scan={on|off}",
+        "semijoin={on|off}",
+        "semijoin_with_cache={on|off}",
+        "subquery_cache={on|off}",
+        "table_elimination={on|off}"
+      ]
     },
     {
       "cli": "--optimizer-use-condition-selectivity=#",
-      "default": "1",
+      "default": "4 (>= MariaDB 10.4.1), 1 (<= MariaDB 10.4.0)",
       "dynamic": true,
       "id": "optimizer_use_condition_selectivity",
       "name": "optimizer_use_condition_selectivity",
@@ -2095,7 +2137,7 @@
     },
     {
       "cli": "--plugin-maturity=level",
-      "default": "unknown",
+      "default": "One less than the server maturity (>= MariaDB 10.3.3), unknown (<= MariaDB 10.3.2)",
       "dynamic": false,
       "id": "plugin_maturity",
       "name": "plugin_maturity",
@@ -2112,7 +2154,7 @@
       ]
     },
     {
-      "cli": "--port=#, -p",
+      "cli": "--port=#, -P",
       "default": "3306",
       "dynamic": false,
       "id": "port",
@@ -2171,7 +2213,7 @@
     },
     {
       "cli": "--progress-report-time=#",
-      "default": "5",
+      "default": "56 before MariaDB 5.5.39 and MariaDB 10.0.10, 5 as of MariaDB 5.5.40 and MariaDB 10.0.11",
       "dynamic": true,
       "id": "progress_report_time",
       "name": "progress_report_time",
@@ -2186,7 +2228,6 @@
       "type": "integer"
     },
     {
-      "cli": "none",
       "default": "10",
       "dynamic": false,
       "id": "protocol_version",
@@ -2202,6 +2243,7 @@
     },
     {
       "cli": "--proxy-protocol-networks=value",
+      "default": "(empty)",
       "dynamic": false,
       "id": "proxy_protocol_networks",
       "name": "proxy_protocol_networks",
@@ -2240,7 +2282,7 @@
     },
     {
       "cli": "--query-alloc-block-size=#",
-      "default": "8192",
+      "default": "16384 (from MariaDB 10.1.2), 8192 (before MariaDB 10.1.2)",
       "dynamic": true,
       "id": "query_alloc_block_size",
       "name": "query_alloc_block_size",
@@ -2256,7 +2298,7 @@
     },
     {
       "cli": "--query-cache-limit=#",
-      "default": "1048576",
+      "default": "1048576 (1MB)",
       "dynamic": true,
       "id": "query_cache_limit",
       "name": "query_cache_limit",
@@ -2271,7 +2313,7 @@
     },
     {
       "cli": "--query-cache-min-res-unit=#",
-      "default": "4096",
+      "default": "4096 (4KB)",
       "dynamic": true,
       "id": "query_cache_min_res_unit",
       "name": "query_cache_min_res_unit",
@@ -2286,7 +2328,7 @@
     },
     {
       "cli": "--query-cache-size=#",
-      "default": "0",
+      "default": "1M (>= MariaDB 10.1.7), 0 (<= MariaDB 10.1.6) (although frequently given a default value in some setups)",
       "dynamic": true,
       "id": "query_cache_size",
       "name": "query_cache_size",
@@ -2305,13 +2347,14 @@
       "id": "query_cache_strip_comments",
       "name": "query_cache_strip_comments",
       "scope": [
-        "session"
+        "session",
+        "global"
       ],
       "type": "boolean"
     },
     {
       "cli": "--query-cache-type=#",
-      "default": "ON",
+      "default": "OFF (>= MariaDB 10.1.7), ON (<= MariaDB 10.1.6)",
       "dynamic": true,
       "id": "query_cache_type",
       "name": "query_cache_type",
@@ -2343,7 +2386,7 @@
     },
     {
       "cli": "--query-prealloc-size=#",
-      "default": "8192",
+      "default": "24576 (from MariaDB 10.1.2) 8192 (before MariaDB 10.1.2)",
       "dynamic": true,
       "id": "query_prealloc_size",
       "name": "query_prealloc_size",
@@ -2358,7 +2401,7 @@
       "type": "integer"
     },
     {
-      "cli": "none",
+      "default": "Varies",
       "dynamic": true,
       "id": "rand_seed1",
       "name": "rand_seed1",
@@ -2451,7 +2494,7 @@
       "name": "rpl_recovery_rank"
     },
     {
-      "cli": "--safe-show-database (until mysql 4.1.1)",
+      "cli": "--safe-show-database (until MySQL 4.1.1)",
       "dynamic": true,
       "id": "safe_show_database",
       "name": "safe_show_database",
@@ -2462,7 +2505,7 @@
     },
     {
       "cli": "--secure-auth",
-      "default": "OFF",
+      "default": "ON (>= MariaDB 10.1.7), OFF (<= MariaDB 10.1.6)",
       "dynamic": true,
       "id": "secure_auth",
       "name": "secure_auth",
@@ -2473,6 +2516,7 @@
     },
     {
       "cli": "--secure-file-priv=path",
+      "default": "None",
       "dynamic": false,
       "id": "secure_file_priv",
       "name": "secure_file_priv",
@@ -2516,7 +2560,7 @@
     },
     {
       "cli": "--session-track-system-variables=value",
-      "default": "autocommit, character_set_client, character_set_connection, character_set_results, time_zone",
+      "default": "autocommit, character_set_client, character_set_connection, character_set_results, time_zone (>= MariaDB 10.3.1), empty string (<= MariaDB 10.3.0)",
       "dynamic": true,
       "id": "session_track_system_variables",
       "name": "session_track_system_variables",
@@ -2640,7 +2684,7 @@
     },
     {
       "cli": "--socket=name",
-      "default": "MySQL",
+      "default": "/tmp/mysql.sock (Unix), MySQL (Windows)",
       "dynamic": false,
       "id": "socket",
       "name": "socket",
@@ -2651,7 +2695,7 @@
     },
     {
       "cli": "--sort-buffer-size=#",
-      "default": "2M (2097152)",
+      "default": "2M (2097152) (some distributions increase the default)",
       "dynamic": true,
       "id": "sort_buffer_size",
       "name": "sort_buffer_size",
@@ -2683,8 +2727,16 @@
       "type": "boolean"
     },
     {
+      "cli": "--sql-big-tables",
+      "default": "0",
+      "dynamic": true,
       "id": "sql_big_tables",
-      "name": "sql_big_tables"
+      "name": "sql_big_tables",
+      "scope": [
+        "global",
+        "session"
+      ],
+      "type": "boolean"
     },
     {
       "default": "0",
@@ -2712,8 +2764,16 @@
       "name": "sql_log_update"
     },
     {
+      "cli": "--sql-low-priority-updates",
+      "default": "0",
+      "dynamic": true,
       "id": "sql_low_priority_updates",
-      "name": "sql_low_priority_updates"
+      "name": "sql_low_priority_updates",
+      "scope": [
+        "global",
+        "session"
+      ],
+      "type": "boolean"
     },
     {
       "id": "sql_max_join_size",
@@ -2721,6 +2781,7 @@
     },
     {
       "cli": "--sql-mode=value[,value[,value...]]",
+      "default": "STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION (>= MariaDB 10.2.4), NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION (>= MariaDB 10.1.7), (empty string) (<= MariaDB 10.1.6)",
       "dynamic": true,
       "id": "sql_mode",
       "name": "sql_mode",
@@ -2732,7 +2793,6 @@
       "validValues": []
     },
     {
-      "cli": "none",
       "default": "1",
       "dynamic": true,
       "id": "sql_notes",
@@ -2767,7 +2827,6 @@
       "type": "boolean"
     },
     {
-      "cli": "none",
       "default": "18446744073709551615",
       "dynamic": true,
       "id": "sql_select_limit",
@@ -2832,10 +2891,6 @@
       "type": "boolean"
     },
     {
-      "id": "symbolic_links",
-      "name": "symbolic_links"
-    },
-    {
       "cli": "--sync-frm",
       "default": "TRUE",
       "dynamic": true,
@@ -2861,7 +2916,10 @@
       "dynamic": true,
       "id": "table_definition_cache",
       "name": "table_definition_cache",
-      "range": {},
+      "range": {
+        "from": 400,
+        "to": 2097152
+      },
       "scope": [
         "global"
       ],
@@ -2884,18 +2942,21 @@
     },
     {
       "cli": "--table-open-cache=#",
-      "default": "400",
+      "default": "2000 (>= MariaDB 10.1.7), 400 (<= MariaDB 10.1.6)",
       "dynamic": true,
       "id": "table_open_cache",
       "name": "table_open_cache",
-      "range": {},
+      "range": {
+        "from": 1,
+        "to": 1048576
+      },
       "scope": [
         "global"
       ],
       "type": "integer"
     },
     {
-      "default": "1",
+      "default": "8 (>= MariaDB 10.2.2), 1 (<= MariaDB 10.0.6)",
       "dynamic": false,
       "id": "table_open_cache_instances",
       "name": "table_open_cache_instances",
@@ -2970,7 +3031,7 @@
     },
     {
       "cli": "--thread-cache-size=#",
-      "default": "0",
+      "default": "0 (<= MariaDB 10.1), Auto (from MariaDB 10.2.0)",
       "dynamic": true,
       "id": "thread_cache_size",
       "name": "thread_cache_size",
@@ -3000,6 +3061,7 @@
     },
     {
       "cli": "--thread-stack=#",
+      "default": "299008 (MariaDB 10.2.5), 297984 (MariaDB 10.2.1), 296960 (MariaDB 10.2.0), 295936 (MariaDB 10.1), 294912 (<= MariaDB 10.0)",
       "dynamic": false,
       "id": "thread_stack",
       "name": "thread_stack",
@@ -3053,7 +3115,7 @@
     },
     {
       "cli": "--tmp-disk-table-size=#",
-      "default": "18446744073709551615",
+      "default": "18446744073709551615 (max unsigned integer, no limit)",
       "dynamic": true,
       "id": "tmp_disk_table_size",
       "name": "tmp_disk_table_size",
@@ -3074,7 +3136,7 @@
     },
     {
       "cli": "--tmp-table-size=#",
-      "default": "16777216",
+      "default": "16777216 (16MB)",
       "dynamic": true,
       "id": "tmp_table_size",
       "name": "tmp_table_size",
@@ -3111,7 +3173,7 @@
         "global",
         "session"
       ],
-      "type": "numeric"
+      "type": "integer"
     },
     {
       "cli": "--transaction-prealloc-size=#",
@@ -3127,7 +3189,7 @@
         "global",
         "session"
       ],
-      "type": "numeric"
+      "type": "integer"
     },
     {
       "cli": "--transaction-isolation=name",
@@ -3184,7 +3246,7 @@
     },
     {
       "cli": "--use-stat-tables=mode",
-      "default": "never",
+      "default": "preferably_for_queries (>= MariaDB 10.4.1), never (<= MariaDB 10.4.0)",
       "dynamic": true,
       "id": "use_stat_tables",
       "name": "use_stat_tables",
@@ -3194,7 +3256,7 @@
       ]
     },
     {
-      "cli": "-v, --version[=name] (>= mariadb 10.2.1), --version (<= mariadb 10.2.0)",
+      "cli": "-V, --version[=name] (>= MariaDB 10.2.1), --version (<= MariaDB 10.2.0)",
       "dynamic": false,
       "id": "version",
       "name": "version",
@@ -3231,7 +3293,6 @@
       "type": "string"
     },
     {
-      "cli": "no",
       "dynamic": false,
       "id": "version_malloc_library",
       "name": "version_malloc_library",
@@ -3241,7 +3302,6 @@
       "type": "string"
     },
     {
-      "cli": "none",
       "dynamic": false,
       "id": "version_source_revision",
       "name": "version_source_revision",
@@ -3260,7 +3320,7 @@
         "global",
         "session"
       ],
-      "type": "numeric"
+      "type": "integer"
     },
     {
       "dynamic": false,
@@ -3269,7 +3329,7 @@
       "scope": [
         "session"
       ],
-      "type": "numeric"
+      "type": "integer"
     }
   ],
   "name": "server-system-variables",

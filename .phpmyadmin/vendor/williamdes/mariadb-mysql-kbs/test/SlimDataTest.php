@@ -1,8 +1,9 @@
 <?php
 declare(strict_types = 1);
-namespace Williamdes\MariaDBMySQLKBS;
+namespace Williamdes\MariaDBMySQLKBS\Test;
 
 use \PHPUnit\Framework\TestCase;
+use \Williamdes\MariaDBMySQLKBS\SlimData;
 
 class SlimDataTest extends TestCase
 {
@@ -50,7 +51,7 @@ class SlimDataTest extends TestCase
         $kbe->addDocumentation("https://mariadb.com/");
         $kbe->addDocumentation("https://mariadb.com/", "anchorname");
         $this->assertEquals(
-            file_get_contents(__DIR__."/data/slimDataTestWithVariables.json"),
+            file_get_contents(__DIR__."/data/ultraSlimDataTestWithVariables.json"),
             json_encode($slimData, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT)
         );
     }

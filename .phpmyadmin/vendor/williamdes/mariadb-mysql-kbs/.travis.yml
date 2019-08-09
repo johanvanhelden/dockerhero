@@ -9,49 +9,63 @@ before_script:
 script:
     - ./scripts/ci/ci-$CI_TYPE.sh
 install:
-    - if [ "$CI_TYPE" != "mocha" ]; then flags="--ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress"; fi
-    - if [ "$CI_TYPE" != "mocha" ]; then composer install $flags; fi
-    - if [ "$CI_TYPE" = "mocha" ]; then npm ci; fi
+    - if [ "$CI_COMPOSER" = "yes" ]; then composer install --ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress; fi
+    - if [ "$CI_NPM" = "yes" ]; then npm ci; fi
+    - if [ "$CI_OLD_NPM" = "yes" ]; then npm install; fi
 after_script:
-    - if [ "$CI_TYPE" != "cron" ]; then ./codacy-coverage.phar clover build/logs/clover.xml; else echo "skipped codacy"; fi
+    - if [ "$TRAVIS_BUILD_STAGE_NAME" = "tests" ] && [ "$CI_TYPE" != "mocha" ]; then ./codacy-coverage.phar clover build/logs/clover.xml; else echo "skipped codacy"; fi
 stages:
+    - name: lint
+      if: NOT type = cron
     - name: tests
       if: NOT type = cron
     - name: robot
       if: type = cron
 jobs:
     include:
-        - stage: tests
+        - stage: lint
           php: '7.3'
-          env: CI_TYPE=phpstan
+          env:
+            - CI_TYPE=phpstan
+            - CI_COMPOSER=yes
           name: 'PHPSTAN - PHP 7.3'
-        - stage: tests
+        - stage: lint
           php: '7.3'
-          env: CI_TYPE=phpcs
+          env:
+            - CI_TYPE=phpcs
+            - CI_COMPOSER=yes
           name: 'PHPCS - PHP 7.3'
         - stage: tests
           php: '7.1'
-          env: CI_TYPE=phpunit
+          env:
+            - CI_TYPE=phpunit
+            - CI_COMPOSER=yes
           name: 'PHPUNIT - PHP 7.1'
           after_success:
               - bash <(curl -s https://codecov.io/bash) -cF php
         - stage: tests
           php: '7.2'
-          env: CI_TYPE=phpunit
+          env:
+            - CI_TYPE=phpunit
+            - CI_COMPOSER=yes
           name: 'PHPUNIT - PHP 7.2'
           after_success:
               - bash <(curl -s https://codecov.io/bash) -cF php
         - stage: tests
           php: '7.3'
-          env: CI_TYPE=phpunit
+          env:
+            - CI_TYPE=phpunit
+            - CI_COMPOSER=yes
           name: 'PHPUNIT - PHP 7.3'
           after_success:
               - bash <(curl -s https://codecov.io/bash) -cF php
         - stage: tests
           os: osx
           language: node_js
-          node_js: 10
-          env: CI_TYPE=phpunit
+          node_js: '10'
+          env:
+            - CI_TYPE=phpunit
+            - CI_COMPOSER=yes
           name: 'PHPUNIT - PHP 7.1'
           addons:
               homebrew:
@@ -68,8 +82,10 @@ jobs:
         - stage: tests
           os: osx
           language: node_js
-          node_js: 10
-          env: CI_TYPE=phpunit
+          node_js: '10'
+          env:
+            - CI_TYPE=phpunit
+            - CI_COMPOSER=yes
           name: 'PHPUNIT - PHP 7.2'
           addons:
               homebrew:
@@ -86,8 +102,10 @@ jobs:
         - stage: tests
           os: osx
           language: node_js
-          node_js: 10
-          env: CI_TYPE=phpunit
+          node_js: '10'
+          env:
+            - CI_TYPE=phpunit
+            - CI_COMPOSER=yes
           name: 'PHPUNIT - PHP 7.3'
           addons:
               homebrew:
@@ -103,18 +121,38 @@ jobs:
               - bash <(curl -s https://codecov.io/bash) -cF php
         - stage: robot
           php: '7.2'
-          env: CI_TYPE=cron
+          node_js: 'stable'
+          env:
+            - CI_TYPE=cron
+            - CI_OLD_NPM=yes
+            - CI_COMPOSER=yes
           name: 'Create a pull-request to update data'
         - stage: tests
           language: node_js
           node_js: 'stable'
-          env: CI_TYPE=mocha
+          env:
+            - CI_TYPE=mocha
+            - CI_NPM=yes
           name: 'MOCHA - NODE stable'
           after_success:
               - bash <(curl -s https://codecov.io/bash) -cF javascript
+        - stage: lint
+          language: node_js
+          node_js: 'stable'
+          env:
+            - CI_TYPE=lint
+            - CI_NPM=yes
+          name: 'LINT - NODE stable'
+        - stage: lint
+          language: php
+          php: '7.3'
+          env:
+            - CI_TYPE=lint
+            - CI_COMPOSER=yes
+          name: 'LINT - PHP 7.3'
+          script: composer run phpcs
 cache:
     ccache: true
-    apt: true
     directories:
         - $HOME/.composer/cache/
         - $HOME/.cache/bower

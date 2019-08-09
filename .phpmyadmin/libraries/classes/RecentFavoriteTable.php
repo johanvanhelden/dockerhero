@@ -60,13 +60,13 @@ class RecentFavoriteTable
         $this->relation = new Relation($GLOBALS['dbi']);
         $this->_tableType = $type;
         $server_id = $GLOBALS['server'];
-        if (! isset($_SESSION['tmpval'][$this->_tableType . '_tables'][$server_id])
+        if (! isset($_SESSION['tmpval'][$this->_tableType . 'Tables'][$server_id])
         ) {
-            $_SESSION['tmpval'][$this->_tableType . '_tables'][$server_id]
+            $_SESSION['tmpval'][$this->_tableType . 'Tables'][$server_id]
                 = $this->_getPmaTable() ? $this->getFromDb() : [];
         }
         $this->_tables
-            =& $_SESSION['tmpval'][$this->_tableType . '_tables'][$server_id];
+            =& $_SESSION['tmpval'][$this->_tableType . 'Tables'][$server_id];
     }
 
     /**
@@ -383,11 +383,11 @@ class RecentFavoriteTable
     }
 
     /**
-     * Reutrn the name of the configuration storage table
+     * Return the name of the configuration storage table
      *
-     * @return string pma table name
+     * @return string|null pma table name
      */
-    private function _getPmaTable()
+    private function _getPmaTable(): ?string
     {
         $cfgRelation = $this->relation->getRelationsParam();
         if (! empty($cfgRelation['db'])

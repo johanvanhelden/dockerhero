@@ -16,7 +16,6 @@
       ]
     },
     {
-      "cli": "none",
       "default": "DEFAULT",
       "dynamic": true,
       "id": "system_versioning_asof",

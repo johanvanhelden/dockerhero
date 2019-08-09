@@ -77,7 +77,7 @@
     },
     {
       "cli": "--key-cache-segments=#",
-      "default": "0",
+      "default": "0 (non-segmented)",
       "dynamic": true,
       "id": "key_cache_segments",
       "name": "key_cache_segments",
@@ -88,7 +88,7 @@
       "scope": [
         "global"
       ],
-      "type": "numeric"
+      "type": "integer"
     },
     {
       "cli": "--myisam-block-size=#",
@@ -143,6 +143,7 @@
     },
     {
       "cli": "--myisam-recover-options[=name]",
+      "default": "BACKUP,QUICK (>= MariaDB 10.2.4), DEFAULT (<= MariaDB 10.2.3, >= MariaDB 5.1.44), OFF (<= MariaDB 5.1.42)",
       "dynamic": false,
       "id": "myisam_recover_options",
       "name": "myisam_recover_options",
@@ -173,7 +174,7 @@
     },
     {
       "cli": "--myisam-sort-buffer-size=#",
-      "default": "8388608",
+      "default": "134217720 (128MB), 8388608 (8MB - before MariaDB 10.0.3)",
       "dynamic": true,
       "id": "myisam_sort_buffer_size",
       "name": "myisam_sort_buffer_size",

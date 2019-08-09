@@ -180,6 +180,7 @@
 |Scope|`global`|
 |Default value|`none`|
 |Dynamic|`false`|
+|Valid value(s)|`none`, `hard`, `soft`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -191,9 +192,11 @@
 |----|-----|
 |Name|`aria_group_commit_interval`|
 |Command line|`--aria_group_commit_interval=#`|
-|Type of variable|`numeric`|
+|Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`0 (no waiting)`|
 |Dynamic|`false`|
+|Range|from: `0` to: `4294967295`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -285,7 +288,7 @@
 |Command line|`--aria-pagecache-buffer-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`134217720`|
+|Default value|`134217720 (128MB)`|
 |Dynamic|`false`|
 |Range|from: `131072` to: `upwards`|
 
@@ -343,6 +346,7 @@
 |Command line|`--aria-recover[=#]`|
 |Type of variable|`enumeration`|
 |Scope|`global`|
+|Default value|`BACKUP,QUICK (>= MariaDB 10.2.4), NORMAL (<= MariaDB 10.2.3)`|
 |Dynamic|`true`|
 |Valid value(s)|`NORMAL`, `BACKUP`, `FORCE`, `QUICK`, `OFF`|
 
@@ -373,7 +377,7 @@
 |Command line|`--aria-sort-buffer-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`134217728`|
+|Default value|`268434432 (from MariaDB 10.0.3), 134217728 (before MariaDB 10.0.3)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -417,7 +421,6 @@
 |name|value|
 |----|-----|
 |Name|`aria_used_for_temp_tables`|
-|Command line|`no`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`ON`|
@@ -694,6 +697,7 @@
 |Command line|`--connect-class-path=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|``|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -722,7 +726,7 @@
 |Name|`connect_conv_size`|
 |Command line|`--connect-conv-size=#`|
 |Type of variable|`integer`|
-|Scope|`session`|
+|Scope|`session`, `global`|
 |Default value|`8192`|
 |Dynamic|`true`|
 |Range|from: `0` to: `65500`|
@@ -830,6 +834,7 @@
 |Command line|`--connect-jvm_path=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|``|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -842,8 +847,8 @@
 |----|-----|
 |Name|`connect_type_conv`|
 |Command line|`--connect-type-conv=#`|
-|Scope|`session`|
-|Default value|`NO`|
+|Scope|`session`, `global`|
+|Default value|`YES (>= Connect 1.06.006), NO (<= Connect 1.06.005)`|
 |Dynamic|`true`|
 |Valid value(s)|`NO`, `YES`, `SKIP`|
 
@@ -1345,7 +1350,7 @@
 |name|value|
 |----|-----|
 |Name|`wsrep_certify_nonPK`|
-|Command line|`--wsrep-certify-nonpk[={0|1}]`|
+|Command line|`--wsrep-certify-nonPK[={0|1}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`ON`|
@@ -1389,7 +1394,7 @@
 |name|value|
 |----|-----|
 |Name|`wsrep_convert_LOCK_to_trx`|
-|Command line|`--wsrep-convert-lock-to-trx[={0|1}]`|
+|Command line|`--wsrep-convert-LOCK-to-trx[={0|1}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`OFF`|
@@ -1407,6 +1412,7 @@
 |Command line|`--wsrep-data-home-dir=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`The datadir variable value.`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -1434,7 +1440,7 @@
 |Name|`wsrep_debug`|
 |Command line|`--wsrep-debug[={0|1}]`|
 |Scope|`global`|
-|Default value|`OFF`|
+|Default value|`NONE (>= MariaDB 10.4.3),  OFF (<= MariaDB 10.4.2)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1557,7 +1563,7 @@
 |Command line|`--wsrep-load-data-splitting[={0|1}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`ON`|
+|Default value|`OFF (>= MariaDB 10.4.3), ON (<= MariaDB 10.4.2)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1587,6 +1593,7 @@
 |Command line|`--wsrep-max-ws-rows=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`0 (>= MariaDB Galera 10.0.27, MariaDB 10.1.17), 131072 (<= MariaDB Galera 10.0.26, MariaDB 10.1.16)`|
 |Dynamic|`true`|
 |Range|from: `0` to: `1048576`|
 
@@ -1602,6 +1609,7 @@
 |Command line|`--wsrep-max-ws-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`2147483647 (2GB, >= MariaDB Galera 10.0.27, MariaDB 10.1.17), 1073741824 (1GB, <= MariaDB Galera 10.0.26, MariaDB 10.1.16)`|
 |Dynamic|`true`|
 |Range|from: `1024` to: `2147483647`|
 
@@ -1633,7 +1641,7 @@
 |Command line|`--wsrep-node-address=value`|
 |Type of variable|`string`|
 |Scope|`global`|
-|Default value|`0.0.0.0`|
+|Default value|`Primary network address, usually eth0 with a default port of 4567, or 0.0.0.0 if no IP address.`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -1663,6 +1671,7 @@
 |Command line|`--wsrep-node-name=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`The server's hostname.`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1677,6 +1686,7 @@
 |Command line|`--wsrep-notify-command=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`Empty`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1691,7 +1701,7 @@
 |Command line|`--wsrep-on[={0|1}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
-|Default value|`ON`|
+|Default value|`OFF (>= MariaDB 10.1), ON (<= MariaDB Galera Cluster 10.0),`|
 |Dynamic|`true`|
 |Valid value(s)|`ON`, `OFF`|
 
@@ -1704,7 +1714,7 @@
 |name|value|
 |----|-----|
 |Name|`wsrep_OSU_method`|
-|Command line|`--wsrep-osu-method[=value]`|
+|Command line|`--wsrep-OSU-method[=value]`|
 |Scope|`global`, `session`|
 |Default value|`TOI`|
 |Dynamic|`true`|
@@ -1719,9 +1729,9 @@
 |name|value|
 |----|-----|
 |Name|`wsrep_patch_version`|
-|Command line|`none`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`None`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -1736,6 +1746,7 @@
 |Command line|`--wsrep-provider=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`None`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1750,6 +1761,7 @@
 |Command line|`--wsrep-provider-options=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`Empty`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -1838,9 +1850,10 @@
 |name|value|
 |----|-----|
 |Name|`wsrep_slave_FK_checks`|
-|Command line|`--wsrep-slave-fk-checks[={0|1}]`|
+|Command line|`--wsrep-slave-FK-checks[={0|1}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
+|Default value|`ON`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1868,9 +1881,10 @@
 |name|value|
 |----|-----|
 |Name|`wsrep_slave_UK_checks`|
-|Command line|`--wsrep-slave-uk-checks[={0|1}]`|
+|Command line|`--wsrep-slave-UK-checks[={0|1}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
+|Default value|`OFF`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1900,6 +1914,7 @@
 |Command line|`--wsrep-sst-auth=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1914,6 +1929,7 @@
 |Command line|`--wsrep-sst-donor=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|``|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1974,7 +1990,7 @@
 |Command line|`--wsrep-start-position=value`|
 |Type of variable|`string`|
 |Scope|`global`|
-|Default value|` 00000000-0000-0000-0000-000000000000:-1`|
+|Default value|`00000000-0000-0000-0000-000000000000:-1`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -1991,7 +2007,7 @@
 |Scope|`global`, `session`|
 |Default value|`0`|
 |Dynamic|`true`|
-|Range||
+|Range|from: `0` to: `15`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -2033,6 +2049,10 @@
 |name|value|
 |----|-----|
 |Name|`gtid_slave_pos`|
+|Type of variable|`string`|
+|Scope|`global`|
+|Default value|`Null`|
+|Dynamic|`true`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -2043,6 +2063,10 @@
 |name|value|
 |----|-----|
 |Name|`gtid_binlog_pos`|
+|Type of variable|`string`|
+|Scope|`global`|
+|Default value|`Null`|
+|Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -2053,6 +2077,10 @@
 |name|value|
 |----|-----|
 |Name|`gtid_binlog_state`|
+|Type of variable|`string`|
+|Scope|`global`|
+|Default value|`Null`|
+|Dynamic|`true`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -2063,21 +2091,15 @@
 |name|value|
 |----|-----|
 |Name|`gtid_current_pos`|
+|Type of variable|`string`|
+|Scope|`global`|
+|Default value|`Null`|
+|Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |mariadb.com|[gtid_current_pos](https://mariadb.com/kb/en/library/documentation/gtid/#gtid_current_pos)|
-
-## gtid_strict_mode
-|name|value|
-|----|-----|
-|Name|`gtid_strict_mode`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|mariadb.com|[gtid_strict_mode](https://mariadb.com/kb/en/library/documentation/gtid/#gtid_strict_mode)|
 
 ## gtid_domain_id
 |name|value|
@@ -2122,16 +2144,15 @@
 |------|----|
 |mariadb.com|[server_id](https://mariadb.com/kb/en/library/documentation/gtid/#server_id)|
 |mariadb.com|[server_id](https://mariadb.com/kb/en/library/documentation/replication-and-binary-log-server-system-variables/#server_id)|
-|dev.mysql.com|[replication-options](https://dev.mysql.com/doc/refman/8.0/en/replication-options.html#replication-options)|
-|dev.mysql.com|[replication-options](https://dev.mysql.com/doc/refman/8.0/en/replication-options.html#replication-options)|
+|dev.mysql.com|[option_mysqld_server-id](https://dev.mysql.com/doc/refman/8.0/en/replication-options.html#option_mysqld_server-id)|
 |dev.mysql.com|[sysvar_server_id](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_server_id)|
 
 ## gtid_seq_no
 |name|value|
 |----|-----|
 |Name|`gtid_seq_no`|
-|Command line|`none`|
 |Scope|`session`|
+|Default value|`Null`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -2146,6 +2167,7 @@
 |Command line|`--gtid-ignore-duplicates=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
+|Default value|`OFF`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -2157,6 +2179,11 @@
 |name|value|
 |----|-----|
 |Name|`gtid_pos_auto_engines`|
+|Command line|`--gtid-pos-auto-engines=value`|
+|Type of variable|`string`|
+|Scope|`global`|
+|Default value|`empty`|
+|Dynamic|`true`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -2170,6 +2197,7 @@
 |Command line|`--gtid-cleanup-batch-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`64`|
 |Dynamic|`true`|
 |Range|from: `0` to: `2147483647`|
 
@@ -2230,6 +2258,7 @@
 |Command line|`--server-audit-events=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`Empty string`|
 |Dynamic|`true`|
 |Valid value(s)|`CONNECT`, `QUERY`, `TABLE`, `QUERY_DDL`, `QUERY_DML`, `QUERY_DCL`, `QUERY_DML_NO_SELECT`|
 
@@ -2245,6 +2274,7 @@
 |Command line|`--server-audit-excl-users=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`Empty string`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -2320,6 +2350,7 @@
 |Command line|`--server-audit-incl-users=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`Empty string`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -2331,9 +2362,9 @@
 |name|value|
 |----|-----|
 |Name|`server_audit_loc_info`|
-|Command line|`n/a`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`Empty string`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -2435,6 +2466,7 @@
 |Command line|`--server-audit-syslog-info=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`Empty string`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -2456,6 +2488,19 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[server_audit_syslog_priority](https://mariadb.com/kb/en/library/documentation/mariadb-audit-plugin-system-variables/#server_audit_syslog_priority)|
+
+## server_audit
+|name|value|
+|----|-----|
+|Name|`server_audit`|
+|Command line|`--server-audit=val`|
+|Default value|`ON`|
+|Valid value(s)|`OFF`, `ON`, `FORCE`, `FORCE_PLUS_PERMANENT`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[server_audit](https://mariadb.com/kb/en/library/documentation/mariadb-audit-plugin-system-variables/#server_audit)|
 
 ## Mroonga_count_skip
 |name|value|
@@ -2514,6 +2559,7 @@
 |Command line|`--mroonga-database-path-prefix=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -2558,6 +2604,7 @@
 |Command line|`--mroonga-default-wrapper-engine=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -2614,7 +2661,6 @@
 |name|value|
 |----|-----|
 |Name|`mroonga_libgroonga_embedded`|
-|Command line|`none`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`ON`|
@@ -2629,7 +2675,6 @@
 |name|value|
 |----|-----|
 |Name|`mroonga_libgroonga_support_lz4`|
-|Command line|`none`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`OFF`|
@@ -2644,7 +2689,6 @@
 |name|value|
 |----|-----|
 |Name|`mroonga_libgroonga_support_zlib`|
-|Command line|`none`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`ON`|
@@ -2659,7 +2703,6 @@
 |name|value|
 |----|-----|
 |Name|`mroonga_libgroonga_support_zstd`|
-|Command line|`none`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`OFF`|
@@ -2674,7 +2717,6 @@
 |name|value|
 |----|-----|
 |Name|`mroonga_libgroonga_version`|
-|Command line|`none`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -2768,6 +2810,7 @@
 |Command line|`--mroonga-query-log-file=filename`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty string)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -2782,7 +2825,7 @@
 |Command line|`--mroonga-vector-column-delimiter=value`|
 |Type of variable|`string`|
 |Scope|`global`|
-|Default value|` `|
+|Default value|`(white space)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -2794,7 +2837,6 @@
 |name|value|
 |----|-----|
 |Name|`mroonga_version`|
-|Command line|`none`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -2892,9 +2934,9 @@
 |----|-----|
 |Name|`key_cache_segments`|
 |Command line|`--key-cache-segments=#`|
-|Type of variable|`numeric`|
+|Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`0`|
+|Default value|`0 (non-segmented)`|
 |Dynamic|`true`|
 |Range|from: `0` to: `64`|
 
@@ -3012,7 +3054,6 @@
 |Command line|`--myisam-sort-buffer-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`8388608`|
 |Dynamic|`true`|
 |Range|from: `4096` to: `1.844674407371E+19`|
 
@@ -3043,7 +3084,7 @@
 |name|value|
 |----|-----|
 |Name|`myisam_use_mmap`|
-|Command line|`--myisam-use-mmap`|
+|Command line|`--myisam-use-mmap[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -3370,6 +3411,7 @@
 |Command line|`--rocksdb-compact-cf=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -3478,6 +3520,7 @@
 |Command line|`--rocksdb-create-checkpoint=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -3662,6 +3705,7 @@
 |Command line|`--rocksdb-default-cf-options=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -3921,6 +3965,7 @@
 |Command line|`--rocksdb-git-hash=value=#`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`As per git revision.`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -4249,7 +4294,7 @@
 |Scope|`global`, `session`|
 |Default value|`1048576`|
 |Dynamic|`true`|
-|Range||
+|Range|from: `1` to: `1073741824`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -4373,6 +4418,7 @@
 |Command line|`--rocksdb-override-cf-options=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -4433,6 +4479,7 @@
 |Command line|`--rocksdb-persistent-cache-path=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -4509,6 +4556,7 @@
 |Command line|`--rocksdb-read-free-rpl-tables=value`|
 |Type of variable|`string`|
 |Scope|`global`, `session`|
+|Default value|`(Empty)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -4708,6 +4756,7 @@
 |Command line|`--rocksdb-strict-collation-exceptions=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -4769,6 +4818,7 @@
 |Command line|`--rocksdb-tmpdir[=value]`|
 |Type of variable|`string`|
 |Scope|`global`, `session`|
+|Default value|`(Empty)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -4812,6 +4862,7 @@
 |Name|`rocksdb_update_cf_options`|
 |Command line|`--rocksdb-update-cf-options=value`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -4948,6 +4999,7 @@
 |Command line|`--rocksdb-wal-dir=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(Empty)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5118,7 +5170,6 @@
 |name|value|
 |----|-----|
 |Name|`performance_schema`|
-|Command line|`--performance-schema=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -5136,6 +5187,7 @@
 |Command line|`--performance-schema-accounts-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autoscaling; do not assign this literal value)`|
 |Dynamic|`false`|
 |Range|from: `-1` to: `1048576`|
 
@@ -5152,6 +5204,7 @@
 |Command line|`--performance-schema-digests-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autosizing; do not assign this literal value)`|
 |Dynamic|`false`|
 |Range|from: `-1`|
 
@@ -5168,6 +5221,7 @@
 |Command line|`--performance-schema-events-stages-history-long-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autosizing; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5183,6 +5237,7 @@
 |Command line|`--performance-schema-events-stages-history-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autosizing; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5198,6 +5253,7 @@
 |Command line|`--performance-schema-events-statements-history-long-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autosizing; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5213,6 +5269,7 @@
 |Command line|`--performance-schema-events-statements-history-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autosizing; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5228,6 +5285,7 @@
 |Command line|`--performance-schema-events-waits-history-long-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autosizing; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5243,6 +5301,7 @@
 |Command line|`--performance-schema-events-waits-history-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autosizing; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5258,6 +5317,7 @@
 |Command line|`--performance-schema-hosts-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autoscaling; do not assign this literal value)`|
 |Dynamic|`false`|
 |Range|from: `-1` to: `1048576`|
 
@@ -5291,6 +5351,7 @@
 |Command line|`--performance-schema-max-cond-instances=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autoscaling; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5355,6 +5416,7 @@
 |Command line|`--performance-schema-max-file-instances=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autoscaling; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5386,6 +5448,7 @@
 |Command line|`--performance-schema-max-mutex-instances=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autoscaling; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5418,6 +5481,7 @@
 |Command line|`--performance-schema-max-rwlock-instances=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autoscaling; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5466,7 +5530,6 @@
 |Command line|`--performance-schema-max-stage-classes=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`150`|
 |Dynamic|`false`|
 |Range|from: `0` to: `256`|
 
@@ -5483,7 +5546,6 @@
 |Command line|`--performance-schema-max-statement-classes=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`-1 (signifies autosizing; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5499,6 +5561,7 @@
 |Command line|`--performance-schema-max-table-handles=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autoscaling; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5514,6 +5577,7 @@
 |Command line|`--performance-schema-max-table-instances=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autoscaling; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5545,6 +5609,7 @@
 |Command line|`--performance-schema-max-thread-instances=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`-1 (signifies autoscaling; do not assign this literal value)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -5656,6 +5721,7 @@
 |Command line|`--binlog-annotate-row-events[={0|1}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
+|Default value|`ON (>= MariaDB 10.2.4), OFF (<= MariaDB 10.2.3)`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -5684,6 +5750,7 @@
 |name|value|
 |----|-----|
 |Name|`binlog_checksum`|
+|Command line|`--binlog-checksum=name`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Default value|`crc32`|
@@ -5735,7 +5802,7 @@
 |name|value|
 |----|-----|
 |Name|`binlog_direct_non_transactional_updates`|
-|Command line|`--binlog-direct-non-transactional-updates[=value]`|
+|Command line|`--binlog-direct-non-transactional-updates[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`0`|
@@ -5771,7 +5838,6 @@
 |Command line|`--binlog-format=format`|
 |Type of variable|`enumeration`|
 |Scope|`global`, `session`|
-|Default value|`row`|
 |Dynamic|`true`|
 |Valid value(s)|`ROW`, `STATEMENT`, `MIXED`|
 
@@ -5781,7 +5847,6 @@
 |mariadb.com|[binlog_format](https://mariadb.com/kb/en/library/documentation/replication-and-binary-log-server-system-variables/#binlog_format)|
 |dev.mysql.com|[sysvar_binlog_format](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_format)|
 |dev.mysql.com|[sysvar_binlog_format](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_format)|
-|dev.mysql.com|[option_mysqld_binlog-format](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_binlog-format)|
 
 ## binlog_optimize_thread_scheduling
 |name|value|
@@ -5838,10 +5903,9 @@
 |name|value|
 |----|-----|
 |Name|`default_master_connection`|
-|Command line|`none`|
 |Type of variable|`string`|
 |Scope|`session`|
-|Default value|`''`|
+|Default value|`'' (empty string)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -5963,6 +6027,7 @@
 |name|value|
 |----|-----|
 |Name|`log_bin_index`|
+|Command line|`--log-bin-index=file_name`|
 |Type of variable|`file name`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -5980,10 +6045,10 @@
 |name|value|
 |----|-----|
 |Name|`log_bin_trust_function_creators`|
-|Command line|`--log-bin-trust-function-creators[={0|1}]`|
+|Command line|`--log-bin-trust-function-creators[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`0`|
+|Default value|`off`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -5999,9 +6064,9 @@
 |name|value|
 |----|-----|
 |Name|`log_slow_slave_statements`|
+|Command line|`--log-slow-slave-statements[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`off`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -6014,7 +6079,7 @@
 |name|value|
 |----|-----|
 |Name|`log_slave_updates`|
-|Command line|`--log-slave-updates`|
+|Command line|`--log-slave-updates[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -6031,6 +6096,7 @@
 |name|value|
 |----|-----|
 |Name|`master_verify_checksum`|
+|Command line|`--master-verify-checksum[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`0`|
@@ -6124,7 +6190,7 @@
 |Command line|`--read-binlog-speed-limit=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`0`|
+|Default value|`0 (no limit)`|
 |Dynamic|`true`|
 |Range|from: `0` to: `1.844674407371E+19`|
 
@@ -6167,7 +6233,7 @@
 |name|value|
 |----|-----|
 |Name|`relay_log_index`|
-|Command line|`--relay-log-index`|
+|Command line|`--relay-log-index=file_name`|
 |Type of variable|`file name`|
 |Scope|`global`|
 |Default value|`*host_name*-relay-bin.index`|
@@ -6201,10 +6267,10 @@
 |name|value|
 |----|-----|
 |Name|`relay_log_purge`|
-|Command line|`--relay-log-purge={0|1}`|
+|Command line|`--relay-log-purge[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`1`|
+|Default value|`on`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -6218,10 +6284,10 @@
 |name|value|
 |----|-----|
 |Name|`relay_log_recovery`|
-|Command line|`--relay-log-recovery`|
+|Command line|`--relay-log-recovery[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`0`|
+|Default value|`off`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -6256,6 +6322,7 @@
 |Command line|`--replicate-annotate-row-events`|
 |Type of variable|`boolean`|
 |Scope|`global`|
+|Default value|`ON (>= MariaDB 10.2.4), OFF (<= MariaDB 10.2.3)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -6406,7 +6473,7 @@
 |name|value|
 |----|-----|
 |Name|`report_port`|
-|Command line|`--report-port=#`|
+|Command line|`--report-port=port-num`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`[slave_port]`|
@@ -6440,7 +6507,6 @@
 |name|value|
 |----|-----|
 |Name|`skip_parallel_replication`|
-|Command line|`none`|
 |Type of variable|`boolean`|
 |Scope|`session`|
 |Default value|`OFF`|
@@ -6455,7 +6521,6 @@
 |name|value|
 |----|-----|
 |Name|`skip_replication`|
-|Command line|`none`|
 |Type of variable|`boolean`|
 |Scope|`session`|
 |Default value|`OFF`|
@@ -6470,7 +6535,7 @@
 |name|value|
 |----|-----|
 |Name|`slave_compressed_protocol`|
-|Command line|`--slave-compressed-protocol`|
+|Command line|`--slave-compressed-protocol[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`0`|
@@ -6538,7 +6603,7 @@
 |Command line|`--slave-load-tmpdir=path`|
 |Type of variable|`directory name`|
 |Scope|`global`|
-|Default value|`/tmp`|
+|Default value|`value of --tmpdir`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -6552,6 +6617,7 @@
 |name|value|
 |----|-----|
 |Name|`slave_max_allowed_packet`|
+|Command line|`--slave-max-allowed-packet=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`1073741824`|
@@ -6562,6 +6628,7 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[slave_max_allowed_packet](https://mariadb.com/kb/en/library/documentation/replication-and-binary-log-server-system-variables/#slave_max_allowed_packet)|
+|dev.mysql.com|[option_mysqld_slave-max-allowed-packet](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#option_mysqld_slave-max-allowed-packet)|
 |dev.mysql.com|[sysvar_slave_max_allowed_packet](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#sysvar_slave_max_allowed_packet)|
 
 ## slave_net_timeout
@@ -6573,7 +6640,7 @@
 |Scope|`global`|
 |Default value|`60`|
 |Dynamic|`true`|
-|Range|from: `1`|
+|Range|from: `1` to: `upwards`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -6602,7 +6669,6 @@
 |name|value|
 |----|-----|
 |Name|`slave_parallel_mode`|
-|Command line|`none`|
 |Scope|`global`|
 |Default value|`conservative`|
 |Dynamic|`false`|
@@ -6683,11 +6749,11 @@
 |name|value|
 |----|-----|
 |Name|`slave_sql_verify_checksum`|
+|Command line|`--slave-sql-verify-checksum[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`1`|
 |Dynamic|`true`|
-|Valid value(s)|`0`, `1`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -6720,7 +6786,7 @@
 |Command line|`--slave-transaction_retry-errors=[error_code1,error_code2,...]`|
 |Type of variable|`string`|
 |Scope|`global`|
-|Default value|`1213,1205`|
+|Default value|`1158,1159,1160,1161,1205,1213,1429,2013,12701 (>= MariaDB 10.4.5), 1213,1205 (>= MariaDB 10.3.3)`|
 |Dynamic|`false`|
 |Valid value(s)|`comma-separated list of error codes`|
 
@@ -6815,6 +6881,7 @@
 |Command line|`--sync-master-info=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`10000`|
 |Dynamic|`true`|
 |Range|from: `0`|
 
@@ -6831,6 +6898,7 @@
 |Command line|`--sync-relay-log=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`10000`|
 |Dynamic|`true`|
 |Range|from: `0`|
 
@@ -6847,6 +6915,7 @@
 |Command line|`--sync-relay-log-info=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`10000`|
 |Dynamic|`true`|
 |Range|from: `0` to: `4294967295`|
 
@@ -7549,6 +7618,7 @@
 |name|value|
 |----|-----|
 |Name|`rpl_semi_sync_master_wait_point`|
+|Command line|`--rpl-semi-sync-master-wait-point=value`|
 |Type of variable|`enumeration`|
 |Scope|`global`|
 |Default value|`after_sync`|
@@ -7621,6 +7691,32 @@
 |mariadb.com|[rpl_semi_sync_slave_trace_level](https://mariadb.com/kb/en/library/documentation/semisynchronous-replication/#rpl_semi_sync_slave_trace_level)|
 |dev.mysql.com|[sysvar_rpl_semi_sync_slave_trace_level](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#sysvar_rpl_semi_sync_slave_trace_level)|
 
+## rpl_semi_sync_master
+|name|value|
+|----|-----|
+|Name|`rpl_semi_sync_master`|
+|Command line|`--rpl-semi-sync-master=value`|
+|Default value|`ON`|
+|Valid value(s)|`OFF`, `ON`, `FORCE`, `FORCE_PLUS_PERMANENT`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[rpl_semi_sync_master](https://mariadb.com/kb/en/library/documentation/semisynchronous-replication/#rpl_semi_sync_master)|
+
+## rpl_semi_sync_slave
+|name|value|
+|----|-----|
+|Name|`rpl_semi_sync_slave`|
+|Command line|`--rpl-semi-sync-slave=value`|
+|Default value|`ON`|
+|Valid value(s)|`OFF`, `ON`, `FORCE`, `FORCE_PLUS_PERMANENT`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[rpl_semi_sync_slave](https://mariadb.com/kb/en/library/documentation/semisynchronous-replication/#rpl_semi_sync_slave)|
+
 ## Aborted_clients
 |name|value|
 |----|-----|
@@ -7644,6 +7740,18 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[aborted_connects](https://mariadb.com/kb/en/library/documentation/server-status-variables/#aborted_connects)|
+
+## Aborted_connects_preauth
+|name|value|
+|----|-----|
+|Name|`Aborted_connects_preauth`|
+|Type of variable|`integer`|
+|Scope|`global`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[aborted_connects_preauth](https://mariadb.com/kb/en/library/documentation/server-status-variables/#aborted_connects_preauth)|
 
 ## Access_denied_errors
 |name|value|
@@ -10093,6 +10201,18 @@
 |------|----|
 |mariadb.com|[executed_triggers](https://mariadb.com/kb/en/library/documentation/server-status-variables/#executed_triggers)|
 
+## Feature_application_time_periods
+|name|value|
+|----|-----|
+|Name|`Feature_application_time_periods`|
+|Type of variable|`integer`|
+|Scope|`global`, `session`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[feature_application_time_periods](https://mariadb.com/kb/en/library/documentation/server-status-variables/#feature_application_time_periods)|
+
 ## Feature_check_constraint
 |name|value|
 |----|-----|
@@ -10846,6 +10966,18 @@
 |------|----|
 |mariadb.com|[opened_files](https://mariadb.com/kb/en/library/documentation/server-status-variables/#opened_files)|
 
+## Opened_plugin_libraries
+|name|value|
+|----|-----|
+|Name|`Opened_plugin_libraries`|
+|Type of variable|`integer`|
+|Scope|`global`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[opened_plugin_libraries](https://mariadb.com/kb/en/library/documentation/server-status-variables/#opened_plugin_libraries)|
+
 ## Opened_table_definitions
 |name|value|
 |----|-----|
@@ -11037,6 +11169,18 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[performance_schema_rwlock_instances_lost](https://mariadb.com/kb/en/library/documentation/server-status-variables/#performance_schema_rwlock_instances_lost)|
+
+## Performance_schema_session_connect_attrs_lost
+|name|value|
+|----|-----|
+|Name|`Performance_schema_session_connect_attrs_lost`|
+|Type of variable|`integer`|
+|Scope|`global`, `session`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[performance_schema_session_connect_attrs_lost](https://mariadb.com/kb/en/library/documentation/server-status-variables/#performance_schema_session_connect_attrs_lost)|
 
 ## Performance_schema_socket_classes_lost
 |name|value|
@@ -11721,7 +11865,6 @@
 |name|value|
 |----|-----|
 |Name|`autocommit`|
-|Command line|`--autocommit[=#]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`1`|
@@ -11752,9 +11895,9 @@
 |name|value|
 |----|-----|
 |Name|`back_log`|
+|Command line|`--back-log=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`-1 (signifies autosizing; do not assign this literal value)`|
 |Dynamic|`false`|
 |Range|from: `1` to: `65535`|
 
@@ -11784,7 +11927,7 @@
 |name|value|
 |----|-----|
 |Name|`big_tables`|
-|Command line|`--big-tables`|
+|Command line|`--big-tables[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`0`|
@@ -11794,7 +11937,6 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[big_tables](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#big_tables)|
-|dev.mysql.com|[option_mysqld_big-tables](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_big-tables)|
 |dev.mysql.com|[sysvar_big_tables](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_big_tables)|
 
 ## bind_address
@@ -11811,7 +11953,6 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[bind_address](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#bind_address)|
-|dev.mysql.com|[option_mysqld_bind-address](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_bind-address)|
 |dev.mysql.com|[sysvar_bind_address](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_bind_address)|
 
 ## bulk_insert_buffer_size
@@ -11887,7 +12028,6 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[character_set_filesystem](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#character_set_filesystem)|
-|dev.mysql.com|[option_mysqld_character-set-filesystem](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_character-set-filesystem)|
 |dev.mysql.com|[sysvar_character_set_filesystem](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_character_set_filesystem)|
 
 ## character_set_results
@@ -11908,7 +12048,7 @@
 |name|value|
 |----|-----|
 |Name|`character_set_server`|
-|Command line|`--character-set-server`|
+|Command line|`--character-set-server=name`|
 |Type of variable|`string`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
@@ -11917,7 +12057,6 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[character_set_server](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#character_set_server)|
-|dev.mysql.com|[option_mysqld_character-set-server](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_character-set-server)|
 |dev.mysql.com|[sysvar_character_set_server](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_character_set_server)|
 
 ## character_set_system
@@ -11948,7 +12087,6 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[character_sets_dir](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#character_sets_dir)|
-|dev.mysql.com|[option_mysqld_character-sets-dir](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_character-sets-dir)|
 |dev.mysql.com|[sysvar_character_sets_dir](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_character_sets_dir)|
 
 ## check_constraint_checks
@@ -11958,6 +12096,7 @@
 |Command line|`--check-constraint-checks=[0|1]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
+|Default value|`ON`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -12006,7 +12145,6 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[collation_server](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#collation_server)|
-|dev.mysql.com|[option_mysqld_collation-server](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_collation-server)|
 |dev.mysql.com|[sysvar_collation_server](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_collation_server)|
 
 ## completion_type
@@ -12032,6 +12170,7 @@
 |Name|`concurrent_insert`|
 |Type of variable|`enumeration`|
 |Scope|`global`|
+|Default value|`auto`|
 |Dynamic|`true`|
 |Valid value(s)|`NEVER`, `AUTO`, `ALWAYS`, `0`, `1`, `2`|
 
@@ -12064,7 +12203,7 @@
 |Name|`core_file`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`off`|
+|Default value|`0`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -12249,10 +12388,8 @@
 |name|value|
 |----|-----|
 |Name|`delay_key_write`|
-|Command line|`--delay-key-write[=name]`|
 |Type of variable|`enumeration`|
 |Scope|`global`|
-|Default value|`on`|
 |Dynamic|`true`|
 |Valid value(s)|`ON`, `OFF`, `ALL`|
 
@@ -12260,7 +12397,6 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[delay_key_write](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#delay_key_write)|
-|dev.mysql.com|[option_mysqld_delay-key-write](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_delay-key-write)|
 |dev.mysql.com|[sysvar_delay_key_write](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_delay_key_write)|
 
 ## delayed_insert_limit
@@ -12365,7 +12501,7 @@
 |Command line|`--encrypt-tmp-files[={0|1}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`ON`|
+|Default value|`OFF (>= MariaDB 10.1.7), ON (<= MariaDB 10.1.6)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -12392,7 +12528,6 @@
 |name|value|
 |----|-----|
 |Name|`enforce_storage_engine`|
-|Command line|`none`|
 |Type of variable|`string`|
 |Scope|`session`|
 |Default value|`none`|
@@ -12410,6 +12545,7 @@
 |Command line|`--engine-condition-pushdown`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
+|Default value|`OFF (MariaDB 5.5), ON (<= MariaDB 5.3)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -12421,8 +12557,10 @@
 |name|value|
 |----|-----|
 |Name|`eq_range_index_dive_limit`|
+|Command line|`--eq-range-index-dive-limit=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
+|Default value|`200`|
 |Dynamic|`true`|
 |Range|from: `0` to: `4294967295`|
 
@@ -12482,7 +12620,6 @@
 |name|value|
 |----|-----|
 |Name|`explicit_defaults_for_timestamp`|
-|Command line|`--explicit-defaults-for-timestamp=[={0|1}]`|
 |Type of variable|`boolean`|
 
 ### Documentation(s)
@@ -12509,7 +12646,7 @@
 |name|value|
 |----|-----|
 |Name|`flush`|
-|Command line|`--flush`|
+|Command line|`--flush[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -12639,7 +12776,7 @@
 |name|value|
 |----|-----|
 |Name|`general_log`|
-|Command line|`--general-log`|
+|Command line|`--general-log[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`0`|
@@ -12675,7 +12812,6 @@
 |Command line|`--group-concat-max-len=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`1024`|
 |Dynamic|`true`|
 |Range|from: `4`|
 
@@ -12824,7 +12960,7 @@
 |Command line|`--histogram-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`0`|
+|Default value|`254 (>= MariaDB 10.4.3), 0 (<= MariaDB 10.4.2)`|
 |Dynamic|`true`|
 |Range|from: `0` to: `255`|
 
@@ -12840,7 +12976,7 @@
 |Command line|`--histogram-type=value`|
 |Type of variable|`enumeration`|
 |Scope|`global`, `session`|
-|Default value|`SINGLE_PREC_HB`|
+|Default value|`DOUBLE_PREC_HB (>= MariaDB 10.4.3), SINGLE_PREC_HB(<= MariaDB 10.4.2)`|
 |Dynamic|`true`|
 |Valid value(s)|`SINGLE_PREC_HB`, `DOUBLE_PREC_HB`|
 
@@ -12853,6 +12989,7 @@
 |name|value|
 |----|-----|
 |Name|`host_cache_size`|
+|Command line|`--host-cache-size=#.`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -12951,7 +13088,6 @@
 |name|value|
 |----|-----|
 |Name|`in_transaction`|
-|Command line|`no`|
 |Type of variable|`boolean`|
 |Scope|`session`|
 |Default value|`0`|
@@ -13030,6 +13166,7 @@
 |Command line|`--join-buffer-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
+|Default value|`262144`|
 |Dynamic|`true`|
 |Range|from: `128`|
 
@@ -13075,7 +13212,6 @@
 |name|value|
 |----|-----|
 |Name|`keep_files_on_create`|
-|Command line|`--keep-files-on-create=#`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
@@ -13085,22 +13221,6 @@
 |------|----|
 |mariadb.com|[keep_files_on_create](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#keep_files_on_create)|
 |dev.mysql.com|[sysvar_keep_files_on_create](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_keep_files_on_create)|
-
-## language
-|name|value|
-|----|-----|
-|Name|`language`|
-|Command line|`--language=name, -l`|
-|Type of variable|`directory name`|
-|Scope|`global`|
-|Default value|`/usr/local/mysql/share/mysql/english/`|
-|Dynamic|`false`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|mariadb.com|[language](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#language)|
-|dev.mysql.com|[option_mysqld_language](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_language)|
 
 ## large_files_support
 |name|value|
@@ -13134,10 +13254,10 @@
 |name|value|
 |----|-----|
 |Name|`large_pages`|
-|Command line|`--large-pages, --skip-large-pages`|
+|Command line|`--large-pages[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`0`|
+|Default value|`off`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -13243,7 +13363,6 @@
 |Command line|`--lock-wait-timeout=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`31536000`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -13287,6 +13406,7 @@
 |Command line|`--log-disabled_statements=value`|
 |Type of variable|`set`|
 |Scope|`global`, `session`|
+|Default value|`(empty string)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -13330,7 +13450,7 @@
 |name|value|
 |----|-----|
 |Name|`log_queries_not_using_indexes`|
-|Command line|`--log-queries-not-using-indexes`|
+|Command line|`--log-queries-not-using-indexes[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -13347,9 +13467,9 @@
 |name|value|
 |----|-----|
 |Name|`log_slow_admin_statements`|
+|Command line|`--log-slow-admin-statements[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`off`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -13380,6 +13500,7 @@
 |Command line|`log-slow-filter=value1[,value2...]`|
 |Type of variable|`enumeration`|
 |Scope|`global`, `session`|
+|Default value|`admin, filesort, filesort_on_disk, full_join, full_scan, query_cache, query_cache_miss, tmp_table, tmp_table_on_disk (<= MariaDB 10.3.0), admin, filesort, filesort_on_disk, filesort_priority_queue, full_join, full_scan, query_cache, query_cache_miss, tmp_table, tmp_table_on_disk (>= MariaDB 10.3.1)`|
 |Dynamic|`true`|
 |Valid value(s)|`admin`, `filesort`, `filesort_on_disk`, `filesort_priority_queue`, `full_join`, `full_scan`, `query_cache`, `query_cache_miss`, `tmp_table`, `tmp_table_on_disk`|
 
@@ -13426,6 +13547,7 @@
 |Command line|`log-slow-verbosity=value1[,value2...]`|
 |Type of variable|`enumeration`|
 |Scope|`global`, `session`|
+|Default value|`(Empty)`|
 |Dynamic|`true`|
 |Valid value(s)|`query_plan`, `innodb`, `explain`|
 
@@ -13486,7 +13608,7 @@
 |name|value|
 |----|-----|
 |Name|`low_priority_updates`|
-|Command line|`--low-priority-updates`|
+|Command line|`--low-priority-updates[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`0`|
@@ -13520,6 +13642,7 @@
 |Command line|`--lower-case-table-names[=#]`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`0`|
 |Dynamic|`false`|
 |Range|from: `0` to: `2`|
 
@@ -13551,6 +13674,7 @@
 |Command line|`--max-connect-errors=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`100`|
 |Dynamic|`true`|
 |Range|from: `1`|
 
@@ -13663,6 +13787,7 @@
 |Command line|`--max-join-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
+|Default value|`18446744073709551615`|
 |Dynamic|`true`|
 |Range|from: `1` to: `1.844674407371E+19`|
 
@@ -13695,6 +13820,7 @@
 |Command line|`--max-long-data-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`16777216 (16M) >= MariaDB 10.2.4, 4194304 (4M) <= MariaDB 10.2.3, >= MariaDB 10.1.7, 1048576 (1M) <= MariaDB 10.1.6`|
 |Dynamic|`false`|
 |Range|from: `1024` to: `4294967295`|
 
@@ -13791,7 +13917,7 @@
 |Command line|`--max-session-mem-used=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`9223372036854775807`|
+|Default value|`9223372036854775807 (8192 PB)`|
 |Dynamic|`true`|
 |Range|from: `8192` to: `1.844674407371E+19`|
 
@@ -13840,7 +13966,7 @@
 |Command line|`--max-statement-time[=#]`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`0`|
+|Default value|`0.000000 >= MariaDB 10.1.13, 0 <= MariaDB 10.1.12`|
 |Dynamic|`true`|
 |Range|from: `0` to: `upwards`|
 
@@ -13892,6 +14018,7 @@
 |name|value|
 |----|-----|
 |Name|`metadata_locks_cache_size`|
+|Command line|`--metadata-locks-cache-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`1024`|
@@ -13908,6 +14035,7 @@
 |name|value|
 |----|-----|
 |Name|`metadata_locks_hash_instances`|
+|Command line|`--metadata-locks-hash-instances=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`8`|
@@ -13989,6 +14117,7 @@
 |name|value|
 |----|-----|
 |Name|`named_pipe`|
+|Command line|`--named-pipe[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -14071,7 +14200,8 @@
 |name|value|
 |----|-----|
 |Name|`old`|
-|Command line|`--old`|
+|Command line|`--old[={OFF|ON}]`|
+|Type of variable|`boolean`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -14083,7 +14213,7 @@
 |name|value|
 |----|-----|
 |Name|`old_alter_table`|
-|Command line|`--old-alter-table`|
+|Command line|`--old-alter-table[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`0`|
@@ -14093,7 +14223,6 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[old_alter_table](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#old_alter_table)|
-|dev.mysql.com|[option_mysqld_old-alter-table](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_old-alter-table)|
 |dev.mysql.com|[sysvar_old_alter_table](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_old_alter_table)|
 
 ## old_mode
@@ -14115,6 +14244,7 @@
 |name|value|
 |----|-----|
 |Name|`old_passwords`|
+|Command line|`--old-passwords=value`|
 |Scope|`global`, `session`|
 |Default value|`0`|
 |Dynamic|`true`|
@@ -14133,7 +14263,6 @@
 |Command line|`--open-files-limit=count`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`5000, with possible adjustment`|
 |Dynamic|`false`|
 |Range|from: `0` to: `4294967295`|
 
@@ -14141,18 +14270,16 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[open_files_limit](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#open_files_limit)|
-|dev.mysql.com|[option_mysqld_open-files-limit](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_open-files-limit)|
 |dev.mysql.com|[sysvar_open_files_limit](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_open_files_limit)|
 
 ## optimizer_prune_level
 |name|value|
 |----|-----|
 |Name|`optimizer_prune_level`|
-|Command line|`--optimizer-prune-level[=#]`|
-|Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`1`|
 |Dynamic|`true`|
+|Range|from: `0` to: `1`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -14164,7 +14291,6 @@
 |name|value|
 |----|-----|
 |Name|`optimizer_search_depth`|
-|Command line|`--optimizer-search-depth[=#]`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
 |Default value|`62`|
@@ -14214,7 +14340,7 @@
 |Command line|`--optimizer-use-condition-selectivity=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`1`|
+|Default value|`4 (>= MariaDB 10.4.1), 1 (<= MariaDB 10.4.0)`|
 |Dynamic|`true`|
 |Range|from: `1` to: `5`|
 
@@ -14227,6 +14353,7 @@
 |name|value|
 |----|-----|
 |Name|`optimizer_trace`|
+|Command line|`--optimizer-trace=value`|
 |Type of variable|`string`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
@@ -14241,6 +14368,7 @@
 |name|value|
 |----|-----|
 |Name|`optimizer_trace_max_mem_size`|
+|Command line|`--optimizer-trace-max-mem-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
@@ -14288,7 +14416,7 @@
 |Name|`plugin_maturity`|
 |Command line|`--plugin-maturity=level`|
 |Scope|`global`|
-|Default value|`unknown`|
+|Default value|`One less than the server maturity (>= MariaDB 10.3.3), unknown (<= MariaDB 10.3.2)`|
 |Dynamic|`false`|
 |Valid value(s)|`unknown`, `experimental`, `alpha`, `beta`, `gamma`, `stable`|
 
@@ -14301,7 +14429,7 @@
 |name|value|
 |----|-----|
 |Name|`port`|
-|Command line|`--port=#, -p`|
+|Command line|`--port=port_num`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`3306`|
@@ -14369,7 +14497,7 @@
 |Command line|`--progress-report-time=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`5`|
+|Default value|`56 before MariaDB 5.5.39 and MariaDB 10.0.10, 5 as of MariaDB 5.5.40 and MariaDB 10.0.11`|
 |Dynamic|`true`|
 |Range|from: `0` to: `4294967295`|
 
@@ -14399,6 +14527,7 @@
 |Command line|`--proxy-protocol-networks=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`(empty)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -14455,7 +14584,6 @@
 |Command line|`--query-alloc-block-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`8192`|
 |Dynamic|`true`|
 |Range|from: `1024` to: `4294967295`|
 
@@ -14520,7 +14648,7 @@
 |Name|`query_cache_strip_comments`|
 |Command line|`query-cache-strip-comments`|
 |Type of variable|`boolean`|
-|Scope|`session`|
+|Scope|`session`, `global`|
 |Default value|`OFF`|
 |Dynamic|`true`|
 
@@ -14536,6 +14664,7 @@
 |Command line|`--query-cache-type=#`|
 |Type of variable|`enumeration`|
 |Scope|`global`, `session`|
+|Default value|`0`|
 |Dynamic|`true`|
 |Valid value(s)|`0`, `OFF`, `1`, `ON`, `2`, `DEMAND`|
 
@@ -14549,10 +14678,9 @@
 |name|value|
 |----|-----|
 |Name|`query_cache_wlock_invalidate`|
-|Command line|`--query-cache-wlock-invalidate`|
+|Command line|`--query-cache-wlock-invalidate[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
-|Default value|`0`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -14568,7 +14696,6 @@
 |Command line|`--query-prealloc-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`8192`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -14639,7 +14766,7 @@
 |name|value|
 |----|-----|
 |Name|`read_only`|
-|Command line|`--read-only`|
+|Command line|`--read-only[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -14696,7 +14823,7 @@
 |name|value|
 |----|-----|
 |Name|`safe_show_database`|
-|Command line|`--safe-show-database (until mysql 4.1.1)`|
+|Command line|`--safe-show-database (until MySQL 4.1.1)`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -14710,10 +14837,10 @@
 |name|value|
 |----|-----|
 |Name|`secure_auth`|
-|Command line|`--secure-auth`|
+|Command line|`--secure-auth[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`on`|
+|Default value|`1`|
 |Dynamic|`true`|
 |Valid value(s)|`ON`|
 
@@ -14760,7 +14887,6 @@
 |name|value|
 |----|-----|
 |Name|`session_track_schema`|
-|Command line|`--session-track-schema={0|1}`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
@@ -14775,7 +14901,6 @@
 |name|value|
 |----|-----|
 |Name|`session_track_state_change`|
-|Command line|`--session-track-state-change={0|1}`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
@@ -14822,17 +14947,16 @@
 |name|value|
 |----|-----|
 |Name|`shared_memory`|
-|Command line|`--shared-memory[={0,1}]`|
+|Command line|`--shared-memory[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`false`|
+|Default value|`off`|
 |Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |mariadb.com|[shared_memory](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#shared_memory)|
-|dev.mysql.com|[option_mysqld_shared-memory](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_shared-memory)|
 |dev.mysql.com|[sysvar_shared_memory](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_shared_memory)|
 
 ## shared_memory_base_name
@@ -14842,21 +14966,19 @@
 |Command line|`--shared-memory-base-name=name`|
 |Type of variable|`string`|
 |Scope|`global`|
-|Default value|`mysql`|
 |Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |mariadb.com|[shared_memory_base_name](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#shared_memory_base_name)|
-|dev.mysql.com|[option_mysqld_shared-memory-base-name](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_shared-memory-base-name)|
 |dev.mysql.com|[sysvar_shared_memory_base_name](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_shared_memory_base_name)|
 
 ## skip_external_locking
 |name|value|
 |----|-----|
 |Name|`skip_external_locking`|
-|Command line|`--skip-external-locking`|
+|Command line|`--skip-external-locking[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`1`|
@@ -14872,7 +14994,7 @@
 |name|value|
 |----|-----|
 |Name|`skip_name_resolve`|
-|Command line|`--skip-name-resolve`|
+|Command line|`--skip-name-resolve[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`0`|
@@ -14935,7 +15057,7 @@
 |name|value|
 |----|-----|
 |Name|`slow_query_log`|
-|Command line|`--slow-query-log`|
+|Command line|`--slow-query-log[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`0`|
@@ -15030,6 +15152,11 @@
 |name|value|
 |----|-----|
 |Name|`sql_big_tables`|
+|Command line|`--sql-big-tables`|
+|Type of variable|`boolean`|
+|Scope|`global`, `session`|
+|Default value|`0`|
+|Dynamic|`true`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -15080,6 +15207,11 @@
 |name|value|
 |----|-----|
 |Name|`sql_low_priority_updates`|
+|Command line|`--sql-low-priority-updates`|
+|Type of variable|`boolean`|
+|Scope|`global`, `session`|
+|Default value|`0`|
+|Dynamic|`true`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -15241,19 +15373,6 @@
 |------|----|
 |mariadb.com|[strict_password_validation](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#strict_password_validation)|
 
-## symbolic_links
-|name|value|
-|----|-----|
-|Name|`symbolic_links`|
-|Command line|`--symbolic-links`|
-|Type of variable|`boolean`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|mariadb.com|[symbolic_links](https://mariadb.com/kb/en/library/documentation/replication/optimization-and-tuning/system-variables/server-system-variables/#symbolic_links)|
-|dev.mysql.com|[option_mysqld_symbolic-links](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_symbolic-links)|
-
 ## sync_frm
 |name|value|
 |----|-----|
@@ -15287,9 +15406,11 @@
 |name|value|
 |----|-----|
 |Name|`table_definition_cache`|
+|Command line|`--table-definition-cache=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Dynamic|`true`|
+|Range|from: `400`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -15317,9 +15438,11 @@
 |name|value|
 |----|-----|
 |Name|`table_open_cache`|
+|Command line|`--table-open-cache=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Dynamic|`true`|
+|Range|from: `1`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -15331,6 +15454,7 @@
 |name|value|
 |----|-----|
 |Name|`table_open_cache_instances`|
+|Command line|`--table-open-cache-instances=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -15523,7 +15647,7 @@
 |Command line|`--tmp-disk-table-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`18446744073709551615`|
+|Default value|`18446744073709551615 (max unsigned integer, no limit)`|
 |Dynamic|`true`|
 |Range|from: `1024` to: `1.844674407371E+19`|
 
@@ -15659,7 +15783,6 @@
 |name|value|
 |----|-----|
 |Name|`updatable_views_with_limit`|
-|Command line|`--updatable-views-with-limit=#`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`1`|
@@ -15677,7 +15800,7 @@
 |Name|`use_stat_tables`|
 |Command line|`--use-stat-tables=mode`|
 |Scope|`global`, `session`|
-|Default value|`never`|
+|Default value|`preferably_for_queries (>= MariaDB 10.4.1), never (<= MariaDB 10.4.0)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -15689,7 +15812,7 @@
 |name|value|
 |----|-----|
 |Name|`version`|
-|Command line|`-v, --version[=name] (>= mariadb 10.2.1), --version (<= mariadb 10.2.0)`|
+|Command line|`-V, --version[=name] (>= MariaDB 10.2.1), --version (<= MariaDB 10.2.0)`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -15745,7 +15868,6 @@
 |name|value|
 |----|-----|
 |Name|`version_malloc_library`|
-|Command line|`no`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -15759,7 +15881,6 @@
 |name|value|
 |----|-----|
 |Name|`version_source_revision`|
-|Command line|`none`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -15790,7 +15911,7 @@
 |name|value|
 |----|-----|
 |Name|`warning_count`|
-|Type of variable|`numeric`|
+|Type of variable|`integer`|
 |Scope|`session`|
 |Dynamic|`false`|
 
@@ -17883,6 +18004,7 @@
 |Name|`version_ssl_library`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`None`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -17938,6 +18060,36 @@
 |mariadb.com|[thread_handling](https://mariadb.com/kb/en/library/documentation/thread-pool-system-and-status-variables/#thread_handling)|
 |dev.mysql.com|[sysvar_thread_handling](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_thread_handling)|
 
+## thread_pool_dedicated_listener
+|name|value|
+|----|-----|
+|Name|`thread_pool_dedicated_listener`|
+|Command line|`thread-pool-dedicated-listener={0|1}`|
+|Type of variable|`boolean`|
+|Scope|``|
+|Default value|`0`|
+|Dynamic|`false`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[thread_pool_dedicated_listener](https://mariadb.com/kb/en/library/documentation/thread-pool-system-and-status-variables/#thread_pool_dedicated_listener)|
+
+## thread_pool_exact_stats
+|name|value|
+|----|-----|
+|Name|`thread_pool_exact_stats`|
+|Command line|`thread-pool-exact-stats={0|1}`|
+|Type of variable|`boolean`|
+|Scope|``|
+|Default value|`0`|
+|Dynamic|`false`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[thread_pool_exact_stats](https://mariadb.com/kb/en/library/documentation/thread-pool-system-and-status-variables/#thread_pool_exact_stats)|
+
 ## thread_pool_idle_timeout
 |name|value|
 |----|-----|
@@ -17960,6 +18112,7 @@
 |Command line|`thread-pool-max-threads=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`65536 (>= MariaDB 10.2.4), 1000 (<= MariaDB 10.2.3, >= MariaDB 10.1), 500 (<= MariaDB 10.0)`|
 |Dynamic|`true`|
 |Range|from: `1` to: `65536`|
 
@@ -18032,7 +18185,6 @@
 |Command line|`--thread-pool-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`16`|
 |Range|from: `1`|
 
 ### Documentation(s)
@@ -18049,7 +18201,6 @@
 |Type of variable|`integer`|
 |Scope|`global`|
 |Dynamic|`true`|
-|Range|from: `4` to: `600`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -20022,7 +20173,7 @@
 |Name|`tokudb_block_size`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`4194304`|
+|Default value|`4194304 (4MB)`|
 |Dynamic|`true`|
 |Range|from: `0` to: `1.844674407371E+19`|
 
@@ -20050,6 +20201,7 @@
 |----|-----|
 |Name|`tokudb_cache_size`|
 |Type of variable|`integer`|
+|Default value|`Half of the total system memory`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -20178,6 +20330,7 @@
 |----|-----|
 |Name|`tokudb_data_dir`|
 |Type of variable|`string`|
+|Default value|`Empty (the MariaDB datadir is used)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -20332,6 +20485,7 @@
 |----|-----|
 |Name|`tokudb_last_lock_timeout`|
 |Scope|`global`, `session`|
+|Default value|`Empty`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -20359,7 +20513,7 @@
 |Name|`tokudb_loader_memory_size`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`100000000`|
+|Default value|`100000000 (100M)`|
 |Dynamic|`true`|
 |Range|from: `0` to: `1.844674407371E+19`|
 
@@ -20374,7 +20528,7 @@
 |Name|`tokudb_lock_timeout`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`4000`|
+|Default value|`4000 (4 seconds)`|
 |Dynamic|`true`|
 |Range|from: `0` to: `1.844674407371E+19`|
 
@@ -20402,6 +20556,7 @@
 |----|-----|
 |Name|`tokudb_log_dir`|
 |Type of variable|`string`|
+|Default value|`Empty (the MariaDB datadir is used)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -20444,6 +20599,7 @@
 |Name|`tokudb_optimize_index_name`|
 |Type of variable|`string`|
 |Scope|`global`, `session`|
+|Default value|`None`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -20500,7 +20656,7 @@
 |Name|`tokudb_read_block_size`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`65536`|
+|Default value|`65536 (64KB)`|
 |Dynamic|`true`|
 |Range|from: `4096` to: `4294967295`|
 
@@ -20515,7 +20671,7 @@
 |Name|`tokudb_read_buf_size`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
-|Default value|`131072`|
+|Default value|`131072 (128KB)`|
 |Dynamic|`true`|
 |Range|from: `0` to: `1048576`|
 
@@ -20642,6 +20798,7 @@
 |----|-----|
 |Name|`tokudb_tmp_dir`|
 |Type of variable|`directory name`|
+|Default value|`Empty (the MariaDB datadir is used)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -20695,7 +20852,6 @@
 |name|value|
 |----|-----|
 |Name|`system_versioning_asof`|
-|Command line|`none`|
 |Scope|`global`, `session`|
 |Default value|`DEFAULT`|
 |Dynamic|`true`|
@@ -22692,7 +22848,7 @@
 |name|value|
 |----|-----|
 |Name|`ignore_builtin_innodb`|
-|Command line|`--ignore-builtin-innodb`|
+|Command line|`--ignore-builtin-innodb[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -22724,7 +22880,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_adaptive_flushing`|
-|Command line|`--innodb-adaptive-flushing=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -22772,7 +22927,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_adaptive_hash_index`|
-|Command line|`--innodb-adaptive-hash-index=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -22870,7 +23024,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_api_disable_rowlock`|
-|Command line|`--innodb-api-disable-rowlock=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -22885,7 +23038,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_api_enable_binlog`|
-|Command line|`--innodb-api-enable-binlog=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -22900,7 +23052,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_api_enable_mdl`|
-|Command line|`--innodb-api-enable-mdl=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -22945,6 +23096,7 @@
 |Command line|`--innodb-autoextend-increment=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`64`|
 |Dynamic|`true`|
 |Range|from: `1` to: `1000`|
 
@@ -23084,10 +23236,9 @@
 |name|value|
 |----|-----|
 |Name|`innodb_buffer_pool_dump_at_shutdown`|
-|Command line|`--innodb-buffer-pool-dump-at-shutdown=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`on`|
+|Default value|`1`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -23100,7 +23251,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_buffer_pool_dump_now`|
-|Command line|`--innodb-buffer-pool-dump-now=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -23177,7 +23327,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_buffer_pool_load_abort`|
-|Command line|`--innodb-buffer-pool-load-abort=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -23192,10 +23341,9 @@
 |name|value|
 |----|-----|
 |Name|`innodb_buffer_pool_load_at_startup`|
-|Command line|`--innodb-buffer-pool-load-at-startup=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`on`|
+|Default value|`1`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -23208,7 +23356,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_buffer_pool_load_now`|
-|Command line|`--innodb-buffer-pool-load-now=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -23399,7 +23546,9 @@
 |Name|`innodb_cleaner_lsn_age_factor`|
 |Command line|`--innodb-cleaner-lsn-age-factor=value`|
 |Scope|`global`|
+|Default value|`deprecated (>= MariaDB 10.2.6), high_checkpoint (<= MariaDB 10.1)`|
 |Dynamic|`true`|
+|Valid value(s)|`high_checkpoint`, `legacy`, `deprecated`, `high_checkpoint`, `legacy`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -23410,7 +23559,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_cmp_per_index_enabled`|
-|Command line|`--innodb-cmp-per-index-enabled=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -23444,7 +23592,7 @@
 |Name|`innodb_compression_algorithm`|
 |Command line|`--innodb-compression-algorithm=value`|
 |Scope|`global`|
-|Default value|`none`|
+|Default value|`zlib (>= MariaDB 10.2.4, MariaDB 10.1.22), none (<= MariaDB 10.2.3, MariaDB 10.1.21)`|
 |Dynamic|`true`|
 |Valid value(s)|`none`, `zlib`, `lz4`, `lzo`, `lzma`, `bzip2`, `snappy`|
 
@@ -23526,6 +23674,7 @@
 |Command line|`--innodb-concurrency-tickets=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`5000`|
 |Dynamic|`true`|
 |Range|from: `1` to: `4294967295`|
 
@@ -23542,7 +23691,9 @@
 |Command line|`innodb-corrupt-table-action=value`|
 |Type of variable|`enumeration`|
 |Scope|`global`|
+|Default value|`assert (<= MariaDB 10.1), deprecated (<= MariaDB 10.2.6)`|
 |Dynamic|`true`|
+|Valid value(s)|`deprecated`, `assert`, `warn`, `salvage`, `assert`, `warn`, `salvage`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -23582,7 +23733,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_deadlock_detect`|
-|Command line|`--innodb-deadlock-detect`|
+|Command line|`--innodb-deadlock-detect[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`1`|
@@ -23756,7 +23907,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_disable_sort_file_cache`|
-|Command line|`--innodb-disable-sort-file-cache=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -23771,7 +23921,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_disallow_writes`|
-|Command line|`none`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`OFF`|
@@ -23786,7 +23935,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_doublewrite`|
-|Command line|`--innodb-doublewrite, --skip-innodb-doublewrite`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -23817,7 +23965,9 @@
 |Name|`innodb_empty_free_list_algorithm`|
 |Command line|`innodb-empty-free-list-algorithm=value`|
 |Scope|`global`|
+|Default value|`deprecated (>= MariaDB 10.2.6), legacy (>= MariaDB 10.1.24), backoff (<= MariaDB 10.1.23)`|
 |Dynamic|`true`|
+|Valid value(s)|`deprecated`, `backoff`, `legacy`, `backoff`, `legacy`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -24019,6 +24169,7 @@
 |Command line|`--innodb-file-format=value`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`Barracuda (>= MariaDB 10.2.2), Antelope (<= MariaDB 10.2.1)`|
 |Dynamic|`true`|
 |Valid value(s)|`Antelope`, `Barracuda`|
 
@@ -24034,7 +24185,7 @@
 |Command line|`--innodb-file-format-check=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`ON`|
+|Default value|`ON (>= MariaDB 5.5)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -24062,9 +24213,10 @@
 |name|value|
 |----|-----|
 |Name|`innodb_file_per_table`|
-|Command line|`--innodb-file-per-table`|
+|Command line|`--innodb-path-per-table[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
+|Default value|`1`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -24171,7 +24323,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_flush_sync`|
-|Command line|`--innodb-flush-sync={0|1}`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -24204,7 +24355,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_force_load_corrupted`|
-|Command line|`--innodb-force-load-corrupted`|
+|Command line|`--innodb-force-load-corrupted[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -24252,7 +24403,9 @@
 |Name|`innodb_foreground_preflush`|
 |Command line|`innodb-foreground-preflush=value`|
 |Scope|`global`|
+|Default value|`deprecated (>= MariaDB 10.2.6), exponential_backoff (<= MariaDB 10.1)`|
 |Dynamic|`true`|
+|Valid value(s)|`deprecated`, `exponential_backoff`, `sync_preflush`, `exponential_backoff`, `sync_preflush`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -24294,7 +24447,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_ft_enable_diag_print`|
-|Command line|`--innodb-ft-enable-diag-print=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -24309,7 +24461,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_ft_enable_stopword`|
-|Command line|`--innodb-ft-enable-stopword=#`|
 |Type of variable|`boolean`|
 |Dynamic|`true`|
 
@@ -24490,6 +24641,7 @@
 |Command line|`innodb-ibuf-max-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`1/2 the size of the InnoDB buffer pool`|
 |Dynamic|`false`|
 |Range|from: `0`|
 
@@ -24615,6 +24767,7 @@
 |Command line|`--innodb-large-prefix`|
 |Type of variable|`boolean`|
 |Scope|`global`|
+|Default value|`ON (>= MariaDB 10.2.2), OFF (<= MariaDB 10.2.1)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -24643,7 +24796,7 @@
 |Name|`innodb_lock_schedule_algorithm`|
 |Command line|`--innodb-lock-schedule-algorithm=#`|
 |Scope|`global`|
-|Default value|`FCFS`|
+|Default value|`VATS (10.2), FCFS (10.1)`|
 |Dynamic|`false`|
 |Valid value(s)|`FCFS`, `VATS`|
 
@@ -24764,6 +24917,7 @@
 |Name|`innodb_log_buffer_size`|
 |Command line|`--innodb-log-buffer-size=#`|
 |Type of variable|`integer`|
+|Default value|`16777216`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -24777,7 +24931,9 @@
 |Name|`innodb_log_checksum_algorithm`|
 |Command line|`innodb-log-checksum-algorithm=value`|
 |Scope|`global`|
+|Default value|`deprecated (>= MariaDB 10.2.6), innodb (<= MariaDB 10.1)`|
 |Dynamic|`true`|
+|Valid value(s)|`deprecated`, `innodb`, `none`, `crc32`, `strict_none`, `strict_innodb`, `strict_crc32`, `innodb`, `none`, `crc32`, `strict_none`, `strict_innodb`, `strict_crc32`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -24802,10 +24958,9 @@
 |name|value|
 |----|-----|
 |Name|`innodb_log_compressed_pages`|
-|Command line|`--innodb-log-compressed-pages=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`on`|
+|Default value|`1`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -24821,6 +24976,7 @@
 |Command line|`--innodb-log-file-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`50331648`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -24916,7 +25072,7 @@
 |Command line|`innodb-max-bitmap-file-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`4096`|
+|Default value|`4096 (4KB)`|
 |Dynamic|`true`|
 |Range|from: `4096` to: `1.844674407371E+19`|
 
@@ -25013,7 +25169,6 @@
 |Command line|`--innodb-max-undo-log-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`1073741824`|
 |Dynamic|`true`|
 |Range|from: `10485760`|
 
@@ -25030,7 +25185,7 @@
 |Command line|`innodb-merge-sort-block-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`1048576`|
+|Default value|`1048576 (1M)`|
 |Dynamic|`true`|
 |Range|from: `1048576` to: `1073741824`|
 
@@ -25097,9 +25252,10 @@
 |name|value|
 |----|-----|
 |Name|`innodb_monitor_reset`|
-|Type of variable|`string`|
 |Scope|`global`|
+|Default value|`empty string`|
 |Dynamic|`true`|
+|Valid value(s)|`counter`, `module`, `pattern`, `all`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -25111,9 +25267,10 @@
 |name|value|
 |----|-----|
 |Name|`innodb_monitor_reset_all`|
-|Type of variable|`string`|
 |Scope|`global`|
+|Default value|`empty string`|
 |Dynamic|`true`|
+|Valid value(s)|`counter`, `module`, `pattern`, `all`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -25159,6 +25316,7 @@
 |Command line|`--innodb-old-blocks-time=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`1000`|
 |Dynamic|`true`|
 |Range|from: `0`|
 
@@ -25205,7 +25363,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_optimize_fulltext_only`|
-|Command line|`--innodb-optimize-fulltext-only=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -25279,7 +25436,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_print_all_deadlocks`|
-|Command line|`--innodb-print-all-deadlocks=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -25343,7 +25499,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_random_read_ahead`|
-|Command line|`--innodb-random-read-ahead=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -25408,7 +25563,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_read_only`|
-|Command line|`--innodb-read-only=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -25423,7 +25577,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_recovery_stats`|
-|Command line|`no`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`OFF`|
@@ -25470,7 +25623,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_rollback_on_timeout`|
-|Command line|`--innodb-rollback-on-timeout`|
+|Command line|`--innodb-rollback-on-timeout[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`0`|
@@ -25613,7 +25766,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_simulate_comp_failures`|
-|Command line|`none`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`0`|
@@ -25649,7 +25801,6 @@
 |Command line|`--innodb-spin-wait-delay=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`6`|
 |Dynamic|`true`|
 |Range|from: `0` to: `4294967295`|
 
@@ -25663,7 +25814,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_stats_auto_recalc`|
-|Command line|`--innodb-stats-auto-recalc=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -25692,7 +25842,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_stats_include_delete_marked`|
-|Command line|`--innodb-stats-include-delete-marked`|
+|Command line|`--innodb-stats-include-delete-marked[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -25739,9 +25889,10 @@
 |name|value|
 |----|-----|
 |Name|`innodb_stats_on_metadata`|
-|Command line|`--innodb-stats-on-metadata`|
+|Command line|`--innodb-stats-on-metadata[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
+|Default value|`0`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -25754,7 +25905,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_stats_persistent`|
-|Command line|`--innodb-stats-persistent=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -25846,7 +25996,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_status_output`|
-|Command line|`--innodb-status-output={0|1}`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -25861,7 +26010,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_status_output_locks`|
-|Command line|`--innodb-status-output-locks={0|1}`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -25876,10 +26024,9 @@
 |name|value|
 |----|-----|
 |Name|`innodb_strict_mode`|
-|Command line|`--innodb-strict-mode=#`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
-|Default value|`on`|
+|Default value|`1`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -25941,7 +26088,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_table_locks`|
-|Command line|`--innodb-table-locks`|
+|Command line|`--innodb-table-locks[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
@@ -26077,7 +26224,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_undo_log_truncate`|
-|Command line|`--innodb-undo-log-truncate[={0|1}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -26125,7 +26271,7 @@
 |Command line|`innodb-use-atomic-writes={0|1}`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`OFF`|
+|Default value|`ON (>= MariaDB 10.2.4), OFF (<= MariaDB 10.2.3)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -26182,7 +26328,6 @@
 |name|value|
 |----|-----|
 |Name|`innodb_use_native_aio`|
-|Command line|`--innodb-use-native-aio=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -26261,7 +26406,7 @@
 |Command line|`--innodb-use-trim=#`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`OFF`|
+|Default value|`ON (>= MariaDB 10.2.4), OFF (<= MariaDB 10.2.3)`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -26317,7 +26462,7 @@
 |name|value|
 |----|-----|
 |Name|`audit_log_buffer_size`|
-|Command line|`--audit-log-buffer-size=value`|
+|Command line|`--audit-log-buffer-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`1048576`|
@@ -26512,7 +26657,7 @@
 |name|value|
 |----|-----|
 |Name|`audit_log_rotate_on_size`|
-|Command line|`--audit-log-rotate-on-size=N`|
+|Command line|`--audit-log-rotate-on-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`0`|
@@ -26573,7 +26718,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_status_file`|
-|Command line|`--innodb-status-file`|
+|Command line|`--innodb-status-file[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Default value|`off`|
 
@@ -26586,10 +26731,10 @@
 |name|value|
 |----|-----|
 |Name|`daemon_memcached_enable_binlog`|
-|Command line|`--daemon-memcached-enable-binlog=#`|
+|Command line|`--daemon-memcached-enable-binlog[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`false`|
+|Default value|`off`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -26601,7 +26746,7 @@
 |name|value|
 |----|-----|
 |Name|`daemon_memcached_engine_lib_name`|
-|Command line|`--daemon-memcached-engine-lib-name=library`|
+|Command line|`--daemon-memcached-engine-lib-name=file_name`|
 |Type of variable|`file name`|
 |Scope|`global`|
 |Default value|`innodb_engine.so`|
@@ -26616,7 +26761,7 @@
 |name|value|
 |----|-----|
 |Name|`daemon_memcached_engine_lib_path`|
-|Command line|`--daemon-memcached-engine-lib-path=directory`|
+|Command line|`--daemon-memcached-engine-lib-path=dir_name`|
 |Type of variable|`directory name`|
 |Scope|`global`|
 |Default value|`null`|
@@ -26676,7 +26821,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_background_drop_list_empty`|
-|Command line|`--innodb-background-drop-list-empty`|
+|Command line|`--innodb-background-drop-list-empty[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -26691,7 +26836,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_buffer_pool_debug`|
-|Command line|`--innodb-buffer-pool-debug`|
+|Command line|`--innodb-buffer-pool-debug[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -26706,7 +26851,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_buffer_pool_in_core_file`|
-|Command line|`--innodb-buffer-pool-in-core-file`|
+|Command line|`--innodb-buffer-pool-in-core-file[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -26721,7 +26866,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_checkpoint_disabled`|
-|Command line|`--innodb-checkpoint-disabled`|
+|Command line|`--innodb-checkpoint-disabled[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -26752,7 +26897,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_ddl_log_crash_reset_debug`|
-|Command line|`--innodb-ddl-log-crash-reset-debug`|
+|Command line|`--innodb-ddl-log-crash-reset-debug[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -26767,7 +26912,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_dedicated_server`|
-|Command line|`--innodb-dedicated-server`|
+|Command line|`--innodb-dedicated-server[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -26844,7 +26989,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_log_checkpoint_fuzzy_now`|
-|Command line|`--innodb-log-checkpoint-fuzzy-now`|
+|Command line|`--innodb-log-checkpoint-fuzzy-now[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -26859,7 +27004,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_log_checkpoint_now`|
-|Command line|`--innodb-log-checkpoint-now`|
+|Command line|`--innodb-log-checkpoint-now[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -26954,7 +27099,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_print_ddl_logs`|
-|Command line|`--innodb-print-ddl-logs`|
+|Command line|`--innodb-print-ddl-logs[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -26969,7 +27114,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_redo_log_encrypt`|
-|Command line|`--innodb-redo-log-encrypt`|
+|Command line|`--innodb-redo-log-encrypt[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -27031,7 +27176,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_sync_debug`|
-|Command line|`--innodb-sync-debug`|
+|Command line|`--innodb-sync-debug[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -27061,7 +27206,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_trx_purge_view_update_only_debug`|
-|Command line|`--innodb-trx-purge-view-update-only-debug`|
+|Command line|`--innodb-trx-purge-view-update-only-debug[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -27092,7 +27237,7 @@
 |name|value|
 |----|-----|
 |Name|`innodb_undo_log_encrypt`|
-|Command line|`--innodb-undo-log-encrypt`|
+|Command line|`--innodb-undo-log-encrypt[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -27114,10 +27259,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndbcluster](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndbcluster)|
 
-## ndb_allow_copying_alter_table
+## ndb-allow-copying-alter-table
 |name|value|
 |----|-----|
-|Name|`ndb_allow_copying_alter_table`|
+|Name|`ndb-allow-copying-alter-table`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
 
@@ -27126,10 +27271,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-allow-copying-alter-table](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-allow-copying-alter-table)|
 
-## ndb_batch_size
+## ndb-batch-size
 |name|value|
 |----|-----|
-|Name|`ndb_batch_size`|
+|Name|`ndb-batch-size`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27138,10 +27283,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-batch-size](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-batch-size)|
 
-## ndb_cluster_connection_pool
+## ndb-cluster-connection-pool
 |name|value|
 |----|-----|
-|Name|`ndb_cluster_connection_pool`|
+|Name|`ndb-cluster-connection-pool`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27150,10 +27295,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-cluster-connection-pool](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-cluster-connection-pool)|
 
-## ndb_cluster_connection_pool_nodeids
+## ndb-cluster-connection-pool-nodeids
 |name|value|
 |----|-----|
-|Name|`ndb_cluster_connection_pool_nodeids`|
+|Name|`ndb-cluster-connection-pool-nodeids`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27162,10 +27307,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-cluster-connection-pool-nodeids](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-cluster-connection-pool-nodeids)|
 
-## ndb_blob_read_batch_bytes
+## ndb-blob-read-batch-bytes
 |name|value|
 |----|-----|
-|Name|`ndb_blob_read_batch_bytes`|
+|Name|`ndb-blob-read-batch-bytes`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
 
@@ -27174,10 +27319,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-blob-read-batch-bytes](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-blob-read-batch-bytes)|
 
-## ndb_blob_write_batch_bytes
+## ndb-blob-write-batch-bytes
 |name|value|
 |----|-----|
-|Name|`ndb_blob_write_batch_bytes`|
+|Name|`ndb-blob-write-batch-bytes`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
 
@@ -27186,10 +27331,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-blob-write-batch-bytes](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-blob-write-batch-bytes)|
 
-## ndb_connectstring
+## ndb-connectstring
 |name|value|
 |----|-----|
-|Name|`ndb_connectstring`|
+|Name|`ndb-connectstring`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -27197,10 +27342,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-connectstring](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-connectstring)|
 
-## ndb_default_column_format
+## ndb-default-column-format
 |name|value|
 |----|-----|
-|Name|`ndb_default_column_format`|
+|Name|`ndb-default-column-format`|
 |Scope|`global`|
 |Dynamic|`true`|
 
@@ -27208,12 +27353,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-default-column-format](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-default-column-format)|
-|dev.mysql.com|[sysvar_ndb_default_column_format](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_default_column_format)|
 
-## ndb_deferred_constraints
+## ndb-deferred-constraints
 |name|value|
 |----|-----|
-|Name|`ndb_deferred_constraints`|
+|Name|`ndb-deferred-constraints`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
 
@@ -27221,12 +27365,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-deferred-constraints](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-deferred-constraints)|
-|dev.mysql.com|[sysvar_ndb_deferred_constraints](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_deferred_constraints)|
 
-## ndb_distribution
+## ndb-distribution
 |name|value|
 |----|-----|
-|Name|`ndb_distribution`|
+|Name|`ndb-distribution`|
 |Scope|`global`|
 |Dynamic|`true`|
 
@@ -27234,12 +27377,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-distribution](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-distribution)|
-|dev.mysql.com|[sysvar_ndb_distribution](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_distribution)|
 
-## ndb_log_apply_status
+## ndb-log-apply-status
 |name|value|
 |----|-----|
-|Name|`ndb_log_apply_status`|
+|Name|`ndb-log-apply-status`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27247,12 +27389,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-log-apply-status](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-log-apply-status)|
-|dev.mysql.com|[sysvar_ndb_log_apply_status](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_apply_status)|
 
-## ndb_log_empty_epochs
+## ndb-log-empty-epochs
 |name|value|
 |----|-----|
-|Name|`ndb_log_empty_epochs`|
+|Name|`ndb-log-empty-epochs`|
 |Scope|`global`|
 |Dynamic|`true`|
 
@@ -27260,12 +27401,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-log-empty-epochs](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-log-empty-epochs)|
-|dev.mysql.com|[sysvar_ndb_log_empty_epochs](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_empty_epochs)|
 
-## ndb_log_empty_update
+## ndb-log-empty-update
 |name|value|
 |----|-----|
-|Name|`ndb_log_empty_update`|
+|Name|`ndb-log-empty-update`|
 |Scope|`global`|
 |Dynamic|`true`|
 
@@ -27273,12 +27413,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-log-empty-update](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-log-empty-update)|
-|dev.mysql.com|[sysvar_ndb_log_empty_update](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_empty_update)|
 
-## ndb_log_exclusive_reads
+## ndb-log-exclusive-reads
 |name|value|
 |----|-----|
-|Name|`ndb_log_exclusive_reads`|
+|Name|`ndb-log-exclusive-reads`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
 
@@ -27286,12 +27425,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-log-exclusive-reads](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-log-exclusive-reads)|
-|dev.mysql.com|[sysvar_ndb_log_exclusive_reads](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_exclusive_reads)|
 
-## ndb_log_orig
+## ndb-log-orig
 |name|value|
 |----|-----|
-|Name|`ndb_log_orig`|
+|Name|`ndb-log-orig`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27299,12 +27437,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-log-orig](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-log-orig)|
-|dev.mysql.com|[sysvar_ndb_log_orig](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_orig)|
 
-## ndb_log_transaction_id
+## ndb-log-transaction-id
 |name|value|
 |----|-----|
-|Name|`ndb_log_transaction_id`|
+|Name|`ndb-log-transaction-id`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27312,12 +27449,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-log-transaction-id](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-log-transaction-id)|
-|dev.mysql.com|[sysvar_ndb_log_transaction_id](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_transaction_id)|
 
-## ndb_log_update_minimal
+## ndb-log-update-minimal
 |name|value|
 |----|-----|
-|Name|`ndb_log_update_minimal`|
+|Name|`ndb-log-update-minimal`|
 |Scope|`global`|
 |Dynamic|`true`|
 
@@ -27326,10 +27462,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-log-update-minimal](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-log-update-minimal)|
 
-## ndb_mgmd_host
+## ndb-mgmd-host
 |name|value|
 |----|-----|
-|Name|`ndb_mgmd_host`|
+|Name|`ndb-mgmd-host`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -27337,10 +27473,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-mgmd-host](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-mgmd-host)|
 
-## ndb_nodeid
+## ndb-nodeid
 |name|value|
 |----|-----|
-|Name|`ndb_nodeid`|
+|Name|`ndb-nodeid`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27349,46 +27485,44 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-nodeid](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-nodeid)|
 
-## ndb_optimization_delay
+## ndb-optimization-delay
 |name|value|
 |----|-----|
-|Name|`ndb_optimization_delay`|
+|Name|`ndb-optimization-delay`|
 |Scope|`global`|
 |Dynamic|`true`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
-|dev.mysql.com|[option_mysqld_ndb_optimization_delay](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb_optimization_delay)|
+|dev.mysql.com|[option_mysqld_ndb-optimization-delay](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-optimization-delay)|
 
-## ndb_recv_thread_activation_threshold
+## ndb-recv-thread-activation-threshold
 |name|value|
 |----|-----|
-|Name|`ndb_recv_thread_activation_threshold`|
+|Name|`ndb-recv-thread-activation-threshold`|
 |Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-recv-thread-activation-threshold](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-recv-thread-activation-threshold)|
-|dev.mysql.com|[sysvar_ndb_recv_thread_activation_threshold](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_recv_thread_activation_threshold)|
 
-## ndb_recv_thread_cpu_mask
+## ndb-recv-thread-cpu-mask
 |name|value|
 |----|-----|
-|Name|`ndb_recv_thread_cpu_mask`|
-|Scope|`global`|
+|Name|`ndb-recv-thread-cpu-mask`|
+|Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-recv-thread-cpu-mask](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-recv-thread-cpu-mask)|
-|dev.mysql.com|[sysvar_ndb_recv_thread_cpu_mask](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_recv_thread_cpu_mask)|
 
-## ndb-transid-mysql-connection-map=state
+## ndb-transid-mysql-connection-map
 |name|value|
 |----|-----|
-|Name|`ndb-transid-mysql-connection-map=state`|
+|Name|`ndb-transid-mysql-connection-map`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -27396,10 +27530,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-transid-mysql-connection-map](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-transid-mysql-connection-map)|
 
-## ndb_wait_connected
+## ndb-wait-connected
 |name|value|
 |----|-----|
-|Name|`ndb_wait_connected`|
+|Name|`ndb-wait-connected`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27408,10 +27542,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-wait-connected](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-wait-connected)|
 
-## ndb_wait_setup
+## ndb-wait-setup
 |name|value|
 |----|-----|
-|Name|`ndb_wait_setup`|
+|Name|`ndb-wait-setup`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27420,10 +27554,10 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_ndb-wait-setup](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_ndb-wait-setup)|
 
-## server_id_bits
+## server-id-bits
 |name|value|
 |----|-----|
-|Name|`server_id_bits`|
+|Name|`server-id-bits`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -27431,12 +27565,11 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_server-id-bits](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#option_mysqld_server-id-bits)|
-|dev.mysql.com|[sysvar_server_id_bits](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_server_id_bits)|
 
-## skip_ndbcluster
+## skip-ndbcluster
 |name|value|
 |----|-----|
-|Name|`skip_ndbcluster`|
+|Name|`skip-ndbcluster`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -27491,6 +27624,42 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_ndb_data_node_neighbour](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_data_node_neighbour)|
+
+## ndb_default_column_format
+|name|value|
+|----|-----|
+|Name|`ndb_default_column_format`|
+|Scope|`global`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_default_column_format](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_default_column_format)|
+
+## ndb_deferred_constraints
+|name|value|
+|----|-----|
+|Name|`ndb_deferred_constraints`|
+|Scope|`global`, `session`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_deferred_constraints](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_deferred_constraints)|
+
+## ndb_distribution
+|name|value|
+|----|-----|
+|Name|`ndb_distribution`|
+|Scope|`global`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_distribution](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_distribution)|
 
 ## ndb_eventbuffer_free_percent
 |name|value|
@@ -27588,6 +27757,18 @@
 |------|----|
 |dev.mysql.com|[sysvar_ndb_join_pushdown](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_join_pushdown)|
 
+## ndb_log_apply_status
+|name|value|
+|----|-----|
+|Name|`ndb_log_apply_status`|
+|Scope|`global`|
+|Dynamic|`false`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_log_apply_status](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_apply_status)|
+
 ## ndb_log_bin
 |name|value|
 |----|-----|
@@ -27612,6 +27793,66 @@
 |------|----|
 |dev.mysql.com|[sysvar_ndb_log_binlog_index](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_binlog_index)|
 
+## ndb_log_empty_epochs
+|name|value|
+|----|-----|
+|Name|`ndb_log_empty_epochs`|
+|Scope|`global`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_log_empty_epochs](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_empty_epochs)|
+
+## ndb_log_empty_update
+|name|value|
+|----|-----|
+|Name|`ndb_log_empty_update`|
+|Scope|`global`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_log_empty_update](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_empty_update)|
+
+## ndb_log_exclusive_reads
+|name|value|
+|----|-----|
+|Name|`ndb_log_exclusive_reads`|
+|Scope|`global`, `session`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_log_exclusive_reads](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_exclusive_reads)|
+
+## ndb_log_orig
+|name|value|
+|----|-----|
+|Name|`ndb_log_orig`|
+|Scope|`global`|
+|Dynamic|`false`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_log_orig](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_orig)|
+
+## ndb_log_transaction_id
+|name|value|
+|----|-----|
+|Name|`ndb_log_transaction_id`|
+|Scope|`global`|
+|Dynamic|`false`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_log_transaction_id](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_log_transaction_id)|
+
 ## ndb_optimized_node_selection
 |name|value|
 |----|-----|
@@ -27635,6 +27876,29 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_ndb_read_backup](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_read_backup)|
+
+## ndb_recv_thread_activation_threshold
+|name|value|
+|----|-----|
+|Name|`ndb_recv_thread_activation_threshold`|
+|Dynamic|`false`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_recv_thread_activation_threshold](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_recv_thread_activation_threshold)|
+
+## ndb_recv_thread_cpu_mask
+|name|value|
+|----|-----|
+|Name|`ndb_recv_thread_cpu_mask`|
+|Scope|`global`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_ndb_recv_thread_cpu_mask](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_recv_thread_cpu_mask)|
 
 ## ndb_report_thresh_binlog_epoch_slip
 |name|value|
@@ -27665,7 +27929,7 @@
 |name|value|
 |----|-----|
 |Name|`ndb_row_checksum`|
-|Type of variable|`boolean`|
+|Type of variable|`integer`|
 |Scope|`global`|
 |Dynamic|`true`|
 
@@ -27794,6 +28058,18 @@
 |------|----|
 |dev.mysql.com|[sysvar_ndb_version_string](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_ndb_version_string)|
 
+## server_id_bits
+|name|value|
+|----|-----|
+|Name|`server_id_bits`|
+|Scope|`global`|
+|Dynamic|`false`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_server_id_bits](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-options-variables.html#sysvar_server_id_bits)|
+
 ## transaction_allow_batching
 |name|value|
 |----|-----|
@@ -27894,7 +28170,7 @@
 |name|value|
 |----|-----|
 |Name|`performance_schema_error_size`|
-|Command line|`--performance-schema-error-size`|
+|Command line|`--performance-schema-error-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`number of server error codes`|
@@ -28181,7 +28457,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_sasl_init_pool_size`|
-|Command line|`--authentication-ldap-sasl-init-pool-size=value`|
+|Command line|`--authentication-ldap-sasl-init-pool-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`10`|
@@ -28197,7 +28473,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_sasl_log_status`|
-|Command line|`--authentication-ldap-sasl-log-status=value`|
+|Command line|`--authentication-ldap-sasl-log-status=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`1`|
@@ -28213,7 +28489,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_sasl_max_pool_size`|
-|Command line|`--authentication-ldap-sasl-max-pool-size=value`|
+|Command line|`--authentication-ldap-sasl-max-pool-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`1000`|
@@ -28229,7 +28505,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_sasl_server_host`|
-|Command line|`--authentication-ldap-sasl-server-host=value`|
+|Command line|`--authentication-ldap-sasl-server-host=host_name`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -28243,7 +28519,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_sasl_server_port`|
-|Command line|`--authentication-ldap-sasl-server-port=value`|
+|Command line|`--authentication-ldap-sasl-server-port=port_num`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`389`|
@@ -28259,7 +28535,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_sasl_tls`|
-|Command line|`--authentication-ldap-sasl-tls=value`|
+|Command line|`--authentication-ldap-sasl-tls[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -28394,7 +28670,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_simple_init_pool_size`|
-|Command line|`--authentication-ldap-simple-init-pool-size=value`|
+|Command line|`--authentication-ldap-simple-init-pool-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`10`|
@@ -28410,7 +28686,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_simple_log_status`|
-|Command line|`--authentication-ldap-simple-log-status=value`|
+|Command line|`--authentication-ldap-simple-log-status=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`1`|
@@ -28426,7 +28702,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_simple_max_pool_size`|
-|Command line|`--authentication-ldap-simple-max-pool-size=value`|
+|Command line|`--authentication-ldap-simple-max-pool-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`1000`|
@@ -28442,7 +28718,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_simple_server_host`|
-|Command line|`--authentication-ldap-simple-server-host=value`|
+|Command line|`--authentication-ldap-simple-server-host=host_name`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -28456,7 +28732,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_simple_server_port`|
-|Command line|`--authentication-ldap-simple-server-port=value`|
+|Command line|`--authentication-ldap-simple-server-port=port_num`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`389`|
@@ -28472,7 +28748,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_ldap_simple_tls`|
-|Command line|`--authentication-ldap-simple-tls=value`|
+|Command line|`--authentication-ldap-simple-tls[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -28514,32 +28790,14 @@
 |dev.mysql.com|[sysvar_binlog_row_event_max_size](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_row_event_max_size)|
 |dev.mysql.com|[option_mysqld_binlog-row-event-max-size](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#option_mysqld_binlog-row-event-max-size)|
 
-## binlog_rows_query_log_events
-|name|value|
-|----|-----|
-|Name|`binlog_rows_query_log_events`|
-|Command line|`--binlog-rows-query-log-events`|
-|Type of variable|`boolean`|
-|Scope|`global`, `session`|
-|Default value|`false`|
-|Dynamic|`true`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[option_mysqld_binlog-rows-query-log-events](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#option_mysqld_binlog-rows-query-log-events)|
-|dev.mysql.com|[sysvar_binlog_rows_query_log_events](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_rows_query_log_events)|
-|dev.mysql.com|[option_mysqld_binlog-rows-query-log-events](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#option_mysqld_binlog-rows-query-log-events)|
-|dev.mysql.com|[sysvar_binlog_rows_query_log_events](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_rows_query_log_events)|
-
 ## log_bin_use_v1_row_events
 |name|value|
 |----|-----|
 |Name|`log_bin_use_v1_row_events`|
-|Command line|`--log-bin-use-v1-row-events[={0|1}]`|
+|Command line|`--log-bin-use-v1-row-events[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`0`|
+|Default value|`off`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -28594,9 +28852,9 @@
 |name|value|
 |----|-----|
 |Name|`sporadic_binlog_dump_fail`|
-|Command line|`--sporadic-binlog-dump-fail`|
+|Command line|`--sporadic-binlog-dump-fail[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -28608,7 +28866,7 @@
 |name|value|
 |----|-----|
 |Name|`binlog_encryption`|
-|Command line|`--binlog-encryption`|
+|Command line|`--binlog-encryption[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -28688,6 +28946,7 @@
 |name|value|
 |----|-----|
 |Name|`binlog_max_flush_queue_time`|
+|Command line|`--binlog-max-flush-queue-time=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`0`|
@@ -28704,6 +28963,7 @@
 |name|value|
 |----|-----|
 |Name|`binlog_order_commits`|
+|Command line|`--binlog-order-commits[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -28719,7 +28979,7 @@
 |name|value|
 |----|-----|
 |Name|`binlog_rotate_encryption_master_key_at_startup`|
-|Command line|`--binlog-rotate-encryption-master-key-at-startup`|
+|Command line|`--binlog-rotate-encryption-master-key-at-startup[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -28761,6 +29021,22 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_binlog_row_value_options](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_row_value_options)|
+
+## binlog_rows_query_log_events
+|name|value|
+|----|-----|
+|Name|`binlog_rows_query_log_events`|
+|Command line|`--binlog-rows-query-log-events[={OFF|ON}]`|
+|Type of variable|`boolean`|
+|Scope|`global`, `session`|
+|Default value|`off`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_binlog_rows_query_log_events](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_rows_query_log_events)|
+|dev.mysql.com|[sysvar_binlog_rows_query_log_events](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_rows_query_log_events)|
 
 ## binlog_transaction_dependency_tracking
 |name|value|
@@ -28816,6 +29092,7 @@
 |name|value|
 |----|-----|
 |Name|`log_statements_unsafe_for_binlog`|
+|Command line|`--log-statements-unsafe-for-binlog[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -28844,7 +29121,7 @@
 |name|value|
 |----|-----|
 |Name|`transaction_write_set_extraction`|
-|Command line|`--transaction-write-set-extraction=[value]`|
+|Command line|`--transaction-write-set-extraction[=value]`|
 |Type of variable|`enumeration`|
 |Scope|`global`, `session`|
 |Default value|`off`|
@@ -28904,22 +29181,6 @@
 |dev.mysql.com|[option_mysqld_enforce-gtid-consistency](https://dev.mysql.com/doc/refman/8.0/en/replication-options-gtids.html#option_mysqld_enforce-gtid-consistency)|
 |dev.mysql.com|[sysvar_enforce_gtid_consistency](https://dev.mysql.com/doc/refman/8.0/en/replication-options-gtids.html#sysvar_enforce_gtid_consistency)|
 
-## executed_gtids_compression_period
-|name|value|
-|----|-----|
-|Name|`executed_gtids_compression_period`|
-|Type of variable|`integer`|
-|Scope|`global`|
-|Default value|`1000`|
-|Dynamic|`true`|
-|Range|from: `0` to: `4294967295`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[option_mysqld_executed-gtids-compression-period](https://dev.mysql.com/doc/refman/8.0/en/replication-options-gtids.html#option_mysqld_executed-gtids-compression-period)|
-|dev.mysql.com|[sysvar_executed_gtids_compression_period](https://dev.mysql.com/doc/refman/8.0/en/replication-options-gtids.html#sysvar_executed_gtids_compression_period)|
-
 ## gtid_mode
 |name|value|
 |----|-----|
@@ -28956,10 +29217,10 @@
 |name|value|
 |----|-----|
 |Name|`binlog_gtid_simple_recovery`|
-|Command line|`--binlog-gtid-simple-recovery`|
+|Command line|`--binlog-gtid-simple-recovery[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`true`|
+|Default value|`on`|
 |Dynamic|`false`|
 
 ### Documentation(s)
@@ -29021,28 +29282,13 @@
 |------|----|
 |dev.mysql.com|[sysvar_gtid_purged](https://dev.mysql.com/doc/refman/8.0/en/replication-options-gtids.html#sysvar_gtid_purged)|
 
-## simplified_binlog_gtid_recovery
-|name|value|
-|----|-----|
-|Name|`simplified_binlog_gtid_recovery`|
-|Command line|`--simplified-binlog-gtid-recovery`|
-|Type of variable|`boolean`|
-|Scope|`global`|
-|Default value|`false`|
-|Dynamic|`false`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[sysvar_simplified_binlog_gtid_recovery](https://dev.mysql.com/doc/refman/8.0/en/replication-options-gtids.html#sysvar_simplified_binlog_gtid_recovery)|
-
 ## show_slave_auth_info
 |name|value|
 |----|-----|
 |Name|`show_slave_auth_info`|
-|Command line|`--show-slave-auth-info`|
+|Command line|`--show-slave-auth-info[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29079,6 +29325,7 @@
 |name|value|
 |----|-----|
 |Name|`rpl_semi_sync_master_wait_for_slave_count`|
+|Command line|`--rpl-semi-sync-master-wait-for-slave-count=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`1`|
@@ -29121,9 +29368,9 @@
 |name|value|
 |----|-----|
 |Name|`replicate_same_server_id`|
-|Command line|`--replicate-same-server-id`|
+|Command line|`--replicate-same-server-id[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29184,28 +29431,14 @@
 |name|value|
 |----|-----|
 |Name|`skip_slave_start`|
-|Command line|`--skip-slave-start`|
+|Command line|`--skip-slave-start[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_skip-slave-start](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#option_mysqld_skip-slave-start)|
-
-## slave-max-allowed-packet=bytes
-|name|value|
-|----|-----|
-|Name|`slave-max-allowed-packet=bytes`|
-|Command line|`--slave-max-allowed-packet=#`|
-|Type of variable|`integer`|
-|Default value|`1073741824`|
-|Range|from: `1024` to: `1073741824`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[option_mysqld_slave-max-allowed-packet](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#option_mysqld_slave-max-allowed-packet)|
 
 ## slave_parallel_type
 |name|value|
@@ -29220,19 +29453,22 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_slave-parallel-type](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#option_mysqld_slave-parallel-type)|
+|dev.mysql.com|[sysvar_slave_parallel_type](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#sysvar_slave_parallel_type)|
 
-## slave-rows-search-algorithms=list
+## slave_rows_search_algorithms
 |name|value|
 |----|-----|
-|Name|`slave-rows-search-algorithms=list`|
-|Command line|`--slave-rows-search-algorithms=list`|
+|Name|`slave_rows_search_algorithms`|
 |Type of variable|`set`|
+|Scope|`global`|
+|Dynamic|`true`|
 |Valid value(s)|`TABLE_SCAN,INDEX_SCAN`, `INDEX_SCAN,HASH_SCAN`, `TABLE_SCAN,HASH_SCAN`, `TABLE_SCAN,INDEX_SCAN,HASH_SCAN`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_slave-rows-search-algorithms](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#option_mysqld_slave-rows-search-algorithms)|
+|dev.mysql.com|[sysvar_slave_rows_search_algorithms](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#sysvar_slave_rows_search_algorithms)|
 
 ## abort_slave_event_count
 |name|value|
@@ -29265,7 +29501,7 @@
 |name|value|
 |----|-----|
 |Name|`master_info_repository`|
-|Command line|`--master-info-repository=FILE|TABLE`|
+|Command line|`--master-info-repository={FILE|TABLE}`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -29324,49 +29560,33 @@
 |------|----|
 |dev.mysql.com|[sysvar_rpl_stop_slave_timeout](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#sysvar_rpl_stop_slave_timeout)|
 
-## slave_parallel_type=type
-|name|value|
-|----|-----|
-|Name|`slave_parallel_type=type`|
-|Command line|`--slave-parallel-type=type`|
-|Type of variable|`enumeration`|
-|Default value|`database`|
-|Valid value(s)|`DATABASE`, `LOGICAL_CLOCK`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[sysvar_slave_parallel_type](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#sysvar_slave_parallel_type)|
-
 ## slave_preserve_commit_order
 |name|value|
 |----|-----|
 |Name|`slave_preserve_commit_order`|
-|Command line|`--slave-preserve-commit-order=value`|
+|Command line|`--slave-preserve-commit-order[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`0`|
+|Default value|`off`|
 |Dynamic|`true`|
-|Valid value(s)|`0`, `1`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_slave_preserve_commit_order](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#sysvar_slave_preserve_commit_order)|
 
-## slave_rows_search_algorithms
+## server_uuid
 |name|value|
 |----|-----|
-|Name|`slave_rows_search_algorithms`|
-|Type of variable|`set`|
+|Name|`server_uuid`|
+|Type of variable|`string`|
 |Scope|`global`|
-|Dynamic|`true`|
-|Valid value(s)|`TABLE_SCAN,INDEX_SCAN`, `INDEX_SCAN,HASH_SCAN`, `TABLE_SCAN,HASH_SCAN`, `TABLE_SCAN,INDEX_SCAN,HASH_SCAN`|
+|Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
-|dev.mysql.com|[sysvar_slave_rows_search_algorithms](https://dev.mysql.com/doc/refman/8.0/en/replication-options-slave.html#sysvar_slave_rows_search_algorithms)|
+|dev.mysql.com|[sysvar_server_uuid](https://dev.mysql.com/doc/refman/8.0/en/replication-options.html#sysvar_server_uuid)|
 
 ## help
 |name|value|
@@ -29383,9 +29603,9 @@
 |name|value|
 |----|-----|
 |Name|`allow_suspicious_udfs`|
-|Command line|`--allow-suspicious-udfs`|
+|Command line|`--allow-suspicious-udfs[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29407,9 +29627,9 @@
 |name|value|
 |----|-----|
 |Name|`character_set_client_handshake`|
-|Command line|`--character-set-client-handshake`|
+|Command line|`--character-set-client-handshake[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`true`|
+|Default value|`on`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29500,17 +29720,6 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_early-plugin-load](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_early-plugin-load)|
 
-## enable_named_pipe
-|name|value|
-|----|-----|
-|Name|`enable_named_pipe`|
-|Command line|`--enable-named-pipe`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[option_mysqld_enable-named-pipe](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_enable-named-pipe)|
-
 ## exit_info
 |name|value|
 |----|-----|
@@ -29527,9 +29736,9 @@
 |name|value|
 |----|-----|
 |Name|`external_locking`|
-|Command line|`--external-locking`|
+|Command line|`--external-locking[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29540,9 +29749,9 @@
 |name|value|
 |----|-----|
 |Name|`gdb`|
-|Command line|`--gdb`|
+|Command line|`--gdb[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29553,7 +29762,7 @@
 |name|value|
 |----|-----|
 |Name|`initialize`|
-|Command line|`--initialize`|
+|Command line|`--initialize[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Default value|`off`|
 
@@ -29566,7 +29775,7 @@
 |name|value|
 |----|-----|
 |Name|`initialize_insecure`|
-|Command line|`--initialize-insecure`|
+|Command line|`--initialize-insecure[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Default value|`off`|
 
@@ -29597,6 +29806,21 @@
 |------|----|
 |dev.mysql.com|[option_mysqld_install-manual](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_install-manual)|
 
+## language
+|name|value|
+|----|-----|
+|Name|`language`|
+|Command line|`--language=name`|
+|Type of variable|`directory name`|
+|Scope|`global`|
+|Default value|`/usr/local/mysql/share/mysql/english/`|
+|Dynamic|`false`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[option_mysqld_language](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_language)|
+
 ## local_service
 |name|value|
 |----|-----|
@@ -29624,7 +29848,7 @@
 |name|value|
 |----|-----|
 |Name|`log_raw`|
-|Command line|`--log-raw[=value]`|
+|Command line|`--log-raw[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Default value|`off`|
 
@@ -29637,9 +29861,9 @@
 |name|value|
 |----|-----|
 |Name|`log_short_format`|
-|Command line|`--log-short-format`|
+|Command line|`--log-short-format[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29663,9 +29887,9 @@
 |name|value|
 |----|-----|
 |Name|`memlock`|
-|Command line|`--memlock`|
+|Command line|`--memlock[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29676,9 +29900,9 @@
 |name|value|
 |----|-----|
 |Name|`no_dd_upgrade`|
-|Command line|`--no-dd-upgrade`|
+|Command line|`--no-dd-upgrade[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29689,9 +29913,9 @@
 |name|value|
 |----|-----|
 |Name|`no_monitor`|
-|Command line|`--no-monitor`|
+|Command line|`--no-monitor[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29702,9 +29926,9 @@
 |name|value|
 |----|-----|
 |Name|`old_style_user_limits`|
-|Command line|`--old-style-user-limits`|
+|Command line|`--old-style-user-limits[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29717,6 +29941,8 @@
 |Name|`plugin_load`|
 |Command line|`--plugin-load=plugin_list`|
 |Type of variable|`string`|
+|Scope|`global`|
+|Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29729,6 +29955,8 @@
 |Name|`plugin_load_add`|
 |Command line|`--plugin-load-add=plugin_list`|
 |Type of variable|`string`|
+|Scope|`global`|
+|Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29763,19 +29991,19 @@
 |name|value|
 |----|-----|
 |Name|`safe_user_create`|
-|Command line|`--safe-user-create`|
+|Command line|`--safe-user-create[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_safe-user-create](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_safe-user-create)|
 
-## skip_event_scheduler
+## skip_event_scheduler__disable_event_scheduler
 |name|value|
 |----|-----|
-|Name|`skip_event_scheduler`|
+|Name|`skip_event_scheduler__disable_event_scheduler`|
 |Command line|`--skip-event-scheduler--disable-event-scheduler`|
 
 ### Documentation(s)
@@ -29787,9 +30015,9 @@
 |name|value|
 |----|-----|
 |Name|`skip_grant_tables`|
-|Command line|`--skip-grant-tables`|
+|Command line|`--skip-grant-tables[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29822,14 +30050,26 @@
 |name|value|
 |----|-----|
 |Name|`super_large_pages`|
-|Command line|`--super-large-pages`|
+|Command line|`--super-large-pages[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[option_mysqld_super-large-pages](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_super-large-pages)|
+
+## symbolic_links
+|name|value|
+|----|-----|
+|Name|`symbolic_links`|
+|Command line|`--symbolic-links[={OFF|ON}]`|
+|Type of variable|`boolean`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[option_mysqld_symbolic-links](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_symbolic-links)|
 
 ## skip_stack_trace
 |name|value|
@@ -29859,9 +30099,9 @@
 |name|value|
 |----|-----|
 |Name|`sysdate_is_now`|
-|Command line|`--sysdate-is-now`|
+|Command line|`--sysdate-is-now[={OFF|ON}]`|
 |Type of variable|`boolean`|
-|Default value|`false`|
+|Default value|`off`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29886,7 +30126,7 @@
 |name|value|
 |----|-----|
 |Name|`temp_pool`|
-|Command line|`--temp-pool`|
+|Command line|`--temp-pool[={OFF|ON}]`|
 |Type of variable|`boolean`|
 
 ### Documentation(s)
@@ -29915,7 +30155,7 @@
 |name|value|
 |----|-----|
 |Name|`transaction_read_only`|
-|Command line|`--transaction-read-only`|
+|Command line|`--transaction-read-only[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`off`|
@@ -29957,7 +30197,7 @@
 |name|value|
 |----|-----|
 |Name|`validate_config`|
-|Command line|`--validate-config`|
+|Command line|`--validate-config[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Default value|`off`|
 
@@ -29970,7 +30210,7 @@
 |name|value|
 |----|-----|
 |Name|`activate_all_roles_on_login`|
-|Command line|`--activate-all-roles-on-login`|
+|Command line|`--activate-all-roles-on-login[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -29985,7 +30225,7 @@
 |name|value|
 |----|-----|
 |Name|`admin_address`|
-|Command line|`--admin-address=#`|
+|Command line|`--admin-address=addr`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Dynamic|`false`|
@@ -29999,7 +30239,7 @@
 |name|value|
 |----|-----|
 |Name|`admin_port`|
-|Command line|`--admin-port=#`|
+|Command line|`--admin-port=port_num`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`33062`|
@@ -30015,7 +30255,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_windows_log_level`|
-|Command line|`--authentication-windows-log-level`|
+|Command line|`--authentication-windows-log-level=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`2`|
@@ -30031,7 +30271,7 @@
 |name|value|
 |----|-----|
 |Name|`authentication_windows_use_principal_name`|
-|Command line|`--authentication-windows-use-principal-name`|
+|Command line|`--authentication-windows-use-principal-name[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -30061,7 +30301,7 @@
 |name|value|
 |----|-----|
 |Name|`avoid_temporal_upgrade`|
-|Command line|`--avoid-temporal-upgrade={OFF|ON}`|
+|Command line|`--avoid-temporal-upgrade[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -30136,7 +30376,7 @@
 |name|value|
 |----|-----|
 |Name|`check_proxy_users`|
-|Command line|`--check-proxy-users=[={OFF|ON}]`|
+|Command line|`--check-proxy-users[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -30151,7 +30391,7 @@
 |name|value|
 |----|-----|
 |Name|`create_admin_listener_thread`|
-|Command line|`--create-admin-listener-thread`|
+|Command line|`--create-admin-listener-thread[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -30210,6 +30450,7 @@
 |name|value|
 |----|-----|
 |Name|`default_table_encryption`|
+|Command line|`--default-table-encryption=#`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`off`|
@@ -30239,7 +30480,7 @@
 |name|value|
 |----|-----|
 |Name|`dragnet.log_error_filter_rules`|
-|Command line|`--dragnet.log-error-filter-rules`|
+|Command line|`--dragnet.log-error-filter-rules=value`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Default value|`if prio>=information then drop. if exists source_line then unset source_line.`|
@@ -30254,6 +30495,7 @@
 |name|value|
 |----|-----|
 |Name|`end_markers_in_json`|
+|Command line|`--end-markers-in-json[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`off`|
@@ -30297,7 +30539,7 @@
 |name|value|
 |----|-----|
 |Name|`information_schema_stats_expiry`|
-|Command line|`--information-schema-stats-expiry=value`|
+|Command line|`--information-schema-stats-expiry=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
 |Default value|`86400`|
@@ -30345,7 +30587,7 @@
 |name|value|
 |----|-----|
 |Name|`log_error_filter_rules`|
-|Command line|`--log-error-filter-rules`|
+|Command line|`--log-error-filter-rules=value`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Default value|`set by server`|
@@ -30360,7 +30602,7 @@
 |name|value|
 |----|-----|
 |Name|`log_error_services`|
-|Command line|`--log-error-services`|
+|Command line|`--log-error-services=value`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Default value|`log_filter_internal; log_sink_internal`|
@@ -30420,7 +30662,7 @@
 |name|value|
 |----|-----|
 |Name|`log_syslog`|
-|Command line|`--log-syslog[={0|1}]`|
+|Command line|`--log-syslog[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`true`|
@@ -30449,7 +30691,7 @@
 |name|value|
 |----|-----|
 |Name|`log_syslog_include_pid`|
-|Command line|`--log-syslog-include-pid[={0|1}]`|
+|Command line|`--log-syslog-include-pid[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -30495,6 +30737,7 @@
 |name|value|
 |----|-----|
 |Name|`log_throttle_queries_not_using_indexes`|
+|Command line|`--log-throttle-queries-not-using-indexes=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`0`|
@@ -30539,7 +30782,7 @@
 |name|value|
 |----|-----|
 |Name|`max_points_in_geometry`|
-|Command line|`--max-points-in-geometry=integer`|
+|Command line|`--max-points-in-geometry=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
 |Default value|`65536`|
@@ -30555,8 +30798,8 @@
 |name|value|
 |----|-----|
 |Name|`mecab_rc_file`|
-|Command line|`--mecab-rc-file`|
-|Type of variable|`directory name`|
+|Command line|`--mecab-rc-file=file_name`|
+|Type of variable|`file name`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -30569,7 +30812,7 @@
 |name|value|
 |----|-----|
 |Name|`mysql_native_password_proxy_users`|
-|Command line|`--mysql-native-password-proxy-users=[={OFF|ON}]`|
+|Command line|`--mysql-native-password-proxy-users[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -30584,6 +30827,7 @@
 |name|value|
 |----|-----|
 |Name|`named_pipe_full_access_group`|
+|Command line|`--named-pipe-full-access-group=value`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Default value|`*everyone*`|
@@ -30599,10 +30843,10 @@
 |name|value|
 |----|-----|
 |Name|`new`|
-|Command line|`--new`|
+|Command line|`--new[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
-|Default value|`false`|
+|Default value|`off`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -30614,7 +30858,7 @@
 |name|value|
 |----|-----|
 |Name|`ngram_token_size`|
-|Command line|`--ngram-token-size`|
+|Command line|`--ngram-token-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`2`|
@@ -30630,7 +30874,7 @@
 |name|value|
 |----|-----|
 |Name|`offline_mode`|
-|Command line|`--offline-mode=val`|
+|Command line|`--offline-mode[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -30645,6 +30889,7 @@
 |name|value|
 |----|-----|
 |Name|`optimizer_trace_features`|
+|Command line|`--optimizer-trace-features=value`|
 |Type of variable|`string`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
@@ -30658,6 +30903,7 @@
 |name|value|
 |----|-----|
 |Name|`optimizer_trace_limit`|
+|Command line|`--optimizer-trace-limit=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
 |Default value|`1`|
@@ -30672,6 +30918,7 @@
 |name|value|
 |----|-----|
 |Name|`optimizer_trace_offset`|
+|Command line|`--optimizer-trace-offset=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
 |Default value|`-1`|
@@ -30686,7 +30933,7 @@
 |name|value|
 |----|-----|
 |Name|`parser_max_mem_size`|
-|Command line|`--parser-max-mem-size=N`|
+|Command line|`--parser-max-mem-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
 |Dynamic|`true`|
@@ -30696,6 +30943,21 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_parser_max_mem_size](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_parser_max_mem_size)|
+
+## partial_revokes
+|name|value|
+|----|-----|
+|Name|`partial_revokes`|
+|Command line|`--partial-revokes[={OFF|ON}]`|
+|Type of variable|`boolean`|
+|Scope|`global`|
+|Default value|`off (if partial revokes do not exist)on (if partial revokes exist)`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_partial_revokes](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_partial_revokes)|
 
 ## password_history
 |name|value|
@@ -30748,7 +31010,7 @@
 |name|value|
 |----|-----|
 |Name|`persisted_globals_load`|
-|Command line|`--persisted-globals-load[=ON|OFF]`|
+|Command line|`--persisted-globals-load[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -30774,11 +31036,26 @@
 |------|----|
 |dev.mysql.com|[sysvar_persist_only_admin_x509_subject](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_persist_only_admin_x509_subject)|
 
+## print_identified_with_as_hex
+|name|value|
+|----|-----|
+|Name|`print_identified_with_as_hex`|
+|Command line|`--print-identified-with-as-hex[={OFF|ON}]`|
+|Type of variable|`boolean`|
+|Scope|`global`, `session`|
+|Default value|`off`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_print_identified_with_as_hex](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_print_identified_with_as_hex)|
+
 ## range_optimizer_max_mem_size
 |name|value|
 |----|-----|
 |Name|`range_optimizer_max_mem_size`|
-|Command line|`--range-optimizer-max-mem-size=N`|
+|Command line|`--range-optimizer-max-mem-size=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
 |Default value|`8388608`|
@@ -30886,7 +31163,7 @@
 |name|value|
 |----|-----|
 |Name|`schema_definition_cache`|
-|Command line|`--schema-definition-cache=N`|
+|Command line|`--schema-definition-cache=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`256`|
@@ -30902,7 +31179,7 @@
 |name|value|
 |----|-----|
 |Name|`session_track_gtids`|
-|Command line|`--session-track-gtids=[value]`|
+|Command line|`--session-track-gtids=value`|
 |Type of variable|`enumeration`|
 |Scope|`global`, `session`|
 |Default value|`off`|
@@ -30948,7 +31225,7 @@
 |name|value|
 |----|-----|
 |Name|`sha256_password_proxy_users`|
-|Command line|`--sha256-password-proxy-users=[={OFF|ON}]`|
+|Command line|`--sha256-password-proxy-users[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -30993,9 +31270,10 @@
 |name|value|
 |----|-----|
 |Name|`show_create_table_verbosity`|
-|Command line|`--show-create-table-verbosity`|
+|Command line|`--show-create-table-verbosity[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
+|Default value|`off`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -31007,7 +31285,7 @@
 |name|value|
 |----|-----|
 |Name|`show_old_temporals`|
-|Command line|`--show-old-temporals={OFF|ON}`|
+|Command line|`--show-old-temporals[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`off`|
@@ -31053,7 +31331,7 @@
 |name|value|
 |----|-----|
 |Name|`stored_program_definition_cache`|
-|Command line|`--stored-program-definition-cache=N`|
+|Command line|`--stored-program-definition-cache=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`256`|
@@ -31099,7 +31377,7 @@
 |name|value|
 |----|-----|
 |Name|`syseventlog.include_pid`|
-|Command line|`--syseventlog.include-pid[={0|1}]`|
+|Command line|`--syseventlog.include-pid[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -31129,6 +31407,7 @@
 |name|value|
 |----|-----|
 |Name|`table_encryption_privilege_check`|
+|Command line|`--table-encryption-privilege-check[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`off`|
@@ -31138,6 +31417,22 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_table_encryption_privilege_check](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_table_encryption_privilege_check)|
+
+## tablespace_definition_cache
+|name|value|
+|----|-----|
+|Name|`tablespace_definition_cache`|
+|Command line|`--tablespace-definition-cache=#`|
+|Type of variable|`integer`|
+|Scope|`global`|
+|Default value|`256`|
+|Dynamic|`true`|
+|Range|from: `256` to: `524288`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_tablespace_definition_cache](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_tablespace_definition_cache)|
 
 ## temptable_max_ram
 |name|value|
@@ -31159,7 +31454,7 @@
 |name|value|
 |----|-----|
 |Name|`temptable_use_mmap`|
-|Command line|`--temptable-use-mmap`|
+|Command line|`--temptable-use-mmap[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -31225,6 +31520,7 @@
 |Command line|`--tls-ciphersuites=ciphersuite_list`|
 |Type of variable|`string`|
 |Scope|`global`|
+|Default value|`empty string`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -31264,6 +31560,7 @@
 |name|value|
 |----|-----|
 |Name|`validate_user_plugins`|
+|Command line|`--validate-user-plugins[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`|
 |Default value|`on`|
@@ -31291,7 +31588,7 @@
 |name|value|
 |----|-----|
 |Name|`windowing_use_high_precision`|
-|Command line|`--windowing-use-high-precision=#`|
+|Command line|`--windowing-use-high-precision[={OFF|ON}]`|
 |Type of variable|`boolean`|
 |Scope|`global`, `session`|
 |Default value|`on`|
@@ -31321,7 +31618,7 @@
 |name|value|
 |----|-----|
 |Name|`version_tokens_session_number`|
-|Command line|`--version-tokens-session-number=N`|
+|Command line|`--version-tokens-session-number=#`|
 |Type of variable|`integer`|
 |Scope|`global`, `session`|
 |Default value|`0`|
@@ -31350,7 +31647,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_bind_address`|
-|Command line|`--mysqlx-bind-address=value`|
+|Command line|`--mysqlx-bind-address=addr`|
 |Type of variable|`string`|
 |Scope|`global`|
 |Default value|`*`|
@@ -31365,7 +31662,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_connect_timeout`|
-|Command line|`--mysqlx-connect-timeout=value`|
+|Command line|`--mysqlx-connect-timeout=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`30`|
@@ -31381,7 +31678,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_document_id_unique_prefix`|
-|Command line|`--mysqlx-document-id-unique-prefix=value`|
+|Command line|`--mysqlx-document-id-unique-prefix=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`0`|
@@ -31393,11 +31690,26 @@
 |------|----|
 |dev.mysql.com|[sysvar_mysqlx_document_id_unique_prefix](https://dev.mysql.com/doc/refman/8.0/en/x-plugin-options-system-variables.html#sysvar_mysqlx_document_id_unique_prefix)|
 
+## mysqlx_enable_hello_notice
+|name|value|
+|----|-----|
+|Name|`mysqlx_enable_hello_notice`|
+|Command line|`--mysqlx-document-id-unique-prefix[={OFF|ON}]`|
+|Type of variable|`boolean`|
+|Scope|`global`|
+|Default value|`on`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_mysqlx_enable_hello_notice](https://dev.mysql.com/doc/refman/8.0/en/x-plugin-options-system-variables.html#sysvar_mysqlx_enable_hello_notice)|
+
 ## mysqlx_idle_worker_thread_timeout
 |name|value|
 |----|-----|
 |Name|`mysqlx_idle_worker_thread_timeout`|
-|Command line|`--mysqlx-idle-worker-thread-timeout=value`|
+|Command line|`--mysqlx-idle-worker-thread-timeout=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`60`|
@@ -31413,7 +31725,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_interactive_timeout`|
-|Command line|`--mysqlx-interactive-timeout=value`|
+|Command line|`--mysqlx-interactive-timeout=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`28800`|
@@ -31429,7 +31741,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_max_allowed_packet`|
-|Command line|`--mysqlx-max-allowed-packet=value`|
+|Command line|`--mysqlx-max-allowed-packet=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`67108864`|
@@ -31445,7 +31757,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_max_connections`|
-|Command line|`--mysqlx-max-connections=value`|
+|Command line|`--mysqlx-max-connections=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`100`|
@@ -31461,7 +31773,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_min_worker_threads`|
-|Command line|`--mysqlx-min-worker-threads=value`|
+|Command line|`--mysqlx-min-worker-threads=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`2`|
@@ -31477,7 +31789,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_port`|
-|Command line|`--mysqlx-port=value`|
+|Command line|`--mysqlx-port=port_num`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`33060`|
@@ -31493,7 +31805,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_port_open_timeout`|
-|Command line|`--mysqlx-port-open-timeout=value`|
+|Command line|`--mysqlx-port-open-timeout=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
 |Default value|`0`|
@@ -31509,7 +31821,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_read_timeout`|
-|Command line|`--mysqlx-read-timeout=value`|
+|Command line|`--mysqlx-read-timeout=#`|
 |Type of variable|`integer`|
 |Scope|`session`|
 |Default value|`28800`|
@@ -31638,7 +31950,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_wait_timeout`|
-|Command line|`--mysqlx-wait-timeout=value`|
+|Command line|`--mysqlx-wait-timeout=#`|
 |Type of variable|`integer`|
 |Scope|`session`|
 |Default value|`28800`|
@@ -31654,7 +31966,7 @@
 |name|value|
 |----|-----|
 |Name|`mysqlx_write_timeout`|
-|Command line|`--mysqlx-write-timeout=value`|
+|Command line|`--mysqlx-write-timeout=#`|
 |Type of variable|`integer`|
 |Scope|`session`|
 |Default value|`60`|

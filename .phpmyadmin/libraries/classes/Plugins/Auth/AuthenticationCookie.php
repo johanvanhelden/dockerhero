@@ -19,11 +19,11 @@ use PhpMyAdmin\Response;
 use PhpMyAdmin\Server\Select;
 use PhpMyAdmin\Session;
 use PhpMyAdmin\Template;
-use PhpMyAdmin\Util;
 use PhpMyAdmin\Url;
+use PhpMyAdmin\Util;
 use phpseclib\Crypt;
-use ReCaptcha;
 use phpseclib\Crypt\Random;
+use ReCaptcha;
 
 /**
  * Remember where to redirect the user
@@ -175,7 +175,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         if (empty($GLOBALS['cfg']['Lang']) && $language_manager->hasChoice()) {
             echo "<div class='hide js-show'>";
             // use fieldset, don't show doc link
-            echo $language_manager->getSelectorDisplay(true, false);
+            echo $language_manager->getSelectorDisplay(new Template(), true, false);
             echo '</div>';
         }
         echo '
@@ -252,7 +252,7 @@ class AuthenticationCookie extends AuthenticationPlugin
             , $GLOBALS['lang'] , '" async defer></script>';
             echo '<input class="btn btn-primary g-recaptcha" data-sitekey="'
             , htmlspecialchars($GLOBALS['cfg']['CaptchaLoginPublicKey']),'"'
-                . ' data-callback="recaptchaCallback" value="' , __('Go') , '" type="submit" id="input_go">';
+                . ' data-callback="Functions.recaptchaCallback" value="' , __('Go') , '" type="submit" id="input_go">';
         }
         $_form_params = [];
         if (! empty($GLOBALS['target'])) {
@@ -322,7 +322,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         $this->user = $this->password = '';
         $GLOBALS['from_cookie'] = false;
 
-        if (isset($_REQUEST['pma_username']) && strlen($_REQUEST['pma_username']) > 0) {
+        if (isset($_POST['pma_username']) && strlen($_POST['pma_username']) > 0) {
             // Verify Captcha if it is required.
             if (! empty($GLOBALS['cfg']['CaptchaLoginPrivateKey'])
                 && ! empty($GLOBALS['cfg']['CaptchaLoginPublicKey'])
@@ -369,14 +369,14 @@ class AuthenticationCookie extends AuthenticationPlugin
             }
 
             // The user just logged in
-            $this->user = Core::sanitizeMySQLUser($_REQUEST['pma_username']);
-            $this->password = isset($_REQUEST['pma_password']) ? $_REQUEST['pma_password'] : '';
+            $this->user = Core::sanitizeMySQLUser($_POST['pma_username']);
+            $this->password = isset($_POST['pma_password']) ? $_POST['pma_password'] : '';
             if ($GLOBALS['cfg']['AllowArbitraryServer']
                 && isset($_REQUEST['pma_servername'])
             ) {
                 if ($GLOBALS['cfg']['ArbitraryServerRegexp']) {
                     $parts = explode(' ', $_REQUEST['pma_servername']);
-                    if (count($parts) == 2) {
+                    if (count($parts) === 2) {
                         $tmp_host = $parts[0];
                     } else {
                         $tmp_host = $_REQUEST['pma_servername'];
@@ -491,7 +491,7 @@ class AuthenticationCookie extends AuthenticationPlugin
         ) {
             /* Allow to specify 'host port' */
             $parts = explode(' ', $GLOBALS['pma_auth_server']);
-            if (count($parts) == 2) {
+            if (count($parts) === 2) {
                 $tmp_host = $parts[0];
                 $tmp_port = $parts[1];
             } else {
@@ -891,7 +891,7 @@ class AuthenticationCookie extends AuthenticationPlugin
     public function createIV()
     {
         /* Testsuite shortcut only to allow predictable IV */
-        if (! is_null($this->_cookie_iv)) {
+        if ($this->_cookie_iv !== null) {
             return $this->_cookie_iv;
         }
         if ($this->_use_openssl) {

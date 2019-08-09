@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 use PhpMyAdmin\Core;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\File;
 use PhpMyAdmin\InsertEdit;
 use PhpMyAdmin\Message;
@@ -30,23 +29,20 @@ if (! defined('ROOT_PATH')) {
     define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 }
 
-global $url_params;
+global $containerBuilder, $db, $table, $url_params;
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->set(Response::class, Response::getInstance());
-
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
 // Check parameters
 Util::checkParameters(['db', 'table', 'goto']);
 
-$dbi->selectDb($GLOBALS['db']);
+$dbi->selectDb($db);
 
 /**
  * Initializes some variables
@@ -61,9 +57,12 @@ $scripts->addFile('sql.js');
 $scripts->addFile('indexes.js');
 $scripts->addFile('gis_data_editor.js');
 
-$relation = new Relation($dbi);
-$transformations = new Transformations();
-$insertEdit = new InsertEdit($dbi);
+/** @var Relation $relation */
+$relation = $containerBuilder->get('relation');
+/** @var Transformations $transformations */
+$transformations = $containerBuilder->get('transformations');
+/** @var InsertEdit $insertEdit */
+$insertEdit = $containerBuilder->get('insert_edit');
 
 // check whether insert row mode, if so include tbl_change.php
 $insertEdit->isInsertRow();
@@ -154,7 +153,7 @@ if ($dbi->getVersion() >= 50600) {
 }
 
 //if some posted fields need to be transformed.
-$mime_map = $transformations->getMime($GLOBALS['db'], $GLOBALS['table']);
+$mime_map = $transformations->getMime($db, $table);
 if ($mime_map === false) {
     $mime_map = [];
 }
@@ -340,7 +339,7 @@ foreach ($loop_array as $rownumber => $where_clause) {
             $value_sets[] = implode(', ', $query_values);
         } else {
             // build update query
-            $query[] = 'UPDATE ' . Util::backquote($GLOBALS['table'])
+            $query[] = 'UPDATE ' . Util::backquote($table)
                 . ' SET ' . implode(', ', $query_values)
                 . ' WHERE ' . $where_clause
                 . ($_POST['clause_is_unique'] ? '' : ' LIMIT 1');
@@ -537,7 +536,7 @@ if (! empty($return_to_sql_query)) {
 }
 
 $scripts->addFile('vendor/jquery/additional-methods.js');
-$scripts->addFile('tbl_change.js');
+$scripts->addFile('table/change.js');
 
 $active_page = $goto_include;
 

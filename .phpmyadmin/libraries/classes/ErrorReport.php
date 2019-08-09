@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace PhpMyAdmin;
 
+use PhpMyAdmin\Error;
 use PhpMyAdmin\Utils\HttpRequest;
 
 /**
@@ -44,12 +45,14 @@ class ErrorReport
      * Constructor
      *
      * @param HttpRequest $httpRequest HttpRequest instance
+     * @param Relation    $relation    Relation instance
+     * @param Template    $template    Template instance
      */
-    public function __construct(HttpRequest $httpRequest)
+    public function __construct(HttpRequest $httpRequest, Relation $relation, Template $template)
     {
         $this->httpRequest = $httpRequest;
-        $this->relation = new Relation($GLOBALS['dbi']);
-        $this->template = new Template();
+        $this->relation = $relation;
+        $this->template = $template;
     }
 
     /**
@@ -98,8 +101,8 @@ class ErrorReport
             "user_agent_string" => $_SERVER['HTTP_USER_AGENT'],
             "locale" => $_COOKIE['pma_lang'],
             "configuration_storage" =>
-                is_null($relParams['db']) ? "disabled" : "enabled",
-            "php_version" => PHP_VERSION
+                $relParams['db'] === null ? "disabled" : "enabled",
+            "php_version" => PHP_VERSION,
         ];
 
         if ($exceptionType == 'js') {
@@ -142,7 +145,7 @@ class ErrorReport
                 return [];
             }
             foreach ($_SESSION['prev_errors'] as $errorObj) {
-                /** @var \PhpMyAdmin\Error  $errorObj */
+                /** @var Error $errorObj */
                 if ($errorObj->getLine()
                     && $errorObj->getType()
                     && $errorObj->getNumber() != E_USER_WARNING
@@ -153,7 +156,7 @@ class ErrorReport
                         "type" => $errorObj->getType(),
                         "msg" => $errorObj->getOnlyMessage(),
                         "stackTrace" => $errorObj->getBacktrace(5),
-                        "stackhash" => $errorObj->getHash()
+                        "stackhash" => $errorObj->getHash(),
                     ];
                 }
             }
@@ -226,7 +229,7 @@ class ErrorReport
      *
      * @param array $report the report info to be sent
      *
-     * @return string|bool the reply of the server
+     * @return string|null|bool the reply of the server
      */
     public function send(array $report)
     {

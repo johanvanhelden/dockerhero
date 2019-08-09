@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 use PhpMyAdmin\Controllers\Database\MultiTableQueryController;
 use PhpMyAdmin\DatabaseInterface;
-use PhpMyAdmin\Di\Container;
 use PhpMyAdmin\Response;
+use PhpMyAdmin\Template;
 
 if (! defined('ROOT_PATH')) {
     define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
@@ -18,20 +18,17 @@ if (! defined('ROOT_PATH')) {
 
 require_once ROOT_PATH . 'libraries/common.inc.php';
 
-$container = Container::getDefaultContainer();
-$container->set(Response::class, Response::getInstance());
-
 /** @var Response $response */
-$response = $container->get(Response::class);
+$response = $containerBuilder->get(Response::class);
 
 /** @var DatabaseInterface $dbi */
-$dbi = $container->get(DatabaseInterface::class);
+$dbi = $containerBuilder->get(DatabaseInterface::class);
 
-$controller = new MultiTableQueryController(
-    $response,
-    $dbi,
-    $db
-);
+/** @var MultiTableQueryController $controller */
+$controller = $containerBuilder->get(MultiTableQueryController::class);
+
+/** @var Template $template */
+$template = $containerBuilder->get('template');
 
 if (isset($_POST['sql_query'])) {
     $controller->displayResults([
@@ -47,8 +44,8 @@ if (isset($_POST['sql_query'])) {
     $header = $response->getHeader();
     $scripts = $header->getScripts();
     $scripts->addFile('vendor/jquery/jquery.md5.js');
-    $scripts->addFile('db_multi_table_query.js');
-    $scripts->addFile('db_query_generator.js');
+    $scripts->addFile('database/multi_table_query.js');
+    $scripts->addFile('database/query_generator.js');
 
-    $response->addHTML($controller->index());
+    $response->addHTML($controller->index($template));
 }

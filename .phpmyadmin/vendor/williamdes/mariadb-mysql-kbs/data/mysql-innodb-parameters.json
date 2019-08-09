@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "cli": "--ignore-builtin-innodb",
+      "cli": "--ignore-builtin-innodb[={OFF|ON}]",
       "dynamic": false,
       "id": "option_mysqld_ignore-builtin-innodb",
       "name": "ignore_builtin_innodb",
@@ -23,15 +23,15 @@
       ]
     },
     {
-      "cli": "--innodb-status-file",
+      "cli": "--innodb-status-file[={OFF|ON}]",
       "default": "off",
       "id": "option_mysqld_innodb-status-file",
       "name": "innodb_status_file",
       "type": "boolean"
     },
     {
-      "cli": "--daemon-memcached-enable-binlog=#",
-      "default": "false",
+      "cli": "--daemon-memcached-enable-binlog[={OFF|ON}]",
+      "default": "off",
       "dynamic": false,
       "id": "sysvar_daemon_memcached_enable_binlog",
       "name": "daemon_memcached_enable_binlog",
@@ -41,7 +41,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--daemon-memcached-engine-lib-name=library",
+      "cli": "--daemon-memcached-engine-lib-name=file_name",
       "default": "innodb_engine.so",
       "dynamic": false,
       "id": "sysvar_daemon_memcached_engine_lib_name",
@@ -52,7 +52,7 @@
       "type": "file name"
     },
     {
-      "cli": "--daemon-memcached-engine-lib-path=directory",
+      "cli": "--daemon-memcached-engine-lib-path=dir_name",
       "default": "null",
       "dynamic": false,
       "id": "sysvar_daemon_memcached_engine_lib_path",
@@ -96,7 +96,7 @@
       "type": "integer"
     },
     {
-      "cli": "--ignore-builtin-innodb",
+      "cli": "--ignore-builtin-innodb[={OFF|ON}]",
       "dynamic": false,
       "id": "sysvar_ignore_builtin_innodb",
       "name": "ignore_builtin_innodb",
@@ -106,7 +106,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-adaptive-flushing",
+      "cli": "--innodb-adaptive-flushing[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_adaptive_flushing",
@@ -132,7 +132,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-adaptive-hash-index",
+      "cli": "--innodb-adaptive-hash-index[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_adaptive_hash_index",
@@ -188,7 +188,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-api-disable-rowlock",
+      "cli": "--innodb-api-disable-rowlock[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_api_disable_rowlock",
@@ -199,7 +199,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-api-enable-binlog",
+      "cli": "--innodb-api-enable-binlog[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_api_enable_binlog",
@@ -210,7 +210,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-api-enable-mdl",
+      "cli": "--innodb-api-enable-mdl[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_api_enable_mdl",
@@ -262,7 +262,7 @@
       ]
     },
     {
-      "cli": "--innodb-background-drop-list-empty",
+      "cli": "--innodb-background-drop-list-empty[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_background_drop_list_empty",
@@ -287,7 +287,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-buffer-pool-debug",
+      "cli": "--innodb-buffer-pool-debug[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_buffer_pool_debug",
@@ -298,7 +298,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-buffer-pool-dump-at-shutdown",
+      "cli": "--innodb-buffer-pool-dump-at-shutdown[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_buffer_pool_dump_at_shutdown",
@@ -309,7 +309,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-buffer-pool-dump-now",
+      "cli": "--innodb-buffer-pool-dump-now[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_buffer_pool_dump_now",
@@ -346,7 +346,7 @@
       "type": "file name"
     },
     {
-      "cli": "--innodb-buffer-pool-in-core-file",
+      "cli": "--innodb-buffer-pool-in-core-file[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_buffer_pool_in_core_file",
@@ -371,7 +371,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-buffer-pool-load-abort",
+      "cli": "--innodb-buffer-pool-load-abort[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_buffer_pool_load_abort",
@@ -382,7 +382,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-buffer-pool-load-at-startup",
+      "cli": "--innodb-buffer-pool-load-at-startup[={OFF|ON}]",
       "default": "on",
       "dynamic": false,
       "id": "sysvar_innodb_buffer_pool_load_at_startup",
@@ -393,7 +393,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-buffer-pool-load-now",
+      "cli": "--innodb-buffer-pool-load-now[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_buffer_pool_load_now",
@@ -466,7 +466,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-checkpoint-disabled",
+      "cli": "--innodb-checkpoint-disabled[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_checkpoint_disabled",
@@ -496,7 +496,7 @@
       ]
     },
     {
-      "cli": "--innodb-cmp-per-index-enabled",
+      "cli": "--innodb-cmp-per-index-enabled[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_cmp_per_index_enabled",
@@ -620,7 +620,7 @@
       "type": "directory name"
     },
     {
-      "cli": "--innodb-ddl-log-crash-reset-debug",
+      "cli": "--innodb-ddl-log-crash-reset-debug[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_ddl_log_crash_reset_debug",
@@ -631,7 +631,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-deadlock-detect",
+      "cli": "--innodb-deadlock-detect[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_deadlock_detect",
@@ -642,7 +642,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-dedicated-server",
+      "cli": "--innodb-dedicated-server[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_dedicated_server",
@@ -679,7 +679,7 @@
       "type": "directory name"
     },
     {
-      "cli": "--innodb-disable-sort-file-cache",
+      "cli": "--innodb-disable-sort-file-cache[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_disable_sort_file_cache",
@@ -690,7 +690,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-doublewrite",
+      "cli": "--innodb-doublewrite[={OFF|ON}]",
       "default": "on",
       "dynamic": false,
       "id": "sysvar_innodb_doublewrite",
@@ -731,7 +731,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-file-per-table",
+      "cli": "--innodb-file-per-table[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_file_per_table",
@@ -813,7 +813,7 @@
       ]
     },
     {
-      "cli": "--innodb-flush-sync",
+      "cli": "--innodb-flush-sync[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_flush_sync",
@@ -839,7 +839,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-force-load-corrupted",
+      "cli": "--innodb-force-load-corrupted[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_force_load_corrupted",
@@ -904,7 +904,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-ft-enable-diag-print",
+      "cli": "--innodb-ft-enable-diag-print[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_ft_enable_diag_print",
@@ -915,7 +915,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-ft-enable-stopword",
+      "cli": "--innodb-ft-enable-stopword[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_ft_enable_stopword",
@@ -1106,7 +1106,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-log-checkpoint-fuzzy-now",
+      "cli": "--innodb-log-checkpoint-fuzzy-now[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_log_checkpoint_fuzzy_now",
@@ -1117,7 +1117,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-log-checkpoint-now",
+      "cli": "--innodb-log-checkpoint-now[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_log_checkpoint_now",
@@ -1128,7 +1128,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-log-checksums",
+      "cli": "--innodb-log-checksums[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_log_checksums",
@@ -1139,7 +1139,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-log-compressed-pages",
+      "cli": "--innodb-log-compressed-pages[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_log_compressed_pages",
@@ -1349,7 +1349,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-monitor-disable=[counter|module|pattern|all]",
+      "cli": "--innodb-monitor-disable={counter|module|pattern|all}",
       "dynamic": true,
       "id": "sysvar_innodb_monitor_disable",
       "name": "innodb_monitor_disable",
@@ -1359,7 +1359,7 @@
       "type": "string"
     },
     {
-      "cli": "--innodb-monitor-enable=[counter|module|pattern|all]",
+      "cli": "--innodb-monitor-enable={counter|module|pattern|all}",
       "dynamic": true,
       "id": "sysvar_innodb_monitor_enable",
       "name": "innodb_monitor_enable",
@@ -1369,27 +1369,41 @@
       "type": "string"
     },
     {
-      "cli": "--innodb-monitor-reset=[counter|module|pattern|all]",
+      "cli": "--innodb-monitor-reset={counter|module|pattern|all}",
+      "default": "empty string",
       "dynamic": true,
       "id": "sysvar_innodb_monitor_reset",
       "name": "innodb_monitor_reset",
       "scope": [
         "global"
       ],
-      "type": "string"
+      "type": "enumeration",
+      "validValues": [
+        "counter",
+        "module",
+        "pattern",
+        "all"
+      ]
     },
     {
-      "cli": "--innodb-monitor-reset-all=[counter|module|pattern|all]",
+      "cli": "--innodb-monitor-reset-all={counter|module|pattern|all}",
+      "default": "empty string",
       "dynamic": true,
       "id": "sysvar_innodb_monitor_reset_all",
       "name": "innodb_monitor_reset_all",
       "scope": [
         "global"
       ],
-      "type": "string"
+      "type": "enumeration",
+      "validValues": [
+        "counter",
+        "module",
+        "pattern",
+        "all"
+      ]
     },
     {
-      "cli": "--innodb-numa-interleave",
+      "cli": "--innodb-numa-interleave[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_numa_interleave",
@@ -1460,7 +1474,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-optimize-fulltext-only",
+      "cli": "--innodb-optimize-fulltext-only[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_optimize_fulltext_only",
@@ -1519,7 +1533,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-print-all-deadlocks",
+      "cli": "--innodb-print-all-deadlocks[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_print_all_deadlocks",
@@ -1530,7 +1544,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-print-ddl-logs",
+      "cli": "--innodb-print-ddl-logs[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_print_ddl_logs",
@@ -1586,7 +1600,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-random-read-ahead",
+      "cli": "--innodb-random-read-ahead[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_random_read_ahead",
@@ -1627,7 +1641,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-read-only",
+      "cli": "--innodb-read-only[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_read_only",
@@ -1638,7 +1652,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-redo-log-encrypt",
+      "cli": "--innodb-redo-log-encrypt[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_redo_log_encrypt",
@@ -1664,7 +1678,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-rollback-on-timeout",
+      "cli": "--innodb-rollback-on-timeout[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_rollback_on_timeout",
@@ -1759,7 +1773,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-stats-auto-recalc",
+      "cli": "--innodb-stats-auto-recalc[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_stats_auto_recalc",
@@ -1770,7 +1784,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-stats-include-delete-marked",
+      "cli": "--innodb-stats-include-delete-marked[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_stats_include_delete_marked",
@@ -1797,7 +1811,7 @@
       ]
     },
     {
-      "cli": "--innodb-stats-on-metadata",
+      "cli": "--innodb-stats-on-metadata[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_stats_on_metadata",
@@ -1808,7 +1822,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-stats-persistent",
+      "cli": "--innodb-stats-persistent[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_stats_persistent",
@@ -1841,7 +1855,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-status-output",
+      "cli": "--innodb-status-output[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_status_output",
@@ -1852,7 +1866,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-status-output-locks",
+      "cli": "--innodb-status-output-locks[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_status_output_locks",
@@ -1863,7 +1877,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-strict-mode",
+      "cli": "--innodb-strict-mode[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_strict_mode",
@@ -1905,7 +1919,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-sync-debug",
+      "cli": "--innodb-sync-debug[={OFF|ON}]",
       "default": "off",
       "dynamic": false,
       "id": "sysvar_innodb_sync_debug",
@@ -1916,7 +1930,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-table-locks",
+      "cli": "--innodb-table-locks[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_innodb_table_locks",
@@ -1992,7 +2006,7 @@
       "type": "directory name"
     },
     {
-      "cli": "--innodb-trx-purge-view-update-only-debug",
+      "cli": "--innodb-trx-purge-view-update-only-debug[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_trx_purge_view_update_only_debug",
@@ -2027,7 +2041,7 @@
       "type": "directory name"
     },
     {
-      "cli": "--innodb-undo-log-encrypt",
+      "cli": "--innodb-undo-log-encrypt[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_innodb_undo_log_encrypt",
@@ -2038,7 +2052,7 @@
       "type": "boolean"
     },
     {
-      "cli": "--innodb-undo-log-truncate",
+      "cli": "--innodb-undo-log-truncate[={OFF|ON}]",
       "dynamic": true,
       "id": "sysvar_innodb_undo_log_truncate",
       "name": "innodb_undo_log_truncate",
@@ -2072,7 +2086,7 @@
       "type": "integer"
     },
     {
-      "cli": "--innodb-use-native-aio",
+      "cli": "--innodb-use-native-aio[={OFF|ON}]",
       "default": "on",
       "dynamic": false,
       "id": "sysvar_innodb_use_native_aio",

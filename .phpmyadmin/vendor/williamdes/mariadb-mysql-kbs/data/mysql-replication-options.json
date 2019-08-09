@@ -3,7 +3,7 @@
     {
       "cli": "--server-id=#",
       "dynamic": true,
-      "id": "replication-options",
+      "id": "option_mysqld_server-id",
       "name": "server_id",
       "range": {
         "from": 0,
@@ -16,8 +16,8 @@
     },
     {
       "dynamic": false,
-      "id": "replication-options",
-      "name": "server_id",
+      "id": "sysvar_server_uuid",
+      "name": "server_uuid",
       "scope": [
         "global"
       ],

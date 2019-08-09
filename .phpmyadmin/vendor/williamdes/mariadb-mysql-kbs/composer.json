@@ -5,7 +5,7 @@
     "type": "library",
     "readme": "https://github.com/williamdes/mariadb-mysql-kbs/blob/master/README.md",
     "license": "MPL-2.0",
-    "version": "1.2.5",
+    "version": "1.2.6",
     "keywords": [
         "mariadb",
         "mysql",
@@ -30,6 +30,13 @@
             "email": "williamdes@wdes.fr"
         }
     ],
+    "scripts": {
+        "build": "php src/merge.php",
+        "test": "phpunit --testdox --configuration ./test/phpunit.xml",
+        "phpstan": "phpstan analyse src test --configuration=phpstan.neon --level=max --memory-limit=100M",
+        "phpcs": "phpcs --standard=phpcs.xml --no-cache --colors -p -n",
+        "phpcbf": "phpcbf --standard=phpcs.xml"
+    },
     "require": {
         "php": "^7.1"
     },
@@ -39,7 +46,7 @@
         "slevomat/coding-standard": "^5.0",
         "squizlabs/php_codesniffer": "^3.3",
         "php-school/cli-menu": "^3.0",
-        "swaggest/json-schema": "^0.12.3"
+        "swaggest/json-schema": "^0.12.9"
     },
     "archive": {
         "exclude": [
@@ -63,7 +70,9 @@
             "/phpcs.xml",
             "/phpstan.neon",
             "/.travis.yml",
-            "/dist/merged-raw.md"
+            "/dist/merged-raw.md",
+            "/.jshintignore",
+            "/.phpunit.result.cache"
         ]
     },
     "autoload": {
@@ -73,7 +82,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Williamdes\\MariaDBMySQLKBS\\": "test/"
+            "Williamdes\\MariaDBMySQLKBS\\Test\\": "test/"
         }
     },
     "non-feature-branches": ["update/*"]

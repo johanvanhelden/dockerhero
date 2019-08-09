@@ -35,10 +35,10 @@ class ReCaptcha
      * Version of this client library.
      * @const string
      */
-    const VERSION = 'php_1.2.1';
+    const VERSION = 'php_1.2.2';
 
     /**
-     * URL for reCAPTCHA sitevrerify API
+     * URL for reCAPTCHA siteverify API
      * @const string
      */
     const SITE_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';

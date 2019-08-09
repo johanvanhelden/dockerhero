@@ -11,9 +11,7 @@ module.exports = function() {
             done();
         });
         test('prMessage for MariaDB files', function(done) {
-            const commmitMsg = templates.prMessage([
-                'data/mariadb-aria-server-status-variables.json',
-            ]);
+            const commmitMsg = templates.prMessage(['data/mariadb-aria-server-status-variables.json']);
             expect(commmitMsg).to.equal('🤖 [MariaDB] updates');
             done();
         });
@@ -131,18 +129,12 @@ module.exports = function() {
     });
     suite('commit message', function() {
         test('commitMessage for lambda files', function(done) {
-            const commmitMsg = templates.commitMessage([
-                'a.json',
-                'ab/cd/ef.json',
-                'README.md',
-            ]);
+            const commmitMsg = templates.commitMessage(['a.json', 'ab/cd/ef.json', 'README.md']);
             expect(commmitMsg).to.equal('update: 🤖 Some updates 🤖');
             done();
         });
         test('commitMessage for MariaDB files', function(done) {
-            const commmitMsg = templates.commitMessage([
-                'data/mariadb-aria-server-status-variables.json',
-            ]);
+            const commmitMsg = templates.commitMessage(['data/mariadb-aria-server-status-variables.json']);
             expect(commmitMsg).to.equal('update: [MariaDB] updates');
             done();
         });

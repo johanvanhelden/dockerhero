@@ -2,6 +2,7 @@
   "data": [
     {
       "cli": "--connect-class-path=value",
+      "default": "",
       "dynamic": false,
       "id": "connect_class_path",
       "name": "connect_class_path",
@@ -33,7 +34,8 @@
         "to": 65500
       },
       "scope": [
-        "session"
+        "session",
+        "global"
       ],
       "type": "integer"
     },
@@ -113,6 +115,7 @@
     },
     {
       "cli": "--connect-jvm_path=value",
+      "default": "",
       "dynamic": false,
       "id": "connect_jvm_path",
       "name": "connect_jvm_path",
@@ -123,12 +126,13 @@
     },
     {
       "cli": "--connect-type-conv=#",
-      "default": "NO",
+      "default": "YES (>= Connect 1.06.006), NO (<= Connect 1.06.005)",
       "dynamic": true,
       "id": "connect_type_conv",
       "name": "connect_type_conv",
       "scope": [
-        "session"
+        "session",
+        "global"
       ],
       "validValues": [
         "NO",

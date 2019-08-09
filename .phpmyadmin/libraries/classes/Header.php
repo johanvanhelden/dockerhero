@@ -134,7 +134,6 @@ class Header
         $db = strlen($GLOBALS['db']) ? $GLOBALS['db'] : '';
         $table = strlen($GLOBALS['table']) ? $GLOBALS['table'] : '';
         $this->_menu = new Menu(
-            $GLOBALS['server'],
             $db,
             $table
         );
@@ -185,7 +184,7 @@ class Header
         $this->_scripts->addFile('vendor/jquery/jquery-ui-timepicker-addon.js');
         $this->_scripts->addFile('vendor/jquery/jquery.ba-hashchange-1.3.js');
         $this->_scripts->addFile('vendor/jquery/jquery.debounce-1.0.5.js');
-        $this->_scripts->addFile('menu-resizer.js');
+        $this->_scripts->addFile('menu_resizer.js');
 
         // Cross-framing protection
         if ($GLOBALS['cfg']['AllowThirdPartyFraming'] === false) {
@@ -202,14 +201,6 @@ class Header
         // the user preferences have not been merged at this point
 
         $this->_scripts->addFile('messages.php', ['l' => $GLOBALS['lang']]);
-        // Append the theme id to this url to invalidate
-        // the cache on a theme change. Though this might be
-        // unavailable for fatal errors.
-        if (isset($GLOBALS['PMA_Theme'])) {
-            $theme_id = urlencode($GLOBALS['PMA_Theme']->getId());
-        } else {
-            $theme_id = 'default';
-        }
         $this->_scripts->addFile('config.js');
         $this->_scripts->addFile('doclinks.js');
         $this->_scripts->addFile('functions.js');
@@ -270,7 +261,7 @@ class Header
             'is_https' => $GLOBALS['PMA_Config']->isHttps(),
             'rootPath' => $GLOBALS['PMA_Config']->getRootPath(),
             'arg_separator' => Url::getArgSeparator(),
-            'PMA_VERSION' => PMA_VERSION
+            'PMA_VERSION' => PMA_VERSION,
         ];
         if (isset($GLOBALS['cfg']['Server'])
             && isset($GLOBALS['cfg']['Server']['auth_type'])
@@ -300,7 +291,7 @@ class Header
                 $params[$key] = $key . ':"' . Sanitize::escapeJsString($value) . '"';
             }
         }
-        return 'PMA_commonParams.setAll({' . implode(',', $params) . '});';
+        return 'CommonParams.setAll({' . implode(',', $params) . '});';
     }
 
     /**

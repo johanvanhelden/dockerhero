@@ -1,6 +1,6 @@
 {
     "name": "mariadb-mysql-kbs",
-    "version": "1.2.5",
+    "version": "1.2.6",
     "description": "An index of the MariaDB and MySQL Knowledge bases",
     "main": "src/index.js",
     "homepage": "https://github.com/williamdes/mariadb-mysql-kbs#readme",
@@ -42,8 +42,10 @@
     "scripts": {
         "changelog": "changelog-generator-twig --owner williamdes --repo mariadb-mysql-kbs --repoDir ./ --baseCommit 28e9e010dc027dee17a55f5eedad776dcf983e95",
         "changelog-file": "npm run --silent changelog > CHANGELOG.md",
-        "prettier": "prettier \"*/**/*.js\" --ignore-path ./.prettierignore --write",
+        "prettier": "prettier \"*.js\" \"*/**/*.js\" --ignore-path ./.prettierignore --write",
         "test": "nyc --all mocha --ui tdd",
+        "jshint": "jshint ./",
+        "build": "node ./src/index.js",
         "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov",
         "sudo-bot-pr": "sudo-bot --env scripts/sudo-bot/.env --verbose"
     },
@@ -59,13 +61,14 @@
     "dependencies": {},
     "devDependencies": {
         "chai": "^4.2.0",
-        "changelog-generator-twig": "^1.1.0",
-        "codecov": "^3.2.0",
-        "jsdom": "^14.0.0",
-        "mocha": "^6.0.2",
-        "nyc": "^13.3.0",
-        "prettier": "^1.16.4",
-        "sudo-bot": "^1.1.4"
+        "changelog-generator-twig": "^1.2.0",
+        "codecov": "^3.5.0",
+        "crawler": "^1.2.1",
+        "jshint": "^2.10.2",
+        "mocha": "^6.1.4",
+        "nyc": "^14.1.1",
+        "prettier": "^1.18.2",
+        "sudo-bot": "^1.1.8"
     },
     "directories": {
         "lib": "src",

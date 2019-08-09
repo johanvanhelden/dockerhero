@@ -1,13 +1,14 @@
 {
   "data": [
     {
-      "cli": "--show-slave-auth-info",
-      "default": "false",
+      "cli": "--show-slave-auth-info[={OFF|ON}]",
+      "default": "off",
       "id": "option_mysqld_show-slave-auth-info",
       "name": "show_slave_auth_info",
       "type": "boolean"
     },
     {
+      "cli": "--auto-increment-increment=#",
       "default": "1",
       "dynamic": true,
       "id": "sysvar_auto_increment_increment",
@@ -23,6 +24,7 @@
       "type": "integer"
     },
     {
+      "cli": "--auto-increment-offset=#",
       "default": "1",
       "dynamic": true,
       "id": "sysvar_auto_increment_offset",
@@ -56,6 +58,7 @@
       "type": "integer"
     },
     {
+      "cli": "--rpl-semi-sync-master-enabled[={OFF|ON}]",
       "default": "off",
       "dynamic": true,
       "id": "sysvar_rpl_semi_sync_master_enabled",
@@ -66,6 +69,7 @@
       "type": "boolean"
     },
     {
+      "cli": "--rpl-semi-sync-master-timeout=#",
       "default": "10000",
       "dynamic": true,
       "id": "sysvar_rpl_semi_sync_master_timeout",
@@ -76,6 +80,7 @@
       "type": "integer"
     },
     {
+      "cli": "--rpl-semi-sync-master-trace-level=#",
       "default": "32",
       "dynamic": true,
       "id": "sysvar_rpl_semi_sync_master_trace_level",
@@ -86,6 +91,7 @@
       "type": "integer"
     },
     {
+      "cli": "--rpl-semi-sync-master-wait-for-slave-count=#",
       "default": "1",
       "dynamic": true,
       "id": "sysvar_rpl_semi_sync_master_wait_for_slave_count",
@@ -100,6 +106,7 @@
       "type": "integer"
     },
     {
+      "cli": "--rpl-semi-sync-master-wait-no-slave[={OFF|ON}]",
       "default": "on",
       "dynamic": true,
       "id": "sysvar_rpl_semi_sync_master_wait_no_slave",
@@ -110,6 +117,7 @@
       "type": "boolean"
     },
     {
+      "cli": "--rpl-semi-sync-master-wait-point=value",
       "default": "after_sync",
       "dynamic": true,
       "id": "sysvar_rpl_semi_sync_master_wait_point",
