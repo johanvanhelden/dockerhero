@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.4.3 - 2019-08-20
+
+### Added
+
+- Exif extension to PHP 7.2 and PHP 7.3 image to by consistent with the workspace image.
+
 ## 1.4.2 - 2019-08-09
 
 ### Added
