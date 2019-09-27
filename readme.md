@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.4.3
+## Version 1.5.0
 
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-workspace.svg?label=dockerhero-workspace&style=flat-square)
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-nginx.svg?label=dockerhero-nginx&style=flat-square)
@@ -76,6 +76,8 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
     1. [Laravel Dusk](#laravel-dusk)
     2. [laravel-dump-server](#laravel-dump-server)
     3. [Remote Xdebug](#remote-xdebug)
+        1. [Starting Xdebug](#starting-xdebug)
+        2. [Configuring the IDE](#configuring-the-ide)
 13. [Known issues](#known-issues)
     1. [MacOS](#macos)
 14. [Contributing](#contributing)
@@ -364,6 +366,31 @@ In order to make it work with dockerhero, simply override the config and point i
 Next, ssh into to workspace image, and simply run: `$ artisan dump-server` and start dumping to your heart's content.
 
 ### Remote Xdebug
+
+#### Starting Xdebug
+Xdebug is disabled per default to speed up PHP. If you want to start remote debugging, you would have to enable Xdebug first. To do this, execute the `xdebug/start.sh` script in the scripts folder.
+This enables Xdebug in the PHP and Workspace container.
+
+Make your life easier and create these functions in your ~/.bash_aliases file like so:
+
+```
+xdebugStatus() {
+    $projectPath/dockerhero/scripts/xdebug/status.sh
+}
+
+xdebugStop() {
+    $projectPath/dockerhero/scripts/xdebug/stop.sh
+}
+
+xdebugStart() {
+    $projectPath/dockerhero/scripts/xdebug/start.sh
+}
+```
+
+Now you can simply run `$ xdebugStart` and `$ xdebugStop`.
+
+
+#### Configuring the IDE
 It is possible to remotely debug your code using an IDE.
 You would have to set up your IDE to use port *9005*.
 And you would have to properly map your local path to Dockerhero (the project root is always `/var/www/projects` in Dockerhero).
@@ -400,7 +427,14 @@ Feel free to send in pull requests! Either to the image repos or the Dockerhero 
 - Always target your PR's to the `develop` branche.
 
 ### Testing changes
-To test changes to Dockerhero images, you can either follow the instructions from the README of the images or, if you want to test those changes in the Dockerhero system itself, you can change the `image: johanvanhelden/dockerhero-*` lines in the `docker-compose.yml` to: `build: ../path-to-your-image-fork`.
+To test changes to Dockerhero images, you can either follow the instructions from the README of the images or, if you want to test those changes in the Dockerhero system itself, you add the overwrite to the `docker-compose.override.yml` for the container you want to test. For example:
+```
+version: '2'
+
+services:
+  php:
+    build: ../dockerhero-php-7.3-fpm
+```
 
 Next, start Dockerhero using the following command: `docker-compose up --build`.
 

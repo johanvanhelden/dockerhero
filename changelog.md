@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.5.0 - 2019-09-27
+
+### Added
+
+- Xdebug start, stop and status scripts to easily turn Xdebug on, off or request the status.
+
+### Changed
+
+- Disabled Xdebug per default in the PHP 7.2, 7.3 and workspace images to speed up PHP
+
 ## 1.4.3 - 2019-08-20
 
 ### Added
