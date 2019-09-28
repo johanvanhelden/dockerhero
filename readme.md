@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.5.0
+## Version 1.5.1
 
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-workspace.svg?label=dockerhero-workspace&style=flat-square)
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-nginx.svg?label=dockerhero-nginx&style=flat-square)
@@ -8,9 +8,10 @@
 
 ### What is Dockerhero?
 
-Dockerhero is a local development tool. Out of the box, it should only take a "docker-compose start" to get all your local PHP projects working. Yes, all of them. At the same time.
+Dockerhero is a local development tool. Out of the box, it should only take a "docker-compose start" to get **all your local PHP projects working**. Yes, all of them. **At the same time**.
 
 It has support for Laravel, Codeigniter, Wordpress and other PHP projects.
+It has dynamic docroot support for both `public` and `public_html`, depending on what folder is found in your project. **Zero setup needed!**
 
 The goal is also to make it customizable. You can easily add your own nginx configurations, cronjobs and via phpMyAdmin you can create your own databases.
 
@@ -57,8 +58,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 3. [Usage](#usage)
     1. [Starting](#starting)
     2. [Stopping](#stopping)
-    3. [Laravel public folder](#laravel-public-folder)
-    4. [Private composer packages](#private-composer-packages)
+    3. [Private composer packages](#private-composer-packages)
 4. [Databases](#databases)
     1. [MySQL](#mysql)
         1. [Changing the MySQL version](#changing-the-mysql-version)
@@ -163,14 +163,6 @@ If you had it running in the background, you can use:
 ```
 $ docker-compose stop
 ```
-
-### Laravel public folder
-If you are working with a default Laravel project, you will probably get a `File not found.` error. This is because Laravel uses a `public` folder instead of a `public_html` folder. Dockerhero is configured out-of-the-box to use a `public_html` as the root.
-
-There are a few ways to solve this:
-- Either reconfigure Laravel to use a public_html folder, for instructions, view this [Gist](https://gist.github.com/johanvanhelden/29096a9ff31eac9b039d36056919abbb#file-reconfigure-laravel-instructions-md)
-- Or create a symbolic link, for instructions, view this [Gist](https://gist.github.com/johanvanhelden/29096a9ff31eac9b039d36056919abbb#file-symlink-instructions-md)
-- Or add a custom nginx vhost to use the public folder, for instructions, view this [Gist](https://gist.github.com/johanvanhelden/29096a9ff31eac9b039d36056919abbb#file-vhost-instructions-md)
 
 ### Private composer packages
 If you need to access private composer packages, you might want to link your local `/home/username/.composer` folder (containing your auth.json file) to Dockerhero. You can do so by adding a new volume to the workspace image in your `docker-compose.override.yml`  (if you do not have one,
