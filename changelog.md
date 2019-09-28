@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.5.1 - 2019-09-28
+
+### Added
+
+- `public` folder support (both `public_html` AND `public` will work now, depending on what folder is found in your project).
+
 ## 1.5.0 - 2019-09-28
 
 ### Added
@@ -16,7 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-- Disabled Xdebug per default in the PHP 7.2, 7.3 and workspace images to speed up PHP
+- Disabled Xdebug per default in the PHP 7.2, 7.3 and workspace images to speed up PHP.
 
 ## 1.4.3 - 2019-08-20
 
