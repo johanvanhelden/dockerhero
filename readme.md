@@ -132,7 +132,7 @@ This part is however entirely optional, and you do not have to do this. You can 
 
 ### Dockerhero itself
 
-Simply download or pull the latest release from [GitHub](https://github.com/johanvanhelden/dockerhero) and [update the images](#updating-images).
+Simply download or pull the latest release from [GitHub](https://github.com/johanvanhelden/dockerhero) and [update the images](#dockerhero-images).
 
 ### Dockerhero images
 
