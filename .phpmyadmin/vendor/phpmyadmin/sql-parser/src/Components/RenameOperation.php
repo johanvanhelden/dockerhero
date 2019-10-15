@@ -1,8 +1,8 @@
 <?php
+
 /**
  * `RENAME TABLE` keyword parser.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -53,9 +53,9 @@ class RenameOperation extends Component
      *
      * @return RenameOperation[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = [])
+    public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
-        $ret = [];
+        $ret = array();
 
         $expr = new self();
 
@@ -99,10 +99,10 @@ class RenameOperation extends Component
                 $expr->old = Expression::parse(
                     $parser,
                     $list,
-                    [
+                    array(
                         'breakOnAlias' => true,
-                        'parseField' => 'table',
-                    ]
+                        'parseField' => 'table'
+                    )
                 );
                 if (empty($expr->old)) {
                     $parser->error(
@@ -125,10 +125,10 @@ class RenameOperation extends Component
                 $expr->new = Expression::parse(
                     $parser,
                     $list,
-                    [
+                    array(
                         'breakOnAlias' => true,
-                        'parseField' => 'table',
-                    ]
+                        'parseField' => 'table'
+                    )
                 );
                 if (empty($expr->new)) {
                     $parser->error(
@@ -171,7 +171,7 @@ class RenameOperation extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = [])
+    public static function build($component, array $options = array())
     {
         if (is_array($component)) {
             return implode(', ', $component);

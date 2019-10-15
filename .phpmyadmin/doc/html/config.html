@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &#8212; phpMyAdmin 5.0.0-alpha1 documentation</title>
+    <title>Configuration &#8212; phpMyAdmin 4.9.1 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '5.0.0-alpha1',
+        VERSION:     '4.9.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 5.0.0-alpha1 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.9.1 documentation" href="index.html" />
     <link rel="next" title="User Guide" href="user.html" />
     <link rel="prev" title="Installation" href="setup.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="setup.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.0-alpha1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -104,7 +104,7 @@ modified.</p>
 </div>
 <p>Sets here the complete <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a> (with full path) to your phpMyAdmin
 installation&#8217;s directory. E.g.
-<code class="docutils literal"><span class="pre">https://www.example.net/path_to_your_phpMyAdmin_directory/</span></code>. Note also
+<code class="docutils literal"><span class="pre">https://www.example.net/path_to_your_phpMyAdmin_directory/</span></code>.  Note also
 that the <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a> on most of web servers are case sensitive (even on
 Windows). Don’t forget the trailing slash at the end.</p>
 <p>Starting with version 2.3.0, it is advisable to try leaving this blank. In
@@ -348,7 +348,7 @@ settings interface.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean|string</td>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">false</td>
 </tr>
@@ -356,9 +356,7 @@ settings interface.</p>
 </table>
 <p>Setting this to <code class="docutils literal"><span class="pre">true</span></code> allows phpMyAdmin to be included inside a frame,
 and is a potential security hole allowing cross-frame scripting attacks or
-clickjacking. Setting this to &#8216;sameorigin&#8217; prevents phpMyAdmin to be
-included from another document in a frame, unless that document belongs
-to the same domain.</p>
+clickjacking.</p>
 </dd></dl>
 
 </div>
@@ -1091,11 +1089,6 @@ auth, all non-US-ASCII characters will be stripped.</p>
 </tr>
 </tbody>
 </table>
-<div class="deprecated">
-<p><span class="versionmodified">Deprecated since version 4.2.0: </span>This setting was removed. The <code class="docutils literal"><span class="pre">mysql</span></code> extension will only be used when
-the <code class="docutils literal"><span class="pre">mysqli</span></code> extension is not available. As of 5.0.0, only the
-<code class="docutils literal"><span class="pre">mysqli</span></code> extension can be used.</p>
-</div>
 <p>The PHP MySQL extension to use (<code class="docutils literal"><span class="pre">mysql</span></code> or <code class="docutils literal"><span class="pre">mysqli</span></code>).</p>
 <p>It is recommended to use <code class="docutils literal"><span class="pre">mysqli</span></code> in all installations.</p>
 </dd></dl>
@@ -2044,7 +2037,7 @@ empty). See <code class="file docutils literal"><span class="pre">examples/signo
 <span class="sd"> * @package    PhpMyAdmin</span>
 <span class="sd"> * @subpackage Example</span>
 <span class="sd"> */</span>
-<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
 
 <span class="sd">/**</span>
 <span class="sd"> * This function returns username and password.</span>
@@ -2058,18 +2051,14 @@ empty). See <code class="file docutils literal"><span class="pre">examples/signo
 <span class="k">function</span> <span class="nf">get_login_credentials</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="cm">/* Optionally we can use passed username */</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="nv">$user</span><span class="p">,</span>
-            <span class="s1">&#39;password&#39;</span><span class="p">,</span>
-        <span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="cm">/* Here we would retrieve the credentials */</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="s1">&#39;root&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="p">];</span>
+    <span class="nv">$credentials</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$credentials</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -2637,24 +2626,6 @@ you&#8217;re about to lose data.</p>
 statement if one of the queries fails. Default is to abort execution.</p>
 </dd></dl>
 
-<dl class="option">
-<dt id="cfg_enable_drag_drop_import">
-<code class="descname">$cfg['enable_drag_drop_import']</code><a class="headerlink" href="#cfg_enable_drag_drop_import" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Default value:</th><td class="field-body">true</td>
-</tr>
-</tbody>
-</table>
-<p>Whether or not the drag and drop import feature is enabled.
-When enabled, a user can drag a file in to their browser and phpMyAdmin will
-attempt to import the file.</p>
-</dd></dl>
-
 </div>
 <div class="section" id="cookie-authentication-options">
 <h2>Cookie authentication options<a class="headerlink" href="#cookie-authentication-options" title="Permalink to this headline">¶</a></h2>
@@ -2843,7 +2814,7 @@ server.</p>
 </tbody>
 </table>
 <p>The public key for the reCaptcha service that can be obtained from
-<a class="reference external" href="https://www.google.com/recaptcha/intro/">https://www.google.com/recaptcha/intro/</a>.</p>
+<a class="reference external" href="https://www.google.com/recaptcha/intro/v3.html">https://www.google.com/recaptcha/intro/v3.html</a>.</p>
 <p>reCaptcha will be then used in <a class="reference internal" href="setup.html#cookie"><span class="std std-ref">Cookie authentication mode</span></a>.</p>
 </dd></dl>
 
@@ -2861,7 +2832,7 @@ server.</p>
 </tbody>
 </table>
 <p>The private key for the reCaptcha service that can be obtain from
-<a class="reference external" href="https://www.google.com/recaptcha/intro/">https://www.google.com/recaptcha/intro/</a>.</p>
+<a class="reference external" href="https://www.google.com/recaptcha/intro/v3.html">https://www.google.com/recaptcha/intro/v3.html</a>.</p>
 <p>reCaptcha will be then used in <a class="reference internal" href="setup.html#cookie"><span class="std std-ref">Cookie authentication mode</span></a>.</p>
 </dd></dl>
 
@@ -5006,7 +4977,7 @@ the files.</p>
 </tbody>
 </table>
 <p>The name of the directory where <a class="reference internal" href="glossary.html#term-sql"><span class="xref std std-term">SQL</span></a> files have been uploaded by
-other means than phpMyAdmin (for example, FTP). Those files are available
+other means than phpMyAdmin (for example, ftp). Those files are available
 under a drop-down box when you click the database or table name, then the
 Import tab.</p>
 <p>If
@@ -5042,8 +5013,8 @@ to setup this directory and how to make its usage secure.</p>
 </tr>
 </tbody>
 </table>
-<p>The name of the directory where dumps can be saved.</p>
-<p>If you want different directory for each user, %u will be replaced with
+<p>The name of the webserver directory where exported files can be saved.</p>
+<p>If you want a different directory for each user, %u will be replaced with the
 username.</p>
 <p>Please note that the directory must exist and has to be writable for
 the user running webserver.</p>
@@ -5432,10 +5403,6 @@ developers of phpMyAdmin.</p>
 </tr>
 </tbody>
 </table>
-<div class="deprecated">
-<p><span class="versionmodified">Deprecated since version 5.0.0: </span>This setting was removed as the browser is more efficient,
-thus no need of this option.</p>
-</div>
 <p>Font size to use, is applied in CSS.</p>
 </dd></dl>
 
@@ -5885,7 +5852,6 @@ configuration options, only the most frequently used ones.</p>
 <span class="sd"> *</span>
 <span class="sd"> * @package PhpMyAdmin</span>
 <span class="sd"> */</span>
-<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="sd">/**</span>
 <span class="sd"> * This is needed for cookie based authentication to encrypt password in</span>
@@ -6047,6 +6013,7 @@ as password.</p>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;auth_type&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;signon&#39;</span><span class="p">;</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;SignonSession&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;SignonSession&#39;</span><span class="p">;</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;SignonURL&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;examples/signon.php&#39;</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x">`</span>
 </pre></div>
 </div>
 </div>
@@ -6098,6 +6065,7 @@ following example shows two of them:</p>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;ServerDefault&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// to choose the server on startup</span>
 
 <span class="c1">// further general options ...</span>
+<span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
 </div>
@@ -6232,7 +6200,7 @@ server certificates and tell phpMyAdmin to use them:</p>
         <li class="right" >
           <a href="setup.html" title="Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.0-alpha1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -1,8 +1,8 @@
 <?php
+
 /**
  * CLI interface.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Utils;
 
@@ -42,11 +42,11 @@ class CLI
 
     public function parseHighlight()
     {
-        $longopts = [
+        $longopts = array(
             'help',
             'query:',
-            'format:',
-        ];
+            'format:'
+        );
         $params = $this->getopt(
             'hq:f:',
             $longopts
@@ -58,7 +58,7 @@ class CLI
         if (! isset($params['f'])) {
             $params['f'] = 'cli';
         }
-        if (! in_array($params['f'], ['html', 'cli', 'text'])) {
+        if (! in_array($params['f'], array('html', 'cli', 'text'))) {
             echo "ERROR: Invalid value for format!\n";
 
             return false;
@@ -86,7 +86,7 @@ class CLI
         if (isset($params['q'])) {
             echo Formatter::format(
                 $params['q'],
-                ['type' => $params['f']]
+                array('type' => $params['f'])
             );
             echo "\n";
 
@@ -106,11 +106,11 @@ class CLI
 
     public function parseLint()
     {
-        $longopts = [
+        $longopts = array(
             'help',
             'query:',
-            'context:',
-        ];
+            'context:'
+        );
         $params = $this->getopt(
             'hq:c:',
             $longopts
@@ -142,7 +142,7 @@ class CLI
         if (isset($params['q'])) {
             $lexer = new Lexer($params['q'], false);
             $parser = new Parser($lexer->list);
-            $errors = Error::get([$lexer, $parser]);
+            $errors = Error::get(array($lexer, $parser));
             if (count($errors) === 0) {
                 return 0;
             }
@@ -166,10 +166,10 @@ class CLI
 
     public function parseTokenize()
     {
-        $longopts = [
+        $longopts = array(
             'help',
-            'query:',
-        ];
+            'query:'
+        );
         $params = $this->getopt(
             'hq:',
             $longopts

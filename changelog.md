@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.5.2 - 2019-10-15
+
+### Changed
+
+- PHPMyAdmin version downgraded to 4.9.1, due to broken upload / save to and from the filesystem in 5.0.0-alpha1. If you have any issues, please clear you browser cache!
+
+### Added
+
+- PHPMyAdmin `databases/save` and `databases/upload` support has been added again.
+
 ## 1.5.1 - 2019-09-28
 
 ### Added

@@ -5,57 +5,34 @@
  *
  * @package PhpMyAdmin
  */
-declare(strict_types=1);
 
-use PhpMyAdmin\Config;
 use PhpMyAdmin\CreateAddField;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Transformations;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 
-if (! defined('ROOT_PATH')) {
-    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
-}
+/**
+ * Get some core libraries
+ */
+require_once 'libraries/common.inc.php';
 
-require_once ROOT_PATH . 'libraries/common.inc.php';
-
-/** @var Response $response */
-$response = $containerBuilder->get(Response::class);
-
-/** @var DatabaseInterface $dbi */
-$dbi = $containerBuilder->get(DatabaseInterface::class);
-
-$header = $response->getHeader();
-$scripts = $header->getScripts();
-$scripts->addFile('table/structure.js');
+$response = Response::getInstance();
+$header   = $response->getHeader();
+$scripts  = $header->getScripts();
+$scripts->addFile('tbl_structure.js');
 
 // Check parameters
-Util::checkParameters(['db', 'table']);
-
-/** @var Transformations $transformations */
-$transformations = $containerBuilder->get('transformations');
-
-/** @var string $db */
-$db = $containerBuilder->getParameter('db');
-
-/** @var string $table */
-$table = $containerBuilder->getParameter('table');
-
-/** @var Config $config */
-$config = $containerBuilder->get('config');
-$cfg = $config->settings;
+Util::checkParameters(array('db', 'table'));
 
 /**
  * Defines the url to return to in case of error in a sql statement
  */
 $err_url = 'tbl_sql.php' . Url::getCommon(
-    [
-        'db' => $db,
-        'table' => $table,
-    ]
+    array(
+        'db' => $db, 'table' => $table
+    )
 );
 
 /**
@@ -87,7 +64,7 @@ if (isset($_POST['do_save_data'])) {
     //tbl_structure.php below
     unset($_POST['do_save_data']);
 
-    $createAddField = new CreateAddField($dbi);
+    $createAddField = new CreateAddField($GLOBALS['dbi']);
 
     list($result, $sql_query) = $createAddField->tryColumnCreationQuery($db, $table, $err_url);
 
@@ -101,9 +78,8 @@ if (isset($_POST['do_save_data'])) {
                 if (isset($_POST['field_name'][$fieldindex])
                     && strlen($_POST['field_name'][$fieldindex]) > 0
                 ) {
-                    $transformations->setMime(
-                        $db,
-                        $table,
+                    Transformations::setMIME(
+                        $db, $table,
                         $_POST['field_name'][$fieldindex],
                         $mimetype,
                         $_POST['field_transformation'][$fieldindex],
@@ -142,16 +118,16 @@ if (isset($_POST['do_save_data'])) {
 /**
  * Displays the form used to define the new field
  */
-if ($abort === false) {
+if ($abort == false) {
     /**
      * Gets tables information
      */
-    include_once ROOT_PATH . 'libraries/tbl_common.inc.php';
+    include_once 'libraries/tbl_common.inc.php';
 
     $active_page = 'tbl_structure.php';
     /**
      * Display the form
      */
     $action = 'tbl_addfield.php';
-    include_once ROOT_PATH . 'libraries/tbl_columns_definition_form.inc.php';
+    include_once 'libraries/tbl_columns_definition_form.inc.php';
 }

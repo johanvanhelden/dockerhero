@@ -16,11 +16,7 @@ trait Base32
     /**
      * Generate a digit secret key in base32 format.
      *
-     * @param int    $length
-     * @param string $prefix
-     *
-     * @throws IncompatibleWithGoogleAuthenticatorException
-     * @throws InvalidCharactersException
+     * @param int $length
      *
      * @return string
      */
@@ -41,7 +37,6 @@ trait Base32
      * @param string $b32
      *
      * @throws InvalidCharactersException
-     * @throws IncompatibleWithGoogleAuthenticatorException
      *
      * @return int
      */
@@ -60,18 +55,12 @@ trait Base32
      * @param $string
      * @param $length
      *
-     * @throws \Exception
-     *
      * @return string
      */
     private function strPadBase32($string, $length)
     {
         for ($i = 0; $i < $length; $i++) {
-            $string .= substr(
-                Constants::VALID_FOR_B32_SCRAMBLED,
-                $this->getRandomNumber(),
-                1
-            );
+            $string .= substr(Constants::VALID_FOR_B32_SCRAMBLED, $this->getRandomNumber(), 1);
         }
 
         return $string;
@@ -97,8 +86,6 @@ trait Base32
      * @param $from
      * @param $to
      *
-     * @throws \Exception
-     *
      * @return int
      */
     protected function getRandomNumber($from = 0, $to = 31)
@@ -110,9 +97,6 @@ trait Base32
      * Validate the secret.
      *
      * @param $b32
-     *
-     * @throws IncompatibleWithGoogleAuthenticatorException
-     * @throws InvalidCharactersException
      */
     protected function validateSecret($b32)
     {
@@ -130,10 +114,7 @@ trait Base32
      */
     protected function checkGoogleAuthenticatorCompatibility($b32)
     {
-        if (
-            $this->enforceGoogleAuthenticatorCompatibility &&
-            (strlen($b32) & (strlen($b32) - 1)) !== 0
-        ) {
+        if ($this->enforceGoogleAuthenticatorCompatibility && ((strlen($b32) & (strlen($b32) - 1)) !== 0)) {
             throw new IncompatibleWithGoogleAuthenticatorException();
         }
     }
@@ -147,10 +128,7 @@ trait Base32
      */
     protected function checkForValidCharacters($b32)
     {
-        if (
-            preg_replace('/[^' . Constants::VALID_FOR_B32 . ']/', '', $b32) !==
-            $b32
-        ) {
+        if (preg_replace('/[^'.Constants::VALID_FOR_B32.']/', '', $b32) !== $b32) {
             throw new InvalidCharactersException();
         }
     }

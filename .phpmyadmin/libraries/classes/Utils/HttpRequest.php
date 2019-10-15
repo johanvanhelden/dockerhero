@@ -5,8 +5,6 @@
  *
  * @package PhpMyAdmin
  */
-declare(strict_types=1);
-
 namespace PhpMyAdmin\Utils;
 
 /**
@@ -43,10 +41,10 @@ class HttpRequest
     private function handleContext(array $context)
     {
         if (strlen($this->proxyUrl) > 0) {
-            $context['http'] = [
+            $context['http'] = array(
                 'proxy' => $this->proxyUrl,
-                'request_fulluri' => true,
-            ];
+                'request_fulluri' => true
+            );
             if (strlen($this->proxyUser) > 0) {
                 $auth = base64_encode(
                     $this->proxyUser . ':' . $this->proxyPass
@@ -125,7 +123,7 @@ class HttpRequest
             $curlStatus &= curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, $method);
         }
         if ($header) {
-            $curlStatus &= curl_setopt($curlHandle, CURLOPT_HTTPHEADER, [$header]);
+            $curlStatus &= curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array($header));
         }
 
         if ($method == "POST") {
@@ -141,7 +139,7 @@ class HttpRequest
          *
          * See https://letsencrypt.org/certificates/
          */
-        $certsDir = ROOT_PATH . 'libraries/certs/';
+        $certsDir = dirname(__file__) . '/../../certs/';
         /* See code below for logic */
         if ($ssl == CURLOPT_CAPATH) {
             $curlStatus &= curl_setopt($curlHandle, CURLOPT_CAPATH, $certsDir);
@@ -174,9 +172,9 @@ class HttpRequest
              */
             if (curl_getinfo($curlHandle, CURLINFO_SSL_VERIFYRESULT) != 0) {
                 if ($ssl == 0) {
-                    return $this->curl($url, $method, $returnOnlyStatus, $content, $header, CURLOPT_CAINFO);
+                    $this->curl($url, $method, $returnOnlyStatus, $content, $header, CURLOPT_CAINFO);
                 } elseif ($ssl == CURLOPT_CAINFO) {
-                    return $this->curl($url, $method, $returnOnlyStatus, $content, $header, CURLOPT_CAPATH);
+                    $this->curl($url, $method, $returnOnlyStatus, $content, $header, CURLOPT_CAPATH);
                 }
             }
             return null;
@@ -203,15 +201,15 @@ class HttpRequest
         $content = null,
         $header = ''
     ) {
-        $context = [
-            'http' => [
+        $context = array(
+            'http' => array(
                 'method'  => $method,
                 'request_fulluri' => true,
                 'timeout' => 10,
                 'user_agent' => 'phpMyAdmin',
                 'header' => "Accept: */*",
-            ],
-        ];
+            )
+        );
         if ($header) {
             $context['http']['header'] .= "\n" . $header;
         }

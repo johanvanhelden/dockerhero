@@ -1,8 +1,8 @@
 <?php
+
 /**
  * Parses a data type.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -25,23 +25,23 @@ class DataType extends Component
      *
      * @var array
      */
-    public static $DATA_TYPE_OPTIONS = [
+    public static $DATA_TYPE_OPTIONS = array(
         'BINARY' => 1,
-        'CHARACTER SET' => [
+        'CHARACTER SET' => array(
             2,
             'var',
-        ],
-        'CHARSET' => [
+        ),
+        'CHARSET' => array(
             2,
             'var',
-        ],
-        'COLLATE' => [
+        ),
+        'COLLATE' => array(
             3,
             'var',
-        ],
+        ),
         'UNSIGNED' => 4,
-        'ZEROFILL' => 5,
-    ];
+        'ZEROFILL' => 5
+    );
 
     /**
      * The name of the data type.
@@ -63,7 +63,7 @@ class DataType extends Component
      *
      * @var array
      */
-    public $parameters = [];
+    public $parameters = array();
 
     /**
      * The options of this data type.
@@ -81,7 +81,7 @@ class DataType extends Component
      */
     public function __construct(
         $name = null,
-        array $parameters = [],
+        array $parameters = array(),
         $options = null
     ) {
         $this->name = $name;
@@ -96,7 +96,7 @@ class DataType extends Component
      *
      * @return DataType
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = [])
+    public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
         $ret = new self();
 
@@ -127,7 +127,7 @@ class DataType extends Component
             }
 
             if ($state === 0) {
-                $ret->name = strtoupper((string) $token->value);
+                $ret->name = strtoupper($token->value);
                 if (($token->type !== Token::TYPE_KEYWORD) || (! ($token->flags & Token::FLAG_KEYWORD_DATA_TYPE))) {
                     $parser->error('Unrecognized data type.', $token);
                 }
@@ -160,7 +160,7 @@ class DataType extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = [])
+    public static function build($component, array $options = array())
     {
         $name = empty($options['lowercase']) ?
             $component->name : strtolower($component->name);

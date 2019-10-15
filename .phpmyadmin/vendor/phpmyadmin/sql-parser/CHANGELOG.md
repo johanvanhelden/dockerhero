@@ -1,9 +1,7 @@
 # Change Log
 
-## [5.0.0] - 2019-05-09
+## [4.3.2] - 2019-06-03
 
-* Drop support for PHP 5.3, PHP 5.4, PHP 5.5, PHP 5.6, PHP 7.0 and HHVM
-* Enable strict mode on PHP files
 * Fix redundant whitespaces in build() outputs (#228)
 * Fix incorrect error on DEFAULT keyword in ALTER operation (#229)
 * Fix incorrect outputs from Query::getClause (#233)
@@ -11,7 +9,7 @@
 * Fix for missing tokenize-query in Composer's vendor/bin/ directory
 * Fix for PHP warnings with an incomplete CASE expression (#241)
 * Fix for error message with multiple CALL statements (#223)
-* Recognize the question mark character as a paramenter (#242)
+* Recognize the question mark character as a parameter (#242)
 
 ## [4.3.1] - 2019-01-05
 
@@ -94,7 +92,7 @@
 
 ## [4.1.3] - 2017-04-06
 
-* Added suppport for DELETE ... JOIN clauses.
+* Added support for DELETE ... JOIN clauses.
 * Changed BufferedQuery to include comments in output.
 * Fixed parsing of inline comments.
 
@@ -248,7 +246,7 @@
 * Misc: Added PHPUnit's Code Coverage 3.0 as a dependency.
 * Misc: Added support for PHP 5.4 back.
 * Misc: Removed dependency to Ctype.
-* Misc: Repository transfered from @udan11 to @phpMyAdmin.
+* Misc: Repository transferred from @udan11 to @phpMyAdmin.
 * Misc: Updated `.gitignore` to ignore `composer.lock`.
 * Misc: Updated Composer and Travis configuration for PHP 7 and PHPUnit 5.
 * Tools: Documented tags in `ContextGenerator`.

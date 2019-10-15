@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Distributing and packaging phpMyAdmin &#8212; phpMyAdmin 5.0.0-alpha1 documentation</title>
+    <title>Distributing and packaging phpMyAdmin &#8212; phpMyAdmin 4.9.1 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '5.0.0-alpha1',
+        VERSION:     '4.9.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 5.0.0-alpha1 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.9.1 documentation" href="index.html" />
     <link rel="next" title="Copyright" href="copyright.html" />
     <link rel="prev" title="Security policy" href="security.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="security.html" title="Security policy"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.0-alpha1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -54,13 +54,13 @@
             
   <div class="section" id="distributing-and-packaging-phpmyadmin">
 <h1>Distributing and packaging phpMyAdmin<a class="headerlink" href="#distributing-and-packaging-phpmyadmin" title="Permalink to this headline">¶</a></h1>
-<p>This document is intended to give pieces of advice to people who want to
-redistribute phpMyAdmin inside other software packages such as Linux
+<p>This document is intended to give advices to people who want to
+redistribute phpMyAdmin inside other software package such as Linux
 distribution or some all in one package including web server and MySQL
 server.</p>
-<p>Generally, you can customize some basic aspects (paths to some files and
+<p>Generally you can customize some basic aspects (paths to some files and
 behavior) in <code class="file docutils literal"><span class="pre">libraries/vendor_config.php</span></code>.</p>
-<p>For example, if you want setup script to generate a config file in var, change
+<p>For example if you want setup script to generate config file in var, change
 <code class="docutils literal"><span class="pre">SETUP_CONFIG_FILE</span></code> to <code class="file docutils literal"><span class="pre">/var/lib/phpmyadmin/config.inc.php</span></code> and you
 will also probably want to skip directory writable check, so set
 <code class="docutils literal"><span class="pre">SETUP_DIR_WRITABLE</span></code> to false.</p>
@@ -68,7 +68,7 @@ will also probably want to skip directory writable check, so set
 <h2>External libraries<a class="headerlink" href="#external-libraries" title="Permalink to this headline">¶</a></h2>
 <p>phpMyAdmin includes several external libraries, you might want to
 replace them with system ones if they are available, but please note
-that you should test whether the version you provide is compatible with the
+that you should test whether version you provide is compatible with the
 one we ship.</p>
 <p>Currently known list of external libraries:</p>
 <dl class="docutils">
@@ -134,7 +134,7 @@ dependencies.</dd>
         <li class="right" >
           <a href="security.html" title="Security policy"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.0-alpha1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

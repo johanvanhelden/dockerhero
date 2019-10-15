@@ -1,8 +1,8 @@
 <?php
+
 /**
  * Error related utilities.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Utils;
 
@@ -32,26 +32,26 @@ class Error
      */
     public static function get($objs)
     {
-        $ret = [];
+        $ret = array();
 
         foreach ($objs as $obj) {
             if ($obj instanceof Lexer) {
                 foreach ($obj->errors as $err) {
-                    $ret[] = [
+                    $ret[] = array(
                         $err->getMessage(),
                         $err->getCode(),
                         $err->ch,
-                        $err->pos,
-                    ];
+                        $err->pos
+                    );
                 }
             } elseif ($obj instanceof Parser) {
                 foreach ($obj->errors as $err) {
-                    $ret[] = [
+                    $ret[] = array(
                         $err->getMessage(),
                         $err->getCode(),
                         $err->token->token,
-                        $err->token->position,
-                    ];
+                        $err->token->position
+                    );
                 }
             }
         }
@@ -77,7 +77,7 @@ class Error
         $errors,
         $format = '#%1$d: %2$s (near "%4$s" at position %5$d)'
     ) {
-        $ret = [];
+        $ret = array();
 
         $i = 0;
         foreach ($errors as $key => $err) {
@@ -86,7 +86,7 @@ class Error
                 ++$i,
                 $err[0],
                 $err[1],
-                htmlspecialchars((string) $err[2]),
+                htmlspecialchars($err[2]),
                 $err[3]
             );
         }

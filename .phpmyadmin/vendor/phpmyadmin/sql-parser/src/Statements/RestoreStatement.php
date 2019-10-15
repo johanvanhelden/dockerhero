@@ -1,8 +1,8 @@
 <?php
+
 /**
  * `RESTORE` statement.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -22,12 +22,12 @@ class RestoreStatement extends MaintenanceStatement
      *
      * @var array
      */
-    public static $OPTIONS = [
+    public static $OPTIONS = array(
         'TABLE' => 1,
 
-        'FROM' => [
+        'FROM' => array(
             2,
             'var',
-        ],
-    ];
+        )
+    );
 }

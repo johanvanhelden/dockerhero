@@ -1,8 +1,8 @@
 <?php
+
 /**
  * The definition of a parameter of a function or procedure.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -63,9 +63,9 @@ class ParameterDefinition extends Component
      *
      * @return ParameterDefinition[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = [])
+    public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
-        $ret = [];
+        $ret = array();
 
         $expr = new self();
 
@@ -153,7 +153,7 @@ class ParameterDefinition extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = [])
+    public static function build($component, array $options = array())
     {
         if (is_array($component)) {
             return '(' . implode(', ', $component) . ')';

@@ -1,8 +1,8 @@
 <?php
+
 /**
  * Parses the definition of a key.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -28,24 +28,24 @@ class Key extends Component
      *
      * @var array
      */
-    public static $KEY_OPTIONS = [
-        'KEY_BLOCK_SIZE' => [
+    public static $KEY_OPTIONS = array(
+        'KEY_BLOCK_SIZE' => array(
             1,
             'var',
-        ],
-        'USING' => [
+        ),
+        'USING' => array(
             2,
             'var',
-        ],
-        'WITH PARSER' => [
+        ),
+        'WITH PARSER' => array(
             3,
             'var',
-        ],
-        'COMMENT' => [
+        ),
+        'COMMENT' => array(
             4,
             'var=',
-        ],
-    ];
+        )
+    );
 
     /**
      * The name of this key.
@@ -85,7 +85,7 @@ class Key extends Component
      */
     public function __construct(
         $name = null,
-        array $columns = [],
+        array $columns = array(),
         $type = null,
         $options = null
     ) {
@@ -102,7 +102,7 @@ class Key extends Component
      *
      * @return Key
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = [])
+    public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
         $ret = new self();
 
@@ -111,7 +111,7 @@ class Key extends Component
          *
          * @var array
          */
-        $lastColumn = [];
+        $lastColumn = array();
 
         /**
          * The state of the parser.
@@ -164,7 +164,7 @@ class Key extends Component
                         $state = ($token->value === ',') ? 2 : 4;
                         if (! empty($lastColumn)) {
                             $ret->columns[] = $lastColumn;
-                            $lastColumn = [];
+                            $lastColumn = array();
                         }
                     }
                 } else {
@@ -194,14 +194,14 @@ class Key extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = [])
+    public static function build($component, array $options = array())
     {
         $ret = $component->type . ' ';
         if (! empty($component->name)) {
             $ret .= Context::escape($component->name) . ' ';
         }
 
-        $columns = [];
+        $columns = array();
         foreach ($component->columns as $column) {
             $tmp = Context::escape($column['name']);
             if (isset($column['length'])) {

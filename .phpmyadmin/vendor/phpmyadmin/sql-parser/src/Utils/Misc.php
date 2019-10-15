@@ -1,8 +1,8 @@
 <?php
+
 /**
  * Miscellaneous utilities.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Utils;
 
@@ -32,12 +32,12 @@ class Misc
             || empty($statement->expr)
             || empty($statement->from)
         ) {
-            return [];
+            return array();
         }
 
-        $retval = [];
+        $retval = array();
 
-        $tables = [];
+        $tables = array();
 
         /**
          * Expressions that may contain aliases.
@@ -63,22 +63,22 @@ class Misc
                 $expr->database : $database;
 
             if (! isset($retval[$thisDb])) {
-                $retval[$thisDb] = [
+                $retval[$thisDb] = array(
                     'alias' => null,
-                    'tables' => [],
-                ];
+                    'tables' => array()
+                );
             }
 
             if (! isset($retval[$thisDb]['tables'][$expr->table])) {
-                $retval[$thisDb]['tables'][$expr->table] = [
+                $retval[$thisDb]['tables'][$expr->table] = array(
                     'alias' => (isset($expr->alias) && ($expr->alias !== '')) ?
                         $expr->alias : null,
-                    'columns' => [],
-                ];
+                    'columns' => array()
+                );
             }
 
             if (! isset($tables[$thisDb])) {
-                $tables[$thisDb] = [];
+                $tables[$thisDb] = array();
             }
             $tables[$thisDb][$expr->alias] = $expr->table;
         }

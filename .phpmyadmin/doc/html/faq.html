@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 5.0.0-alpha1 documentation</title>
+    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 4.9.1 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '5.0.0-alpha1',
+        VERSION:     '4.9.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 5.0.0-alpha1 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.9.1 documentation" href="index.html" />
     <link rel="next" title="Developers Information" href="developers.html" />
     <link rel="prev" title="Other sources of information" href="other.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.0-alpha1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -165,14 +165,14 @@ these problems should not occur. If possible, upgrade your phpMyAdmin
 to the latest version to take advantage of the new import features.</p>
 <p>The first things to check (or ask your host provider to check) are the values
 of <code class="docutils literal"><span class="pre">max_execution_time</span></code>, <code class="docutils literal"><span class="pre">upload_max_filesize</span></code>, <code class="docutils literal"><span class="pre">memory_limit</span></code> and
-<code class="docutils literal"><span class="pre">post_max_size</span></code> in the <code class="file docutils literal"><span class="pre">php.ini</span></code> configuration file. All of these
+<code class="docutils literal"><span class="pre">post_max_size</span></code> in the <code class="file docutils literal"><span class="pre">php.ini</span></code> configuration file. All of these three
 settings limit the maximum size of data that can be submitted and handled by
 PHP. Please note that <code class="docutils literal"><span class="pre">post_max_size</span></code> needs to be larger than
 <code class="docutils literal"><span class="pre">upload_max_filesize</span></code>. There exist several workarounds if your upload is too
 big or your hosting provider is unwilling to change the settings:</p>
 <ul>
 <li><p class="first">Look at the <span class="target" id="index-2"></span><a class="reference internal" href="config.html#cfg_UploadDir"><code class="xref config config-option docutils literal"><span class="pre">$cfg['UploadDir']</span></code></a> feature. This allows one to upload a file to the server
-via scp, FTP, or your favorite file transfer method. PhpMyAdmin is
+via scp, ftp, or your favorite file transfer method. PhpMyAdmin is
 then able to import the files from the temporary directory. More
 information is available in the <a class="reference internal" href="config.html#config"><span class="std std-ref">Configuration</span></a>  of this document.</p>
 </li>
@@ -366,8 +366,7 @@ MMCache but upgrading MMCache to version 2.3.21 solves the problem.</p>
 releases.</p>
 <p>PHP 7 is supported since phpMyAdmin 4.6, PHP 7.1 is supported since 4.6.5,
 PHP 7.2 is supported since 4.7.4.</p>
-<p>HHVM is supported up to phpMyAdmin 4.8.</p>
-<p>Since release 5.0, phpMyAdmin supports only PHP 7.1 and newer.</p>
+<p>phpMyAdmin also works fine with HHVM.</p>
 </div>
 <div class="section" id="can-i-use-http-authentication-with-iis">
 <span id="faq1-32"></span><h3>1.32 Can I use HTTP authentication with IIS?<a class="headerlink" href="#can-i-use-http-authentication-with-iis" title="Permalink to this headline">¶</a></h3>
@@ -391,20 +390,19 @@ and click the <code class="docutils literal"><span class="pre">Set</span> <span 
 <div class="section" id="faq1-33">
 <span id="id6"></span><h3>1.33 (withdrawn).<a class="headerlink" href="#faq1-33" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="can-i-directly-access-a-database-or-table-pages">
-<span id="faq1-34"></span><h3>1.34 Can I directly access a database or table pages?<a class="headerlink" href="#can-i-directly-access-a-database-or-table-pages" title="Permalink to this headline">¶</a></h3>
-<p>Yes. Out of the box, you can use a <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a> like
+<div class="section" id="can-i-access-directly-to-database-or-table-pages">
+<span id="faq1-34"></span><h3>1.34 Can I access directly to database or table pages?<a class="headerlink" href="#can-i-access-directly-to-database-or-table-pages" title="Permalink to this headline">¶</a></h3>
+<p>Yes. Out of the box, you can use <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a> like
 <code class="docutils literal"><span class="pre">http://server/phpMyAdmin/index.php?server=X&amp;db=database&amp;table=table&amp;target=script</span></code>.
-For <code class="docutils literal"><span class="pre">server</span></code> you can use the server number
-which refers to the numeric host index (from <code class="docutils literal"><span class="pre">$i</span></code>) in
-<code class="file docutils literal"><span class="pre">config.inc.php</span></code>. The table and script parts are optional.</p>
-<p>If you want a URL like
-<code class="docutils literal"><span class="pre">http://server/phpMyAdmin/database[/table][/script]</span></code>, you need to do some additional configuration. The following
-lines apply only for the <a class="reference external" href="https://httpd.apache.org">Apache</a> web server.
-First, make sure that you have enabled some features within the Apache global
+For <code class="docutils literal"><span class="pre">server</span></code> you use the server number
+which refers to the order of the server paragraph in
+<code class="file docutils literal"><span class="pre">config.inc.php</span></code>. Table and script parts are optional. If you want
+<code class="docutils literal"><span class="pre">http://server/phpMyAdmin/database[/table][/script]</span></code> <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a>, you need to do some configuration. Following
+lines apply only for <a class="reference external" href="https://httpd.apache.org">Apache</a> web server.
+First make sure, that you have enabled some features within global
 configuration. You need <code class="docutils literal"><span class="pre">Options</span> <span class="pre">SymLinksIfOwnerMatch</span></code> and <code class="docutils literal"><span class="pre">AllowOverride</span>
 <span class="pre">FileInfo</span></code> enabled for directory where phpMyAdmin is installed and you
-need mod_rewrite to be enabled. Then you just need to create the
+need mod_rewrite to be enabled. Then you just need to create
 following <a class="reference internal" href="glossary.html#term-htaccess"><span class="xref std std-term">.htaccess</span></a> file in root folder of phpMyAdmin installation (don&#8217;t
 forget to change directory name inside of it):</p>
 <div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nb">RewriteEngine</span> <span class="k">On</span>
@@ -414,10 +412,6 @@ forget to change directory name inside of it):</p>
 <span class="nb">RewriteRule</span> ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)$ index.php?db=$1&amp;table=$2 [R]
 <span class="nb">RewriteRule</span> ^([a-zA-Z0-9_]+)$ index.php?db=$1 [R]
 </pre></div>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#faq4-8"><span class="std std-ref">4.8 Which parameters can I use in the URL that starts phpMyAdmin?</span></a></p>
 </div>
 </div>
 <div class="section" id="can-i-use-http-authentication-with-apache-cgi">
@@ -947,10 +941,6 @@ either the numeric host index (from <code class="docutils literal"><span class="
 or one of the host names present in the configuration file.</p>
 <p>For example, to jump directly to a particular database, a URL can be constructed as
 <code class="docutils literal"><span class="pre">https://example.com/phpmyadmin/?db=sakila</span></code>.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#faq1-34"><span class="std std-ref">1.34 Can I directly access a database or table pages?</span></a></p>
-</div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 4.9.0: </span>Support for using the <code class="docutils literal"><span class="pre">pma_username</span></code> and <code class="docutils literal"><span class="pre">pma_password</span></code> parameters was removed
 in phpMyAdmin 4.9.0 (see <a class="reference external" href="https://www.phpmyadmin.net/security/PMASA-2019-4/">PMASA-2019-4</a>).</p>
@@ -1824,7 +1814,7 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
 <li><a class="reference internal" href="#which-php-versions-does-phpmyadmin-support">1.31 Which PHP versions does phpMyAdmin support?</a></li>
 <li><a class="reference internal" href="#can-i-use-http-authentication-with-iis">1.32 Can I use HTTP authentication with IIS?</a></li>
 <li><a class="reference internal" href="#faq1-33">1.33 (withdrawn).</a></li>
-<li><a class="reference internal" href="#can-i-directly-access-a-database-or-table-pages">1.34 Can I directly access a database or table pages?</a></li>
+<li><a class="reference internal" href="#can-i-access-directly-to-database-or-table-pages">1.34 Can I access directly to database or table pages?</a></li>
 <li><a class="reference internal" href="#can-i-use-http-authentication-with-apache-cgi">1.35 Can I use HTTP authentication with Apache CGI?</a></li>
 <li><a class="reference internal" href="#i-get-an-error-500-internal-server-error">1.36 I get an error &#8220;500 Internal Server Error&#8221;.</a></li>
 <li><a class="reference internal" href="#i-run-phpmyadmin-on-cluster-of-different-machines-and-password-encryption-in-cookie-auth-doesn-t-work">1.37 I run phpMyAdmin on cluster of different machines and password encryption in cookie auth doesn&#8217;t work.</a></li>
@@ -2013,7 +2003,7 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.0-alpha1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

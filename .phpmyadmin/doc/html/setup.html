@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &#8212; phpMyAdmin 5.0.0-alpha1 documentation</title>
+    <title>Installation &#8212; phpMyAdmin 4.9.1 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '5.0.0-alpha1',
+        VERSION:     '4.9.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="copyright" title="Copyright" href="copyright.html" />
-    <link rel="top" title="phpMyAdmin 5.0.0-alpha1 documentation" href="index.html" />
+    <link rel="top" title="phpMyAdmin 4.9.1 documentation" href="index.html" />
     <link rel="next" title="Configuration" href="config.html" />
     <link rel="prev" title="Requirements" href="require.html" /> 
   </head>
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="require.html" title="Requirements"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.0-alpha1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -130,29 +130,18 @@ which include phpMyAdmin together with a database and web server such as
 </div>
 <div class="section" id="installing-from-git">
 <h2>Installing from Git<a class="headerlink" href="#installing-from-git" title="Permalink to this headline">¶</a></h2>
-<p>In order to install from Git, you&#8217;ll need a few supporting applications:</p>
-<ul class="simple">
-<li><a class="reference external" href="https://git-scm.com/downloads">Git</a> to download the source, or you can download the most recent source directly from <a class="reference external" href="https://github.com/phpmyadmin/phpmyadmin/archive/master.zip">Github</a></li>
-<li><a class="reference external" href="https://getcomposer.org/download/">Composer</a></li>
-<li><a class="reference external" href="https://nodejs.org/en/download/">Node.js</a> (version 8 or higher)</li>
-<li><a class="reference external" href="https://yarnpkg.com/lang/en/docs/install">Yarn</a></li>
-</ul>
 <p>You can clone current phpMyAdmin source from
 <code class="docutils literal"><span class="pre">https://github.com/phpmyadmin/phpmyadmin.git</span></code>:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>git clone https://github.com/phpmyadmin/phpmyadmin.git
 </pre></div>
 </div>
-<p>Additionally you need to install dependencies using <a class="reference external" href="https://getcomposer.org">Composer</a>:</p>
+<p>Additionally you need to install dependencies using the <a class="reference external" href="https://getcomposer.org/">Composer tool</a>:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>composer update
 </pre></div>
 </div>
 <p>If you do not intend to develop, you can skip the installation of developer tools
 by invoking:</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span>composer update --no-dev
-</pre></div>
-</div>
-<p>Finally, you&#8217;ll need to use <a class="reference external" href="https://yarnpkg.com/lang/en/docs/install">Yarn</a> to install some JavaScript dependencies:</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span>yarn install
 </pre></div>
 </div>
 </div>
@@ -307,6 +296,7 @@ but you can override any of the values.</p>
 configuration file:</p>
 <div class="highlight-php"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Export&#39;</span><span class="p">][</span><span class="s1">&#39;csv_columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
 </pre></div>
 </div>
 <p>You can also use it to define server configuration instead of using the
@@ -494,7 +484,7 @@ looks like <code class="docutils literal"><span class="pre">phpMyAdmin-x.x.x</sp
 webserver&#8217;s document root. If you don&#8217;t have direct access to your
 document root, put the files in a directory on your local machine,
 and, after step 4, transfer the directory on your web server using,
-for example, FTP.</li>
+for example, ftp.</li>
 <li>Ensure that all the scripts have the appropriate owner (if PHP is
 running in safe mode, having some scripts with an owner different from
 the owner of other scripts will be a problem). See <a class="reference internal" href="faq.html#faq4-2"><span class="std std-ref">4.2 What&#8217;s the preferred way of making phpMyAdmin secure against evil access?</span></a> and
@@ -525,7 +515,8 @@ simple configuration may look like this:</p>
 <span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;auth_type&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;cookie&#39;</span><span class="p">;</span>
 <span class="c1">// if you insist on &quot;root&quot; having no password:</span>
-<span class="c1">// $cfg[&#39;Servers&#39;][$i][&#39;AllowNoPassword&#39;] = true;</span>
+<span class="c1">// $cfg[&#39;Servers&#39;][$i][&#39;AllowNoPassword&#39;] = true; `</span>
+<span class="cp">?&gt;</span>
 </pre></div>
 </div>
 <p>Or, if you prefer to not be prompted every time you log in:</p>
@@ -536,6 +527,7 @@ simple configuration may look like this:</p>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;user&#39;</span><span class="p">]</span>          <span class="o">=</span> <span class="s1">&#39;root&#39;</span><span class="p">;</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="s1">&#39;cbb74bc&#39;</span><span class="p">;</span> <span class="c1">// use here your password</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;Servers&#39;</span><span class="p">][</span><span class="nv">$i</span><span class="p">][</span><span class="s1">&#39;auth_type&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="s1">&#39;config&#39;</span><span class="p">;</span>
+<span class="cp">?&gt;</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -893,7 +885,6 @@ the login process.</li>
 <span class="sd"> * @package    PhpMyAdmin</span>
 <span class="sd"> * @subpackage Example</span>
 <span class="sd"> */</span>
-<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="cm">/* Use cookies for session */</span>
 <span class="nb">ini_set</span><span class="p">(</span><span class="s1">&#39;session.use_cookies&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">);</span>
@@ -916,7 +907,7 @@ the login process.</li>
     <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;PMA_single_signon_host&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">];</span>
     <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;PMA_single_signon_port&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">];</span>
     <span class="cm">/* Update another field of server configuration */</span>
-    <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;PMA_single_signon_cfgupdate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;verbose&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Signon test&#39;</span><span class="p">];</span>
+    <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;PMA_single_signon_cfgupdate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;verbose&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Signon test&#39;</span><span class="p">);</span>
     <span class="nv">$id</span> <span class="o">=</span> <span class="nb">session_id</span><span class="p">();</span>
     <span class="cm">/* Close that session */</span>
     <span class="o">@</span><span class="nb">session_write_close</span><span class="p">();</span>
@@ -930,9 +921,9 @@ the login process.</li>
 <span class="x">    &lt;!DOCTYPE HTML&gt;</span>
 <span class="x">    &lt;html lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;</span>
 <span class="x">    &lt;head&gt;</span>
-<span class="x">    &lt;link rel=&quot;icon&quot; href=&quot;../favicon.ico&quot; type=&quot;image/x-icon&quot;&gt;</span>
-<span class="x">    &lt;link rel=&quot;shortcut icon&quot; href=&quot;../favicon.ico&quot; type=&quot;image/x-icon&quot;&gt;</span>
-<span class="x">    &lt;meta charset=&quot;utf-8&quot;&gt;</span>
+<span class="x">    &lt;link rel=&quot;icon&quot; href=&quot;../favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;</span>
+<span class="x">    &lt;link rel=&quot;shortcut icon&quot; href=&quot;../favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;</span>
+<span class="x">    &lt;meta charset=&quot;utf-8&quot; /&gt;</span>
 <span class="x">    &lt;title&gt;phpMyAdmin single signon example&lt;/title&gt;</span>
 <span class="x">    &lt;/head&gt;</span>
 <span class="x">    &lt;body&gt;</span>
@@ -944,13 +935,13 @@ the login process.</li>
     <span class="p">}</span>
     <span class="cp">?&gt;</span><span class="x"></span>
 <span class="x">    &lt;form action=&quot;signon.php&quot; method=&quot;post&quot;&gt;</span>
-<span class="x">    Username: &lt;input type=&quot;text&quot; name=&quot;user&quot;&gt;&lt;br&gt;</span>
-<span class="x">    Password: &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;&lt;br&gt;</span>
+<span class="x">    Username: &lt;input type=&quot;text&quot; name=&quot;user&quot; /&gt;&lt;br /&gt;</span>
+<span class="x">    Password: &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;&lt;br /&gt;</span>
 <span class="x">    Host: (will use the one from config.inc.php by default)</span>
-<span class="x">    &lt;input type=&quot;text&quot; name=&quot;host&quot;&gt;&lt;br&gt;</span>
+<span class="x">    &lt;input type=&quot;text&quot; name=&quot;host&quot; /&gt;&lt;br /&gt;</span>
 <span class="x">    Port: (will use the one from config.inc.php by default)</span>
-<span class="x">    &lt;input type=&quot;text&quot; name=&quot;port&quot;&gt;&lt;br&gt;</span>
-<span class="x">    &lt;input type=&quot;submit&quot;&gt;</span>
+<span class="x">    &lt;input type=&quot;text&quot; name=&quot;port&quot; /&gt;&lt;br /&gt;</span>
+<span class="x">    &lt;input type=&quot;submit&quot; /&gt;</span>
 <span class="x">    &lt;/form&gt;</span>
 <span class="x">    &lt;/body&gt;</span>
 <span class="x">    &lt;/html&gt;</span>
@@ -978,7 +969,6 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 <span class="sd"> * @package    PhpMyAdmin</span>
 <span class="sd"> * @subpackage Example</span>
 <span class="sd"> */</span>
-<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="k">false</span> <span class="o">===</span> <span class="o">@</span><span class="k">include_once</span> <span class="s1">&#39;OpenID/RelyingParty.php&#39;</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">exit</span><span class="p">;</span>
@@ -990,12 +980,12 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 <span class="sd">/**</span>
 <span class="sd"> * Map of authenticated users to MySQL user/password pairs.</span>
 <span class="sd"> */</span>
-<span class="nv">$AUTH_MAP</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;https://launchpad.net/~username&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+<span class="nv">$AUTH_MAP</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;https://launchpad.net/~username&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;user&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
         <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="p">],</span>
-<span class="p">];</span>
+        <span class="p">),</span>
+    <span class="p">);</span>
 
 <span class="sd">/**</span>
 <span class="sd"> * Simple function to show HTML page with given content.</span>
@@ -1012,9 +1002,9 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 <span class="x">    &lt;!DOCTYPE HTML&gt;</span>
 <span class="x">    &lt;html lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;</span>
 <span class="x">    &lt;head&gt;</span>
-<span class="x">    &lt;link rel=&quot;icon&quot; href=&quot;../favicon.ico&quot; type=&quot;image/x-icon&quot;&gt;</span>
-<span class="x">    &lt;link rel=&quot;shortcut icon&quot; href=&quot;../favicon.ico&quot; type=&quot;image/x-icon&quot;&gt;</span>
-<span class="x">    &lt;meta charset=&quot;utf-8&quot;&gt;</span>
+<span class="x">    &lt;link rel=&quot;icon&quot; href=&quot;../favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;</span>
+<span class="x">    &lt;link rel=&quot;shortcut icon&quot; href=&quot;../favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;</span>
+<span class="x">    &lt;meta charset=&quot;utf-8&quot; /&gt;</span>
 <span class="x">    &lt;title&gt;phpMyAdmin OpenID signon example&lt;/title&gt;</span>
 <span class="x">    &lt;/head&gt;</span>
 <span class="x">    &lt;body&gt;</span>
@@ -1069,11 +1059,11 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 <span class="nv">$returnTo</span> <span class="o">.=</span> <span class="s1">&#39;openid.php&#39;</span><span class="p">;</span>
 
 <span class="cm">/* Display form */</span>
-<span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">)</span> <span class="o">||</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;phpMyAdmin&#39;</span><span class="p">]))</span> <span class="p">{</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">count</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">count</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">)</span> <span class="o">||</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;phpMyAdmin&#39;</span><span class="p">]))</span> <span class="p">{</span>
     <span class="cm">/* Show simple form */</span>
     <span class="nv">$content</span> <span class="o">=</span> <span class="s1">&#39;&lt;form action=&quot;openid.php&quot; method=&quot;post&quot;&gt;</span>
-<span class="s1">OpenID: &lt;input type=&quot;text&quot; name=&quot;identifier&quot;&gt;&lt;br&gt;</span>
-<span class="s1">&lt;input type=&quot;submit&quot; name=&quot;start&quot;&gt;</span>
+<span class="s1">OpenID: &lt;input type=&quot;text&quot; name=&quot;identifier&quot; /&gt;&lt;br /&gt;</span>
+<span class="s1">&lt;input type=&quot;submit&quot; name=&quot;start&quot; /&gt;</span>
 <span class="s1">&lt;/form&gt;</span>
 <span class="s1">&lt;/body&gt;</span>
 <span class="s1">&lt;/html&gt;&#39;</span><span class="p">;</span>
@@ -1111,7 +1101,7 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
     <span class="k">exit</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="cm">/* Grab query string */</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">count</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">list</span><span class="p">(,</span> <span class="nv">$queryString</span><span class="p">)</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;REQUEST_URI&#39;</span><span class="p">]);</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="c1">// I hate php sometimes</span>
@@ -1127,7 +1117,7 @@ in <code class="file docutils literal"><span class="pre">examples/openid.php</sp
 
     <span class="nv">$id</span> <span class="o">=</span> <span class="nv">$message</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;openid.claimed_id&#39;</span><span class="p">);</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$AUTH_MAP</span><span class="p">[</span><span class="nv">$id</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$AUTH_MAP</span><span class="p">[</span><span class="nv">$id</span><span class="p">]))</span> <span class="p">{</span>
         <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;PMA_single_signon_user&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$AUTH_MAP</span><span class="p">[</span><span class="nv">$id</span><span class="p">][</span><span class="s1">&#39;user&#39;</span><span class="p">];</span>
         <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;PMA_single_signon_password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$AUTH_MAP</span><span class="p">[</span><span class="nv">$id</span><span class="p">][</span><span class="s1">&#39;password&#39;</span><span class="p">];</span>
         <span class="nb">session_write_close</span><span class="p">();</span>
@@ -1156,7 +1146,7 @@ in <code class="file docutils literal"><span class="pre">examples/signon-script.
 <span class="sd"> * @package    PhpMyAdmin</span>
 <span class="sd"> * @subpackage Example</span>
 <span class="sd"> */</span>
-<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
 
 <span class="sd">/**</span>
 <span class="sd"> * This function returns username and password.</span>
@@ -1170,18 +1160,14 @@ in <code class="file docutils literal"><span class="pre">examples/signon-script.
 <span class="k">function</span> <span class="nf">get_login_credentials</span><span class="p">(</span><span class="nv">$user</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="cm">/* Optionally we can use passed username */</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="nv">$user</span><span class="p">,</span>
-            <span class="s1">&#39;password&#39;</span><span class="p">,</span>
-        <span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="cm">/* Here we would retrieve the credentials */</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="s1">&#39;root&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="p">];</span>
+    <span class="nv">$credentials</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$credentials</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1445,7 +1431,7 @@ manually or after a period of inactivity). <a class="reference external" href="h
         <li class="right" >
           <a href="require.html" title="Requirements"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.0-alpha1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.9.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

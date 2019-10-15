@@ -7,8 +7,6 @@
  *
  * @package PhpMyAdmin
  */
-declare(strict_types=1);
-
 namespace PhpMyAdmin;
 
 use PhpMyAdmin\Core;
@@ -48,14 +46,14 @@ class Logging
      * @param string $user   user name
      * @param string $status status message
      *
-     * @return string
+     * @return void
      */
     public static function getLogMessage($user, $status)
     {
         if ($status == 'ok') {
-            return 'user authenticated: ' . $user . ' from ' . Core::getIp();
+            return 'user authenticated: ' . $user . ' from ' .  Core::getIp();
         }
-        return 'user denied: ' . $user . ' (' . $status . ') from ' . Core::getIp();
+        return 'user denied: ' . $user . ' (' . $status . ') from ' .  Core::getIp();
     }
 
     /**
@@ -94,8 +92,7 @@ class Logging
         } else {
             @error_log(
                 date('M d H:i:s') . ' phpmyadmin: ' . $message . "\n",
-                3,
-                $log_file
+                3, $log_file
             );
         }
     }

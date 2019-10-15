@@ -1,8 +1,8 @@
 <?php
+
 /**
  * Defines the core helper infrastructure of the library.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser;
 
@@ -28,7 +28,7 @@ class Core
      *
      * @see Core::error()
      */
-    public $errors = [];
+    public $errors = array();
 
     /**
      * Creates a new error log.

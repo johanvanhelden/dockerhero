@@ -5,10 +5,7 @@
  *
  * @package PhpMyAdmin
  */
-declare(strict_types=1);
-
 use PhpMyAdmin\Database\Qbe;
-use PhpMyAdmin\DatabaseInterface;
 use PhpMyAdmin\Message;
 use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
@@ -18,42 +15,31 @@ use PhpMyAdmin\Template;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
 
-if (! defined('ROOT_PATH')) {
-    define('ROOT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
-}
+/**
+ * requirements
+ */
+require_once 'libraries/common.inc.php';
 
-global $db, $pmaThemeImage, $url_query;
-
-require_once ROOT_PATH . 'libraries/common.inc.php';
-
-/** @var Response $response */
-$response = $containerBuilder->get(Response::class);
-
-/** @var DatabaseInterface $dbi */
-$dbi = $containerBuilder->get(DatabaseInterface::class);
-
-/** @var Relation $relation */
-$relation = $containerBuilder->get('relation');
-/** @var Template $template */
-$template = $containerBuilder->get('template');
+$response = Response::getInstance();
+$relation = new Relation();
 
 // Gets the relation settings
 $cfgRelation = $relation->getRelationsParam();
 
-$savedSearchList = [];
+$savedSearchList = array();
 $savedSearch = null;
 $currentSearchId = null;
 if ($cfgRelation['savedsearcheswork']) {
     $header = $response->getHeader();
     $scripts = $header->getScripts();
-    $scripts->addFile('database/qbe.js');
+    $scripts->addFile('db_qbe.js');
 
     //Get saved search list.
-    $savedSearch = new SavedSearches($GLOBALS, $relation);
+    $savedSearch = new SavedSearches($GLOBALS);
     $savedSearch->setUsername($GLOBALS['cfg']['Server']['user'])
-        ->setDbname($db);
+        ->setDbname($GLOBALS['db']);
 
-    if (! empty($_POST['searchId'])) {
+    if (!empty($_POST['searchId'])) {
         $savedSearch->setId($_POST['searchId']);
     }
 
@@ -70,17 +56,17 @@ if ($cfgRelation['savedsearcheswork']) {
         } elseif ('delete' === $_POST['action']) {
             $deleteResult = $savedSearch->delete();
             //After deletion, reset search.
-            $savedSearch = new SavedSearches($GLOBALS, $relation);
+            $savedSearch = new SavedSearches($GLOBALS);
             $savedSearch->setUsername($GLOBALS['cfg']['Server']['user'])
-                ->setDbname($db);
-            $_POST = [];
+                ->setDbname($GLOBALS['db']);
+            $_POST = array();
         } elseif ('load' === $_POST['action']) {
             if (empty($_POST['searchId'])) {
                 //when not loading a search, reset the object.
-                $savedSearch = new SavedSearches($GLOBALS, $relation);
+                $savedSearch = new SavedSearches($GLOBALS);
                 $savedSearch->setUsername($GLOBALS['cfg']['Server']['user'])
-                    ->setDbname($db);
-                $_POST = [];
+                    ->setDbname($GLOBALS['db']);
+                $_POST = array();
             } else {
                 $loadResult = $savedSearch->load();
             }
@@ -97,7 +83,7 @@ if ($cfgRelation['savedsearcheswork']) {
  */
 $message_to_display = false;
 if (isset($_POST['submit_sql']) && ! empty($sql_query)) {
-    if (0 !== stripos($sql_query, "SELECT")) {
+    if (! preg_match('@^SELECT@i', $sql_query)) {
         $message_to_display = true;
     } else {
         $goto = 'db_sql.php';
@@ -126,7 +112,7 @@ if (isset($_POST['submit_sql']) && ! empty($sql_query)) {
 }
 
 $sub_part  = '_qbe';
-require ROOT_PATH . 'libraries/db_common.inc.php';
+require 'libraries/db_common.inc.php';
 $url_query .= '&amp;goto=db_qbe.php';
 $url_params['goto'] = 'db_qbe.php';
 
@@ -140,7 +126,7 @@ list(
     $tooltip_truename,
     $tooltip_aliasname,
     $pos
-) = Util::getDbInfo($db, $sub_part === null ? '' : $sub_part);
+) = Util::getDbInfo($db, isset($sub_part) ? $sub_part : '');
 
 if ($message_to_display) {
     Message::error(
@@ -151,7 +137,7 @@ if ($message_to_display) {
 unset($message_to_display);
 
 // create new qbe search instance
-$db_qbe = new Qbe($relation, $template, $dbi, $db, $savedSearchList, $savedSearch);
+$db_qbe = new Qbe($GLOBALS['db'], $savedSearchList, $savedSearch);
 
 $secondaryTabs = [
     'multi' => [
@@ -164,7 +150,7 @@ $secondaryTabs = [
     ],
 ];
 $response->addHTML(
-    $template->render('secondary_tabs', [
+    Template::get('secondary_tabs')->render([
         'url_params' => $url_params,
         'sub_tabs' => $secondaryTabs,
     ])
@@ -173,7 +159,7 @@ $response->addHTML(
 $url = 'db_designer.php' . Url::getCommon(
     array_merge(
         $url_params,
-        ['query' => 1]
+        array('query' => 1)
     )
 );
 $response->addHTML(

@@ -13,11 +13,7 @@
         }
     ]
 } only %}
-{% include 'div_for_slider_effect.twig' with {
-    'id': 'query_div',
-    'message': 'Query window'|trans,
-    'initial_sliders_state': 'open',
-} only %}
+{{ Util_getDivForSliderEffect('query_div', 'Query window'|trans, 'open') }}
 <form action="" id="query_form">
     <input type="hidden" id="db_name" value="{{ db }}">
     <fieldset>
@@ -159,7 +155,7 @@
         {% endfor %}
 
         <fieldset style="display:inline">
-            <input class="btn btn-secondary" type="button" value="{% trans '+ Add column' %}" id="add_column_button">
+            <input type="button" value="{% trans '+ Add column' %}" id="add_column_button">
         </fieldset>
 
         <fieldset>
@@ -176,8 +172,8 @@
     </fieldset>
 
     <fieldset class="tblFooters">
-        <input class="btn btn-secondary" type="button" id="update_query_button" value="{% trans 'Update query' %}">
-        <input class="btn btn-primary" type="button" id="submit_query" value="{% trans 'Submit query' %}">
+        <input type="button" id="update_query_button" value="{% trans 'Update query' %}">
+        <input type="button" id="submit_query" value="{% trans 'Submit query' %}">
     </fieldset>
 </form>
 </div>{# Slider div #}

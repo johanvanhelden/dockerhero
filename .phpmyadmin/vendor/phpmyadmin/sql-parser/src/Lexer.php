@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Defines the lexer of the library.
  *
@@ -6,7 +7,6 @@
  *
  * Depends on context to extract lexemes.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser;
 
@@ -46,7 +46,7 @@ class Lexer extends Core
      *
      * @var array
      */
-    public static $PARSER_METHODS = [
+    public static $PARSER_METHODS = array(
         // It is best to put the parsers in order of their complexity
         // (ascending) and their occurrence rate (descending).
         //
@@ -80,8 +80,8 @@ class Lexer extends Core
         'parseSymbol',
         'parseKeyword',
         'parseLabel',
-        'parseUnknown',
-    ];
+        'parseUnknown'
+    );
 
     /**
      * The string to be parsed.

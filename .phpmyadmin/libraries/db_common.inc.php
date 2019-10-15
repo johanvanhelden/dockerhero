@@ -5,21 +5,19 @@
  *
  * @package PhpMyAdmin
  */
-declare(strict_types=1);
 
 use PhpMyAdmin\Core;
 use PhpMyAdmin\Message;
-use PhpMyAdmin\Operations;
-use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
+use PhpMyAdmin\Operations;
 
 if (! defined('PHPMYADMIN')) {
     exit;
 }
 
-Util::checkParameters(['db']);
+PhpMyAdmin\Util::checkParameters(array('db'));
 
 global $cfg;
 global $db;
@@ -32,19 +30,15 @@ if ($db_is_system_schema) {
     $is_show_stats = false;
 }
 
-$relation = new Relation($GLOBALS['dbi']);
-$operations = new Operations($GLOBALS['dbi'], $relation);
-
 /**
  * Defines the urls to return to in case of error in a sql statement
  */
 $err_url_0 = 'index.php' . Url::getCommon();
 
-$err_url = Util::getScriptNameForOption(
-    $GLOBALS['cfg']['DefaultTabDatabase'],
-    'database'
+$err_url = PhpMyAdmin\Util::getScriptNameForOption(
+    $GLOBALS['cfg']['DefaultTabDatabase'], 'database'
 )
-    . Url::getCommon(['db' => $db]);
+    . Url::getCommon(array('db' => $db));
 
 /**
  * Ensures the database exists (else move to the "parent" script) and displays
@@ -64,7 +58,7 @@ if (! isset($is_db) || ! $is_db) {
         $is_db = false;
     }
     // Not a valid db name -> back to the welcome page
-    $params = ['reload' => '1'];
+    $params = array('reload' => '1');
     if (isset($message)) {
         $params['message'] = $message;
     }
@@ -93,40 +87,44 @@ if (isset($_POST['submitcollation'])
 ) {
     list($db_charset) = explode('_', $_POST['db_collation']);
     $sql_query        = 'ALTER DATABASE '
-        . Util::backquote($db)
+        . PhpMyAdmin\Util::backquote($db)
         . ' DEFAULT' . Util::getCharsetQueryPart($_POST['db_collation']);
     $result           = $GLOBALS['dbi']->query($sql_query);
     $message          = Message::success();
 
     /**
-     * Changes tables charset if requested by the user
-     */
-    if (isset($_POST['change_all_tables_collations']) &&
+    * Changes tables charset if requested by the user
+    */
+    if (
+        isset($_POST['change_all_tables_collations']) &&
         $_POST['change_all_tables_collations'] === 'on'
     ) {
-        list($tables, , , , , , , ,) = Util::getDbInfo($db, null);
-        foreach ($tables as $tableName => $data) {
+        list($tables, , , , , , , ,) = PhpMyAdmin\Util::getDbInfo($db, null);
+        foreach($tables as $tableName => $data) {
             if ($GLOBALS['dbi']->getTable($db, $tableName)->isView()) {
                 // Skip views, we can not change the collation of a view.
                 // issue #15283
                 continue;
             }
             $sql_query      = 'ALTER TABLE '
-            . Util::backquote($db)
+            . PhpMyAdmin\Util::backquote($db)
             . '.'
-            . Util::backquote($tableName)
+            . PhpMyAdmin\Util::backquote($tableName)
             . ' DEFAULT '
             . Util::getCharsetQueryPart($_POST['db_collation']);
             $GLOBALS['dbi']->query($sql_query);
 
             /**
-             * Changes columns charset if requested by the user
-             */
-            if (isset($_POST['change_all_tables_columns_collations']) &&
+            * Changes columns charset if requested by the user
+            */
+            if (
+                isset($_POST['change_all_tables_columns_collations']) &&
                 $_POST['change_all_tables_columns_collations'] === 'on'
             ) {
+                $operations = new Operations();
                 $operations->changeAllColumnsCollation($db, $tableName, $_POST['db_collation']);
             }
+
         }
     }
     unset($db_charset);
@@ -158,4 +156,4 @@ if (isset($_POST['submitcollation'])
 /**
  * Set parameters for links
  */
-$url_query = Url::getCommon(['db' => $db]);
+$url_query = Url::getCommon(array('db' => $db));

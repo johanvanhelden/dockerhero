@@ -1,9 +1,9 @@
 <?php
+
 /**
  * Parses a reference to an expression (column, table or database name, function
  * call, mathematical expression, etc.).
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -28,7 +28,7 @@ class Expression extends Component
      *
      * @var array
      */
-    private static $ALLOWED_KEYWORDS = [
+    private static $ALLOWED_KEYWORDS = array(
         'AS' => 1,
         'DUAL' => 1,
         'NULL' => 1,
@@ -39,8 +39,8 @@ class Expression extends Component
         'OR' => 1,
         'XOR' => 1,
         'NOT' => 1,
-        'MOD' => 1,
-    ];
+        'MOD' => 1
+    );
 
     /**
      * The name of this database.
@@ -155,7 +155,7 @@ class Expression extends Component
      *
      * @return Expression
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = [])
+    public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
         $ret = new self();
 
@@ -192,10 +192,10 @@ class Expression extends Component
          *
          * @var Token[]
          */
-        $prev = [
+        $prev = array(
             null,
-            null,
-        ];
+            null
+        );
 
         // When a field is parsed, no parentheses are expected.
         if (! empty($options['parseField'])) {
@@ -269,7 +269,7 @@ class Expression extends Component
                         continue;
                     }
                     $isExpr = true;
-                } elseif ($brackets === 0 && strlen((string) $ret->expr) > 0 && ! $alias) {
+                } elseif ($brackets === 0 && strlen($ret->expr) > 0 && ! $alias) {
                     /* End of expression */
                     break;
                 }
@@ -413,7 +413,7 @@ class Expression extends Component
         }
 
         // White-spaces might be added at the end.
-        $ret->expr = trim((string) $ret->expr);
+        $ret->expr = trim($ret->expr);
 
         if ($ret->expr === '') {
             return null;
@@ -430,7 +430,7 @@ class Expression extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = [])
+    public static function build($component, array $options = array())
     {
         if (is_array($component)) {
             return implode($component, ', ');
@@ -439,7 +439,7 @@ class Expression extends Component
         if ($component->expr !== '' && ! is_null($component->expr)) {
             $ret = $component->expr;
         } else {
-            $fields = [];
+            $fields = array();
             if (isset($component->database) && ($component->database !== '')) {
                 $fields[] = $component->database;
             }

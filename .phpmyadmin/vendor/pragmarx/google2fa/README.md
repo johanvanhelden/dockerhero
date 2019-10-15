@@ -1,11 +1,3 @@
-![image](http://lingtalfi.com/services/pngtext?color=cc0000&size=50&text=WARNING)
-
-<p style="font-color: red;">
-    Google API for QR generator is turned off. 
-</p>
-
-All version of that package prior to 5.0.0 are deprecated. Please, make composer update and check documentation regarding [QRCode generation](https://github.com/antonioribeiro/google2fa#generating-qrcodes).
-
 # Google2FA
 
 <p align="center">
@@ -47,7 +39,7 @@ Use Composer to install it:
 
     composer require pragmarx/google2fa
 
-To generate inline QRCodes, you'll need to install a QR code generator, e.g. [BaconQrCode](https://github.com/Bacon/BaconQrCode):
+If you prefer inline QRCodes instead of a Google generated url, you'll need to install [BaconQrCode](https://github.com/Bacon/BaconQrCode):
   
     composer require bacon/bacon-qr-code
 
@@ -73,26 +65,47 @@ $user->google2fa_secret = $google2fa->generateSecretKey();
 
 ## Generating QRCodes
 
-The securer way of creating QRCode is to do it yourself or using a library. First you have to install a QR code generator e.g. BaconQrCode, as stated above, then you just have to generate the QR code url using:
+The securer way of creating QRCode is to do it yourself or using a library. First you have to install the BaconQrCode package, as stated above, then you just have to generate the inline string using:
  
 ```php
-$qrCodeUrl = $google2fa->getQRCodeUrl(
+$inlineUrl = $google2fa->getQRCodeInline(
     $companyName,
     $companyEmail,
     $secretKey
 );
 ```
 
-Once you have the QR code url, you can feed it to your preferred QR code generator.
+And use it in your blade template this way:
+
+```html
+<img src="{{ $inlineUrl }}">
+```
 
 ```php
-// Use your own QR Code generator to generate a data URL:
-google2fa_url = custom_generate_qrcode_url($qrCodeUrl);
+$secretKey = $google2fa->generateSecretKey(16, $userId);
+```
+
+## Show the QR Code to your user, via Google Apis
+
+It's insecure to use it via Google Apis, so you have to enable it before using it.
+
+```php
+$google2fa->setAllowInsecureCallToGoogleApis(true);
+
+$google2fa_url = $google2fa->getQRCodeGoogleUrl(
+    'YourCompany',
+    $user->email,
+    $user->google2fa_secret
+);
 
 /// and in your view:
 
 <img src="{{ $google2fa_url }}" alt="">
 ```
+
+And they should see and scan the QR code to their applications:
+
+![QRCode](https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl=otpauth%3A%2F%2Ftotp%2FPragmaRX%3Aacr%2Bpragmarx%40antoniocarlosribeiro.com%3Fsecret%3DADUMJO5634NPDEKW%26issuer%3DPragmaRX)
 
 And to verify, you just have to:
 
@@ -104,15 +117,15 @@ $valid = $google2fa->verifyKey($user->google2fa_secret, $secret);
 
 ## QR Code Packages  
 
-This package suggests the use of [Bacon/QRCode](https://github.com/Bacon/BaconQrCode) because it is known as a good QR Code package, but you can use it with any other package, for instance [Simple QrCode](https://www.simplesoftware.io/docs/simple-qrcode) or [Endroid QR Code](https://github.com/endroid/qr-code), which both use [Bacon/QRCode](https://github.com/Bacon/BaconQrCode) to produce QR Codes.
+This package suggests the use of Bacon/QRCode because it is known as a good QR Code package, but you can use it with any other package, for instance [Simple QrCode](https://www.simplesoftware.io/docs/simple-qrcode), which uses Bacon/QRCode to produce QR Codes.
 
 Usually you'll need a 2FA URL, so you just have to use the URL generator:
 
 ```php
-$google2fa->getQRCodeUrl($companyName, $companyEmail, $secretKey)
+    $google2fa->getQRCodeUrl($companyName, $companyEmail, $secretKey)
 ```
 
-#### Here's an example using Simple QrCode:
+Here's an example using Simple QrCode:
 
 ```php
 <div class="visible-print text-center">
@@ -121,70 +134,13 @@ $google2fa->getQRCodeUrl($companyName, $companyEmail, $secretKey)
 </div>
 ```
 
-#### Endroid QR Code Generator
-
-Generate the data URL
-
-```php
-
-$qrCode = new \Endroid\QrCode\QrCode($value);
-$qrCode->setSize(100);
-$google2fa_url = $qrCode->writeDataUri();
-```
-   
-And in your view
-
-```php
-<div class="visible-print text-center">
-    {!! $google2fa_url !!}
-    <p>Scan me to return to the original page.</p>
-</div>
-```
-
-#### BaconQRCode directly
-
-```php
-<?php
-
-use PragmaRX\Google2FA\Google2FA;
-use BaconQrCode\Renderer\ImageRenderer;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
-use BaconQrCode\Renderer\RendererStyle\RendererStyle;
-use BaconQrCode\Writer;
-
-$google2fa = app(Google2FA::class);
-
-$g2faUrl = $google2fa->getQRCodeUrl(
-    'pragmarx',
-    'google2fa@pragmarx.com',
-    $google2fa->generateSecretKey()
-);
-
-$writer = new Writer(
-    new ImageRenderer(
-        new RendererStyle(400),
-        new ImagickImageBackEnd()
-    )
-);
-
-$qrcode_image = base64_encode($writer->writeString($g2faUrl));
-```
-
-And show it as an image:
-
-```php
-<img src="data:image/png;base64, <?php echo $qrcode_image; ?> "/>
-```
-
 ## Server Time
 
 It's really important that you keep your server time in sync with some NTP server, on Ubuntu you can add this to the crontab:
 
-```bash
-sudo service ntp stop
-sudo ntpd -gq
-sudo service ntp start
-```
+    sudo service ntp stop
+    sudo ntpd -gq
+    sudo service ntp start
 
 ## Validation Window
 
@@ -226,7 +182,7 @@ Although the probability of collision of a 16 bytes (128 bits) random string is 
 $secretKey = $google2fa->generateSecretKey(32); // defaults to 16 bytes
 ```
 
-#### You can prefix your secret keys
+#### You cn prefix your secret keys
 
 You may prefix your secret keys, but you have to understand that, as your secret key must have length in power of 2, your prefix will have to have a complementary size. So if your key is 16 bytes long, if you add a prefix it must be also 16 bytes long, but as your prefixes will be converted to base 32, the max length of your prefix is 10 bytes. So, those are the sizes you can use in your prefixes:
 

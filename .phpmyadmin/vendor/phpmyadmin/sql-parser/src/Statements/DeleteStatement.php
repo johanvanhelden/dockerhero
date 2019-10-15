@@ -1,8 +1,8 @@
 <?php
+
 /**
  * `DELETE` statement.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -54,11 +54,11 @@ class DeleteStatement extends Statement
      *
      * @var array
      */
-    public static $OPTIONS = [
+    public static $OPTIONS = array(
         'LOW_PRIORITY' => 1,
         'QUICK' => 2,
-        'IGNORE' => 3,
-    ];
+        'IGNORE' => 3
+    );
 
     /**
      * The clauses of this statement, in order.
@@ -67,41 +67,41 @@ class DeleteStatement extends Statement
      *
      * @var array
      */
-    public static $CLAUSES = [
-        'DELETE' => [
+    public static $CLAUSES = array(
+        'DELETE' => array(
             'DELETE',
             2,
-        ],
+        ),
         // Used for options.
-        '_OPTIONS' => [
+        '_OPTIONS' => array(
             '_OPTIONS',
             1,
-        ],
-        'FROM' => [
+        ),
+        'FROM' => array(
             'FROM',
             3,
-        ],
-        'PARTITION' => [
+        ),
+        'PARTITION' => array(
             'PARTITION',
             3,
-        ],
-        'USING' => [
+        ),
+        'USING' => array(
             'USING',
             3,
-        ],
-        'WHERE' => [
+        ),
+        'WHERE' => array(
             'WHERE',
             3,
-        ],
-        'ORDER BY' => [
+        ),
+        'ORDER BY' => array(
             'ORDER BY',
             3,
-        ],
-        'LIMIT' => [
+        ),
+        'LIMIT' => array(
             'LIMIT',
             3,
-        ],
-    ];
+        )
+    );
 
     /**
      * Table(s) used as sources for this statement.
@@ -184,7 +184,7 @@ class DeleteStatement extends Statement
         if (! is_null($this->order) && count($this->order) > 0) {
             $ret .= ' ORDER BY ' . ExpressionArray::build($this->order);
         }
-        if (! is_null($this->limit) && strlen((string) $this->limit) > 0) {
+        if (! is_null($this->limit) && strlen($this->limit) > 0) {
             $ret .= ' LIMIT ' . Limit::build($this->limit);
         }
 

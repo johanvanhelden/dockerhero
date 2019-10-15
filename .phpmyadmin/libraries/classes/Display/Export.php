@@ -5,8 +5,6 @@
  *
  * @package PhpMyAdmin
  */
-declare(strict_types=1);
-
 namespace PhpMyAdmin\Display;
 
 use PhpMyAdmin\Core;
@@ -19,11 +17,8 @@ use PhpMyAdmin\Relation;
 use PhpMyAdmin\Response;
 use PhpMyAdmin\Table;
 use PhpMyAdmin\Template;
+use PhpMyAdmin\Url;
 use PhpMyAdmin\Util;
-use Throwable;
-use Twig_Error_Loader;
-use Twig_Error_Runtime;
-use Twig_Error_Syntax;
 
 /**
  * PhpMyAdmin\Display\Export class
@@ -33,22 +28,16 @@ use Twig_Error_Syntax;
 class Export
 {
     /**
-     * @var Relation
+     * @var Relation $relation
      */
     private $relation;
-
-    /**
-     * @var Template
-     */
-    public $template;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->relation = new Relation($GLOBALS['dbi']);
-        $this->template = new Template();
+        $this->relation = new Relation();
     }
 
     /**
@@ -90,7 +79,7 @@ class Export
                 if (in_array($currentDb, $_POST['db_select'])) {
                     $isSelected = true;
                 }
-            } elseif (! empty($tmpSelect)) {
+            } elseif (!empty($tmpSelect)) {
                 if (mb_strpos(
                     ' ' . $tmpSelect,
                     '|' . $currentDb . '|'
@@ -106,7 +95,7 @@ class Export
             ];
         }
 
-        return $this->template->render('display/export/select_options', [
+        return Template::get('display/export/select_options')->render([
             'databases' => $databases,
         ]);
     }
@@ -142,7 +131,7 @@ class Export
             $sqlQuery = $_POST['sql_query'];
         }
 
-        return $this->template->render('display/export/hidden_inputs', [
+        return Template::get('display/export/hidden_inputs')->render([
             'db' => $db,
             'table' => $table,
             'export_type' => $exportType,
@@ -185,9 +174,9 @@ class Export
             }
         }
 
-        return $this->template->render('display/export/template_options', [
+        return Template::get('display/export/template_options')->render([
             'templates' => $templates,
-            'selected_template' => ! empty($_POST['template_id']) ? $_POST['template_id'] : null,
+            'selected_template' => !empty($_POST['template_id']) ? $_POST['template_id'] : null,
         ]);
     }
 
@@ -205,7 +194,7 @@ class Export
             $exportMethod = $cfg['Export']['method'];
         }
 
-        return $this->template->render('display/export/method', [
+        return Template::get('display/export/method')->render([
             'export_method' => $exportMethod,
         ]);
     }
@@ -220,7 +209,7 @@ class Export
      */
     private function getHtmlForOptionsSelection($exportType, $multiValues)
     {
-        return $this->template->render('display/export/selection', [
+        return Template::get('display/export/selection')->render([
             'export_type' => $exportType,
             'multi_values' => $multiValues,
         ]);
@@ -236,7 +225,7 @@ class Export
     private function getHtmlForOptionsFormatDropdown($exportList)
     {
         $dropdown = Plugins::getChoice('Export', 'what', $exportList, 'format');
-        return $this->template->render('display/export/format_dropdown', [
+        return Template::get('display/export/format_dropdown')->render([
             'dropdown' => $dropdown,
         ]);
     }
@@ -253,7 +242,7 @@ class Export
         global $cfg;
         $options = Plugins::getOptions('Export', $exportList);
 
-        return $this->template->render('display/export/options_format', [
+        return Template::get('display/export/options_format')->render([
             'options' => $options,
             'can_convert_kanji' => Encoding::canConvertKanji(),
             'exec_time_limit' => $cfg['ExecTimeLimit'],
@@ -274,7 +263,7 @@ class Export
         $tableObject = new Table($table, $db);
         $numberOfRows = $tableObject->countRecords();
 
-        return $this->template->render('display/export/options_rows', [
+        return Template::get('display/export/options_rows')->render([
             'allrows' => isset($_POST['allrows']) ? $_POST['allrows'] : null,
             'limit_to' => isset($_POST['limit_to']) ? $_POST['limit_to'] : null,
             'limit_from' => isset($_POST['limit_from']) ? $_POST['limit_from'] : null,
@@ -299,7 +288,7 @@ class Export
             'quick_export_onserver_overwrite'
         );
 
-        return $this->template->render('display/export/options_quick_export', [
+        return Template::get('display/export/options_quick_export')->render([
             'save_dir' => $saveDir,
             'export_is_checked' => $exportIsChecked,
             'export_overwrite_is_checked' => $exportOverwriteIsChecked,
@@ -322,7 +311,7 @@ class Export
             'onserver_overwrite'
         );
 
-        return $this->template->render('display/export/options_output_save_dir', [
+        return Template::get('display/export/options_output_save_dir')->render([
             'save_dir' => $saveDir,
             'export_is_checked' => $exportIsChecked,
             'export_overwrite_is_checked' => $exportOverwriteIsChecked,
@@ -339,7 +328,7 @@ class Export
      */
     private function getHtmlForOptionsOutputFormat($exportType)
     {
-        $trans = new Message();
+        $trans = new Message;
         $trans->addText(__('@SERVER@ will become the server name'));
         if ($exportType == 'database' || $exportType == 'table') {
             $trans->addText(__(', @DATABASE@ will become the database name'));
@@ -389,7 +378,7 @@ class Export
             }
         }
 
-        return $this->template->render('display/export/options_output_format', [
+        return Template::get('display/export/options_output_format')->render([
             'message' => $msg->getMessage(),
             'filename_template' => $filenameTemplate,
             'is_checked' => $this->checkboxCheck('remember_file_template'),
@@ -405,7 +394,7 @@ class Export
     {
         global $cfg;
 
-        return $this->template->render('display/export/options_output_charset', [
+        return Template::get('display/export/options_output_charset')->render([
             'encodings' => Encoding::listEncodings(),
             'export_charset' => $cfg['Export']['charset'],
         ]);
@@ -438,7 +427,7 @@ class Export
         $isZip = ($cfg['ZipDump'] && function_exists('gzcompress'));
         $isGzip = ($cfg['GZipDump'] && function_exists('gzencode'));
 
-        return $this->template->render('display/export/options_output_compression', [
+        return Template::get('display/export/options_output_compression')->render([
             'is_zip' => $isZip,
             'is_gzip' => $isGzip,
             'selected_compression' => $selectedCompression,
@@ -452,7 +441,7 @@ class Export
      */
     private function getHtmlForOptionsOutputRadio()
     {
-        return $this->template->render('display/export/options_output_radio', [
+        return Template::get('display/export/options_output_radio')->render([
             'has_repopulate' => isset($_POST['repopulate']),
             'export_asfile' => $GLOBALS['cfg']['Export']['asfile'],
         ]);
@@ -469,7 +458,7 @@ class Export
     {
         $isChecked = $this->checkboxCheck('as_separate_files');
 
-        return $this->template->render('display/export/options_output_separate_files', [
+        return Template::get('display/export/options_output_separate_files')->render([
             'is_checked' => $isChecked,
             'export_type' => $exportType,
         ]);
@@ -487,14 +476,14 @@ class Export
         global $cfg;
 
         $hasAliases = isset($_SESSION['tmpval']['aliases'])
-            && ! Core::emptyRecursive($_SESSION['tmpval']['aliases']);
+            && !Core::emptyRecursive($_SESSION['tmpval']['aliases']);
         unset($_SESSION['tmpval']['aliases']);
 
         $isCheckedLockTables = $this->checkboxCheck('lock_tables');
         $isCheckedAsfile = $this->checkboxCheck('asfile');
 
         $optionsOutputSaveDir = '';
-        if (isset($cfg['SaveDir']) && ! empty($cfg['SaveDir'])) {
+        if (isset($cfg['SaveDir']) && !empty($cfg['SaveDir'])) {
             $optionsOutputSaveDir = $this->getHtmlForOptionsOutputSaveDir();
         }
         $optionsOutputFormat = $this->getHtmlForOptionsOutputFormat($exportType);
@@ -511,7 +500,7 @@ class Export
         }
         $optionsOutputRadio = $this->getHtmlForOptionsOutputRadio();
 
-        return $this->template->render('display/export/options_output', [
+        return Template::get('display/export/options_output')->render([
             'has_aliases' => $hasAliases,
             'export_type' => $exportType,
             'is_checked_lock_tables' => $isCheckedLockTables,
@@ -561,7 +550,7 @@ class Export
             $html .= $this->getHtmlForOptionsRows($db, $table, $unlimNumRows);
         }
 
-        if (isset($cfg['SaveDir']) && ! empty($cfg['SaveDir'])) {
+        if (isset($cfg['SaveDir']) && !empty($cfg['SaveDir'])) {
             $html .= $this->getHtmlForOptionsQuickExport();
         }
 
@@ -575,10 +564,6 @@ class Export
      * Generate Html For currently defined aliases
      *
      * @return string
-     * @throws Throwable
-     * @throws Twig_Error_Loader
-     * @throws Twig_Error_Runtime
-     * @throws Twig_Error_Syntax
      */
     private function getHtmlForCurrentAlias()
     {
@@ -586,51 +571,48 @@ class Export
             . __('Defined aliases')
             . '</th></tr></thead><tbody>';
 
-        $template = $this->template->load('export/alias_item');
+        $template = Template::get('export/alias_item');
         if (isset($_SESSION['tmpval']['aliases'])) {
             foreach ($_SESSION['tmpval']['aliases'] as $db => $dbData) {
                 if (isset($dbData['alias'])) {
-                    $result .= $template->render([
+                    $result .= $template->render(array(
                         'type' => _pgettext('Alias', 'Database'),
                         'name' => $db,
                         'field' => 'aliases[' . $db . '][alias]',
                         'value' => $dbData['alias'],
-                    ]);
+                    ));
                 }
                 if (! isset($dbData['tables'])) {
                     continue;
                 }
                 foreach ($dbData['tables'] as $table => $tableData) {
                     if (isset($tableData['alias'])) {
-                        $result .= $template->render([
+                        $result .= $template->render(array(
                             'type' => _pgettext('Alias', 'Table'),
                             'name' => $db . '.' . $table,
                             'field' => 'aliases[' . $db . '][tables][' . $table . '][alias]',
                             'value' => $tableData['alias'],
-                        ]);
+                        ));
                     }
                     if (! isset($tableData['columns'])) {
                         continue;
                     }
                     foreach ($tableData['columns'] as $column => $columnName) {
-                        $result .= $template->render([
+                        $result .= $template->render(array(
                             'type' => _pgettext('Alias', 'Column'),
-                            'name' => $db . '.' . $table . '.' . $column,
+                            'name' => $db . '.' . $table . '.'. $column,
                             'field' => 'aliases[' . $db . '][tables][' . $table . '][colums][' . $column . ']',
                             'value' => $columnName,
-                        ]);
+                        ));
                     }
                 }
             }
         }
 
         // Empty row for javascript manipulations
-        $result .= '</tbody><tfoot class="hide">' . $template->render([
-            'type' => '',
-            'name' => '',
-            'field' => 'aliases_new',
-            'value' => '',
-        ]) . '</tfoot>';
+        $result .= '</tbody><tfoot class="hide">' . $template->render(array(
+            'type' => '', 'name' => '', 'field' => 'aliases_new', 'value' => ''
+        )) . '</tfoot>';
 
         return $result . '</table>';
     }
@@ -646,7 +628,7 @@ class Export
 
         $html = '<div id="alias_modal" class="hide" title="' . $title . '">';
         $html .= $this->getHtmlForCurrentAlias();
-        $html .= $this->template->render('export/alias_add');
+        $html .= Template::get('export/alias_add')->render();
 
         $html .= '</div>';
         return $html;
@@ -663,7 +645,7 @@ class Export
      * @param int    $unlimNumRows unlimited number of rows
      * @param string $multiValues  selector options
      *
-     * @return string
+     * @return string $html
      */
     public function getDisplay(
         $exportType,
@@ -686,14 +668,14 @@ class Export
         }
 
         /* Scan for plugins */
-        /** @var ExportPlugin[] $exportList */
+        /* @var $exportList ExportPlugin[] */
         $exportList = Plugins::getPlugins(
             "export",
             'libraries/classes/Plugins/Export/',
-            [
+            array(
                 'export_type' => $exportType,
-                'single_table' => isset($GLOBALS['single_table']),
-            ]
+                'single_table' => isset($GLOBALS['single_table'])
+            )
         );
 
         /* Fail if we didn't find any plugin */
@@ -704,14 +686,14 @@ class Export
             exit;
         }
 
-        $html = $this->template->render('display/export/option_header', [
+        $html = Template::get('display/export/option_header')->render([
             'export_type' => $exportType,
             'db' => $db,
             'table' => $table,
         ]);
 
         if ($cfgRelation['exporttemplateswork']) {
-            $html .= $this->template->render('display/export/template_loading', [
+            $html .= Template::get('display/export/template_loading')->render([
                 'options' => $this->getOptionsForTemplates($exportType),
             ]);
         }
@@ -765,8 +747,8 @@ class Export
         $user = $GLOBALS['dbi']->escapeString($GLOBALS['cfg']['Server']['user']);
 
         switch ($_POST['templateAction']) {
-            case 'create':
-                $query = "INSERT INTO " . $templateTable . "("
+        case 'create':
+            $query = "INSERT INTO " . $templateTable . "("
                 . " `username`, `export_type`,"
                 . " `template_name`, `template_data`"
                 . ") VALUES ("
@@ -775,23 +757,23 @@ class Export
                 . "', '" . $GLOBALS['dbi']->escapeString($_POST['templateName'])
                 . "', '" . $GLOBALS['dbi']->escapeString($_POST['templateData'])
                 . "');";
-                break;
-            case 'load':
-                $query = "SELECT `template_data` FROM " . $templateTable
-                 . " WHERE `id` = " . $id . " AND `username` = '" . $user . "'";
-                break;
-            case 'update':
-                $query = "UPDATE " . $templateTable . " SET `template_data` = "
-                  . "'" . $GLOBALS['dbi']->escapeString($_POST['templateData']) . "'"
-                  . " WHERE `id` = " . $id . " AND `username` = '" . $user . "'";
-                break;
-            case 'delete':
-                $query = "DELETE FROM " . $templateTable
-                   . " WHERE `id` = " . $id . " AND `username` = '" . $user . "'";
-                break;
-            default:
-                $query = '';
-                break;
+            break;
+        case 'load':
+            $query = "SELECT `template_data` FROM " . $templateTable
+                 . " WHERE `id` = " . $id  . " AND `username` = '" . $user . "'";
+            break;
+        case 'update':
+            $query = "UPDATE " . $templateTable . " SET `template_data` = "
+              . "'" . $GLOBALS['dbi']->escapeString($_POST['templateData']) . "'"
+              . " WHERE `id` = " . $id  . " AND `username` = '" . $user . "'";
+            break;
+        case 'delete':
+            $query = "DELETE FROM " . $templateTable
+               . " WHERE `id` = " . $id  . " AND `username` = '" . $user . "'";
+            break;
+        default:
+            $query = '';
+            break;
         }
 
         $result = $this->relation->queryAsControlUser($query, false);
@@ -813,8 +795,7 @@ class Export
         } elseif ('load' == $_POST['templateAction']) {
             $data = null;
             while ($row = $GLOBALS['dbi']->fetchAssoc(
-                $result,
-                DatabaseInterface::CONNECT_CONTROL
+                $result, DatabaseInterface::CONNECT_CONTROL
             )) {
                 $data = $row['template_data'];
             }

@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.5.1
+## Version 1.5.2
 
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-workspace.svg?label=dockerhero-workspace&style=flat-square)
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-nginx.svg?label=dockerhero-nginx&style=flat-square)

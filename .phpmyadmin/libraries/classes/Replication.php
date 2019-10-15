@@ -5,9 +5,10 @@
  *
  * @package PhpMyAdmin
  */
-declare(strict_types=1);
-
 namespace PhpMyAdmin;
+
+use PhpMyAdmin\Core;
+use PhpMyAdmin\DatabaseInterface;
 
 /**
  * PhpMyAdmin\Replication class
@@ -26,15 +27,12 @@ class Replication
      *
      * @return array
      */
-    public function fillInfo(
-        $type,
-        $replicationInfoKey,
-        array $mysqlInfo,
-        $mysqlKey
+    public static function fillInfo(
+        $type, $replicationInfoKey, array $mysqlInfo, $mysqlKey
     ) {
         $GLOBALS['replication_info'][$type][$replicationInfoKey]
             = empty($mysqlInfo[$mysqlKey])
-                ? []
+                ? array()
                 : explode(
                     ",",
                     $mysqlInfo[$mysqlKey]
@@ -51,7 +49,7 @@ class Replication
      *
      * @return string the extracted part
      */
-    public function extractDbOrTable($string, $what = 'db')
+    public static function extractDbOrTable($string, $what = 'db')
     {
         $list = explode(".", $string);
         if ('db' == $what) {
@@ -73,7 +71,7 @@ class Replication
      *
      * @return mixed output of DatabaseInterface::tryQuery
      */
-    public function slaveControl($action, $control = null, $link = null)
+    public static function slaveControl($action, $control = null, $link = null)
     {
         $action = mb_strtoupper($action);
         $control = mb_strtoupper($control);
@@ -103,18 +101,11 @@ class Replication
      *
      * @return string output of CHANGE MASTER mysql command
      */
-    public function slaveChangeMaster(
-        $user,
-        $password,
-        $host,
-        $port,
-        array $pos,
-        $stop = true,
-        $start = true,
-        $link = null
+    public static function slaveChangeMaster($user, $password, $host, $port,
+        array $pos, $stop = true, $start = true, $link = null
     ) {
         if ($stop) {
-            $this->slaveControl("STOP", null, $link);
+            self::slaveControl("STOP", null, $link);
         }
 
         $out = $GLOBALS['dbi']->tryQuery(
@@ -124,12 +115,11 @@ class Replication
             'MASTER_USER=\'' . $user . '\',' .
             'MASTER_PASSWORD=\'' . $password . '\',' .
             'MASTER_LOG_FILE=\'' . $pos["File"] . '\',' .
-            'MASTER_LOG_POS=' . $pos["Position"] . ';',
-            $link
+            'MASTER_LOG_POS=' . $pos["Position"] . ';', $link
         );
 
         if ($start) {
-            $this->slaveControl("START", null, $link);
+            self::slaveControl("START", null, $link);
         }
 
         return $out;
@@ -144,16 +134,12 @@ class Replication
      * @param int    $port     mysql remote port
      * @param string $socket   path to unix socket
      *
-     * @return mixed mysql link on success
+     * @return mixed $link mysql link on success
      */
-    public function connectToMaster(
-        $user,
-        $password,
-        $host = null,
-        $port = null,
-        $socket = null
+    public static function connectToMaster(
+        $user, $password, $host = null, $port = null, $socket = null
     ) {
-        $server = [];
+        $server = array();
         $server['user'] = $user;
         $server['password'] = $password;
         $server["host"] = Core::sanitizeMySQLHost($host);
@@ -171,12 +157,12 @@ class Replication
      * @param mixed $link mysql link
      *
      * @return array an array containing File and Position in MySQL replication
-     * on master server, useful for slaveChangeMaster()
+     * on master server, useful for self::slaveChangeMaster
      */
-    public function slaveBinLogMaster($link = null)
+    public static function slaveBinLogMaster($link = null)
     {
         $data = $GLOBALS['dbi']->fetchResult('SHOW MASTER STATUS', null, null, $link);
-        $output = [];
+        $output = array();
 
         if (! empty($data)) {
             $output["File"] = $data[0]["File"];

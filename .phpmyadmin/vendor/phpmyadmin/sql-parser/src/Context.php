@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Defines a context class that is later extended to define other contexts.
  *
  * A context is a collection of keywords, operators and functions used for
  * parsing.
  */
-declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser;
 
@@ -86,14 +86,14 @@ abstract class Context
      *
      * @var array
      */
-    public static $KEYWORDS = [];
+    public static $KEYWORDS = array();
 
     /**
      * List of operators and their flags.
      *
      * @var array
      */
-    public static $OPERATORS = [
+    public static $OPERATORS = array(
         // Some operators (*, =) may have ambiguous flags, because they depend on
         // the context they are being used in.
         // For example: 1. SELECT * FROM table; # SQL specific (wildcard)
@@ -137,8 +137,8 @@ abstract class Context
         ')' => 16,
         '.' => 16,
         ',' => 16,
-        ';' => 16,
-    ];
+        ';' => 16
+    );
 
     /**
      * The mode of the MySQL server that will be used in lexing, parsing and

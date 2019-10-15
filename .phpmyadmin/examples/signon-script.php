@@ -10,7 +10,7 @@
  * @package    PhpMyAdmin
  * @subpackage Example
  */
-declare(strict_types=1);
+
 
 /**
  * This function returns username and password.
@@ -24,16 +24,12 @@ declare(strict_types=1);
 function get_login_credentials($user)
 {
     /* Optionally we can use passed username */
-    if (! empty($user)) {
-        return [
-            $user,
-            'password',
-        ];
+    if (!empty($user)) {
+        return array($user, 'password');
     }
 
     /* Here we would retrieve the credentials */
-    return [
-        'root',
-        '',
-    ];
+    $credentials = array('root', '');
+
+    return $credentials;
 }
