@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.5.2
+## Version 1.5.3
 
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-workspace.svg?label=dockerhero-workspace&style=flat-square)
 ![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-nginx.svg?label=dockerhero-nginx&style=flat-square)
@@ -41,6 +41,7 @@ Dockerhero includes the following useful tools:
 - Laravel Artisan autocompletion
 - Laravel Dusk support
 - laravel-dump-server support
+- OCI8 support
 - and more to come!
 
 Localtest.me is used to make everything work without editing your hosts file! Just like magic!

@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.5.3 - 2020-01-09
+
+### Added
+
+- OCI8 and PDO_OCI to the PHP 7.2, 7.3 and workspace images.
+
 ## 1.5.2 - 2019-10-15
 
 ### Changed
