@@ -13,7 +13,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 
 - Make PHP 7.3 the default version
-- The workspace images are now tagged with their PHP version to properly allow for complete PHP switching
+- The workspace image is now tagged with the PHP version to properly allow for complete PHP version switching
+- Depricated `bower` from the workspace image and switched `vue-cli` to `@vue/cli`
 
 ## 1.5.3 - 2020-01-09
 
