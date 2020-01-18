@@ -28,7 +28,7 @@ Dockerhero includes the following useful tools:
 - Mailhog
 - Composer
 - Xdebug (with remote debugging support)
-- NVM (the default node version is 8)
+- NVM (node 6, 8 and the default version is 10)
 - NPM
 - Yarn
 - Gulp
