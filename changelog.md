@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.6.0 - 2020-01-18
+
+### Added
+
+- Make PHP 7.3 the default version
+- The workspace images are now tagged with their PHP version to properly allow for complete PHP switching
+
 ## 1.5.3 - 2020-01-09
 
 ### Added

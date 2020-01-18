@@ -1,10 +1,6 @@
 # Dockerhero
 
-## Version 1.5.3
-
-![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-workspace.svg?label=dockerhero-workspace&style=flat-square)
-![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-nginx.svg?label=dockerhero-nginx&style=flat-square)
-![Docker Build Status](https://img.shields.io/docker/build/johanvanhelden/dockerhero-php-7.2-fpm.svg?label=dockerhero-php-7.2-fpm&style=flat-square)
+## Version 1.6.0
 
 ### What is Dockerhero?
 
@@ -20,7 +16,7 @@ Dockerhero includes the following software (containers):
 - nginx (latest)
 - mySQL (5.7)
 - Redis (latest)
-- PHP (7.2-fpm by default, [or choose a different version](#picking-a-php-version))
+- PHP (7.3-fpm by default, [or choose a different version](#picking-a-php-version))
 - Mailhog
 - and more to come!
 
@@ -102,25 +98,32 @@ This is because dockhero mounts its parent folder (`./../`) as `/var/www/project
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
 ### Picking a PHP version
-By default, PHP 7.2 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change image.
+By default, PHP 7.3 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change image.
 
 For more information, please see this section: [Overriding default settings](#overriding-default-settings)
 
-Available PHP Images:
+#### Available PHP Images:
 
 PHP 7.3: `johanvanhelden/dockerhero-php-7.3-fpm:latest`
 
 PHP 7.2: `johanvanhelden/dockerhero-php-7.2-fpm:latest`
 
-PHP 7.1: `johanvanhelden/dockerhero-php-7.1-fpm:latest`
+PHP 7.1: `johanvanhelden/dockerhero-php-7.1-fpm:latest` (No longer maintained)
 
-PHP 5.6: `johanvanhelden/dockerhero-php-5.6-fpm:latest`
+PHP 5.6: `johanvanhelden/dockerhero-php-5.6-fpm:latest` (No longer maintained)
 
-PHP 5.4: `johanvanhelden/dockerhero-php-5.4-fpm:latest`
+PHP 5.4: `johanvanhelden/dockerhero-php-5.4-fpm:latest` (No longer maintained)
 
-There is also a PHP 7.1 version of the workspace available for backward compatibility:
+#### Workspace images
+You should pick a matching workspace image for the PHP version you are using.
 
-`johanvanhelden/dockerhero-workspace:php7.1`
+PHP 7.3: `johanvanhelden/dockerhero-workspace:php7.3`
+
+PHP 7.2: `johanvanhelden/dockerhero-workspace:php7.2`
+
+PHP 7.1: `johanvanhelden/dockerhero-workspace:php7.1` (No longer maintained)
+
+There is also a latest tag, this one is used to remain backward compatible, but should not be actively used.
 
 
 ### Trusting the self-signed certificate
