@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.6.1 - 2020-02-04
+
+### Changed
+
+- [Workspace] Rebuild the supported tags to update composer to 1.9.3.
+
 ## 1.6.0 - 2020-01-18
 
 ### Added
