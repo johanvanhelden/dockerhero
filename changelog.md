@@ -8,10 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
-## 1.6.2 - 2020-04-28
+## 1.7.0 - 2020-04-28
 
 ### Added
 
+- [Workspace] Updated composer on all supported PHP versions
 - [Workspace] Intl extension added to all supported PHP versions to be consistent with the PHP images
 - [Gobal] PHP 7.4 added
 
