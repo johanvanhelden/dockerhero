@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.7.1 - 2020-05-07
+
+### Added
+
+- [Gobal] Fixed the Xdebug start and stop scripts
+
 ## 1.7.0 - 2020-04-28
 
 ### Added

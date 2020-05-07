@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.7.0
+## Version 1.7.1
 
 ### What is Dockerhero?
 
