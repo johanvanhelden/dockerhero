@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.7.2 - 2020-06-11
+
+### Added
+
+- [Workspace] Added the imagick extension
+- [PHP] Added the imagick extension
+
 ## 1.7.1 - 2020-05-07
 
 ### Added
