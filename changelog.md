@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 1.8.0 - 2020-07-30
+
+### Added
+
+- [Gobal] Make 7.4 the default PHP version
+
 ## 1.7.2 - 2020-06-11
 
 ### Added
