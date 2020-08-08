@@ -13,6 +13,9 @@ services:
       - /etc/localtime:/etc/localtime:ro
     tty: true
     dns: 8.8.8.8
+    networks:
+      dockerhero:
+        ipv4_address: 172.25.0.10
 
   php:
     container_name: dockerhero_php
@@ -30,6 +33,9 @@ services:
       - "9912:9912"
     expose:
       - "9005"
+    networks:
+      dockerhero:
+        ipv4_address: 172.25.0.11
 
   web:
     container_name: dockerhero_web
@@ -47,6 +53,9 @@ services:
       - "80:80"
       - "443:443"
     dns: 8.8.8.8
+    networks:
+      dockerhero:
+        ipv4_address: 172.25.0.12
 
   db:
     container_name: dockerhero_db
@@ -62,6 +71,9 @@ services:
       MYSQL_USER: dockerhero
       MYSQL_PASSWORD: dockerhero
     dns: 8.8.8.8
+    networks:
+      dockerhero:
+        ipv4_address: 172.25.0.13
 
   mail:
     container_name: dockerhero_mail
@@ -70,6 +82,9 @@ services:
       - "1025:1025"
       - "8025:8025"
     dns: 8.8.8.8
+    networks:
+      dockerhero:
+        ipv4_address: 172.25.0.14
 
   redis:
     container_name: dockerhero_redis
@@ -79,6 +94,9 @@ services:
     ports:
       - "6379:6379"
     command: redis-server --appendonly yes
+    networks:
+      dockerhero:
+        ipv4_address: 172.25.0.15
 
 volumes:
   database:
@@ -87,3 +105,12 @@ volumes:
     driver: "local"
   redis:
     driver: "local"
+
+networks:
+  dockerhero:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
+          gateway: 172.25.0.1

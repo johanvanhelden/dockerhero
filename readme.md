@@ -68,19 +68,20 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 9. [Overriding default settings](#overriding-default-settings)
 10. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
 11. [Making a local website publicly available](#making-a-local-website-publicly-available)
-12. [Miscellaneous](#miscellaneous)
+12. [Connecting to a docker container from your host](#connecting-to-a-docker-container-from-your-host)
+13. [Miscellaneous](#miscellaneous)
     1. [Laravel Dusk](#laravel-dusk)
     2. [laravel-dump-server](#laravel-dump-server)
     3. [Remote Xdebug](#remote-xdebug)
         1. [Starting Xdebug](#starting-xdebug)
         2. [Configuring the IDE](#configuring-the-ide)
-13. [Known issues](#known-issues)
+14. [Known issues](#known-issues)
     1. [MacOS](#macos)
-14. [Contributing](#contributing)
+15. [Contributing](#contributing)
     1. [Testing changes](#testing-changes)
-15. [Thank you](#thank-you)
-16. [Project links](#project-links)
-17. [Todo](#todo)
+16. [Thank you](#thank-you)
+17. [Project links](#project-links)
+18. [Todo](#todo)
 
 ## Installation
 
@@ -312,10 +313,10 @@ services:
   php:
     image: johanvanhelden/dockerhero-php-7.2-fpm:latest
     extra_hosts:
-      - "projectname.localtest.me:172.18.0.6"
+      - "projectname.localtest.me:172.25.0.12"
   workspace:
     extra_hosts:
-      - "projectname.localtest.me:172.18.0.6"
+      - "projectname.localtest.me:172.25.0.12"
 ```
 
 ## Connecting from PHP to a local project via URL
@@ -324,11 +325,10 @@ Add the following entry to the `docker-compose.override.yml` file in the `php:` 
 
 ```
 extra_hosts:
-  - "projectname.localtest.me:172.18.0.6"
+  - "projectname.localtest.me:172.25.0.12"
 ```
-Where 172.18.0.6 is the IP of the dockerhero_web container. To find the IP address you could use:
 
-`$ docker inspect dockerhero_web | grep IPAddress`
+Where 172.25.0.12 is the IP of the dockerhero_web container.
 
 Now, if PHP attempts to connect to projectname.localtest.me, it will not connect to his localhost, but to the nginx container.
 
@@ -347,6 +347,23 @@ In order to do this:
 Where the host-header flag contains the URL of the project you would like to forward.
 
 Ngrok will now present you with a unique ngrok URL. This is the URL you can give out to clients or use in the API/webhook settings.
+
+## Connecting to a docker container from your host
+
+If you want to connect to a docker container from your host, for example to connect to the `dockerhero_db` container using a local MySQL application, you can add all the docker containers to your host file. Simply paste the following container -> ip mapping (the IPs are hardcoded and should never change):
+
+```
+172.25.0.12 dockerhero_web
+172.25.0.11 dockerhero_php
+172.25.0.13 dockerhero_db
+172.25.0.10 dockerhero_workspace
+172.25.0.15 dockerhero_redis
+172.25.0.14 dockerhero_mail
+```
+
+Now, on your host, `dockerhero_db` should also point to the database container.
+
+Pro-tip: so it's also possible now to execute a test suite on your host system using the same environment file. Because your host now knows how to resolve all the container names.
 
 ## Miscellaneous
 
