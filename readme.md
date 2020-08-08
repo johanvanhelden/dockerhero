@@ -57,10 +57,12 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
     3. [Private composer packages](#private-composer-packages)
 4. [Databases](#databases)
     1. [MySQL](#mysql)
-        1. [Changing the MySQL version](#changing-the-mysql-version)
-        2. [Upgrading MySQL](#upgrading-mysql)
-        3. [Changing the SQL mode](#changing-the-sql-mode)
+        1. [Using MySQL with Laravel](#using-mysql-with-laravel)
+        2. [Changing the MySQL version](#changing-the-mysql-version)
+        3. [Upgrading MySQL](#upgrading-mysql)
+        4. [Changing the SQL mode](#changing-the-sql-mode)
     2. [Redis](#redis)
+        1. [Using Redis with Laravel](#using-redis-with-laravel)
 5. [CLI Access](#cli-access)
 6. [Custom nginx configs](#custom-nginx-configs)
 7. [Cronjobs](#cronjobs)
@@ -205,6 +207,21 @@ If you want to import databases from the file system, place them in `./databases
 
 Any exported databases to the file system can be found in `./databases/save`
 
+#### Using MySQL with Laravel
+
+This is what a working configuration would look like:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=dockerhero_db
+DB_PORT=3306
+DB_DATABASE=my_project_db
+DB_USERNAME=my_project
+DB_PASSWORD=my_project
+```
+
+This assumes you created the proper database and user with the password using, for example, PHPMyAdmin.
+
 #### Changing the MySQL version
 If you would like to change the MySQL version, you can do so by editing the `docker-compose.override.yml` (if you do not
 have one, [please create it](#overriding-default-settings)) like so:
@@ -248,6 +265,29 @@ Redis port: 6379
 ```
 
 You can visit phpRedisAdmin by going to `https://phpredisadmin.localtest.me`
+
+#### Using Redis with Laravel
+
+This is what a working configuration would look like:
+
+```
+
+CACHE_DRIVER=redis
+
+-- snip --
+
+QUEUE_CONNECTION=redis
+
+-- snip --
+
+SESSION_DRIVER=redis
+
+-- snip --
+
+REDIS_HOST=dockerhero_redis
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+```
 
 ## CLI Access
 
