@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.8.0
+## Version 2.0.0
 
 ### What is Dockerhero?
 
@@ -57,10 +57,12 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
     3. [Private composer packages](#private-composer-packages)
 4. [Databases](#databases)
     1. [MySQL](#mysql)
-        1. [Changing the MySQL version](#changing-the-mysql-version)
-        2. [Upgrading MySQL](#upgrading-mysql)
-        3. [Changing the SQL mode](#changing-the-sql-mode)
+        1. [Using MySQL with Laravel](#using-mysql-with-laravel)
+        2. [Changing the MySQL version](#changing-the-mysql-version)
+        3. [Upgrading MySQL](#upgrading-mysql)
+        4. [Changing the SQL mode](#changing-the-sql-mode)
     2. [Redis](#redis)
+        1. [Using Redis with Laravel](#using-redis-with-laravel)
 5. [CLI Access](#cli-access)
 6. [Custom nginx configs](#custom-nginx-configs)
 7. [Cronjobs](#cronjobs)
@@ -68,19 +70,20 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 9. [Overriding default settings](#overriding-default-settings)
 10. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
 11. [Making a local website publicly available](#making-a-local-website-publicly-available)
-12. [Miscellaneous](#miscellaneous)
+12. [Connecting to a docker container from your host](#connecting-to-a-docker-container-from-your-host)
+13. [Miscellaneous](#miscellaneous)
     1. [Laravel Dusk](#laravel-dusk)
     2. [laravel-dump-server](#laravel-dump-server)
     3. [Remote Xdebug](#remote-xdebug)
         1. [Starting Xdebug](#starting-xdebug)
         2. [Configuring the IDE](#configuring-the-ide)
-13. [Known issues](#known-issues)
+14. [Known issues](#known-issues)
     1. [MacOS](#macos)
-14. [Contributing](#contributing)
+15. [Contributing](#contributing)
     1. [Testing changes](#testing-changes)
-15. [Thank you](#thank-you)
-16. [Project links](#project-links)
-17. [Todo](#todo)
+16. [Thank you](#thank-you)
+17. [Project links](#project-links)
+18. [Todo](#todo)
 
 ## Installation
 
@@ -204,6 +207,21 @@ If you want to import databases from the file system, place them in `./databases
 
 Any exported databases to the file system can be found in `./databases/save`
 
+#### Using MySQL with Laravel
+
+This is what a working configuration would look like:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=dockerhero_db
+DB_PORT=3306
+DB_DATABASE=my_project_db
+DB_USERNAME=my_project
+DB_PASSWORD=my_project
+```
+
+This assumes you created the proper database and user with the password using, for example, PHPMyAdmin.
+
 #### Changing the MySQL version
 If you would like to change the MySQL version, you can do so by editing the `docker-compose.override.yml` (if you do not
 have one, [please create it](#overriding-default-settings)) like so:
@@ -247,6 +265,29 @@ Redis port: 6379
 ```
 
 You can visit phpRedisAdmin by going to `https://phpredisadmin.localtest.me`
+
+#### Using Redis with Laravel
+
+This is what a working configuration would look like:
+
+```
+
+CACHE_DRIVER=redis
+
+-- snip --
+
+QUEUE_CONNECTION=redis
+
+-- snip --
+
+SESSION_DRIVER=redis
+
+-- snip --
+
+REDIS_HOST=dockerhero_redis
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+```
 
 ## CLI Access
 
@@ -310,12 +351,11 @@ version: '2'
 
 services:
   php:
-    image: johanvanhelden/dockerhero-php-7.2-fpm:latest
     extra_hosts:
-      - "projectname.localtest.me:172.18.0.6"
+      - "projectname.localtest.me:172.25.0.12"
   workspace:
     extra_hosts:
-      - "projectname.localtest.me:172.18.0.6"
+      - "projectname.localtest.me:172.25.0.12"
 ```
 
 ## Connecting from PHP to a local project via URL
@@ -324,11 +364,10 @@ Add the following entry to the `docker-compose.override.yml` file in the `php:` 
 
 ```
 extra_hosts:
-  - "projectname.localtest.me:172.18.0.6"
+  - "projectname.localtest.me:172.25.0.12"
 ```
-Where 172.18.0.6 is the IP of the dockerhero_web container. To find the IP address you could use:
 
-`$ docker inspect dockerhero_web | grep IPAddress`
+Where 172.25.0.12 is the IP of the dockerhero_web container.
 
 Now, if PHP attempts to connect to projectname.localtest.me, it will not connect to his localhost, but to the nginx container.
 
@@ -347,6 +386,23 @@ In order to do this:
 Where the host-header flag contains the URL of the project you would like to forward.
 
 Ngrok will now present you with a unique ngrok URL. This is the URL you can give out to clients or use in the API/webhook settings.
+
+## Connecting to a docker container from your host
+
+If you want to connect to a docker container from your host, for example to connect to the `dockerhero_db` container using a local MySQL application, you can add all the docker containers to your host file. Simply paste the following container -> ip mapping (the IPs are hardcoded and should never change):
+
+```
+172.25.0.12 dockerhero_web
+172.25.0.11 dockerhero_php
+172.25.0.13 dockerhero_db
+172.25.0.10 dockerhero_workspace
+172.25.0.15 dockerhero_redis
+172.25.0.14 dockerhero_mail
+```
+
+Now, on your host, `dockerhero_db` should also point to the database container.
+
+Pro-tip: so it's also possible now to execute a test suite on your host system using the same environment file. Because your host now knows how to resolve all the container names.
 
 ## Miscellaneous
 
