@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 2.0.0 - 2020-08-10
+
+### Added
+
+- [Gobal] Make container IPs static
+- [Gobal] Add more examples to the readme
+
 ## 1.8.0 - 2020-07-30
 
 ### Added

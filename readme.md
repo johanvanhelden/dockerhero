@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 1.8.0
+## Version 2.0.0
 
 ### What is Dockerhero?
 
@@ -351,7 +351,6 @@ version: '2'
 
 services:
   php:
-    image: johanvanhelden/dockerhero-php-7.2-fpm:latest
     extra_hosts:
       - "projectname.localtest.me:172.25.0.12"
   workspace:
