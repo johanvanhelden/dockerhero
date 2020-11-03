@@ -1,8 +1,9 @@
 <?php
-
 /**
  * `REFERENCES` keyword parser.
  */
+
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -11,13 +12,11 @@ use PhpMyAdmin\SqlParser\Context;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function trim;
 
 /**
  * `REFERENCES` keyword parser.
- *
- * @category   Keywords
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Reference extends Component
 {
@@ -26,20 +25,20 @@ class Reference extends Component
      *
      * @var array
      */
-    public static $REFERENCES_OPTIONS = array(
-        'MATCH' => array(
+    public static $REFERENCES_OPTIONS = [
+        'MATCH' => [
             1,
             'var',
-        ),
-        'ON DELETE' => array(
+        ],
+        'ON DELETE' => [
             2,
             'var',
-        ),
-        'ON UPDATE' => array(
+        ],
+        'ON UPDATE' => [
             3,
             'var',
-        )
-    );
+        ],
+    ];
 
     /**
      * The referenced table.
@@ -63,13 +62,11 @@ class Reference extends Component
     public $options;
 
     /**
-     * Constructor.
-     *
      * @param Expression   $table   the name of the table referenced
      * @param array        $columns the columns referenced
      * @param OptionsArray $options the options
      */
-    public function __construct($table = null, array $columns = array(), $options = null)
+    public function __construct($table = null, array $columns = [], $options = null)
     {
         $this->table = $table;
         $this->columns = $columns;
@@ -83,9 +80,9 @@ class Reference extends Component
      *
      * @return Reference
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = new self();
+        $ret = new static();
 
         /**
          * The state of the parser.
@@ -124,10 +121,10 @@ class Reference extends Component
                 $ret->table = Expression::parse(
                     $parser,
                     $list,
-                    array(
+                    [
                         'parseField' => 'table',
-                        'breakOnAlias' => true
-                    )
+                        'breakOnAlias' => true,
+                    ]
                 );
                 $state = 1;
             } elseif ($state === 1) {
@@ -151,7 +148,7 @@ class Reference extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         return trim(
             $component->table

@@ -24,11 +24,11 @@ class GetAttrNode extends Node
     const METHOD_CALL = 2;
     const ARRAY_CALL = 3;
 
-    public function __construct(Node $node, Node $attribute, ArrayNode $arguments, $type)
+    public function __construct(Node $node, Node $attribute, ArrayNode $arguments, int $type)
     {
         parent::__construct(
-            array('node' => $node, 'attribute' => $attribute, 'arguments' => $arguments),
-            array('type' => $type)
+            ['node' => $node, 'attribute' => $attribute, 'arguments' => $arguments],
+            ['type' => $type]
         );
     }
 
@@ -82,11 +82,11 @@ class GetAttrNode extends Node
                 if (!\is_object($obj)) {
                     throw new \RuntimeException('Unable to get a property on a non-object.');
                 }
-                if (!\is_callable($toCall = array($obj, $this->nodes['attribute']->attributes['value']))) {
+                if (!\is_callable($toCall = [$obj, $this->nodes['attribute']->attributes['value']])) {
                     throw new \RuntimeException(sprintf('Unable to call method "%s" of object "%s".', $this->nodes['attribute']->attributes['value'], \get_class($obj)));
                 }
 
-                return \call_user_func_array($toCall, $this->nodes['arguments']->evaluate($functions, $values));
+                return $toCall(...array_values($this->nodes['arguments']->evaluate($functions, $values)));
 
             case self::ARRAY_CALL:
                 $array = $this->nodes['node']->evaluate($functions, $values);
@@ -95,6 +95,20 @@ class GetAttrNode extends Node
                 }
 
                 return $array[$this->nodes['attribute']->evaluate($functions, $values)];
+        }
+    }
+
+    public function toArray()
+    {
+        switch ($this->attributes['type']) {
+            case self::PROPERTY_CALL:
+                return [$this->nodes['node'], '.', $this->nodes['attribute']];
+
+            case self::METHOD_CALL:
+                return [$this->nodes['node'], '.', $this->nodes['attribute'], '(', $this->nodes['arguments'], ')'];
+
+            case self::ARRAY_CALL:
+                return [$this->nodes['node'], '[', $this->nodes['attribute'], ']'];
         }
     }
 }

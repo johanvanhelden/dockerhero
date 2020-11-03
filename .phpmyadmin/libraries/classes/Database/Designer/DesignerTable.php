@@ -24,16 +24,16 @@ class DesignerTable
     /**
      * Create a new DesignerTable
      *
-     * @param string $databaseName The database name
-     * @param string $tableName The table name
-     * @param string $tableEngine The table engine
+     * @param string      $databaseName The database name
+     * @param string      $tableName    The table name
+     * @param string      $tableEngine  The table engine
      * @param string|null $displayField The display field if available
      */
     public function __construct(
-        $databaseName,
-        $tableName,
-        $tableEngine,
-        $displayField
+        string $databaseName,
+        string $tableName,
+        string $tableEngine,
+        ?string $displayField
     ) {
         $this->databaseName = $databaseName;
         $this->tableName = $tableName;
@@ -46,7 +46,8 @@ class DesignerTable
      *
      * @return bool
      */
-    public function supportsForeignkeys() {
+    public function supportsForeignkeys(): bool
+    {
         return Util::isForeignKeySupported($this->tableEngine);
     }
 
@@ -55,7 +56,8 @@ class DesignerTable
      *
      * @return string
      */
-    public function getDatabaseName() {
+    public function getDatabaseName(): string
+    {
         return $this->databaseName;
     }
 
@@ -64,7 +66,8 @@ class DesignerTable
      *
      * @return string
      */
-    public function getTableName() {
+    public function getTableName(): string
+    {
         return $this->tableName;
     }
 
@@ -73,16 +76,28 @@ class DesignerTable
      *
      * @return string
      */
-    public function getTableEngine() {
+    public function getTableEngine(): string
+    {
         return $this->tableEngine;
     }
 
     /**
-     * Get the db and table speparated with a dot
+     * Get the displayed field
      *
      * @return string
      */
-    public function getDbTableString() {
+    public function getDisplayField()
+    {
+        return $this->displayField;
+    }
+
+    /**
+     * Get the db and table separated with a dot
+     *
+     * @return string
+     */
+    public function getDbTableString(): string
+    {
         return $this->databaseName . '.' . $this->tableName;
     }
 }

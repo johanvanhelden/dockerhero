@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
-- nothing
+- [Gobal] Update PHPMyAdmin to 5.0.4
 
 ## 2.0.0 - 2020-08-10
 

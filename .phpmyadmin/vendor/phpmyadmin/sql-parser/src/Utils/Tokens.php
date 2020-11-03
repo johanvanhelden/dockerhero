@@ -1,21 +1,20 @@
 <?php
-
 /**
  * Token utilities.
  */
+
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Utils;
 
 use PhpMyAdmin\SqlParser\Lexer;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function count;
+use function strcasecmp;
 
 /**
  * Token utilities.
- *
- * @category   Token
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Tokens
 {
@@ -44,7 +43,7 @@ class Tokens
         }
 
         if (isset($pattern['value_str'])
-            && strcasecmp($pattern['value_str'], $token->value)
+            && strcasecmp($pattern['value_str'], (string) $token->value)
         ) {
             return false;
         }
@@ -57,13 +56,8 @@ class Tokens
         }
 
         // Flags.
-        if (isset($pattern['flags'])
-            && (($pattern['flags'] & $token->flags) === 0)
-        ) {
-            return false;
-        }
-
-        return true;
+        return ! isset($pattern['flags'])
+            || (! (($pattern['flags'] & $token->flags) === 0));
     }
 
     public static function replaceTokens($list, array $find, array $replace)
@@ -85,7 +79,7 @@ class Tokens
          *
          * @var array
          */
-        $newList = array();
+        $newList = [];
 
         /**
          * The length of the find pattern is calculated only once.

@@ -1,8 +1,9 @@
 <?php
-
 /**
  * `GROUP BY` keyword parser.
  */
+
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -10,16 +11,17 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function is_array;
+use function trim;
 
 /**
  * `GROUP BY` keyword parser.
- *
- * @category   Keywords
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class GroupKeyword extends Component
 {
+    public $type;
+
     /**
      * The expression that is used for grouping.
      *
@@ -28,8 +30,6 @@ class GroupKeyword extends Component
     public $expr;
 
     /**
-     * Constructor.
-     *
      * @param Expression $expr the expression that we are sorting by
      */
     public function __construct($expr = null)
@@ -44,11 +44,11 @@ class GroupKeyword extends Component
      *
      * @return GroupKeyword[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = array();
+        $ret = [];
 
-        $expr = new self();
+        $expr = new static();
 
         /**
          * The state of the parser.
@@ -96,7 +96,8 @@ class GroupKeyword extends Component
                     if (! empty($expr->expr)) {
                         $ret[] = $expr;
                     }
-                    $expr = new self();
+
+                    $expr = new static();
                     $state = 0;
                 } else {
                     break;
@@ -120,12 +121,12 @@ class GroupKeyword extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         if (is_array($component)) {
             return implode(', ', $component);
         }
 
-        return trim($component->expr);
+        return trim((string) $component->expr);
     }
 }

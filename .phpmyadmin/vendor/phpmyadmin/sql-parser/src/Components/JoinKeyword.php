@@ -1,8 +1,9 @@
 <?php
-
 /**
  * `JOIN` keyword parser.
  */
+
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -10,13 +11,11 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function array_search;
+use function implode;
 
 /**
  * `JOIN` keyword parser.
- *
- * @category   Keywords
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class JoinKeyword extends Component
 {
@@ -25,7 +24,7 @@ class JoinKeyword extends Component
      *
      * @var array
      */
-    public static $JOINS = array(
+    public static $JOINS = [
         'CROSS JOIN' => 'CROSS',
         'FULL JOIN' => 'FULL',
         'FULL OUTER JOIN' => 'FULL',
@@ -40,8 +39,8 @@ class JoinKeyword extends Component
         'NATURAL RIGHT JOIN' => 'NATURAL RIGHT',
         'NATURAL LEFT OUTER JOIN' => 'NATURAL LEFT OUTER',
         'NATURAL RIGHT OUTER JOIN' => 'NATURAL RIGHT OUTER',
-        'STRAIGHT_JOIN' => 'STRAIGHT'
-    );
+        'STRAIGHT_JOIN' => 'STRAIGHT',
+    ];
 
     /**
      * Type of this join.
@@ -74,14 +73,12 @@ class JoinKeyword extends Component
     public $using;
 
     /**
-     * Constructor.
+     * @see JoinKeyword::$JOINS
      *
      * @param string      $type  Join type
      * @param Expression  $expr  join expression
      * @param Condition[] $on    join conditions
      * @param ArrayObj    $using columns joined
-     *
-     * @see JoinKeyword::$JOINS
      */
     public function __construct($type = null, $expr = null, $on = null, $using = null)
     {
@@ -98,11 +95,11 @@ class JoinKeyword extends Component
      *
      * @return JoinKeyword[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = array();
+        $ret = [];
 
-        $expr = new self();
+        $expr = new static();
 
         /**
          * The state of the parser.
@@ -159,7 +156,7 @@ class JoinKeyword extends Component
                     break;
                 }
             } elseif ($state === 1) {
-                $expr->expr = Expression::parse($parser, $list, array('field' => 'table'));
+                $expr->expr = Expression::parse($parser, $list, ['field' => 'table']);
                 $state = 2;
             } elseif ($state === 2) {
                 if ($token->type === Token::TYPE_KEYWORD) {
@@ -174,25 +171,26 @@ class JoinKeyword extends Component
                             if (! empty(static::$JOINS[$token->keyword])
                             ) {
                                 $ret[] = $expr;
-                                $expr = new self();
+                                $expr = new static();
                                 $expr->type = static::$JOINS[$token->keyword];
                                 $state = 1;
                             } else {
                                 /* Next clause is starting */
                                 break 2;
                             }
+
                             break;
                     }
                 }
             } elseif ($state === 3) {
                 $expr->on = Condition::parse($parser, $list);
                 $ret[] = $expr;
-                $expr = new self();
+                $expr = new static();
                 $state = 0;
             } elseif ($state === 4) {
                 $expr->using = ArrayObj::parse($parser, $list);
                 $ret[] = $expr;
-                $expr = new self();
+                $expr = new static();
                 $state = 0;
             }
         }
@@ -212,9 +210,9 @@ class JoinKeyword extends Component
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
-        $ret = array();
+        $ret = [];
         foreach ($component as $c) {
             $ret[] = array_search($c->type, static::$JOINS) . ' ' . $c->expr
                 . (! empty($c->on)

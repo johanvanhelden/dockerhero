@@ -1,8 +1,9 @@
 <?php
-
 /**
  * `SELECT` statement.
  */
+
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -33,10 +34,10 @@ use PhpMyAdmin\SqlParser\Statement;
  *       [PARTITION partition_list]
  *     [WHERE where_condition]
  *     [GROUP BY {col_name | expr | position}
- *       [ASC | DESC), ... [WITH ROLLUP]]
+ *       [ASC | DESC], ... [WITH ROLLUP]]
  *     [HAVING where_condition]
  *     [ORDER BY {col_name | expr | position}
- *       [ASC | DESC), ...]
+ *       [ASC | DESC], ...]
  *     [LIMIT {[offset,] row_count | row_count OFFSET offset}]
  *     [PROCEDURE procedure_name(argument_list)]
  *     [INTO OUTFILE 'file_name'
@@ -45,10 +46,6 @@ use PhpMyAdmin\SqlParser\Statement;
  *       | INTO DUMPFILE 'file_name'
  *       | INTO var_name [, var_name]]
  *     [FOR UPDATE | LOCK IN SHARE MODE]]
- *
- * @category   Statements
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class SelectStatement extends Statement
 {
@@ -57,28 +54,28 @@ class SelectStatement extends Statement
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static $OPTIONS = [
         'ALL' => 1,
         'DISTINCT' => 1,
         'DISTINCTROW' => 1,
         'HIGH_PRIORITY' => 2,
-        'MAX_STATEMENT_TIME' => array(
+        'MAX_STATEMENT_TIME' => [
             3,
             'var=',
-        ),
+        ],
         'STRAIGHT_JOIN' => 4,
         'SQL_SMALL_RESULT' => 5,
         'SQL_BIG_RESULT' => 6,
         'SQL_BUFFER_RESULT' => 7,
         'SQL_CACHE' => 8,
         'SQL_NO_CACHE' => 8,
-        'SQL_CALC_FOUND_ROWS' => 9
-    );
+        'SQL_CALC_FOUND_ROWS' => 9,
+    ];
 
-    public static $END_OPTIONS = array(
+    public static $END_OPTIONS = [
         'FOR UPDATE' => 1,
-        'LOCK IN SHARE MODE' => 1
-    );
+        'LOCK IN SHARE MODE' => 1,
+    ];
 
     /**
      * The clauses of this statement, in order.
@@ -87,153 +84,153 @@ class SelectStatement extends Statement
      *
      * @var array
      */
-    public static $CLAUSES = array(
-        'SELECT' => array(
+    public static $CLAUSES = [
+        'SELECT' => [
             'SELECT',
             2,
-        ),
+        ],
         // Used for options.
-        '_OPTIONS' => array(
+        '_OPTIONS' => [
             '_OPTIONS',
             1,
-        ),
+        ],
         // Used for selected expressions.
-        '_SELECT' => array(
+        '_SELECT' => [
             'SELECT',
             1,
-        ),
-        'INTO' => array(
+        ],
+        'INTO' => [
             'INTO',
             3,
-        ),
-        'FROM' => array(
+        ],
+        'FROM' => [
             'FROM',
             3,
-        ),
-        'FORCE' => array(
+        ],
+        'FORCE' => [
             'FORCE',
             1,
-        ),
-        'USE' => array(
+        ],
+        'USE' => [
             'USE',
             1,
-        ),
-        'IGNORE' => array(
+        ],
+        'IGNORE' => [
             'IGNORE',
             3,
-        ),
-        'PARTITION' => array(
+        ],
+        'PARTITION' => [
             'PARTITION',
             3,
-        ),
+        ],
 
-        'JOIN' => array(
+        'JOIN' => [
             'JOIN',
             1,
-        ),
-        'FULL JOIN' => array(
+        ],
+        'FULL JOIN' => [
             'FULL JOIN',
             1,
-        ),
-        'INNER JOIN' => array(
+        ],
+        'INNER JOIN' => [
             'INNER JOIN',
             1,
-        ),
-        'LEFT JOIN' => array(
+        ],
+        'LEFT JOIN' => [
             'LEFT JOIN',
             1,
-        ),
-        'LEFT OUTER JOIN' => array(
+        ],
+        'LEFT OUTER JOIN' => [
             'LEFT OUTER JOIN',
             1,
-        ),
-        'RIGHT JOIN' => array(
+        ],
+        'RIGHT JOIN' => [
             'RIGHT JOIN',
             1,
-        ),
-        'RIGHT OUTER JOIN' => array(
+        ],
+        'RIGHT OUTER JOIN' => [
             'RIGHT OUTER JOIN',
             1,
-        ),
-        'NATURAL JOIN' => array(
+        ],
+        'NATURAL JOIN' => [
             'NATURAL JOIN',
             1,
-        ),
-        'NATURAL LEFT JOIN' => array(
+        ],
+        'NATURAL LEFT JOIN' => [
             'NATURAL LEFT JOIN',
             1,
-        ),
-        'NATURAL RIGHT JOIN' => array(
+        ],
+        'NATURAL RIGHT JOIN' => [
             'NATURAL RIGHT JOIN',
             1,
-        ),
-        'NATURAL LEFT OUTER JOIN' => array(
+        ],
+        'NATURAL LEFT OUTER JOIN' => [
             'NATURAL LEFT OUTER JOIN',
             1,
-        ),
-        'NATURAL RIGHT OUTER JOIN' => array(
+        ],
+        'NATURAL RIGHT OUTER JOIN' => [
             'NATURAL RIGHT JOIN',
             1,
-        ),
+        ],
 
-        'WHERE' => array(
+        'WHERE' => [
             'WHERE',
             3,
-        ),
-        'GROUP BY' => array(
+        ],
+        'GROUP BY' => [
             'GROUP BY',
             3,
-        ),
-        'HAVING' => array(
+        ],
+        'HAVING' => [
             'HAVING',
             3,
-        ),
-        'ORDER BY' => array(
+        ],
+        'ORDER BY' => [
             'ORDER BY',
             3,
-        ),
-        'LIMIT' => array(
+        ],
+        'LIMIT' => [
             'LIMIT',
             3,
-        ),
-        'PROCEDURE' => array(
+        ],
+        'PROCEDURE' => [
             'PROCEDURE',
             3,
-        ),
-        'UNION' => array(
+        ],
+        'UNION' => [
             'UNION',
             1,
-        ),
-        'EXCEPT' => array(
+        ],
+        'EXCEPT' => [
             'EXCEPT',
             1,
-        ),
-        'INTERSECT' => array(
+        ],
+        'INTERSECT' => [
             'INTERSECT',
             1,
-        ),
-        '_END_OPTIONS' => array(
+        ],
+        '_END_OPTIONS' => [
             '_END_OPTIONS',
             1,
-        ),
+        ],
         // These are available only when `UNION` is present.
-        // 'ORDER BY'                      => array('ORDER BY', 3),
-        // 'LIMIT'                         => array('LIMIT', 3)
-    );
+        // 'ORDER BY'                      => ['ORDER BY', 3],
+        // 'LIMIT'                         => ['LIMIT', 3],
+    ];
 
     /**
      * Expressions that are being selected by this statement.
      *
      * @var Expression[]
      */
-    public $expr = array();
+    public $expr = [];
 
     /**
      * Tables used as sources for this statement.
      *
      * @var Expression[]
      */
-    public $from = array();
+    public $from = [];
 
     /**
      * Index hints
@@ -310,14 +307,14 @@ class SelectStatement extends Statement
      *
      * @var SelectStatement[]
      */
-    public $union = array();
+    public $union = [];
 
     /**
      * The end options of this query.
      *
-     * @var OptionsArray
-     *
      * @see static::$END_OPTIONS
+     *
+     * @var OptionsArray
      */
     public $end_options;
 
@@ -334,14 +331,14 @@ class SelectStatement extends Statement
         if (! empty($this->union)) {
             $clauses = static::$CLAUSES;
             unset($clauses['ORDER BY'], $clauses['LIMIT']);
-            $clauses['ORDER BY'] = array(
+            $clauses['ORDER BY'] = [
                 'ORDER BY',
-                3
-            );
-            $clauses['LIMIT'] = array(
+                3,
+            ];
+            $clauses['LIMIT'] = [
                 'LIMIT',
-                3
-            );
+                3,
+            ];
 
             return $clauses;
         }

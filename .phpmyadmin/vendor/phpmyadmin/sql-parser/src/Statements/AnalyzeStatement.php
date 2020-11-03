@@ -1,8 +1,9 @@
 <?php
-
 /**
  * `ANALYZE` statement.
  */
+
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Statements;
 
@@ -12,12 +13,8 @@ use PhpMyAdmin\SqlParser\Statement;
 /**
  * `ANALYZE` statement.
  *
- * ANALYZE array(NO_WRITE_TO_BINLOG | LOCAL] TABLE
- *  tbl_name array(, tbl_name] ...
- *
- * @category   Statements
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
+ * ANALYZE [NO_WRITE_TO_BINLOG | LOCAL] TABLE
+ *  tbl_name [, tbl_name] ...
  */
 class AnalyzeStatement extends Statement
 {
@@ -26,12 +23,12 @@ class AnalyzeStatement extends Statement
      *
      * @var array
      */
-    public static $OPTIONS = array(
+    public static $OPTIONS = [
         'TABLE' => 1,
 
         'NO_WRITE_TO_BINLOG' => 2,
-        'LOCAL' => 3
-    );
+        'LOCAL' => 3,
+    ];
 
     /**
      * Analyzed tables.

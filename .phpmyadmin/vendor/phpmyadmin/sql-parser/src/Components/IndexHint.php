@@ -1,8 +1,9 @@
 <?php
-
 /**
  * Parses an Index hint.
  */
+
+declare(strict_types=1);
 
 namespace PhpMyAdmin\SqlParser\Components;
 
@@ -10,13 +11,11 @@ use PhpMyAdmin\SqlParser\Component;
 use PhpMyAdmin\SqlParser\Parser;
 use PhpMyAdmin\SqlParser\Token;
 use PhpMyAdmin\SqlParser\TokensList;
+use function implode;
+use function is_array;
 
 /**
  * Parses an Index hint.
- *
- * @category   Components
- *
- * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class IndexHint extends Component
 {
@@ -46,18 +45,20 @@ class IndexHint extends Component
      *
      * @var array
      */
-    public $indexes = array();
+    public $indexes = [];
 
     /**
-     * Constructor.
-     *
      * @param string $type       the type of hint (USE/FORCE/IGNORE)
      * @param string $indexOrKey What the hint is for (INDEX/KEY)
      * @param string $for        the clause for which this hint is (JOIN/ORDER BY/GROUP BY)
-     * @param string $indexes    List of indexes in this hint
+     * @param array  $indexes    List of indexes in this hint
      */
-    public function __construct(string $type = null, string $indexOrKey = null, string $for = null, array $indexes = array())
-    {
+    public function __construct(
+        ?string $type = null,
+        ?string $indexOrKey = null,
+        ?string $for = null,
+        array $indexes = []
+    ) {
         $this->type = $type;
         $this->indexOrKey = $indexOrKey;
         $this->for = $for;
@@ -71,11 +72,11 @@ class IndexHint extends Component
      *
      * @return IndexHint|Component[]
      */
-    public static function parse(Parser $parser, TokensList $list, array $options = array())
+    public static function parse(Parser $parser, TokensList $list, array $options = [])
     {
-        $ret = array();
-        $expr = new self();
-        $expr->type = isset($options['type']) ? $options['type'] : null;
+        $ret = [];
+        $expr = new static();
+        $expr->type = $options['type'] ?? null;
         /**
          * The state of the parser.
          *
@@ -86,6 +87,7 @@ class IndexHint extends Component
          *      2 -------------------- [ expr_list ] --------------------> 0
          *      3 -------------- [ JOIN/GROUP BY/ORDER BY ] -------------> 4
          *      4 -------------------- [ expr_list ] --------------------> 0
+         *
          * @var int
          */
         $state = 0;
@@ -95,6 +97,7 @@ class IndexHint extends Component
         if ($list->idx > 0) {
             --$list->idx;
         }
+
         for (; $list->idx < $list->count; ++$list->idx) {
             /**
              * Token parsed at this moment.
@@ -107,6 +110,7 @@ class IndexHint extends Component
             if ($token->type === Token::TYPE_DELIMITER) {
                 break;
             }
+
             // Skipping whitespaces and comments.
             if (($token->type === Token::TYPE_WHITESPACE) || ($token->type === Token::TYPE_COMMENT)) {
                 continue;
@@ -122,6 +126,7 @@ class IndexHint extends Component
                             break 2;
                         }
                     }
+
                     break;
                 case 1:
                     if ($token->type === Token::TYPE_KEYWORD) {
@@ -130,11 +135,13 @@ class IndexHint extends Component
                         } else {
                             $parser->error('Unexpected keyword.', $token);
                         }
+
                         $state = 2;
                     } else {
                         // we expect the token to be a keyword
                         $parser->error('Unexpected token.', $token);
                     }
+
                     break;
                 case 2:
                     if ($token->type === Token::TYPE_KEYWORD && $token->keyword === 'FOR') {
@@ -143,42 +150,49 @@ class IndexHint extends Component
                         $expr->indexes = ExpressionArray::parse($parser, $list);
                         $state = 0;
                         $ret[] = $expr;
-                        $expr = new self();
+                        $expr = new static();
                     }
+
                     break;
                 case 3:
                     if ($token->type === Token::TYPE_KEYWORD) {
-                        if ($token->keyword === 'JOIN' || $token->keyword === 'GROUP BY' || $token->keyword === 'ORDER BY') {
+                        if ($token->keyword === 'JOIN'
+                            || $token->keyword === 'GROUP BY'
+                            || $token->keyword === 'ORDER BY'
+                        ) {
                             $expr->for = $token->keyword;
                         } else {
                             $parser->error('Unexpected keyword.', $token);
                         }
+
                         $state = 4;
                     } else {
                         // we expect the token to be a keyword
                         $parser->error('Unexpected token.', $token);
                     }
+
                     break;
                 case 4:
                     $expr->indexes = ExpressionArray::parse($parser, $list);
                     $state = 0;
                     $ret[] = $expr;
-                    $expr = new self();
+                    $expr = new static();
                     break;
             }
         }
+
         --$list->idx;
 
         return $ret;
     }
 
     /**
-     * @param ArrayObj|ArrayObj[] $component the component to be built
-     * @param array               $options   parameters for building
+     * @param IndexHint|IndexHint[] $component the component to be built
+     * @param array                 $options   parameters for building
      *
      * @return string
      */
-    public static function build($component, array $options = array())
+    public static function build($component, array $options = [])
     {
         if (is_array($component)) {
             return implode(' ', $component);
@@ -188,6 +202,7 @@ class IndexHint extends Component
         if ($component->for !== null) {
             $ret .= 'FOR ' . $component->for . ' ';
         }
+
         return $ret . ExpressionArray::build($component->indexes);
     }
 }

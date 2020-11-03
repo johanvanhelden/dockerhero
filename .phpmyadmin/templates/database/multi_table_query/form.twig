@@ -13,7 +13,11 @@
         }
     ]
 } only %}
-{{ Util_getDivForSliderEffect('query_div', 'Query window'|trans, 'open') }}
+{% include 'div_for_slider_effect.twig' with {
+    'id': 'query_div',
+    'message': 'Query window'|trans,
+    'initial_sliders_state': 'open',
+} only %}
 <form action="" id="query_form">
     <input type="hidden" id="db_name" value="{{ db }}">
     <fieldset>
@@ -155,25 +159,23 @@
         {% endfor %}
 
         <fieldset style="display:inline">
-            <input type="button" value="{% trans '+ Add column' %}" id="add_column_button">
+            <input class="btn btn-secondary" type="button" value="{% trans '+ Add column' %}" id="add_column_button">
         </fieldset>
 
         <fieldset>
-            {% spaceless %}
-                <textarea id="MultiSqlquery"
-                    cols="80"
-                    rows="4"
-                    style="float:left"
-                    name="sql_query"
-                    dir="ltr">
-                </textarea>
-            {% endspaceless %}
+              {# Keep the block without a space between the open and close tag #}
+              <textarea id="MultiSqlquery"
+                  cols="80"
+                  rows="4"
+                  style="float: left;"
+                  name="sql_query"
+                  dir="ltr"></textarea>
         </fieldset>
     </fieldset>
 
     <fieldset class="tblFooters">
-        <input type="button" id="update_query_button" value="{% trans 'Update query' %}">
-        <input type="button" id="submit_query" value="{% trans 'Submit query' %}">
+        <input class="btn btn-secondary" type="button" id="update_query_button" value="{% trans 'Update query' %}">
+        <input class="btn btn-primary" type="button" id="submit_query" value="{% trans 'Submit query' %}">
     </fieldset>
 </form>
 </div>{# Slider div #}

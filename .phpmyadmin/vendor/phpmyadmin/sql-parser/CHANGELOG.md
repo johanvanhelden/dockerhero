@@ -1,6 +1,108 @@
 # Change Log
 
+## [5.4.1] - 2020-10-15
+* Fix array_key_exists warning when parsing a "DEFAULT FALSE" token (#299)
+
+## [5.4.0] - 2020-10-08
+
+* EXISTS is also a function. (#297)
+* Fix lexer to not allow numbers with letters (#300)
+* Add support for INVISIBLE keyword (#292)
+* Fix the "$" might be a character used in a name (#301)
+* Fix use stream_select instead of non-blocking STDIN (#309)
+* Add select validation to a create view statement (#310)
+
+## [5.3.1] - 2020-03-20
+
+* Revert some changes with the understanding of ANSI_QUOTES mode and identifiers
+* Suggest motranslator 5.0 in README
+
+## [5.3.0] - 2020-03-20
+
+* Stop instanciating an object to check its class name. (#290)
+* Replace sscanf by equivalent native PHP functions because sscanf can be disabled for security reasons. (#270)
+* Allow phpunit 9
+* Allow phpmyadmin/motranslator 5.0
+* Fix for php error when "INSERT INTO x SET a = 1" is "INSERT INTO x SET = 1" (#295)
+* Fixed lexer fails to detect "*" as a wildcard (#288)
+* Fixed ANSI_QUOTES support (#284)
+* Fixed parser mistakes with comments (#156)
+
+## [5.2.0] - 2020-01-07
+
+* Fix ALTER TABLE ... PRIMARY/UNIQUE KEY results in error (#267)
+* Prevent overwrite of offset in Limit clause by parenthesis (#275)
+* Allow SCHEMA to be used in CREATE Database statement (#231)
+* Add missing options in SET statement (#255)
+* Add support for DROP USER statement (#259)
+* Fix php error "undefined index" when replacing a non existing clause (#249)
+
+## [5.1.0] - 2019-11-12
+
+* Fix for PHP deprecations messages about implode for php 7.4+ (#258)
+* Parse CHECK keyword on table definition (#264)
+* Parse truncate statement (#221)
+* Fix wrong parsing of partitions (#265)
+
+## [5.0.0] - 2019-05-09
+
+* Drop support for PHP 5.3, PHP 5.4, PHP 5.5, PHP 5.6, PHP 7.0 and HHVM
+* Enable strict mode on PHP files
+* Fix redundant whitespaces in build() outputs (#228)
+* Fix incorrect error on DEFAULT keyword in ALTER operation (#229)
+* Fix incorrect outputs from Query::getClause (#233)
+* Add support for reading an SQL file from stdin
+* Fix for missing tokenize-query in Composer's vendor/bin/ directory
+* Fix for PHP warnings with an incomplete CASE expression (#241)
+* Fix for error message with multiple CALL statements (#223)
+* Recognize the question mark character as a parameter (#242)
+
+## [4.7.1] - 2020-10-15
+* Fix array_key_exists warning when parsing a "DEFAULT FALSE" token (#299)
+
+## [4.7.0] - 2020-10-08
+
+* EXISTS is also a function. (#297)
+* Fix lexer to not allow numbers with letters (#300)
+* Add support for INVISIBLE keyword (#292)
+* Fix the "$" might be a character used in a name (#301)
+* Fix use stream_select instead of non-blocking STDIN (#309)
+* Add select validation to a create view statement (#310)
+
+## [4.6.1] - 2020-03-20
+
+* Revert some changes with the understanding of ANSI_QUOTES mode and identifiers
+* Suggest motranslator 4.0 in README
+
+## [4.6.0] - 2020-03-20
+
+* Stop instanciating an object to check its class name. (#290)
+* Replace sscanf by equivalent native PHP functions because sscanf can be disabled for security reasons. (#270)
+* Allow phpunit 7
+* Fix for php error when "INSERT INTO x SET a = 1" is "INSERT INTO x SET = 1" (#295)
+* Fixed lexer fails to detect "*" as a wildcard (#288)
+* Fixed ANSI_QUOTES support (#284)
+* Fixed parser mistakes with comments (#156)
+
+## [4.5.0] - 2020-01-07
+
+* Fix ALTER TABLE ... PRIMARY/UNIQUE KEY results in error (#267)
+* Prevent overwrite of offset in Limit clause by parenthesis (#275)
+* Allow SCHEMA to be used in CREATE Database statement (#231)
+* Add missing options in SET statement (#255)
+* Add support for DROP USER statement (#259)
+* Fix php error "undefined index" when replacing a non existing clause (#249)
+
+## [4.4.0] - 2019-11-12
+
+* Fix for PHP deprecations messages about implode for php 7.4+ (#258)
+* Parse CHECK keyword on table definition (#264)
+* Parse truncate statement (#221)
+* Fix wrong parsing of partitions (#265)
+
 ## [4.3.2] - 2019-06-03
+
+Backport fixes from 5.0.0 to QA branch:
 
 * Fix redundant whitespaces in build() outputs (#228)
 * Fix incorrect error on DEFAULT keyword in ALTER operation (#229)
@@ -36,7 +138,7 @@
 
 * Fix parsing of CREATE TABLE with per field COLLATE.
 * Improved Context::loadClosest to better deal with corner cases.
-* Localizaton updates.
+* Localization updates.
 
 ## [4.2.3] - 2017-10-10
 
@@ -50,7 +152,7 @@
 ## [4.2.1] - 2017-09-08
 
 * Fixed minor bug in Query::getFlags.
-* Localizaton updates.
+* Localization updates.
 
 ## [4.2.0] - 2017-08-30
 
