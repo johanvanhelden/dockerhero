@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+- nothing
+
 ## 2.1.0 - 2020-11-25
 
 ## Added
