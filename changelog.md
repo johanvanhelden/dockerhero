@@ -6,7 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## 2.1.0 - 2020-11-25
+
+## Added
+- [Workspace] Added node 12 and 14, make 14 the default
+
+## Removed
+- [Workspace] Deprecated Gulp
+
+### Changed
+
 - [Gobal] Update PHPMyAdmin to 5.0.4
+- [Workspace] Update Composer to v2
 
 ## 2.0.0 - 2020-08-10
 

@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 2.0.0
+## Version 2.1.0
 
 ### What is Dockerhero?
 
@@ -28,10 +28,9 @@ Dockerhero includes the following useful tools:
 - Mailhog
 - Composer
 - Xdebug (with remote debugging support)
-- NVM (node 6, 8 and the default version is 10)
+- NVM (pre-installed with node 10, 12 and 14 and the default version is 14)
 - NPM
 - Yarn
-- Gulp
 - Vue-cli
 - Laravel Artisan autocompletion
 - Laravel Dusk support
