@@ -99,7 +99,17 @@ This is because dockhero mounts its parent folder (`./../`) as `/var/www/project
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
 ### Picking a PHP version
-By default, PHP 7.4 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change image.
+By default, PHP 7.4 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change image. For example, if you want to use PHP 8.0, it might look like this:
+
+```yml
+version: "2"
+
+services:
+  workspace:
+    image: johanvanhelden/dockerhero-workspace:php8.0
+  php:
+    image: johanvanhelden/dockerhero-php-8.0-fpm:latest
+```
 
 For more information, please see this section: [Overriding default settings](#overriding-default-settings)
 
@@ -133,7 +143,6 @@ PHP 7.2: `johanvanhelden/dockerhero-workspace:php7.2`
 PHP 7.1: `johanvanhelden/dockerhero-workspace:php7.1` (No longer maintained)
 
 There is also a latest tag, this one is used to remain backward compatible, but should not be actively used.
-
 
 ### Trusting the self-signed certificate
 
@@ -181,7 +190,7 @@ $ docker-compose stop
 If you need to access private composer packages, you might want to link your local `/home/username/.composer` folder (containing your auth.json file) and `/home/username/.ssh` folder (containing any SSH keys necessary to clone packages) to Dockerhero. You can do so by adding a new volume to the workspace image in your `docker-compose.override.yml`  (if you do not have one,
 [please create it](#overriding-default-settings)) like so:
 
-```
+```yml
 version: '2'
 
 services:
@@ -228,7 +237,7 @@ This assumes you created the proper database and user with the password using, f
 #### Changing the MySQL version
 If you would like to change the MySQL version, you can do so by editing the `docker-compose.override.yml` (if you do not
 have one, [please create it](#overriding-default-settings)) like so:
-```
+```yml
 version: '2'
 
 services:
@@ -349,7 +358,7 @@ MAIL_ENCRYPTION=null
 You can create a brand new `docker-compose.override.yml` in the root of Dockerhero to override default settings or customize things.
 It might look a bit like this:
 
-```
+```yml
 version: '2'
 
 services:
@@ -487,7 +496,7 @@ Feel free to send in pull requests! Either to the image repos or the Dockerhero 
 
 ### Testing changes
 To test changes to Dockerhero images, you can either follow the instructions from the README of the images or, if you want to test those changes in the Dockerhero system itself, you add the overwrite to the `docker-compose.override.yml` for the container you want to test. For example:
-```
+```yml
 version: '2'
 
 services:
