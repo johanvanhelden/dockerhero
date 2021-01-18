@@ -105,6 +105,8 @@ For more information, please see this section: [Overriding default settings](#ov
 
 #### Available PHP Images:
 
+PHP 8.0: `johanvanhelden/dockerhero-php-8.0-fpm:latest`
+
 PHP 7.4: `johanvanhelden/dockerhero-php-7.4-fpm:latest`
 
 PHP 7.3: `johanvanhelden/dockerhero-php-7.3-fpm:latest`
@@ -119,6 +121,8 @@ PHP 5.4: `johanvanhelden/dockerhero-php-5.4-fpm:latest` (No longer maintained)
 
 #### Workspace images
 You should pick a matching workspace image for the PHP version you are using.
+
+PHP 8.0: `johanvanhelden/dockerhero-workspace:php8.0`
 
 PHP 7.4: `johanvanhelden/dockerhero-workspace:php7.4`
 
@@ -507,6 +511,7 @@ Don't forget to stop and start Dockerhero again after reverting the `docker-comp
 - [Dockerhero - GitHub](https://github.com/johanvanhelden/dockerhero)
 - [Dockerhero - Workspace GitHub](https://github.com/johanvanhelden/dockerhero-workspace)
 - [Dockerhero - Nginx GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
+- [Dockerhero - PHP 8.0-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.0-fpm)
 - [Dockerhero - PHP 7.4-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.4-fpm)
 - [Dockerhero - PHP 7.3-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.3-fpm)
 - [Dockerhero - PHP 7.2-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.2-fpm)

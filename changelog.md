@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 2.1.1 - 2021-01-18
+
+## Added
+- [Global] PHP8.0 added
+
 ## 2.1.0 - 2020-11-25
 
 ## Added
