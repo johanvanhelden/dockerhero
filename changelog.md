@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## 2.1.1 - 2021-01-18
 
 ## Added
-- [Global] PHP8.0 added
+- [Global] PHP 8.0 added
 
 ## 2.1.0 - 2020-11-25
 
