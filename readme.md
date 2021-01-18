@@ -393,7 +393,9 @@ In order to do this:
 - Extract the zip file
 - Run the following command from the command line:
 
-`$ ./ngrok http 127.0.0.1:80 -host-header=project.localtest.me`
+```bash
+./ngrok http 127.0.0.1:80 -host-header=project.localtest.me
+```
 
 Where the host-header flag contains the URL of the project you would like to forward.
 
