@@ -164,16 +164,16 @@ To ensure you have the latest images, you can run `docker-compose pull` in the D
 ### Starting
 `$ cd` into the Dockerhero folder on your local machine and execute:
 
-```
-$ docker-compose up
+```bash
+docker-compose up
 ```
 
 This will give you real-time log information and useful when debugging something. If anything fails, you can simply `ctrl-c` docker and it will shut down.
 
 If you would rather prefer to run everything in the background, use:
 
-```
-$ docker-compose start
+```bash
+docker-compose start
 ```
 
 ### Stopping
@@ -182,8 +182,8 @@ To stop the containers, simple stop the `docker-compose up` process using `ctrl-
 
 If you had it running in the background, you can use:
 
-```
-$ docker-compose stop
+```bash
+docker-compose stop
 ```
 
 ### Private composer packages
@@ -259,7 +259,7 @@ After the upgrade is done, please restart Dockerhero.
 By default, I've set the same SQL mode as MySQL 5.6 to ensure maximum backwards compatibility. If you would like to
 set it to the 5.7 default setting, you can do so by editing the `docker-compose.override.yml` (if you do not have one,
 [please create it](#overriding-default-settings)) like so:
-```
+```yml
 version: '2'
 
 services:
@@ -305,7 +305,7 @@ REDIS_PORT=6379
 
 You can enter the bash environment of the containers by executing:
 
-```
+```bash
 docker exec -it --user=dockerhero dockerhero_workspace bash
 ```
 
@@ -323,7 +323,7 @@ If you are inside a Laravel folder, you can type `artisan` (instead of `./artisa
 
 Make your life easier and create a function in your ~/.bash_aliases file like so:
 
-```
+```bash
 sshDockerhero() {
   docker exec --user=dockerhero -it dockerhero_workspace bash
 }
@@ -374,7 +374,7 @@ services:
 
 Add the following entry to the `docker-compose.override.yml` file in the `php:` section:
 
-```
+```yml
 extra_hosts:
   - "projectname.localtest.me:172.25.0.12"
 ```
@@ -427,7 +427,7 @@ In order to make Laravel Dusk work, you need to add your Laravel project URL to 
 [laravel-dump-server](https://github.com/beyondcode/laravel-dump-server) is a great package that allows you to capture dump contents so that it does not interfere with HTTP / API responses.
 
 In order to make it work with dockerhero, simply override the config and point it to the workspace container, like so:
-```
+```php
 'host' => 'tcp://dockerhero_workspace:9912',
 ```
 
@@ -441,7 +441,7 @@ This enables Xdebug in the PHP and Workspace container.
 
 Make your life easier and create these functions in your ~/.bash_aliases file like so:
 
-```
+```bash
 xdebugStatus() {
     $projectPath/dockerhero/scripts/xdebug/status.sh
 }
@@ -464,7 +464,7 @@ You would have to set up your IDE to use port *9005*.
 And you would have to properly map your local path to Dockerhero (the project root is always `/var/www/projects` in Dockerhero).
 
 This is a working config for VSCode for a Laravel project (but has also been tested for CodeIgniter projects):
-```
+```json
 {
     "name": "Listen for XDebug",
     "type": "php",
