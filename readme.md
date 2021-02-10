@@ -47,6 +47,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
     2. [Folder placement](#folder-placement)
     3. [Picking a PHP version](#picking-a-php-version)
     4. [Trusting the self-signed certificate](#trusting-the-self-signed-certificate)
+    5. [WSL2](#wsl2)
 2. [Updating](#updating)
     1. [Dockerhero itself](#dockerhero-itself)
     2. [Dockerhero images](#dockerhero-images)
@@ -150,6 +151,27 @@ Dockerhero has full support for https. This is done with a self-signed certifica
 
 This part is however entirely optional, and you do not have to do this. You can simply ignore the browser warning and continue.
 
+### WSL2
+
+Dockerhero works great with WSL2 but requires one additional setup step if you want to execute, for example, artisan commands or PHPUnit tests from outside Dockerhero.
+Simply add `dns: 0.0.0.0` to all of the containers in your `docker-compose.override.yml` (if you do not have one,
+[please create it](#overriding-default-settings)) like so:
+
+```yml
+  workspace:
+    dns: 0.0.0.0
+  php:
+    dns: 0.0.0.0
+  web:
+    dns: 0.0.0.0
+  db:
+    dns: 0.0.0.0
+  mail:
+    dns: 0.0.0.0
+  redis:
+    dns: 0.0.0.0
+```
+
 ## Updating
 
 ### Dockerhero itself
@@ -187,7 +209,7 @@ docker-compose stop
 ```
 
 ### Private composer packages
-If you need to access private composer packages, you might want to link your local `/home/username/.composer` folder (containing your auth.json file) and `/home/username/.ssh` folder (containing any SSH keys necessary to clone packages) to Dockerhero. You can do so by adding a new volume to the workspace image in your `docker-compose.override.yml`  (if you do not have one,
+If you need to access private composer packages, you might want to link your local `/home/username/.composer` folder (containing your auth.json file) and `/home/username/.ssh` folder (containing any SSH keys necessary to clone packages) to Dockerhero. You can do so by adding a new volume to the workspace image in your `docker-compose.override.yml` (if you do not have one,
 [please create it](#overriding-default-settings)) like so:
 
 ```yml
