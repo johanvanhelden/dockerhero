@@ -66,10 +66,10 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: always
     environment:
+      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: dockerhero
-      MYSQL_DATABASE: dockerhero
-      MYSQL_USER: dockerhero
       MYSQL_PASSWORD: dockerhero
+      MYSQL_DATABASE: dockerhero
     ports:
       - "3306:3306"
     networks:
