@@ -12,6 +12,7 @@ services:
       - ./../:/var/www/projects
       - /etc/localtime:/etc/localtime:ro
     tty: true
+    dns: 8.8.8.8
     networks:
       dockerhero:
         ipv4_address: 172.25.0.10
@@ -31,6 +32,7 @@ services:
       - "9912:9912"
     expose:
       - "9005"
+    dns: 8.8.8.8
     networks:
       dockerhero:
         ipv4_address: 172.25.0.11
@@ -50,6 +52,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    dns: 8.8.8.8
     networks:
       dockerhero:
         ipv4_address: 172.25.0.12
