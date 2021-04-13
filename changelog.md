@@ -6,10 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
-- Add WSL2 section to the readme
-- Remove DNS from mail en db containers
-- Add health checks for Redis and MySQL
+- nothing
+
+## 2.2.0 - 2021-04-13
+
 - Switch to version `3` of the docker-compose file
+- Added WSL2 section to the readme
+- Added health checks for Redis and MySQL
+- Remove DNS from mail en db containers
 - Expose the `3306` MySQL port by default
 - Update PHPMyAdmin to 5.1.0
 - Fix CVE-2021-30130 in PHPMyAdmin
