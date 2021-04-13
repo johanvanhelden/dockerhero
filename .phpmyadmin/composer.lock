@@ -4,100 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dab1d26a91396289983760202770e403",
+    "content-hash": "7d360635df11ddcab9cfc7808f36f086",
     "packages": [
-        {
-            "name": "bacon/bacon-qr-code",
-            "version": "2.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Bacon/BaconQrCode.git",
-                "reference": "add6d9ff97336b62f95a3b94f75cea4e085465b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/add6d9ff97336b62f95a3b94f75cea4e085465b2",
-                "reference": "add6d9ff97336b62f95a3b94f75cea4e085465b2",
-                "shasum": ""
-            },
-            "require": {
-                "dasprid/enum": "^1.0",
-                "ext-iconv": "*",
-                "php": "^7.1"
-            },
-            "require-dev": {
-                "phly/keep-a-changelog": "^1.4",
-                "phpunit/phpunit": "^7 | ^8 | ^9",
-                "squizlabs/php_codesniffer": "^3.4"
-            },
-            "suggest": {
-                "ext-imagick": "to generate QR code images"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "BaconQrCode\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Ben Scholzen 'DASPRiD'",
-                    "email": "mail@dasprids.de",
-                    "homepage": "https://dasprids.de/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "BaconQrCode is a QR code generator for PHP.",
-            "homepage": "https://github.com/Bacon/BaconQrCode",
-            "time": "2020-07-30T16:40:58+00:00"
-        },
-        {
-            "name": "dasprid/enum",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DASPRiD/Enum.git",
-                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DASPRiD/Enum/zipball/5abf82f213618696dda8e3bf6f64dd042d8542b2",
-                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2",
-                "shasum": ""
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7 | ^8 | ^9",
-                "squizlabs/php_codesniffer": "^3.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DASPRiD\\Enum\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Ben Scholzen 'DASPRiD'",
-                    "email": "mail@dasprids.de",
-                    "homepage": "https://dasprids.de/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP 7.1 enum implementation",
-            "keywords": [
-                "enum",
-                "map"
-            ],
-            "time": "2020-10-02T16:03:48+00:00"
-        },
         {
             "name": "google/recaptcha",
             "version": "1.2.4",
@@ -144,113 +52,6 @@
                 "spam"
             ],
             "time": "2020-03-31T17:50:54+00:00"
-        },
-        {
-            "name": "paragonie/constant_time_encoding",
-            "version": "v2.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2",
-                "reference": "47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7|^8"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6|^7",
-                "vimeo/psalm": "^1|^2|^3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ParagonIE\\ConstantTime\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paragon Initiative Enterprises",
-                    "email": "security@paragonie.com",
-                    "homepage": "https://paragonie.com",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "Steve 'Sc00bz' Thomas",
-                    "email": "steve@tobtu.com",
-                    "homepage": "https://www.tobtu.com",
-                    "role": "Original Developer"
-                }
-            ],
-            "description": "Constant-time Implementations of RFC 4648 Encoding (Base-64, Base-32, Base-16)",
-            "keywords": [
-                "base16",
-                "base32",
-                "base32_decode",
-                "base32_encode",
-                "base64",
-                "base64_decode",
-                "base64_encode",
-                "bin2hex",
-                "encoding",
-                "hex",
-                "hex2bin",
-                "rfc4648"
-            ],
-            "time": "2019-11-06T19:20:29+00:00"
-        },
-        {
-            "name": "paragonie/random_compat",
-            "version": "v9.99.100",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
-                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">= 7"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*|5.*",
-                "vimeo/psalm": "^1"
-            },
-            "suggest": {
-                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paragon Initiative Enterprises",
-                    "email": "security@paragonie.com",
-                    "homepage": "https://paragonie.com"
-                }
-            ],
-            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
-            "keywords": [
-                "csprng",
-                "polyfill",
-                "pseudorandom",
-                "random"
-            ],
-            "time": "2020-10-15T08:29:30+00:00"
         },
         {
             "name": "phpmyadmin/motranslator",
@@ -474,16 +275,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.29",
+            "version": "2.0.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "497856a8d997f640b4a516062f84228a772a48a8"
+                "reference": "233a920cb38636a43b18d428f9a8db1f0a1a08f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/497856a8d997f640b4a516062f84228a772a48a8",
-                "reference": "497856a8d997f640b4a516062f84228a772a48a8",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/233a920cb38636a43b18d428f9a8db1f0a1a08f4",
+                "reference": "233a920cb38636a43b18d428f9a8db1f0a1a08f4",
                 "shasum": ""
             },
             "require": {
@@ -491,7 +292,7 @@
             },
             "require-dev": {
                 "phing/phing": "~2.7",
-                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+                "phpunit/phpunit": "^4.8.35|^5.7|^6.0|^9.4",
                 "squizlabs/php_codesniffer": "~2.0"
             },
             "suggest": {
@@ -561,6 +362,10 @@
                 "x.509",
                 "x509"
             ],
+            "support": {
+                "issues": "https://github.com/phpseclib/phpseclib/issues",
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.31"
+            },
             "funding": [
                 {
                     "url": "https://github.com/terrafrost",
@@ -575,121 +380,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-08T04:24:43+00:00"
-        },
-        {
-            "name": "pragmarx/google2fa",
-            "version": "v6.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/antonioribeiro/google2fa.git",
-                "reference": "8df7d8fe0734c7ddad5fce2251adf4b3e9218643"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/google2fa/zipball/8df7d8fe0734c7ddad5fce2251adf4b3e9218643",
-                "reference": "8df7d8fe0734c7ddad5fce2251adf4b3e9218643",
-                "shasum": ""
-            },
-            "require": {
-                "paragonie/constant_time_encoding": "~1.0|~2.0",
-                "paragonie/random_compat": ">=1",
-                "php": ">=5.4",
-                "symfony/polyfill-php56": "~1.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4|~5|~6|~7|~8"
-            },
-            "type": "library",
-            "extra": {
-                "component": "package",
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PragmaRX\\Google2FA\\": "src/",
-                    "PragmaRX\\Google2FA\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Carlos Ribeiro",
-                    "email": "acr@antoniocarlosribeiro.com",
-                    "role": "Creator & Designer"
-                }
-            ],
-            "description": "A One Time Password Authentication package, compatible with Google Authenticator.",
-            "keywords": [
-                "2fa",
-                "Authentication",
-                "Two Factor Authentication",
-                "google2fa"
-            ],
-            "time": "2019-09-18T22:34:47+00:00"
-        },
-        {
-            "name": "pragmarx/google2fa-qrcode",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/antonioribeiro/google2fa-qrcode.git",
-                "reference": "fd5ff0531a48b193a659309cc5fb882c14dbd03f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/google2fa-qrcode/zipball/fd5ff0531a48b193a659309cc5fb882c14dbd03f",
-                "reference": "fd5ff0531a48b193a659309cc5fb882c14dbd03f",
-                "shasum": ""
-            },
-            "require": {
-                "bacon/bacon-qr-code": "~1.0|~2.0",
-                "php": ">=5.4",
-                "pragmarx/google2fa": ">=4.0"
-            },
-            "require-dev": {
-                "khanamiryan/qrcode-detector-decoder": "^1.0",
-                "phpunit/phpunit": "~4|~5|~6|~7"
-            },
-            "type": "library",
-            "extra": {
-                "component": "package",
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PragmaRX\\Google2FAQRCode\\": "src/",
-                    "PragmaRX\\Google2FAQRCode\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Carlos Ribeiro",
-                    "email": "acr@antoniocarlosribeiro.com",
-                    "role": "Creator & Designer"
-                }
-            ],
-            "description": "QR Code package for Google2FA",
-            "keywords": [
-                "2fa",
-                "Authentication",
-                "Two Factor Authentication",
-                "google2fa",
-                "qr code",
-                "qrcode"
-            ],
-            "time": "2019-03-20T16:42:58+00:00"
+            "time": "2021-04-06T13:56:45+00:00"
         },
         {
             "name": "psr/cache",
@@ -832,44 +523,6 @@
                 "psr-3"
             ],
             "time": "2020-03-23T09:12:05+00:00"
-        },
-        {
-            "name": "samyoul/u2f-php-server",
-            "version": "v1.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Samyoul/U2F-php-server.git",
-                "reference": "0625202c79d570e58525ed6c4ae38500ea3f0883"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Samyoul/U2F-php-server/zipball/0625202c79d570e58525ed6c4ae38500ea3f0883",
-                "reference": "0625202c79d570e58525ed6c4ae38500ea3f0883",
-                "shasum": ""
-            },
-            "require": {
-                "ext-openssl": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Samyoul\\U2F\\U2FServer\\": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Samuel Hawksby-Robinson",
-                    "email": "samuel@samyoul.com"
-                }
-            ],
-            "description": "Server side handling class for FIDO U2F registration and authentication",
-            "time": "2018-10-26T12:43:39+00:00"
         },
         {
             "name": "symfony/cache",
@@ -1488,150 +1141,6 @@
             "time": "2020-07-14T12:35:20+00:00"
         },
         {
-            "name": "symfony/polyfill-php56",
-            "version": "v1.18.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php56.git",
-                "reference": "13df84e91cd168f247c2f2ec82cc0fa24901c011"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/13df84e91cd168f247c2f2ec82cc0fa24901c011",
-                "reference": "13df84e91cd168f247c2f2ec82cc0fa24901c011",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/polyfill-util": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.18-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php56\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-07-14T12:35:20+00:00"
-        },
-        {
-            "name": "symfony/polyfill-util",
-            "version": "v1.18.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-util.git",
-                "reference": "46b910c71e9828f8ec2aa7a0314de1130d9b295a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/46b910c71e9828f8ec2aa7a0314de1130d9b295a",
-                "reference": "46b910c71e9828f8ec2aa7a0314de1130d9b295a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.18-dev"
-                },
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Util\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony utilities for portability of PHP codes",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compat",
-                "compatibility",
-                "polyfill",
-                "shim"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-07-14T12:35:20+00:00"
-        },
-        {
             "name": "symfony/service-contracts",
             "version": "v1.1.9",
             "source": {
@@ -1855,68 +1364,6 @@
             "time": "2020-09-27T03:36:23+00:00"
         },
         {
-            "name": "tecnickcom/tcpdf",
-            "version": "6.3.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "19a535eaa7fb1c1cac499109deeb1a7a201b4549"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/19a535eaa7fb1c1cac499109deeb1a7a201b4549",
-                "reference": "19a535eaa7fb1c1cac499109deeb1a7a201b4549",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "config",
-                    "include",
-                    "tcpdf.php",
-                    "tcpdf_parser.php",
-                    "tcpdf_import.php",
-                    "tcpdf_barcodes_1d.php",
-                    "tcpdf_barcodes_2d.php",
-                    "include/tcpdf_colors.php",
-                    "include/tcpdf_filters.php",
-                    "include/tcpdf_font_data.php",
-                    "include/tcpdf_fonts.php",
-                    "include/tcpdf_images.php",
-                    "include/tcpdf_static.php",
-                    "include/barcodes/datamatrix.php",
-                    "include/barcodes/pdf417.php",
-                    "include/barcodes/qrcode.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "Nicola Asuni",
-                    "email": "info@tecnick.com",
-                    "role": "lead"
-                }
-            ],
-            "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
-            "homepage": "http://www.tcpdf.org/",
-            "keywords": [
-                "PDFD32000-2008",
-                "TCPDF",
-                "barcodes",
-                "datamatrix",
-                "pdf",
-                "pdf417",
-                "qrcode"
-            ],
-            "time": "2020-02-14T14:20:12+00:00"
-        },
-        {
             "name": "twig/twig",
             "version": "v2.13.1",
             "source": {
@@ -2051,6 +1498,55 @@
     ],
     "packages-dev": [
         {
+            "name": "bacon/bacon-qr-code",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bacon/BaconQrCode.git",
+                "reference": "add6d9ff97336b62f95a3b94f75cea4e085465b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/add6d9ff97336b62f95a3b94f75cea4e085465b2",
+                "reference": "add6d9ff97336b62f95a3b94f75cea4e085465b2",
+                "shasum": ""
+            },
+            "require": {
+                "dasprid/enum": "^1.0",
+                "ext-iconv": "*",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "phly/keep-a-changelog": "^1.4",
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "suggest": {
+                "ext-imagick": "to generate QR code images"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BaconQrCode\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "BaconQrCode is a QR code generator for PHP.",
+            "homepage": "https://github.com/Bacon/BaconQrCode",
+            "time": "2020-07-30T16:40:58+00:00"
+        },
+        {
             "name": "composer/package-versions-deprecated",
             "version": "1.11.99",
             "source": {
@@ -2176,6 +1672,49 @@
                 }
             ],
             "time": "2020-08-19T10:27:58+00:00"
+        },
+        {
+            "name": "dasprid/enum",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DASPRiD/Enum.git",
+                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DASPRiD/Enum/zipball/5abf82f213618696dda8e3bf6f64dd042d8542b2",
+                "reference": "5abf82f213618696dda8e3bf6f64dd042d8542b2",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7 | ^8 | ^9",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DASPRiD\\Enum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "https://dasprids.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP 7.1 enum implementation",
+            "keywords": [
+                "enum",
+                "map"
+            ],
+            "time": "2020-10-02T16:03:48+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -2937,6 +2476,113 @@
                 "php"
             ],
             "time": "2020-09-26T10:30:38+00:00"
+        },
+        {
+            "name": "paragonie/constant_time_encoding",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/constant_time_encoding.git",
+                "reference": "47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2",
+                "reference": "47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7|^8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6|^7",
+                "vimeo/psalm": "^1|^2|^3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ParagonIE\\ConstantTime\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Steve 'Sc00bz' Thomas",
+                    "email": "steve@tobtu.com",
+                    "homepage": "https://www.tobtu.com",
+                    "role": "Original Developer"
+                }
+            ],
+            "description": "Constant-time Implementations of RFC 4648 Encoding (Base-64, Base-32, Base-16)",
+            "keywords": [
+                "base16",
+                "base32",
+                "base32_decode",
+                "base32_encode",
+                "base64",
+                "base64_decode",
+                "base64_encode",
+                "bin2hex",
+                "encoding",
+                "hex",
+                "hex2bin",
+                "rfc4648"
+            ],
+            "time": "2019-11-06T19:20:29+00:00"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v9.99.100",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^1"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
+            ],
+            "time": "2020-10-15T08:29:30+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -3832,6 +3478,158 @@
             "time": "2020-01-08T08:45:45+00:00"
         },
         {
+            "name": "pragmarx/google2fa",
+            "version": "v6.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antonioribeiro/google2fa.git",
+                "reference": "8df7d8fe0734c7ddad5fce2251adf4b3e9218643"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antonioribeiro/google2fa/zipball/8df7d8fe0734c7ddad5fce2251adf4b3e9218643",
+                "reference": "8df7d8fe0734c7ddad5fce2251adf4b3e9218643",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/constant_time_encoding": "~1.0|~2.0",
+                "paragonie/random_compat": ">=1",
+                "php": ">=5.4",
+                "symfony/polyfill-php56": "~1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4|~5|~6|~7|~8"
+            },
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PragmaRX\\Google2FA\\": "src/",
+                    "PragmaRX\\Google2FA\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Carlos Ribeiro",
+                    "email": "acr@antoniocarlosribeiro.com",
+                    "role": "Creator & Designer"
+                }
+            ],
+            "description": "A One Time Password Authentication package, compatible with Google Authenticator.",
+            "keywords": [
+                "2fa",
+                "Authentication",
+                "Two Factor Authentication",
+                "google2fa"
+            ],
+            "time": "2019-09-18T22:34:47+00:00"
+        },
+        {
+            "name": "pragmarx/google2fa-qrcode",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/antonioribeiro/google2fa-qrcode.git",
+                "reference": "fd5ff0531a48b193a659309cc5fb882c14dbd03f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/antonioribeiro/google2fa-qrcode/zipball/fd5ff0531a48b193a659309cc5fb882c14dbd03f",
+                "reference": "fd5ff0531a48b193a659309cc5fb882c14dbd03f",
+                "shasum": ""
+            },
+            "require": {
+                "bacon/bacon-qr-code": "~1.0|~2.0",
+                "php": ">=5.4",
+                "pragmarx/google2fa": ">=4.0"
+            },
+            "require-dev": {
+                "khanamiryan/qrcode-detector-decoder": "^1.0",
+                "phpunit/phpunit": "~4|~5|~6|~7"
+            },
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PragmaRX\\Google2FAQRCode\\": "src/",
+                    "PragmaRX\\Google2FAQRCode\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Carlos Ribeiro",
+                    "email": "acr@antoniocarlosribeiro.com",
+                    "role": "Creator & Designer"
+                }
+            ],
+            "description": "QR Code package for Google2FA",
+            "keywords": [
+                "2fa",
+                "Authentication",
+                "Two Factor Authentication",
+                "google2fa",
+                "qr code",
+                "qrcode"
+            ],
+            "time": "2019-03-20T16:42:58+00:00"
+        },
+        {
+            "name": "samyoul/u2f-php-server",
+            "version": "v1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Samyoul/U2F-php-server.git",
+                "reference": "0625202c79d570e58525ed6c4ae38500ea3f0883"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Samyoul/U2F-php-server/zipball/0625202c79d570e58525ed6c4ae38500ea3f0883",
+                "reference": "0625202c79d570e58525ed6c4ae38500ea3f0883",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Samyoul\\U2F\\U2FServer\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Hawksby-Robinson",
+                    "email": "samuel@samyoul.com"
+                }
+            ],
+            "description": "Server side handling class for FIDO U2F registration and authentication",
+            "time": "2018-10-26T12:43:39+00:00"
+        },
+        {
             "name": "sebastian/code-unit-reverse-lookup",
             "version": "1.0.1",
             "source": {
@@ -4603,6 +4401,80 @@
             "time": "2020-10-02T07:34:48+00:00"
         },
         {
+            "name": "symfony/polyfill-php56",
+            "version": "v1.18.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php56.git",
+                "reference": "13df84e91cd168f247c2f2ec82cc0fa24901c011"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/13df84e91cd168f247c2f2ec82cc0fa24901c011",
+                "reference": "13df84e91cd168f247c2f2ec82cc0fa24901c011",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/polyfill-util": "~1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.18-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php56\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-07-14T12:35:20+00:00"
+        },
+        {
             "name": "symfony/polyfill-php73",
             "version": "v1.18.1",
             "source": {
@@ -4759,6 +4631,76 @@
             "time": "2020-07-14T12:35:20+00:00"
         },
         {
+            "name": "symfony/polyfill-util",
+            "version": "v1.18.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-util.git",
+                "reference": "46b910c71e9828f8ec2aa7a0314de1130d9b295a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-util/zipball/46b910c71e9828f8ec2aa7a0314de1130d9b295a",
+                "reference": "46b910c71e9828f8ec2aa7a0314de1130d9b295a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.18-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Util\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony utilities for portability of PHP codes",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compat",
+                "compatibility",
+                "polyfill",
+                "shim"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-07-14T12:35:20+00:00"
+        },
+        {
             "name": "symfony/process",
             "version": "v4.4.15",
             "source": {
@@ -4820,6 +4762,68 @@
                 }
             ],
             "time": "2020-09-02T16:08:58+00:00"
+        },
+        {
+            "name": "tecnickcom/tcpdf",
+            "version": "6.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tecnickcom/TCPDF.git",
+                "reference": "19a535eaa7fb1c1cac499109deeb1a7a201b4549"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/19a535eaa7fb1c1cac499109deeb1a7a201b4549",
+                "reference": "19a535eaa7fb1c1cac499109deeb1a7a201b4549",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "config",
+                    "include",
+                    "tcpdf.php",
+                    "tcpdf_parser.php",
+                    "tcpdf_import.php",
+                    "tcpdf_barcodes_1d.php",
+                    "tcpdf_barcodes_2d.php",
+                    "include/tcpdf_colors.php",
+                    "include/tcpdf_filters.php",
+                    "include/tcpdf_font_data.php",
+                    "include/tcpdf_fonts.php",
+                    "include/tcpdf_images.php",
+                    "include/tcpdf_static.php",
+                    "include/barcodes/datamatrix.php",
+                    "include/barcodes/pdf417.php",
+                    "include/barcodes/qrcode.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
+            "homepage": "http://www.tcpdf.org/",
+            "keywords": [
+                "PDFD32000-2008",
+                "TCPDF",
+                "barcodes",
+                "datamatrix",
+                "pdf",
+                "pdf417",
+                "qrcode"
+            ],
+            "time": "2020-02-14T14:20:12+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -4925,8 +4929,5 @@
         "ext-xml": "*"
     },
     "platform-dev": [],
-    "platform-overrides": {
-        "php": "7.1.3"
-    },
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
