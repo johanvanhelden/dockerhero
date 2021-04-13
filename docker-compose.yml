@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 
 services:
   workspace:
@@ -28,11 +28,11 @@ services:
       - workspace
     volumes:
       - /etc/localtime:/etc/localtime:ro
-    dns: 8.8.8.8
     ports:
       - "9912:9912"
     expose:
       - "9005"
+    dns: 8.8.8.8
     networks:
       dockerhero:
         ipv4_address: 172.25.0.11
@@ -70,10 +70,13 @@ services:
       MYSQL_DATABASE: dockerhero
       MYSQL_USER: dockerhero
       MYSQL_PASSWORD: dockerhero
-    dns: 8.8.8.8
+    ports:
+      - "3306:3306"
     networks:
       dockerhero:
         ipv4_address: 172.25.0.13
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping"]
 
   mail:
     container_name: dockerhero_mail
@@ -81,7 +84,6 @@ services:
     ports:
       - "1025:1025"
       - "8025:8025"
-    dns: 8.8.8.8
     networks:
       dockerhero:
         ipv4_address: 172.25.0.14
@@ -97,6 +99,8 @@ services:
     networks:
       dockerhero:
         ipv4_address: 172.25.0.15
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
 
 volumes:
   database:

@@ -78,7 +78,7 @@ abstract class FileLoader extends Loader
         }
         $exclude = \func_num_args() >= 5 ? func_get_arg(4) : null;
 
-        if (\is_string($resource) && \strlen($resource) !== $i = strcspn($resource, '*?{[')) {
+        if (\is_string($resource) && \strlen($resource) !== ($i = strcspn($resource, '*?{[')) && false === strpos($resource, "\n")) {
             $excluded = [];
             foreach ((array) $exclude as $pattern) {
                 foreach ($this->glob($pattern, true, $_, false, true) as $path => $info) {
@@ -97,7 +97,7 @@ abstract class FileLoader extends Loader
             }
 
             if ($isSubpath) {
-                return isset($ret[1]) ? $ret : (isset($ret[0]) ? $ret[0] : null);
+                return isset($ret[1]) ? $ret : ($ret[0] ?? null);
             }
         }
 

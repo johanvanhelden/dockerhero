@@ -6914,8 +6914,7 @@
             "dynamic": true,
             "name": "slave_net_timeout",
             "range": {
-                "from": 1,
-                "to": "upwards"
+                "from": 1
             },
             "scope": [
                 "global"
@@ -7132,8 +7131,12 @@
             ]
         },
         "sql_slave_skip_counter": {
+            "default": "0",
             "dynamic": true,
             "name": "sql_slave_skip_counter",
+            "range": {
+                "from": 0
+            },
             "scope": [
                 "global"
             ],
@@ -11663,6 +11666,7 @@
             ]
         },
         "concurrent_insert": {
+            "cli": "--concurrent-insert[=value]",
             "default": "AUTO",
             "dynamic": true,
             "name": "concurrent_insert",
@@ -12710,6 +12714,7 @@
             "scope": [
                 "global"
             ],
+            "type": "boolean",
             "ids": [
                 "29#large_files_support",
                 "15#sysvar_large_files_support"
@@ -14031,7 +14036,6 @@
             "scope": [
                 "session"
             ],
-            "type": "integer",
             "ids": [
                 "29#pseudo_slave_mode",
                 "15#sysvar_pseudo_slave_mode"
@@ -23511,7 +23515,7 @@
         },
         "innodb_lock_schedule_algorithm": {
             "cli": "--innodb-lock-schedule-algorithm=#",
-            "default": "VATS (10.2), FCFS (10.1)",
+            "default": "FCFS (MariaDB 10.3.9, MariaDB 10.2.17), VATS (MariaDB 10.2.3), FCFS (MariaDB 10.1)",
             "dynamic": false,
             "name": "innodb_lock_schedule_algorithm",
             "scope": [
@@ -23727,7 +23731,7 @@
         },
         "innodb_log_optimize_ddl": {
             "cli": "--innodb-log-optimize-ddl={0|1}",
-            "default": "ON (<= MariaDB 10.5.0), OFF (>= MariaDB 10.5.1)",
+            "default": "OFF (>= MariaDB 10.5.1, MariaDB 10.4.16, MariaDB 10.3.26, MariaDB 10.2.35), ON (<= MariaDB 10.5.0, MariaDB 10.4.15, MariaDB 10.3.25, MariaDB 10.2.34)",
             "dynamic": true,
             "name": "innodb_log_optimize_ddl",
             "scope": [
@@ -23808,6 +23812,7 @@
         },
         "innodb_max_dirty_pages_pct": {
             "cli": "--innodb-max-dirty-pages-pct=#",
+            "dynamic": true,
             "name": "innodb_max_dirty_pages_pct",
             "range": {
                 "from": 0
@@ -24287,6 +24292,17 @@
             "ids": [
                 "40#innodb_read_only",
                 "41#sysvar_innodb_read_only"
+            ]
+        },
+        "innodb_read_only_compressed": {
+            "cli": "--innodb-read-only-compressed, --skip-innodb-read-only-compressed",
+            "default": "ON",
+            "dynamic": false,
+            "name": "innodb_read_only_compressed",
+            "scope": [],
+            "type": "boolean",
+            "ids": [
+                "40#innodb_read_only_compressed"
             ]
         },
         "innodb_recovery_stats": {
@@ -25329,6 +25345,23 @@
                 "42#sysvar_audit_log_policy"
             ]
         },
+        "audit_log_prune_seconds": {
+            "cli": "--audit-log-prune-seconds=#",
+            "default": "0",
+            "dynamic": true,
+            "name": "audit_log_prune_seconds",
+            "range": {
+                "from": 0,
+                "to": 4294967295
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "42#sysvar_audit_log_prune_seconds"
+            ]
+        },
         "audit_log_read_buffer_size": {
             "cli": "--audit-log-read-buffer-size=#",
             "name": "audit_log_read_buffer_size",
@@ -25660,6 +25693,19 @@
             "type": "integer",
             "ids": [
                 "41#sysvar_innodb_doublewrite_pages"
+            ]
+        },
+        "innodb_extend_and_initialize": {
+            "cli": "--innodb=extend-and-initialize[={OFF|ON}]",
+            "default": "ON",
+            "dynamic": true,
+            "name": "innodb_extend_and_initialize",
+            "scope": [
+                "global"
+            ],
+            "type": "boolean",
+            "ids": [
+                "41#sysvar_innodb_extend_and_initialize"
             ]
         },
         "innodb_fil_make_page_dirty_debug": {
@@ -26893,18 +26939,20 @@
                 "session"
             ],
             "type": "boolean",
+            "validValues": [
+                "ON",
+                "OFF"
+            ],
             "ids": [
                 "43#sysvar_ndbinfo_show_hidden"
             ]
         },
         "ndbinfo_table_prefix": {
-            "cli": "--ndbinfo-table-prefix=name",
             "default": "ndb$",
-            "dynamic": true,
+            "dynamic": false,
             "name": "ndbinfo_table_prefix",
             "scope": [
-                "global",
-                "session"
+                "global"
             ],
             "type": "string",
             "ids": [
@@ -27726,7 +27774,7 @@
         },
         "transaction_write_set_extraction": {
             "cli": "--transaction-write-set-extraction[=value]",
-            "default": "OFF",
+            "default": "0",
             "dynamic": true,
             "name": "transaction_write_set_extraction",
             "scope": [
@@ -27797,7 +27845,6 @@
         },
         "gtid_executed_compression_period": {
             "cli": "--gtid-executed-compression-period=#",
-            "default": "1000",
             "dynamic": true,
             "name": "gtid_executed_compression_period",
             "range": {
@@ -27869,54 +27916,6 @@
             "type": "string",
             "ids": [
                 "45#sysvar_gtid_purged"
-            ]
-        },
-        "show_slave_auth_info": {
-            "cli": "--show-slave-auth-info[={OFF|ON}]",
-            "default": "OFF",
-            "name": "show_slave_auth_info",
-            "type": "boolean",
-            "ids": [
-                "21#option_mysqld_show-slave-auth-info"
-            ]
-        },
-        "immediate_server_version": {
-            "dynamic": true,
-            "name": "immediate_server_version",
-            "scope": [
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "21#sysvar_immediate_server_version"
-            ]
-        },
-        "original_server_version": {
-            "dynamic": true,
-            "name": "original_server_version",
-            "scope": [
-                "session"
-            ],
-            "type": "integer",
-            "ids": [
-                "21#sysvar_original_server_version"
-            ]
-        },
-        "rpl_semi_sync_master_wait_for_slave_count": {
-            "cli": "--rpl-semi-sync-master-wait-for-slave-count=#",
-            "default": "1",
-            "dynamic": true,
-            "name": "rpl_semi_sync_master_wait_for_slave_count",
-            "range": {
-                "from": 1,
-                "to": 65535
-            },
-            "scope": [
-                "global"
-            ],
-            "type": "integer",
-            "ids": [
-                "21#sysvar_rpl_semi_sync_master_wait_for_slave_count"
             ]
         },
         "master_info_file": {
@@ -28070,8 +28069,7 @@
             "dynamic": true,
             "name": "slave_checkpoint_period",
             "range": {
-                "from": 1,
-                "to": 4
+                "from": 1
             },
             "scope": [
                 "global"
@@ -28144,6 +28142,54 @@
             ],
             "ids": [
                 "24#sysvar_slave_rows_search_algorithms"
+            ]
+        },
+        "show_slave_auth_info": {
+            "cli": "--show-slave-auth-info[={OFF|ON}]",
+            "default": "OFF",
+            "name": "show_slave_auth_info",
+            "type": "boolean",
+            "ids": [
+                "21#option_mysqld_show-slave-auth-info"
+            ]
+        },
+        "immediate_server_version": {
+            "dynamic": true,
+            "name": "immediate_server_version",
+            "scope": [
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "21#sysvar_immediate_server_version"
+            ]
+        },
+        "original_server_version": {
+            "dynamic": true,
+            "name": "original_server_version",
+            "scope": [
+                "session"
+            ],
+            "type": "integer",
+            "ids": [
+                "21#sysvar_original_server_version"
+            ]
+        },
+        "rpl_semi_sync_master_wait_for_slave_count": {
+            "cli": "--rpl-semi-sync-master-wait-for-slave-count=#",
+            "default": "1",
+            "dynamic": true,
+            "name": "rpl_semi_sync_master_wait_for_slave_count",
+            "range": {
+                "from": 1,
+                "to": 65535
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "21#sysvar_rpl_semi_sync_master_wait_for_slave_count"
             ]
         },
         "server_uuid": {
@@ -28837,6 +28883,23 @@
             "type": "string",
             "ids": [
                 "15#sysvar_block_encryption_mode"
+            ]
+        },
+        "caching_sha2_password_digest_rounds": {
+            "cli": "--caching-sha2-password-digest-rounds=#",
+            "default": "5000",
+            "dynamic": false,
+            "name": "caching_sha2_password_digest_rounds",
+            "range": {
+                "from": 5000,
+                "to": 4095000
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "15#sysvar_caching_sha2_password_digest_rounds"
             ]
         },
         "caching_sha2_password_auto_generate_rsa_keys": {
@@ -29979,6 +30042,23 @@
                 "15#sysvar_tablespace_definition_cache"
             ]
         },
+        "temptable_max_mmap": {
+            "cli": "--temptable-max-mmap=#",
+            "default": "1073741824",
+            "dynamic": true,
+            "name": "temptable_max_mmap",
+            "range": {
+                "from": 0,
+                "to": 2
+            },
+            "scope": [
+                "global"
+            ],
+            "type": "integer",
+            "ids": [
+                "15#sysvar_temptable_max_mmap"
+            ]
+        },
         "temptable_max_ram": {
             "cli": "--temptable-max-ram=#",
             "default": "1073741824",
@@ -30667,7 +30747,7 @@
         "https://mariadb.com/kb/en/library/documentation/oqgraph-system-and-status-variables/",
         "https://mariadb.com/kb/en/library/documentation/performance-schema-system-variables/",
         "https://dev.mysql.com/doc/refman/8.0/en/performance-schema-system-variables.html",
-        "https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html",
+        "https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html",
         "https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html",
         "https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html",
         "https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html",
