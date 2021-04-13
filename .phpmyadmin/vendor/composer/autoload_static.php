@@ -4,11 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitec77e213fff6098191ae48f083f73c3a
+class ComposerStaticInit9ee58e8cc557c5eed9328801a88e8c00
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     );
 
@@ -31,7 +32,6 @@ class ComposerStaticInitec77e213fff6098191ae48f083f73c3a
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
             'Symfony\\Contracts\\Cache\\' => 24,
-            'Symfony\\Component\\Yaml\\' => 23,
             'Symfony\\Component\\VarExporter\\' => 30,
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\ExpressionLanguage\\' => 37,
@@ -53,6 +53,10 @@ class ComposerStaticInitec77e213fff6098191ae48f083f73c3a
             'PhpMyAdmin\\ShapeFile\\' => 21,
             'PhpMyAdmin\\MoTranslator\\' => 24,
             'PhpMyAdmin\\' => 11,
+        ),
+        'F' => 
+        array (
+            'FastRoute\\' => 10,
         ),
     );
 
@@ -84,10 +88,6 @@ class ComposerStaticInitec77e213fff6098191ae48f083f73c3a
         'Symfony\\Contracts\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/cache-contracts',
-        ),
-        'Symfony\\Component\\Yaml\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/yaml',
         ),
         'Symfony\\Component\\VarExporter\\' => 
         array (
@@ -149,6 +149,10 @@ class ComposerStaticInitec77e213fff6098191ae48f083f73c3a
         array (
             0 => __DIR__ . '/../..' . '/libraries/classes',
         ),
+        'FastRoute\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -168,10 +172,10 @@ class ComposerStaticInitec77e213fff6098191ae48f083f73c3a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitec77e213fff6098191ae48f083f73c3a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitec77e213fff6098191ae48f083f73c3a::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitec77e213fff6098191ae48f083f73c3a::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitec77e213fff6098191ae48f083f73c3a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9ee58e8cc557c5eed9328801a88e8c00::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9ee58e8cc557c5eed9328801a88e8c00::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9ee58e8cc557c5eed9328801a88e8c00::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit9ee58e8cc557c5eed9328801a88e8c00::$classMap;
 
         }, null, ClassLoader::class);
     }

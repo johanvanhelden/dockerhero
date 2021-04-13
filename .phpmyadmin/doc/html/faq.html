@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 5.0.4 documentation</title>
+    <title>FAQ - Frequently Asked Questions &#8212; phpMyAdmin 5.1.0 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -302,7 +302,7 @@ PHP scripts. Of course you have to restart Apache.</p>
 <span id="faq1-26"></span><h3>1.26 I just installed phpMyAdmin in my document root of IIS but I get the error “No input file specified” when trying to run phpMyAdmin.<a class="headerlink" href="#i-just-installed-phpmyadmin-in-my-document-root-of-iis-but-i-get-the-error-no-input-file-specified-when-trying-to-run-phpmyadmin" title="Permalink to this headline">¶</a></h3>
 <p>This is a permission problem. Right-click on the phpmyadmin folder and
 choose properties. Under the tab Security, click on “Add” and select
-the user “IUSR_machine” from the list. Now set his permissions and it
+the user “IUSR_machine” from the list. Now set their permissions and it
 should work.</p>
 </div>
 <div class="section" id="i-get-empty-page-when-i-want-to-view-huge-page-eg-db-structure-php-with-plenty-of-tables">
@@ -409,6 +409,10 @@ forget to change directory name inside of it):</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#faq4-8"><span class="std std-ref">4.8 Which parameters can I use in the URL that starts phpMyAdmin?</span></a></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 5.1.0: </span>Support for using the <code class="docutils literal notranslate"><span class="pre">target</span></code> parameter was removed in phpMyAdmin 5.1.0.
+Use the <code class="docutils literal notranslate"><span class="pre">route</span></code> parameter instead.</p>
 </div>
 </div>
 <div class="section" id="can-i-use-http-authentication-with-apache-cgi">
@@ -912,7 +916,7 @@ authentication, so remove it.</li>
 wildcard database name for a user (for example “joe%”), and put the
 privileges you want. For example, adding <code class="docutils literal notranslate"><span class="pre">SELECT,</span> <span class="pre">INSERT,</span> <span class="pre">UPDATE,</span>
 <span class="pre">DELETE,</span> <span class="pre">CREATE,</span> <span class="pre">DROP,</span> <span class="pre">INDEX,</span> <span class="pre">ALTER</span></code> would let a user create/manage
-his/her database(s).</p>
+their database(s).</p>
 </div>
 <div class="section" id="how-can-i-use-the-host-based-authentication-additions">
 <span id="faq4-6"></span><h3>4.6 How can I use the Host-based authentication additions?<a class="headerlink" href="#how-can-i-use-the-host-based-authentication-additions" title="Permalink to this headline">¶</a></h3>
@@ -1024,7 +1028,7 @@ by the recent versions of the most browsers.</p>
 </div>
 <div class="section" id="mac-os-x-safari-browser-changes-special-characters-to">
 <span id="faq5-12"></span><h3>5.12 Mac OS X Safari browser changes special characters to “?”.<a class="headerlink" href="#mac-os-x-safari-browser-changes-special-characters-to" title="Permalink to this headline">¶</a></h3>
-<p>This issue has been reported by a <a class="reference internal" href="glossary.html#term-mac-os-x"><span class="xref std std-term">Mac OS X</span></a> user, who adds that Chimera,
+<p>This issue has been reported by a <a class="reference internal" href="glossary.html#term-macos"><span class="xref std std-term">macOS</span></a> user, who adds that Chimera,
 Netscape and Mozilla do not have this problem.</p>
 </div>
 <div class="section" id="faq5-13">
@@ -1093,7 +1097,7 @@ override the ones from phpMyAdmin).</p>
 <p>This is usually caused by web application firewall doing requests filtering. It
 tries to prevent SQL injection, however phpMyAdmin is tool designed to execute
 SQL queries, thus it makes it unusable.</p>
-<p>Please whitelist phpMyAdmin scripts from the web application firewall settings
+<p>Please allow phpMyAdmin scripts from the web application firewall settings
 or disable it completely for phpMyAdmin path.</p>
 <p>Programs known to cause these kind of errors:</p>
 <ul class="simple">
@@ -1290,7 +1294,7 @@ different structure.</li>
 any) will be included in backup.</li>
 <li>“Enclose table and column names with backquotes” ensures that column
 and table names formed with special characters are protected.</li>
-<li>“Add into comments” includes column comments, relations, and media (MIME)
+<li>“Add into comments” includes column comments, relations, and media
 types set in the pmadb in the dump as <a class="reference internal" href="glossary.html#term-sql"><span class="xref std std-term">SQL</span></a> comments
 (<em>/* xxx */</em>).</li>
 </ul>
@@ -1340,7 +1344,7 @@ checking issues and validation, this introduces a high-risk false-
 user-input situation. Instead you have to initialize mimetypes using
 functions or empty mimetype definitions.</p>
 <p>Plus, you have a whole overview of available mimetypes. Who knows all those
-mimetypes by heart so he/she can enter it at will?</p>
+mimetypes by heart so they can enter it at will?</p>
 </div>
 <div class="section" id="bookmarks-where-can-i-store-bookmarks-why-can-t-i-see-any-bookmarks-below-the-query-box-what-are-these-variables-for">
 <span id="faqbookmark"></span><h3>6.18 Bookmarks: Where can I store bookmarks? Why can’t I see any bookmarks below the query box? What are these variables for?<a class="headerlink" href="#bookmarks-where-can-i-store-bookmarks-why-can-t-i-see-any-bookmarks-below-the-query-box-what-are-these-variables-for" title="Permalink to this headline">¶</a></h3>
@@ -1744,7 +1748,7 @@ authentication to the Apache environment and it can be used in Apache
 logs. Currently there are two variables available:</p>
 <dl class="docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">userID</span></code></dt>
-<dd>User name of currently active user (he does not have to be logged in).</dd>
+<dd>User name of currently active user (they do not have to be logged in).</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">userStatus</span></code></dt>
 <dd>Status of currently active user, one of <code class="docutils literal notranslate"><span class="pre">ok</span></code> (user is logged in),
 <code class="docutils literal notranslate"><span class="pre">mysql-denied</span></code> (MySQL denied user login), <code class="docutils literal notranslate"><span class="pre">allow-denied</span></code> (user denied
@@ -2021,11 +2025,11 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
         <li class="right" >
           <a href="other.html" title="Other sources of information"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.0.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; <a href="copyright.html">Copyright</a> 2012 - 2020, The phpMyAdmin devel team.
+        &#169; <a href="copyright.html">Copyright</a> 2012 - 2021, The phpMyAdmin devel team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
   </body>

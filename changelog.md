@@ -7,10 +7,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 - Add WSL2 section to the readme
-- Remove DNS from the docker-compose file
+- Remove DNS from mail en db containers
 - Add health checks for Redis and MySQL
 - Switch to version `3` of the docker-compose file
 - Expose the `3306` MySQL port by default
+- Update PHPMyAdmin to 5.1.0
 - Fix CVE-2021-30130 in PHPMyAdmin
 
 ## 2.1.1 - 2021-01-18

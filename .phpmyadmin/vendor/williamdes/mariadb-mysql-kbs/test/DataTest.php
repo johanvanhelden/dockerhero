@@ -21,7 +21,7 @@ class DataTest extends TestCase
     {
         $schema = Schema::import($id);
         $schema->in($contents);
-        return true;// No exception occured
+        return true;// No exception occurred
     }
 
     /**

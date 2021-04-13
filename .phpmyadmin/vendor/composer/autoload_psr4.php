@@ -13,7 +13,6 @@ return array(
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Symfony\\Contracts\\Service\\' => array($vendorDir . '/symfony/service-contracts'),
     'Symfony\\Contracts\\Cache\\' => array($vendorDir . '/symfony/cache-contracts'),
-    'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Symfony\\Component\\VarExporter\\' => array($vendorDir . '/symfony/var-exporter'),
     'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
     'Symfony\\Component\\ExpressionLanguage\\' => array($vendorDir . '/symfony/expression-language'),
@@ -29,4 +28,5 @@ return array(
     'PhpMyAdmin\\ShapeFile\\' => array($vendorDir . '/phpmyadmin/shapefile/src'),
     'PhpMyAdmin\\MoTranslator\\' => array($vendorDir . '/phpmyadmin/motranslator/src'),
     'PhpMyAdmin\\' => array($baseDir . '/libraries/classes'),
+    'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
 );

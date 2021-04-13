@@ -6460,7 +6460,7 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[auto_increment_increment](https://mariadb.com/kb/en/library/documentation/replication-and-binary-log-server-system-variables/#auto_increment_increment)|
-|dev.mysql.com|[sysvar_auto_increment_increment](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_auto_increment_increment)|
+|dev.mysql.com|[sysvar_auto_increment_increment](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_auto_increment_increment)|
 
 ## auto_increment_offset
 |name|value|
@@ -6476,7 +6476,7 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[auto_increment_offset](https://mariadb.com/kb/en/library/documentation/replication-and-binary-log-server-system-variables/#auto_increment_offset)|
-|dev.mysql.com|[sysvar_auto_increment_offset](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_auto_increment_offset)|
+|dev.mysql.com|[sysvar_auto_increment_offset](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_auto_increment_offset)|
 
 ## binlog_annotate_row_events
 |name|value|
@@ -7401,7 +7401,7 @@
 |Scope|`global`|
 |Default value|`60`|
 |Dynamic|`true`|
-|Range|from: `1` to: `upwards`|
+|Range|from: `1`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -7610,7 +7610,9 @@
 |Name|`sql_slave_skip_counter`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Default value|`0`|
 |Dynamic|`true`|
+|Range|from: `0`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -8343,7 +8345,7 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[rpl_semi_sync_master_enabled](https://mariadb.com/kb/en/library/documentation/semisynchronous-replication/#rpl_semi_sync_master_enabled)|
-|dev.mysql.com|[sysvar_rpl_semi_sync_master_enabled](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_rpl_semi_sync_master_enabled)|
+|dev.mysql.com|[sysvar_rpl_semi_sync_master_enabled](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_rpl_semi_sync_master_enabled)|
 
 ## rpl_semi_sync_master_timeout
 |name|value|
@@ -8358,7 +8360,7 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[rpl_semi_sync_master_timeout](https://mariadb.com/kb/en/library/documentation/semisynchronous-replication/#rpl_semi_sync_master_timeout)|
-|dev.mysql.com|[sysvar_rpl_semi_sync_master_timeout](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_rpl_semi_sync_master_timeout)|
+|dev.mysql.com|[sysvar_rpl_semi_sync_master_timeout](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_rpl_semi_sync_master_timeout)|
 
 ## rpl_semi_sync_master_trace_level
 |name|value|
@@ -8373,7 +8375,7 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[rpl_semi_sync_master_trace_level](https://mariadb.com/kb/en/library/documentation/semisynchronous-replication/#rpl_semi_sync_master_trace_level)|
-|dev.mysql.com|[sysvar_rpl_semi_sync_master_trace_level](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_rpl_semi_sync_master_trace_level)|
+|dev.mysql.com|[sysvar_rpl_semi_sync_master_trace_level](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_rpl_semi_sync_master_trace_level)|
 
 ## rpl_semi_sync_master_wait_no_slave
 |name|value|
@@ -8388,7 +8390,7 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[rpl_semi_sync_master_wait_no_slave](https://mariadb.com/kb/en/library/documentation/semisynchronous-replication/#rpl_semi_sync_master_wait_no_slave)|
-|dev.mysql.com|[sysvar_rpl_semi_sync_master_wait_no_slave](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_rpl_semi_sync_master_wait_no_slave)|
+|dev.mysql.com|[sysvar_rpl_semi_sync_master_wait_no_slave](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_rpl_semi_sync_master_wait_no_slave)|
 
 ## rpl_semi_sync_master_wait_point
 |name|value|
@@ -8405,7 +8407,7 @@
 |source|anchor name|
 |------|----|
 |mariadb.com|[rpl_semi_sync_master_wait_point](https://mariadb.com/kb/en/library/documentation/semisynchronous-replication/#rpl_semi_sync_master_wait_point)|
-|dev.mysql.com|[sysvar_rpl_semi_sync_master_wait_point](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_rpl_semi_sync_master_wait_point)|
+|dev.mysql.com|[sysvar_rpl_semi_sync_master_wait_point](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_rpl_semi_sync_master_wait_point)|
 
 ## rpl_semi_sync_slave_delay_master
 |name|value|
@@ -12693,6 +12695,7 @@
 |name|value|
 |----|-----|
 |Name|`concurrent_insert`|
+|Command line|`--concurrent-insert[=value]`|
 |Type of variable|`enumeration`|
 |Scope|`global`|
 |Default value|`AUTO`|
@@ -13772,6 +13775,7 @@
 |name|value|
 |----|-----|
 |Name|`large_files_support`|
+|Type of variable|`boolean`|
 |Scope|`global`|
 |Dynamic|`false`|
 
@@ -15090,7 +15094,6 @@
 |name|value|
 |----|-----|
 |Name|`pseudo_slave_mode`|
-|Type of variable|`integer`|
 |Scope|`session`|
 |Dynamic|`true`|
 
@@ -25678,7 +25681,7 @@
 |Command line|`--innodb-lock-schedule-algorithm=#`|
 |Type of variable|`enumeration`|
 |Scope|`global`|
-|Default value|`VATS (10.2), FCFS (10.1)`|
+|Default value|`FCFS (MariaDB 10.3.9, MariaDB 10.2.17), VATS (MariaDB 10.2.3), FCFS (MariaDB 10.1)`|
 |Dynamic|`false`|
 |Valid value(s)|`FCFS`, `VATS`|
 
@@ -25906,7 +25909,7 @@
 |Command line|`--innodb-log-optimize-ddl={0|1}`|
 |Type of variable|`boolean`|
 |Scope|`global`|
-|Default value|`ON (<= MariaDB 10.5.0), OFF (>= MariaDB 10.5.1)`|
+|Default value|`OFF (>= MariaDB 10.5.1, MariaDB 10.4.16, MariaDB 10.3.26, MariaDB 10.2.35), ON (<= MariaDB 10.5.0, MariaDB 10.4.15, MariaDB 10.3.25, MariaDB 10.2.34)`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -25987,6 +25990,7 @@
 |Command line|`--innodb-max-dirty-pages-pct=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
+|Dynamic|`true`|
 |Range|from: `0`|
 
 ### Documentation(s)
@@ -26461,6 +26465,21 @@
 |------|----|
 |mariadb.com|[innodb_read_only](https://mariadb.com/kb/en/library/documentation/xtradbinnodb-server-system-variables/#innodb_read_only)|
 |dev.mysql.com|[sysvar_innodb_read_only](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_read_only)|
+
+## innodb_read_only_compressed
+|name|value|
+|----|-----|
+|Name|`innodb_read_only_compressed`|
+|Command line|`--innodb-read-only-compressed, --skip-innodb-read-only-compressed`|
+|Type of variable|`boolean`|
+|Scope|``|
+|Default value|`ON`|
+|Dynamic|`false`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|mariadb.com|[innodb_read_only_compressed](https://mariadb.com/kb/en/library/documentation/xtradbinnodb-server-system-variables/#innodb_read_only_compressed)|
 
 ## innodb_recovery_stats
 |name|value|
@@ -27553,6 +27572,22 @@
 |------|----|
 |dev.mysql.com|[sysvar_audit_log_policy](https://dev.mysql.com/doc/refman/8.0/en/audit-log-reference.html#sysvar_audit_log_policy)|
 
+## audit_log_prune_seconds
+|name|value|
+|----|-----|
+|Name|`audit_log_prune_seconds`|
+|Command line|`--audit-log-prune-seconds=#`|
+|Type of variable|`integer`|
+|Scope|`global`|
+|Default value|`0`|
+|Dynamic|`true`|
+|Range|from: `0` to: `4294967295`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_audit_log_prune_seconds](https://dev.mysql.com/doc/refman/8.0/en/audit-log-reference.html#sysvar_audit_log_prune_seconds)|
+
 ## audit_log_read_buffer_size
 |name|value|
 |----|-----|
@@ -27911,6 +27946,21 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_innodb_doublewrite_pages](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_doublewrite_pages)|
+
+## innodb_extend_and_initialize
+|name|value|
+|----|-----|
+|Name|`innodb_extend_and_initialize`|
+|Command line|`--innodb=extend-and-initialize[={OFF|ON}]`|
+|Type of variable|`boolean`|
+|Scope|`global`|
+|Default value|`ON`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_innodb_extend_and_initialize](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_extend_and_initialize)|
 
 ## innodb_fil_make_page_dirty_debug
 |name|value|
@@ -29205,6 +29255,7 @@
 |Scope|`global`, `session`|
 |Default value|`OFF`|
 |Dynamic|`true`|
+|Valid value(s)|`ON`, `OFF`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -29215,11 +29266,10 @@
 |name|value|
 |----|-----|
 |Name|`ndbinfo_table_prefix`|
-|Command line|`--ndbinfo-table-prefix=name`|
 |Type of variable|`string`|
-|Scope|`global`, `session`|
+|Scope|`global`|
 |Default value|`ndb$`|
-|Dynamic|`true`|
+|Dynamic|`false`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -30108,7 +30158,7 @@
 |Command line|`--transaction-write-set-extraction[=value]`|
 |Type of variable|`enumeration`|
 |Scope|`global`, `session`|
-|Default value|`OFF`|
+|Default value|`0`|
 |Dynamic|`true`|
 
 ### Documentation(s)
@@ -30183,7 +30233,6 @@
 |Command line|`--gtid-executed-compression-period=#`|
 |Type of variable|`integer`|
 |Scope|`global`|
-|Default value|`1000`|
 |Dynamic|`true`|
 |Range|from: `0` to: `4294967295`|
 
@@ -30248,61 +30297,6 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_gtid_purged](https://dev.mysql.com/doc/refman/8.0/en/replication-options-gtids.html#sysvar_gtid_purged)|
-
-## show_slave_auth_info
-|name|value|
-|----|-----|
-|Name|`show_slave_auth_info`|
-|Command line|`--show-slave-auth-info[={OFF|ON}]`|
-|Type of variable|`boolean`|
-|Default value|`OFF`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[option_mysqld_show-slave-auth-info](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#option_mysqld_show-slave-auth-info)|
-
-## immediate_server_version
-|name|value|
-|----|-----|
-|Name|`immediate_server_version`|
-|Type of variable|`integer`|
-|Scope|`session`|
-|Dynamic|`true`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[sysvar_immediate_server_version](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_immediate_server_version)|
-
-## original_server_version
-|name|value|
-|----|-----|
-|Name|`original_server_version`|
-|Type of variable|`integer`|
-|Scope|`session`|
-|Dynamic|`true`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[sysvar_original_server_version](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_original_server_version)|
-
-## rpl_semi_sync_master_wait_for_slave_count
-|name|value|
-|----|-----|
-|Name|`rpl_semi_sync_master_wait_for_slave_count`|
-|Command line|`--rpl-semi-sync-master-wait-for-slave-count=#`|
-|Type of variable|`integer`|
-|Scope|`global`|
-|Default value|`1`|
-|Dynamic|`true`|
-|Range|from: `1` to: `65535`|
-
-### Documentation(s)
-|source|anchor name|
-|------|----|
-|dev.mysql.com|[sysvar_rpl_semi_sync_master_wait_for_slave_count](https://dev.mysql.com/doc/refman/8.0/en/replication-options-master.html#sysvar_rpl_semi_sync_master_wait_for_slave_count)|
 
 ## master_info_file
 |name|value|
@@ -30473,7 +30467,7 @@
 |Scope|`global`|
 |Default value|`300`|
 |Dynamic|`true`|
-|Range|from: `1` to: `4`|
+|Range|from: `1`|
 
 ### Documentation(s)
 |source|anchor name|
@@ -30541,6 +30535,61 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_slave_rows_search_algorithms](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#sysvar_slave_rows_search_algorithms)|
+
+## show_slave_auth_info
+|name|value|
+|----|-----|
+|Name|`show_slave_auth_info`|
+|Command line|`--show-slave-auth-info[={OFF|ON}]`|
+|Type of variable|`boolean`|
+|Default value|`OFF`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[option_mysqld_show-slave-auth-info](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#option_mysqld_show-slave-auth-info)|
+
+## immediate_server_version
+|name|value|
+|----|-----|
+|Name|`immediate_server_version`|
+|Type of variable|`integer`|
+|Scope|`session`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_immediate_server_version](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_immediate_server_version)|
+
+## original_server_version
+|name|value|
+|----|-----|
+|Name|`original_server_version`|
+|Type of variable|`integer`|
+|Scope|`session`|
+|Dynamic|`true`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_original_server_version](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_original_server_version)|
+
+## rpl_semi_sync_master_wait_for_slave_count
+|name|value|
+|----|-----|
+|Name|`rpl_semi_sync_master_wait_for_slave_count`|
+|Command line|`--rpl-semi-sync-master-wait-for-slave-count=#`|
+|Type of variable|`integer`|
+|Scope|`global`|
+|Default value|`1`|
+|Dynamic|`true`|
+|Range|from: `1` to: `65535`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_rpl_semi_sync_master_wait_for_slave_count](https://dev.mysql.com/doc/refman/8.0/en/replication-options-source.html#sysvar_rpl_semi_sync_master_wait_for_slave_count)|
 
 ## server_uuid
 |name|value|
@@ -31433,6 +31482,22 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_block_encryption_mode](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_block_encryption_mode)|
+
+## caching_sha2_password_digest_rounds
+|name|value|
+|----|-----|
+|Name|`caching_sha2_password_digest_rounds`|
+|Command line|`--caching-sha2-password-digest-rounds=#`|
+|Type of variable|`integer`|
+|Scope|`global`|
+|Default value|`5000`|
+|Dynamic|`false`|
+|Range|from: `5000` to: `4095000`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_caching_sha2_password_digest_rounds](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_caching_sha2_password_digest_rounds)|
 
 ## caching_sha2_password_auto_generate_rsa_keys
 |name|value|
@@ -32608,6 +32673,22 @@
 |source|anchor name|
 |------|----|
 |dev.mysql.com|[sysvar_tablespace_definition_cache](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_tablespace_definition_cache)|
+
+## temptable_max_mmap
+|name|value|
+|----|-----|
+|Name|`temptable_max_mmap`|
+|Command line|`--temptable-max-mmap=#`|
+|Type of variable|`integer`|
+|Scope|`global`|
+|Default value|`1073741824`|
+|Dynamic|`true`|
+|Range|from: `0` to: `2`|
+
+### Documentation(s)
+|source|anchor name|
+|------|----|
+|dev.mysql.com|[sysvar_temptable_max_mmap](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_temptable_max_mmap)|
 
 ## temptable_max_ram
 |name|value|
