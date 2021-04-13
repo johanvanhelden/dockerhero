@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Add health checks for Redis and MySQL
 - Switch to version `3` of the docker-compose file
 - Expose the `3306` MySQL port by default
+- Fix CVE-2021-30130 in PHPMyAdmin
 
 ## 2.1.1 - 2021-01-18
 
