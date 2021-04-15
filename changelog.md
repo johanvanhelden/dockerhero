@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 3.0.0 - 2021-04-15
+
+- Update Composer to support the new GitHub personal token format
+- Drop OCI8 support (I can no longer maintain this by myself)
+- Drop support for PHP 7.2 (eol)
+
 ## 2.2.0 - 2021-04-13
 
 - Switch to version `3` of the docker-compose file

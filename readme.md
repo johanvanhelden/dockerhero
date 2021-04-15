@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 2.2.0
+## Version 3.0.0
 
 ### What is Dockerhero?
 
@@ -35,7 +35,6 @@ Dockerhero includes the following useful tools:
 - Laravel Artisan autocompletion
 - Laravel Dusk support
 - laravel-dump-server support
-- OCI8 support
 - and more to come!
 
 Localtest.me is used to make everything work without editing your hosts file! Just like magic!
@@ -122,7 +121,7 @@ PHP 7.4: `johanvanhelden/dockerhero-php-7.4-fpm:latest`
 
 PHP 7.3: `johanvanhelden/dockerhero-php-7.3-fpm:latest`
 
-PHP 7.2: `johanvanhelden/dockerhero-php-7.2-fpm:latest`
+PHP 7.2: `johanvanhelden/dockerhero-php-7.2-fpm:latest` (No longer maintained)
 
 PHP 7.1: `johanvanhelden/dockerhero-php-7.1-fpm:latest` (No longer maintained)
 
@@ -139,7 +138,7 @@ PHP 7.4: `johanvanhelden/dockerhero-workspace:php7.4`
 
 PHP 7.3: `johanvanhelden/dockerhero-workspace:php7.3`
 
-PHP 7.2: `johanvanhelden/dockerhero-workspace:php7.2`
+PHP 7.2: `johanvanhelden/dockerhero-workspace:php7.2` (No longer maintained)
 
 PHP 7.1: `johanvanhelden/dockerhero-workspace:php7.1` (No longer maintained)
 
