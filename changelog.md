@@ -12,7 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Update Composer to support the new GitHub personal token format
 - Drop OCI8 support (I can no longer maintain this by myself)
-- Drop support for PHP 7.2 (eol)
+- Drop support for PHP 7.2 (EOL)
 
 ## 2.2.0 - 2021-04-13
 
