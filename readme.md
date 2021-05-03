@@ -102,7 +102,7 @@ _Remember: anything you do inside the container is deleted upon closing docker! 
 By default, PHP 7.4 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change image. For example, if you want to use PHP 8.0, it might look like this:
 
 ```yml
-version: "2"
+version: '3'
 
 services:
   workspace:
@@ -153,22 +153,17 @@ This part is however entirely optional, and you do not have to do this. You can 
 ### WSL2
 
 Dockerhero works great with WSL2 but requires one additional setup step if you want to execute, for example, artisan commands or PHPUnit tests from outside Dockerhero.
-Simply add `dns: 0.0.0.0` to all of the containers in your `docker-compose.override.yml` (if you do not have one,
-[please create it](#overriding-default-settings)) like so:
+Simply add the following block to the Windows hosts file (`C:\Windows\System32\drivers\etc\hosts`):
 
-```yml
-  workspace:
-    dns: 0.0.0.0
-  php:
-    dns: 0.0.0.0
-  web:
-    dns: 0.0.0.0
-  db:
-    dns: 0.0.0.0
-  mail:
-    dns: 0.0.0.0
-  redis:
-    dns: 0.0.0.0
+```
+## DOCKERHERO HOSTS BLOCK START ##
+0.0.0.0 dockerhero_web
+0.0.0.0 dockerhero_php
+0.0.0.0 dockerhero_workspace
+0.0.0.0 dockerhero_redis
+0.0.0.0 dockerhero_db
+0.0.0.0 dockerhero_mail
+## DOCKERHERO HOSTS BLOCK END ##
 ```
 
 ## Updating
@@ -212,7 +207,7 @@ If you need to access private composer packages, you might want to link your loc
 [please create it](#overriding-default-settings)) like so:
 
 ```yml
-version: '2'
+version: '3'
 
 services:
   workspace:
@@ -259,7 +254,7 @@ This assumes you created the proper database and user with the password using, f
 If you would like to change the MySQL version, you can do so by editing the `docker-compose.override.yml` (if you do not
 have one, [please create it](#overriding-default-settings)) like so:
 ```yml
-version: '2'
+version: '3'
 
 services:
   db:
@@ -281,7 +276,7 @@ By default, I've set the same SQL mode as MySQL 5.6 to ensure maximum backwards 
 set it to the 5.7 default setting, you can do so by editing the `docker-compose.override.yml` (if you do not have one,
 [please create it](#overriding-default-settings)) like so:
 ```yml
-version: '2'
+version: '3'
 
 services:
   db:
@@ -380,7 +375,7 @@ You can create a brand new `docker-compose.override.yml` in the root of Dockerhe
 It might look a bit like this:
 
 ```yml
-version: '2'
+version: '3'
 
 services:
   php:
@@ -520,7 +515,7 @@ Feel free to send in pull requests! Either to the image repos or the Dockerhero 
 ### Testing changes
 To test changes to Dockerhero images, you can either follow the instructions from the README of the images or, if you want to test those changes in the Dockerhero system itself, you add the overwrite to the `docker-compose.override.yml` for the container you want to test. For example:
 ```yml
-version: '2'
+version: '3'
 
 services:
   php:
