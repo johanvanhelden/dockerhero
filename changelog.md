@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 3.0.1 - 2021-06-15
+
+- Removed the MYSQL_USER db container environment variables as this conflicts with newer docker versions
+
 ## 3.0.0 - 2021-04-15
 
 - Update Composer to support the new GitHub personal token format
