@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 3.0.2 - 2021-06-21
+
+- Fixes an issue with the self-signed certificate (`docker-compose pull` && `docker-compose up` and trust the [new certificate](https://github.com/johanvanhelden/dockerhero-nginx/blob/master/.certs/localtest.crt) to apply the fix)
+
 ## 3.0.1 - 2021-06-15
 
 - Removed the MYSQL_USER db container environment variables as this conflicts with newer docker versions
