@@ -148,6 +148,8 @@ There is also a latest tag, this one is used to remain backward compatible, but 
 
 Dockerhero has full support for https. This is done with a self-signed certificate. In order to skip the warning in your browser, you can trust the certificate by importing it in the browser or keychain. The certificate can be found [here](https://github.com/johanvanhelden/dockerhero-nginx/blob/master/.certs/localtest.me.crt).
 
+If you are on Windows and use Firefox, you should install the certificate in Windows and [allow Firefox to use Window's certificates](https://support.umbrella.com/hc/en-us/articles/115000669728-Configuring-Firefox-to-use-the-Windows-Certificate-Store).
+
 This part is however entirely optional, and you do not have to do this. You can simply ignore the browser warning and continue.
 
 ### WSL2
