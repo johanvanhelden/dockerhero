@@ -3,7 +3,7 @@ version: "3"
 services:
   workspace:
     container_name: dockerhero_workspace
-    image: johanvanhelden/dockerhero-workspace:php7.4
+    image: johanvanhelden/dockerhero-workspace:php8.0
     volumes:
       - ./crons:/var/crons
       - ./databases:/var/www/databases
@@ -19,7 +19,7 @@ services:
 
   php:
     container_name: dockerhero_php
-    image: johanvanhelden/dockerhero-php-7.4-fpm:latest
+    image: johanvanhelden/dockerhero-php-8.0-fpm:latest
     links:
       - db
       - workspace

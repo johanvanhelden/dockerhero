@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 3.1.0 - 2021-07-16
+
+- Update PHP 8.0 images
+- Make PHP 8.0 the default version
+
 ## 3.0.2 - 2021-06-21
 
 - Fixes an issue with the self-signed certificate (`docker-compose pull` && `docker-compose up` and trust the [new certificate](https://github.com/johanvanhelden/dockerhero-nginx/blob/master/.certs/localtest.crt) to apply the fix)
