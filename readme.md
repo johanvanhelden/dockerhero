@@ -67,7 +67,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 7. [Cronjobs](#cronjobs)
 8. [Mailhog](#mailhog)
 9. [Overriding default settings](#overriding-default-settings)
-    1. [Adding More Services](#adding-more-services)
+    1. [Adding more services](#adding-more-services)
 10. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
 11. [Making a local website publicly available](#making-a-local-website-publicly-available)
 12. [Connecting to a docker container from your host](#connecting-to-a-docker-container-from-your-host)
@@ -388,10 +388,10 @@ services:
     extra_hosts:
       - "projectname.localtest.me:172.25.0.12"
 ```
-### Adding More Services
+### Adding more services
 
 Sometimes you might need to spin up more services, like for example an SFTP server.
-You can easilly achieve this by adding these services to your `docker-compose.override.yml`, in the section `services`, like this:
+You can easilly achieve this by adding these services to your `docker-compose.override.yml`, in the `services:` section, like this:
 
 ```yml
 services:
