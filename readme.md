@@ -67,6 +67,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 7. [Cronjobs](#cronjobs)
 8. [Mailhog](#mailhog)
 9. [Overriding default settings](#overriding-default-settings)
+    1. [Adding more services](#adding-more-services)
 10. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
 11. [Making a local website publicly available](#making-a-local-website-publicly-available)
 12. [Connecting to a docker container from your host](#connecting-to-a-docker-container-from-your-host)
@@ -392,6 +393,22 @@ services:
     extra_hosts:
       - "projectname.localtest.me:172.25.0.12"
 ```
+### Adding more services
+
+Sometimes you might need to spin up more services, like for example an SFTP server.
+You can easilly achieve this by adding these services to your `docker-compose.override.yml`, in the `services:` section, like this:
+
+```yml
+services:
+  sftp:
+    image: atmoz/sftp
+    volumes:
+      - ./sftp/storage:/home/sftpuser/storage
+    ports:
+      - "2222:22"
+    command: sftpuser:password:1001
+```
+This snippet will add a lightweight SFTP server to your dockerhero installation, binds it to your local port 2222, and maps the local folder `sftp/storage` to the container (don't forget to create this folder). Files in this folder can now be accessed through sftp://sftpuser:password@localhost:2222/storage
 
 ## Connecting from PHP to a local project via URL
 
