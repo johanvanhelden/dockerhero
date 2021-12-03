@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - nothing
 
+## 3.2.0 - 2021-12-03
+
+- Add PHP 8.1
+- Make PHP 8.1 the default version
+
 ## 3.1.0 - 2021-07-16
 
 - Update PHP 8.0 images
