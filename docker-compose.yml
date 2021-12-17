@@ -1,15 +1,23 @@
 version: "3"
 
+volumes:
+  database:
+    driver: "local"
+  nginx_logs:
+    driver: "local"
+  redis:
+    driver: "local"
+
 services:
   workspace:
     container_name: dockerhero_workspace
     image: johanvanhelden/dockerhero-workspace:php8.1
     volumes:
+      - ./../:/var/www/projects
       - ./crons:/var/crons
       - ./databases:/var/www/databases
       - ./.phpmyadmin:/var/www/phpmyadmin
       - ./.phpredisadmin:/var/www/phpredisadmin
-      - ./../:/var/www/projects
       - /etc/localtime:/etc/localtime:ro
     tty: true
     dns: 8.8.8.8
@@ -24,9 +32,10 @@ services:
       - db
       - workspace
       - redis
-    volumes_from:
+    depends_on:
       - workspace
     volumes:
+      - ../:/var/www/projects
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "9912:9912"
@@ -43,12 +52,12 @@ services:
     links:
       - php
     volumes:
+      - ../:/var/www/projects
       - ./nginx/conf:/etc/nginx/conf.d/dockerhero/custom
       - nginx_logs:/var/log/nginx
       - /etc/localtime:/etc/localtime:ro
-    volumes_from:
+    depends_on:
       - php
-      - workspace
     ports:
       - "80:80"
       - "443:443"
@@ -101,14 +110,6 @@ services:
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
 
-volumes:
-  database:
-    driver: "local"
-  nginx_logs:
-    driver: "local"
-  redis:
-    driver: "local"
-
 networks:
   dockerhero:
     driver: bridge
@@ -116,4 +117,3 @@ networks:
       driver: default
       config:
         - subnet: 172.25.0.0/16
-          gateway: 172.25.0.1
