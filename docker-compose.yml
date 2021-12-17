@@ -15,9 +15,6 @@ services:
     volumes:
       - ./../:/var/www/projects
       - ./crons:/var/crons
-      - ./databases:/var/www/databases
-      - ./.phpmyadmin:/var/www/phpmyadmin
-      - ./.phpredisadmin:/var/www/phpredisadmin
       - /etc/localtime:/etc/localtime:ro
     tty: true
     dns: 8.8.8.8
@@ -36,6 +33,9 @@ services:
       - workspace
     volumes:
       - ../:/var/www/projects
+      - ./databases:/var/www/databases
+      - ./.phpmyadmin:/var/www/phpmyadmin
+      - ./.phpredisadmin:/var/www/phpredisadmin
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "9912:9912"
@@ -53,6 +53,9 @@ services:
       - php
     volumes:
       - ../:/var/www/projects
+      - ./databases:/var/www/databases
+      - ./.phpmyadmin:/var/www/phpmyadmin
+      - ./.phpredisadmin:/var/www/phpredisadmin
       - ./nginx/conf:/etc/nginx/conf.d/dockerhero/custom
       - nginx_logs:/var/log/nginx
       - /etc/localtime:/etc/localtime:ro
