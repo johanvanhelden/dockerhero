@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Argument\ArgumentInterface;
 use Symfony\Component\DependencyInjection\Argument\BoundArgument;
 use Symfony\Component\DependencyInjection\Argument\IteratorArgument;
+use Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument;
 use Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
 use Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
 use Symfony\Component\DependencyInjection\ChildDefinition;
@@ -471,7 +472,7 @@ class YamlFileLoader extends FileLoader
                     throw new InvalidArgumentException(sprintf('Invalid method call for service "%s", did you forgot a leading dash before "%s: ..." in "%s"?', $id, $k, $file));
                 }
 
-                if (isset($call['method'])) {
+                if (isset($call['method']) && \is_string($call['method'])) {
                     $method = $call['method'];
                     $args = $call['arguments'] ?? [];
                     $returnsClone = $call['returns_clone'] ?? false;
@@ -744,6 +745,15 @@ class YamlFileLoader extends FileLoader
                 } catch (InvalidArgumentException $e) {
                     throw new InvalidArgumentException(sprintf('"!iterator" tag only accepts arrays of "@service" references in "%s".', $file));
                 }
+            }
+            if ('service_closure' === $value->getTag()) {
+                $argument = $this->resolveServices($argument, $file, $isParameter);
+
+                if (!$argument instanceof Reference) {
+                    throw new InvalidArgumentException(sprintf('"!service_closure" tag only accepts service references in "%s".', $file));
+                }
+
+                return new ServiceClosureArgument($argument);
             }
             if ('service_locator' === $value->getTag()) {
                 if (!\is_array($argument)) {

@@ -554,14 +554,8 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
     showColList: function showColList(obj) {
       // only show when not resizing or reordering
       if (!g.colRsz && !g.colReorder) {
-        var pos = $(obj).position(); // check if the list position is too right
-
-        if (pos.left + $(g.cList).outerWidth(true) > $(document).width()) {
-          pos.left = $(document).width() - $(g.cList).outerWidth(true);
-        }
-
+        var pos = $(obj).position();
         $(g.cList).css({
-          left: pos.left,
           top: pos.top + $(obj).outerHeight(true)
         }).show();
         $(obj).addClass('coldrop-hover');
@@ -711,15 +705,16 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
 
 
             var newHtml = Functions.escapeHtml(value);
-            newHtml = newHtml.replace(/\n/g, '<br>\n'); // remove decimal places if column type not supported
+            newHtml = newHtml.replace(/\n/g, '<br>\n');
+            var decimals = parseInt($thisField.attr('data-decimals')); // remove decimal places if column type not supported
 
-            if ($thisField.attr('data-decimals') === 0 && $thisField.attr('data-type').indexOf('time') !== -1) {
+            if (decimals === 0 && $thisField.attr('data-type').indexOf('time') !== -1) {
               newHtml = newHtml.substring(0, newHtml.indexOf('.'));
-            } // remove addtional decimal places
+            } // remove additional decimal places
 
 
-            if ($thisField.attr('data-decimals') > 0 && $thisField.attr('data-type').indexOf('time') !== -1) {
-              newHtml = newHtml.substring(0, newHtml.length - (6 - $thisField.attr('data-decimals')));
+            if (decimals > 0 && $thisField.attr('data-type').indexOf('time') !== -1) {
+              newHtml = newHtml.substring(0, newHtml.length - (6 - decimals));
             }
 
             var selector = 'span';
@@ -839,7 +834,7 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
 
         if ($td.is(':not(.not_null)')) {
           // append a null checkbox
-          $editArea.append('<div class="null_div"><label>Null:<input type="checkbox"></label></div>');
+          $editArea.append('<div class="null_div"><label>NULL:<input type="checkbox"></label></div>');
           var $checkbox = $editArea.find('.null_div input'); // check if current <td> is NULL
 
           if (isNull) {
@@ -1289,12 +1284,8 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
               fieldsType.push('hex');
             }
 
-            fieldsNull.push(''); // Convert \n to \r\n to be consistent with form submitted value.
-            // The internal browser representation has to be just \n
-            // while form submitted value \r\n, see specification:
-            // https://www.w3.org/TR/html5/forms.html#the-textarea-element
-
-            fields.push($thisField.data('value').replace(/\n/g, '\r\n'));
+            fieldsNull.push('');
+            fields.push($thisField.data('value'));
             var cellIndex = $thisField.index('.to_be_saved');
 
             if ($thisField.is(':not(.relation, .enum, .set, .bit)')) {
@@ -1789,10 +1780,11 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
 
       $(g.t).find('td, th.draggable').on('mouseenter', function () {
         g.hideColList();
-      }); // attach to global div
+      }); // attach to first row first col of the grid
 
-      $(g.gDiv).append(g.cDrop);
-      $(g.gDiv).append(g.cList); // some adjustment
+      var thFirst = $(g.t).find('th.print_ignore');
+      $(thFirst).append(g.cDrop);
+      $(thFirst).append(g.cList); // some adjustment
 
       g.reposDrop();
     },
@@ -2071,14 +2063,6 @@ var makeGrid = function makeGrid(t, enableResize, enableReorder, enableVisib, en
 
             startGridEditing(e, this);
           }
-        } else {
-          // If it is not a link or it is a double tap then call startGridEditing
-          // this is a double click, cancel the single click timer
-          // and make the click count 0
-          clearTimeout($cell.data('timer'));
-          $cell.data('clicks', 0); // start grid-editing
-
-          startGridEditing(e, this);
         }
       }).on('dblclick', function (e) {
         if ($(e.target).is('.grid_edit a')) {

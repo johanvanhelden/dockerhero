@@ -2702,7 +2702,7 @@ $(function () {
       holdStarter = null;
     }, 250);
   });
-  $(document).on('mouseup', 'span.ajax_notification.dismissable', function () {
+  $(document).on('mouseup', 'span.ajax_notification.dismissable', function (event) {
     if (holdStarter && event.which === 1) {
       clearTimeout(holdStarter);
       Functions.ajaxRemoveMessage($(this));
@@ -3557,8 +3557,7 @@ AJAX.registerOnload('functions.js', function () {
 
 Functions.hideShowConnection = function ($engineSelector) {
   var $connection = $('.create_table_form input[name=connection]');
-  var index = $connection.parent('td').index();
-  var $labelTh = $connection.parents('tr').prev('tr').children('th').eq(index);
+  var $labelTh = $('.create_table_form #storage-engine-connection');
 
   if ($engineSelector.val() !== 'FEDERATED') {
     $connection.prop('disabled', true).parent('td').hide();
@@ -4863,6 +4862,7 @@ Functions.createViewDialog = function ($this) {
       var $dialog = $('<div></div>').attr('id', 'createViewDialog').append(data.message).dialog({
         width: 600,
         minWidth: 400,
+        height: $(window).height(),
         modal: true,
         buttons: buttonOptions,
         title: Messages.strCreateView,
@@ -5387,7 +5387,7 @@ Functions.configSet = function (key, value) {
  * @param {boolean}    cached          Configuration type.
  * @param {Function}   successCallback  The callback to call after the value is received
  *
- * @return {object}                Configuration value.
+ * @return {void}
  */
 
 
@@ -5402,8 +5402,6 @@ Functions.configGet = function (key, cached, successCallback) {
 
 
   $.ajax({
-    // Value at false to be synchronous (then ignore the callback on success)
-    async: typeof successCallback === 'function',
     url: 'index.php?route=/config/get',
     type: 'POST',
     dataType: 'json',
@@ -5427,7 +5425,6 @@ Functions.configGet = function (key, cached, successCallback) {
       }
     }
   });
-  return JSON.parse(localStorage.getItem(key));
 };
 /**
  * Return POST data as stored by Generator::linkOrButton

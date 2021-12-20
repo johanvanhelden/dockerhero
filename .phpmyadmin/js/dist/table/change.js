@@ -301,11 +301,26 @@ function verificationsAfterFieldChange(urlField, multiEdit, theType) {
     // Remove the textbox for salt
     $('#salt_' + target.id).prev('br').remove();
     $('#salt_' + target.id).remove();
+  } // Remove possible blocking rules if the user changed functions
+
+
+  $('#' + target.id).rules('remove', 'validationFunctionForMd5');
+  $('#' + target.id).rules('remove', 'validationFunctionForAesDesEncrypt');
+
+  if (target.value === 'MD5') {
+    $('#' + target.id).rules('add', {
+      validationFunctionForMd5: {
+        param: $thisInput,
+        depends: function depends() {
+          return checkForCheckbox(multiEdit);
+        }
+      }
+    });
   }
 
-  if (target.value === 'AES_DECRYPT' || target.value === 'AES_ENCRYPT' || target.value === 'MD5') {
+  if (target.value === 'DES_ENCRYPT' || target.value === 'AES_ENCRYPT') {
     $('#' + target.id).rules('add', {
-      validationFunctionForFuns: {
+      validationFunctionForAesDesEncrypt: {
         param: $thisInput,
         depends: function depends() {
           return checkForCheckbox(multiEdit);
@@ -429,12 +444,23 @@ AJAX.registerOnload('table/change.js', function () {
     jQuery.validator.addMethod('validationFunctionForHex', function (value) {
       return value.match(/^[a-f0-9]*$/i) !== null;
     });
-    jQuery.validator.addMethod('validationFunctionForFuns', function (value, element, options) {
-      if (value.substring(0, 3) === 'AES' && options.data('type') !== 'HEX') {
+    jQuery.validator.addMethod('validationFunctionForMd5', function (value, element, options) {
+      return !(value.substring(0, 3) === 'MD5' && typeof options.data('maxlength') !== 'undefined' && options.data('maxlength') < 32);
+    });
+    jQuery.validator.addMethod('validationFunctionForAesDesEncrypt', function (value, element, options) {
+      var funType = value.substring(0, 3);
+
+      if (funType !== 'AES' && funType !== 'DES') {
         return false;
       }
 
-      return !(value.substring(0, 3) === 'MD5' && typeof options.data('maxlength') !== 'undefined' && options.data('maxlength') < 32);
+      var dataType = options.data('type');
+
+      if (dataType === 'HEX' || dataType === 'CHAR') {
+        return true;
+      }
+
+      return false;
     });
     jQuery.validator.addMethod('validationFunctionForDateTime', function (value, element, options) {
       var dtValue = value;
@@ -470,14 +496,14 @@ AJAX.registerOnload('table/change.js', function () {
         return isDate(dtValue.substring(0, dv), tmstmp) && isTime(dtValue.substring(dv + 1));
       }
     });
-    /*
-     * message extending script must be run
-     * after initiation of functions
-     */
-
-    extendingValidatorMessages();
   }
+  /*
+   * message extending script must be run
+   * after initiation of functions
+   */
 
+
+  extendingValidatorMessages();
   $.datepicker.initialized = false;
   $(document).on('click', 'span.open_gis_editor', function (event) {
     event.preventDefault();

@@ -275,7 +275,8 @@ RTE.COMMON = {
                 // Item created successfully
                 Functions.ajaxRemoveMessage($msg);
                 Functions.slidingMessage(data.message);
-                that.$ajaxDialog.dialog('close'); // If we are in 'edit' mode, we must
+                that.$ajaxDialog.dialog('close');
+                var tableId = '#' + data.tableType + 'Table'; // If we are in 'edit' mode, we must
                 // remove the reference to the old row.
 
                 if (mode === 'edit' && $editRow !== null) {
@@ -303,7 +304,7 @@ RTE.COMMON = {
                    */
 
                   var inserted = false;
-                  $('table.data').find('tr').each(function () {
+                  $(tableId + '.data').find('tr').each(function () {
                     text = $(this).children('td').eq(0).find('strong').text().toUpperCase().trim();
 
                     if (text !== '' && text > data.name) {
@@ -317,19 +318,19 @@ RTE.COMMON = {
                     // If we didn't manage to insert the row yet,
                     // it must belong at the end of the list,
                     // so we insert it there.
-                    $('table.data').append(data.new_row);
+                    $(tableId + '.data').append(data.new_row);
                   } // Fade-in the new row
 
 
                   $('tr.ajaxInsert').show('slow').removeClass('ajaxInsert');
-                } else if ($('table.data').find('tr').has('td').length === 0) {
+                } else if ($(tableId + '.data').find('tr').has('td').length === 0) {
                   // If we are not supposed to insert the new row,
                   // we will now check if the table is empty and
                   // needs to be hidden. This will be the case if
                   // we were editing the only item in the list,
                   // which we removed and will not be inserting
                   // something else in its place.
-                  $('table.data').hide('slow', function () {
+                  $(tableId + '.data').hide('slow', function () {
                     $('#nothing2display').show('slow');
                   });
                 } // Now we have inserted the row at the correct
@@ -349,16 +350,16 @@ RTE.COMMON = {
                  */
 
                 var rowclass = '';
-                $('table.data').find('tr').has('td').each(function () {
+                $(tableId + '.data').find('tr').has('td').each(function () {
                   rowclass = ct % 2 === 0 ? 'odd' : 'even';
-                  $(this).removeClass().addClass(rowclass);
+                  $(this).removeClass('odd even').addClass(rowclass);
                   ct++;
                 }); // If this is the first item being added, remove
                 // the "No items" message and show the list.
 
-                if ($('table.data').find('tr').has('td').length > 0 && $('#nothing2display').is(':visible')) {
+                if ($(tableId + '.data').find('tr').has('td').length > 0 && $('#nothing2display').is(':visible')) {
                   $('#nothing2display').hide('slow', function () {
-                    $('table.data').show('slow');
+                    $(tableId + '.data').show('slow');
                   });
                 }
 
@@ -492,7 +493,7 @@ RTE.COMMON = {
               var rowclass = '';
               $table.find('tr').has('td').each(function () {
                 rowclass = ct % 2 === 1 ? 'odd' : 'even';
-                $(this).removeClass().addClass(rowclass);
+                $(this).removeClass('odd even').addClass(rowclass);
                 ct++;
               });
             });
@@ -568,7 +569,7 @@ RTE.COMMON = {
                 var rowclass = '';
                 $table.find('tr').has('td').each(function () {
                   rowclass = ct % 2 === 1 ? 'odd' : 'even';
-                  $(this).removeClass().addClass(rowclass);
+                  $(this).removeClass('odd even').addClass(rowclass);
                   ct++;
                 });
               });

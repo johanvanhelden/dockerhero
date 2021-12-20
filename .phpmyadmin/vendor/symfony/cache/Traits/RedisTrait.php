@@ -13,6 +13,7 @@ namespace Symfony\Component\Cache\Traits;
 
 use Predis\Connection\Aggregate\ClusterInterface;
 use Predis\Connection\Aggregate\RedisCluster;
+use Predis\Connection\Aggregate\ReplicationInterface;
 use Predis\Response\Status;
 use Symfony\Component\Cache\Exception\CacheException;
 use Symfony\Component\Cache\Exception\InvalidArgumentException;
@@ -40,6 +41,7 @@ trait RedisTrait
         'redis_sentinel' => null,
         'dbindex' => 0,
         'failover' => 'none',
+        'ssl' => null, // see https://php.net/context.ssl
     ];
     private $redis;
     private $marshaller;
@@ -118,6 +120,9 @@ trait RedisTrait
 
         $query = $hosts = [];
 
+        $tls = 'rediss' === $scheme;
+        $tcpScheme = $tls ? 'tls' : 'tcp';
+
         if (isset($params['query'])) {
             parse_str($params['query'], $query);
 
@@ -130,9 +135,9 @@ trait RedisTrait
                         parse_str($parameters, $parameters);
                     }
                     if (false === $i = strrpos($host, ':')) {
-                        $hosts[$host] = ['scheme' => 'tcp', 'host' => $host, 'port' => 6379] + $parameters;
+                        $hosts[$host] = ['scheme' => $tcpScheme, 'host' => $host, 'port' => 6379] + $parameters;
                     } elseif ($port = (int) substr($host, 1 + $i)) {
-                        $hosts[$host] = ['scheme' => 'tcp', 'host' => substr($host, 0, $i), 'port' => $port] + $parameters;
+                        $hosts[$host] = ['scheme' => $tcpScheme, 'host' => substr($host, 0, $i), 'port' => $port] + $parameters;
                     } else {
                         $hosts[$host] = ['scheme' => 'unix', 'path' => substr($host, 0, $i)] + $parameters;
                     }
@@ -148,7 +153,7 @@ trait RedisTrait
             }
 
             if (isset($params['host'])) {
-                array_unshift($hosts, ['scheme' => 'tcp', 'host' => $params['host'], 'port' => $params['port'] ?? 6379]);
+                array_unshift($hosts, ['scheme' => $tcpScheme, 'host' => $params['host'], 'port' => $params['port'] ?? 6379]);
             } else {
                 array_unshift($hosts, ['scheme' => 'unix', 'path' => $params['path']]);
             }
@@ -174,9 +179,16 @@ trait RedisTrait
             $connect = $params['persistent'] || $params['persistent_id'] ? 'pconnect' : 'connect';
             $redis = new $class();
 
-            $initializer = static function ($redis) use ($connect, $params, $dsn, $auth, $hosts) {
+            $initializer = static function ($redis) use ($connect, $params, $dsn, $auth, $hosts, $tls) {
+                $host = $hosts[0]['host'] ?? $hosts[0]['path'];
+                $port = $hosts[0]['port'] ?? null;
+
+                if (isset($hosts[0]['host']) && $tls) {
+                    $host = 'tls://'.$host;
+                }
+
                 try {
-                    @$redis->{$connect}($hosts[0]['host'] ?? $hosts[0]['path'], $hosts[0]['port'] ?? null, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout']);
+                    @$redis->{$connect}($host, $port, $params['timeout'], (string) $params['persistent_id'], $params['retry_interval'], $params['read_timeout'], ...\defined('Redis::SCAN_PREFIX') ? [['stream' => $params['ssl'] ?? null]] : []);
 
                     set_error_handler(function ($type, $msg) use (&$error) { $error = $msg; });
                     $isConnected = $redis->isConnected();
@@ -210,7 +222,11 @@ trait RedisTrait
             }
         } elseif (is_a($class, \RedisArray::class, true)) {
             foreach ($hosts as $i => $host) {
-                $hosts[$i] = 'tcp' === $host['scheme'] ? $host['host'].':'.$host['port'] : $host['path'];
+                switch ($host['scheme']) {
+                    case 'tcp': $hosts[$i] = $host['host'].':'.$host['port']; break;
+                    case 'tls': $hosts[$i] = 'tls://'.$host['host'].':'.$host['port']; break;
+                    default: $hosts[$i] = $host['path'];
+                }
             }
             $params['lazy_connect'] = $params['lazy'] ?? true;
             $params['connect_timeout'] = $params['timeout'];
@@ -227,11 +243,15 @@ trait RedisTrait
         } elseif (is_a($class, \RedisCluster::class, true)) {
             $initializer = static function () use ($class, $params, $dsn, $hosts) {
                 foreach ($hosts as $i => $host) {
-                    $hosts[$i] = 'tcp' === $host['scheme'] ? $host['host'].':'.$host['port'] : $host['path'];
+                    switch ($host['scheme']) {
+                        case 'tcp': $hosts[$i] = $host['host'].':'.$host['port']; break;
+                        case 'tls': $hosts[$i] = 'tls://'.$host['host'].':'.$host['port']; break;
+                        default: $hosts[$i] = $host['path'];
+                    }
                 }
 
                 try {
-                    $redis = new $class(null, $hosts, $params['timeout'], $params['read_timeout'], (bool) $params['persistent'], $params['auth'] ?? '');
+                    $redis = new $class(null, $hosts, $params['timeout'], $params['read_timeout'], (bool) $params['persistent'], $params['auth'] ?? '', ...\defined('Redis::SCAN_PREFIX') ? [$params['ssl'] ?? null] : []);
                 } catch (\RedisClusterException $e) {
                     throw new InvalidArgumentException(sprintf('Redis connection "%s" failed: ', $dsn).$e->getMessage());
                 }
@@ -280,7 +300,7 @@ trait RedisTrait
             }
             $params['exceptions'] = false;
 
-            $redis = new $class($hosts, array_diff_key($params, self::$defaultConnectionOptions));
+            $redis = new $class($hosts, array_diff_key($params, array_diff_key(self::$defaultConnectionOptions, ['ssl' => null])));
             if (isset($params['redis_sentinel'])) {
                 $redis->getConnection()->setSentinelTimeout($params['timeout']);
             }
@@ -349,7 +369,14 @@ trait RedisTrait
             $evalArgs = [[$namespace], 0];
         }
 
-        foreach ($this->getHosts() as $host) {
+        $hosts = $this->getHosts();
+        $host = reset($hosts);
+        if ($host instanceof \Predis\Client && $host->getConnection() instanceof ReplicationInterface) {
+            // Predis supports info command only on the master in replication environments
+            $hosts = [$host->getClientFor('master')];
+        }
+
+        foreach ($hosts as $host) {
             if (!isset($namespace[0])) {
                 $cleared = $host->flushDb() && $cleared;
                 continue;
@@ -504,8 +531,7 @@ trait RedisTrait
         } elseif ($this->redis instanceof RedisClusterProxy || $this->redis instanceof \RedisCluster) {
             $hosts = [];
             foreach ($this->redis->_masters() as $host) {
-                $hosts[] = $h = new \Redis();
-                $h->connect($host[0], $host[1]);
+                $hosts[] = new RedisClusterNodeProxy($host, $this->redis);
             }
         }
 

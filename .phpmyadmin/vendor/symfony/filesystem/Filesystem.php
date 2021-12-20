@@ -59,7 +59,7 @@ class Filesystem
             }
 
             // Stream context created to allow files overwrite when using FTP stream wrapper - disabled by default
-            if (false === $target = @fopen($targetFile, 'w', null, stream_context_create(['ftp' => ['overwrite' => true]]))) {
+            if (false === $target = @fopen($targetFile, 'w', false, stream_context_create(['ftp' => ['overwrite' => true]]))) {
                 throw new IOException(sprintf('Failed to copy "%s" to "%s" because target file could not be opened for writing.', $originFile, $targetFile), 0, null, $originFile);
             }
 
@@ -416,14 +416,14 @@ class Filesystem
                 return null;
             }
 
-            if ('\\' === \DIRECTORY_SEPARATOR) {
+            if ('\\' === \DIRECTORY_SEPARATOR && \PHP_VERSION_ID < 70410) {
                 $path = readlink($path);
             }
 
             return realpath($path);
         }
 
-        if ('\\' === \DIRECTORY_SEPARATOR) {
+        if ('\\' === \DIRECTORY_SEPARATOR && \PHP_VERSION_ID < 70400) {
             return realpath($path);
         }
 
@@ -746,14 +746,16 @@ class Filesystem
     }
 
     /**
+     * @param mixed ...$args
+     *
      * @return mixed
      */
-    private static function box(callable $func)
+    private static function box(callable $func, ...$args)
     {
         self::$lastError = null;
         set_error_handler(__CLASS__.'::handleError');
         try {
-            $result = $func(...\array_slice(\func_get_args(), 1));
+            $result = $func(...$args);
             restore_error_handler();
 
             return $result;

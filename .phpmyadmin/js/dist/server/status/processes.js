@@ -79,8 +79,6 @@ var processList = {
   /**
    * Handles Auto Refreshing
    *
-   * @param object the event object
-   *
    * @return void
    */
   refresh: function refresh() {
@@ -91,6 +89,8 @@ var processList = {
     processList.abortRefresh(); // if auto refresh is enabled
 
     if (processList.autoRefresh) {
+      // Only fetch the table contents
+      processList.refreshUrl = 'index.php?route=/server/status/processes/refresh';
       var interval = parseInt(processList.refreshInterval, 10) * 1000;
       var urlParams = processList.getUrlParams();
       processList.refreshRequest = $.post(processList.refreshUrl, urlParams, function (data) {

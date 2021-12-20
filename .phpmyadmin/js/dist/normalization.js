@@ -64,7 +64,8 @@ function goTo3NFStep1(newTables) {
     if (data.subText !== '') {
       $('<input>').attr({
         type: 'button',
-        value: Messages.strDone
+        value: Messages.strDone,
+        class: 'btn btn-primary'
       }).on('click', function () {
         processDependencies('', true);
       }).appendTo('.tblFooters');
@@ -90,7 +91,8 @@ function goTo2NFStep1() {
     if (data.subText !== '') {
       $('<input>').attr({
         type: 'submit',
-        value: Messages.strDone
+        value: Messages.strDone,
+        class: 'btn btn-primary'
       }).on('click', function () {
         processDependencies(data.primary_key);
       }).appendTo('.tblFooters');
@@ -548,12 +550,14 @@ AJAX.registerOnload('normalization.js', function () {
         $('<input>').attr({
           type: 'submit',
           id: 'saveSplit',
-          value: Messages.strSave
+          value: Messages.strSave,
+          class: 'btn btn-primary'
         }).appendTo('.tblFooters');
         $('<input>').attr({
           type: 'submit',
           id: 'cancelSplit',
-          value: Messages.strCancel
+          value: Messages.strCancel,
+          class: 'btn btn-secondary'
         }).on('click', function () {
           $('#newCols').html('');
           $(this).parent().html('');
@@ -615,12 +619,14 @@ AJAX.registerOnload('normalization.js', function () {
         $('<input>').attr({
           type: 'submit',
           id: 'saveNewPrimary',
-          value: Messages.strSave
+          value: Messages.strSave,
+          class: 'btn btn-primary'
         }).appendTo('.tblFooters');
         $('<input>').attr({
           type: 'submit',
           id: 'cancelSplit',
-          value: Messages.strCancel
+          value: Messages.strCancel,
+          class: 'btn btn-secondary'
         }).on('click', function () {
           $('#newCols').html('');
           $(this).parent().html('');
@@ -685,14 +691,16 @@ AJAX.registerOnload('normalization.js', function () {
       $('#newCols').html(confirmStr);
       $('<input>').attr({
         type: 'submit',
-        value: Messages.strCancel
+        value: Messages.strCancel,
+        class: 'btn btn-secondary'
       }).on('click', function () {
         $('#newCols').html('');
         $('#extra input[type=checkbox]').prop('checked', false);
       }).appendTo('.tblFooters');
       $('<input>').attr({
         type: 'submit',
-        value: Messages.strGo
+        value: Messages.strGo,
+        class: 'btn btn-primary'
       }).on('click', function () {
         moveRepeatingGroup(repeatingCols);
       }).appendTo('.tblFooters');

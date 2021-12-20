@@ -64,7 +64,7 @@ DatabaseStructure.adjustTotals = function () {
       strRows = strRows.substring(1, strRows.length);
     }
 
-    strRows = strRows.replace(/[,.]/g, '');
+    strRows = strRows.replace(/[,.\s]/g, '');
     var intRow = parseInt(strRows, 10);
 
     if (!isNaN(intRow)) {

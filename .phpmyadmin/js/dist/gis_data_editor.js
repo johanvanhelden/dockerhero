@@ -88,7 +88,7 @@ function loadJSAndGISEditor(value, field, type, inputName) {
   var head = document.getElementsByTagName('head')[0];
   var script; // Loads a set of small JS file needed for the GIS editor
 
-  var smallScripts = ['js/vendor/jquery/jquery.svg.js', 'js/vendor/jquery/jquery.mousewheel.js', 'js/vendor/jquery/jquery.event.drag-2.2.js', 'js/dist/table/gis_visualization.js'];
+  var smallScripts = ['js/vendor/jquery/jquery.svg.js', 'js/vendor/jquery/jquery.mousewheel.js', 'js/dist/table/gis_visualization.js'];
 
   for (var i = 0; i < smallScripts.length; i++) {
     script = document.createElement('script');

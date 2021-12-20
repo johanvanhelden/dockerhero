@@ -1,5 +1,7 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /**
  * Chart type enumerations
  */
@@ -520,9 +522,13 @@ JQPlotTimelineChart.prototype.prepareData = function (dataTable) {
       if (retRow === undefined) {
         retRow = [];
         retData[j - 1] = retRow;
-      }
+      } // See https://github.com/phpmyadmin/phpmyadmin/issues/14395 for the block
 
-      if (d !== null) {
+
+      if (d !== null && _typeof(d) === 'object') {
+        retRow.push([d.getTime(), row[j]]);
+      } else if (typeof d === 'string') {
+        d = new Date(d);
         retRow.push([d.getTime(), row[j]]);
       }
     }

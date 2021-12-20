@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Configuration &#8212; phpMyAdmin 5.1.0 documentation</title>
+    <title>Configuration &#8212; phpMyAdmin 5.1.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="setup.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -2208,7 +2208,7 @@ of servers without logging in.</p>
 </tbody>
 </table>
 <p>Enables check for latest versions using JavaScript on the main phpMyAdmin
-page or by directly accessing <code class="file docutils literal notranslate"><span class="pre">version_check.php</span></code>.</p>
+page or by directly accessing <cite>index.php?route=/version-check</cite>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This setting can be adjusted by your vendor.</p>
@@ -3260,10 +3260,11 @@ the navigation panel.</p>
 </tr>
 </tbody>
 </table>
-<p>Enter <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a> where logo in the navigation panel will point to.
+<p>Enter the <a class="reference internal" href="glossary.html#term-url"><span class="xref std std-term">URL</span></a> where the logo in the navigation panel will point to.
 For use especially with self made theme which changes this.
-For relative/internal URLs, you need to have leading `` ./ `` or trailing characters `` ? `` such as <code class="docutils literal notranslate"><span class="pre">'./sql.php?'</span></code>.
+For relative/internal URLs, you need to have leading `` ./ `` or trailing characters `` ? `` such as <code class="docutils literal notranslate"><span class="pre">'./index.php?route=/server/sql?'</span></code>.
 For external URLs, you should include URL protocol schemes (<code class="docutils literal notranslate"><span class="pre">http</span></code> or <code class="docutils literal notranslate"><span class="pre">https</span></code>) with absolute URLs.</p>
+<p>You may want to make the link open in a new browser tab, for that you need to use <span class="target" id="index-142"></span><a class="reference internal" href="#cfg_NavigationLogoLinkWindow"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['NavigationLogoLinkWindow']</span></code></a></p>
 </dd></dl>
 
 <dl class="option">
@@ -3282,6 +3283,8 @@ For external URLs, you should include URL protocol schemes (<code class="docutil
 <p>Whether to open the linked page in the main window (<code class="docutils literal notranslate"><span class="pre">main</span></code>) or in a
 new one (<code class="docutils literal notranslate"><span class="pre">new</span></code>). Note: use <code class="docutils literal notranslate"><span class="pre">new</span></code> if you are linking to
 <code class="docutils literal notranslate"><span class="pre">phpmyadmin.net</span></code>.</p>
+<p>To open the link in the main window you will need to add the value of <span class="target" id="index-143"></span><a class="reference internal" href="#cfg_NavigationLogoLink"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['NavigationLogoLink']</span></code></a>
+to <span class="target" id="index-144"></span><a class="reference internal" href="#cfg_CSPAllow"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['CSPAllow']</span></code></a> because of the <a class="reference internal" href="glossary.html#term-content-security-policy"><span class="xref std std-term">Content Security Policy</span></a> header.</p>
 </dd></dl>
 
 <dl class="option">
@@ -3556,7 +3559,7 @@ for Berkeley DB tables.</p>
 </table>
 <p>Defines whether to display detailed server information on main page.
 You can additionally hide more information by using
-<span class="target" id="index-142"></span><a class="reference internal" href="#cfg_Servers_verbose"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['verbose']</span></code></a>.</p>
+<span class="target" id="index-145"></span><a class="reference internal" href="#cfg_Servers_verbose"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['verbose']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -4009,7 +4012,7 @@ blank rows.</p>
 </table>
 <p>If there are fewer items than this in the set of foreign keys, then a
 drop-down box of foreign keys is presented, in the style described by
-the <span class="target" id="index-143"></span><a class="reference internal" href="#cfg_ForeignKeyDropdownOrder"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['ForeignKeyDropdownOrder']</span></code></a> setting.</p>
+the <span class="target" id="index-146"></span><a class="reference internal" href="#cfg_ForeignKeyDropdownOrder"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['ForeignKeyDropdownOrder']</span></code></a> setting.</p>
 </dd></dl>
 
 <dl class="option">
@@ -4412,7 +4415,7 @@ are the localized equivalent of:</p>
 </tbody>
 </table>
 <p>Default page size to use when creating PDF pages. Valid values are any
-listed in <span class="target" id="index-144"></span><a class="reference internal" href="#cfg_PDFPageSizes"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['PDFPageSizes']</span></code></a>.</p>
+listed in <span class="target" id="index-147"></span><a class="reference internal" href="#cfg_PDFPageSizes"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['PDFPageSizes']</span></code></a>.</p>
 </dd></dl>
 
 </div>
@@ -4515,7 +4518,7 @@ recode)</li>
 <p>Enabled charset conversion activates a pull-down menu in the Export
 and Import pages, to choose the character set when exporting a file.
 The default value in this menu comes from
-<span class="target" id="index-145"></span><a class="reference internal" href="#cfg_Export_charset"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Export']['charset']</span></code></a> and <span class="target" id="index-146"></span><a class="reference internal" href="#cfg_Import_charset"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Import']['charset']</span></code></a>.</p>
+<span class="target" id="index-148"></span><a class="reference internal" href="#cfg_Export_charset"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Export']['charset']</span></code></a> and <span class="target" id="index-149"></span><a class="reference internal" href="#cfg_Import_charset"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Import']['charset']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -4595,7 +4598,7 @@ buffering.</p>
 </tbody>
 </table>
 <p>Lists proxies and HTTP headers which are trusted for
-<span class="target" id="index-147"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_order"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['order']</span></code></a>. This list is by
+<span class="target" id="index-150"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_order"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['order']</span></code></a>. This list is by
 default empty, you need to fill in some trusted proxy servers if you
 want to use rules for IP addresses behind proxy.</p>
 <p>The following example specifies that phpMyAdmin should trust a
@@ -4604,7 +4607,7 @@ HTTP_X_FORWARDED_FOR (<code class="docutils literal notranslate"><span class="pr
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;TrustedProxies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;1.2.3.4&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;HTTP_X_FORWARDED_FOR&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>The <span class="target" id="index-148"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> directive uses the
+<p>The <span class="target" id="index-151"></span><a class="reference internal" href="#cfg_Servers_AllowDeny_rules"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['AllowDeny']['rules']</span></code></a> directive uses the
 client’s IP address as usual.</p>
 </dd></dl>
 
@@ -4685,7 +4688,7 @@ servers (<a class="reference internal" href="glossary.html#term-iis"><span class
 Security Policy header.</p>
 <p>This can be useful when you want to include some external JavaScript files
 in <code class="file docutils literal notranslate"><span class="pre">config.footer.inc.php</span></code> or <code class="file docutils literal notranslate"><span class="pre">config.header.inc.php</span></code>, which
-would be normally not allowed by Content Security Policy.</p>
+would be normally not allowed by <a class="reference internal" href="glossary.html#term-content-security-policy"><span class="xref std std-term">Content Security Policy</span></a>.</p>
 <p>To allow some sites, just list them within the string:</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;CSPAllow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;example.com example.net&#39;</span><span class="p">;</span>
 </pre></div>
@@ -5041,7 +5044,7 @@ emphasized (*2) for <a class="reference internal" href="glossary.html#term-sql">
 textareas and (*1.25) for <a class="reference internal" href="glossary.html#term-sql"><span class="xref std std-term">SQL</span></a>
 textareas inside the query window.</p>
 <p>The Char* values are used for CHAR
-and VARCHAR editing (if configured via <span class="target" id="index-149"></span><a class="reference internal" href="#cfg_CharEditing"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['CharEditing']</span></code></a>).</p>
+and VARCHAR editing (if configured via <span class="target" id="index-152"></span><a class="reference internal" href="#cfg_CharEditing"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['CharEditing']</span></code></a>).</p>
 </dd></dl>
 
 <dl class="option">
@@ -5334,9 +5337,9 @@ to setup this directory and how to make its usage secure.</p>
 </tr>
 </tbody>
 </table>
-<p>If <span class="target" id="index-150"></span><a class="reference internal" href="#cfg_QueryHistoryDB"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['QueryHistoryDB']</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, all your
+<p>If <span class="target" id="index-153"></span><a class="reference internal" href="#cfg_QueryHistoryDB"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['QueryHistoryDB']</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, all your
 Queries are logged to a table, which has to be created by you (see
-<span class="target" id="index-151"></span><a class="reference internal" href="#cfg_Servers_history"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['history']</span></code></a>). If set to false, all your
+<span class="target" id="index-154"></span><a class="reference internal" href="#cfg_Servers_history"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['history']</span></code></a>). If set to false, all your
 queries will be appended to the form, but only as long as your window is
 opened they remain saved.</p>
 <p>When using the JavaScript based query window, it will always get updated
@@ -5350,9 +5353,9 @@ you first have to look in. The checkbox will get automatically checked
 whenever you change the contents of the textarea. Please uncheck the button
 whenever you definitely want the query window to get updated even though
 you have made alterations.</p>
-<p>If <span class="target" id="index-152"></span><a class="reference internal" href="#cfg_QueryHistoryDB"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['QueryHistoryDB']</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> you can
+<p>If <span class="target" id="index-155"></span><a class="reference internal" href="#cfg_QueryHistoryDB"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['QueryHistoryDB']</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code> you can
 specify the amount of saved history items using
-<span class="target" id="index-153"></span><a class="reference internal" href="#cfg_QueryHistoryMax"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['QueryHistoryMax']</span></code></a>.</p>
+<span class="target" id="index-156"></span><a class="reference internal" href="#cfg_QueryHistoryMax"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['QueryHistoryMax']</span></code></a>.</p>
 </dd></dl>
 
 <dl class="option">
@@ -6027,7 +6030,7 @@ displayed in the console’s Debug SQL tab.</p>
 </tbody>
 </table>
 <p>Enable logging of queries and execution times to the syslog.
-Requires <span class="target" id="index-154"></span><a class="reference internal" href="#cfg_DBG_sql"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['DBG']['sql']</span></code></a> to be enabled.</p>
+Requires <span class="target" id="index-157"></span><a class="reference internal" href="#cfg_DBG_sql"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['DBG']['sql']</span></code></a> to be enabled.</p>
 </dd></dl>
 
 <dl class="option">
@@ -6274,7 +6277,7 @@ only for local address.</p>
 </div>
 <div class="section" id="example-for-using-multiple-mysql-servers">
 <h3>Example for using multiple MySQL servers<a class="headerlink" href="#example-for-using-multiple-mysql-servers" title="Permalink to this headline">¶</a></h3>
-<p>You can configure any number of servers using <span class="target" id="index-155"></span><a class="reference internal" href="#cfg_Servers"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers']</span></code></a>,
+<p>You can configure any number of servers using <span class="target" id="index-158"></span><a class="reference internal" href="#cfg_Servers"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers']</span></code></a>,
 following example shows two of them:</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
 <span class="nv">$cfg</span><span class="p">[</span><span class="s1">&#39;blowfish_secret&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;multiServerExample70518&#39;</span><span class="p">;</span>
@@ -6335,11 +6338,11 @@ server certificates and tell phpMyAdmin to use them:</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="setup.html#ssl"><span class="std std-ref">Using SSL for connection to database server</span></a>,
-<span class="target" id="index-156"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
-<span class="target" id="index-157"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
-<span class="target" id="index-158"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
-<span class="target" id="index-159"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
-<span class="target" id="index-160"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a>,
+<span class="target" id="index-159"></span><a class="reference internal" href="#cfg_Servers_ssl"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl']</span></code></a>,
+<span class="target" id="index-160"></span><a class="reference internal" href="#cfg_Servers_ssl_key"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl_key']</span></code></a>,
+<span class="target" id="index-161"></span><a class="reference internal" href="#cfg_Servers_ssl_cert"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl_cert']</span></code></a>,
+<span class="target" id="index-162"></span><a class="reference internal" href="#cfg_Servers_ssl_ca"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl_ca']</span></code></a>,
+<span class="target" id="index-163"></span><a class="reference internal" href="#cfg_Servers_ssl_verify"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['ssl_verify']</span></code></a>,
 &lt;<a class="reference external" href="https://bugs.php.net/bug.php?id=72048">https://bugs.php.net/bug.php?id=72048</a>&gt;</p>
 </div>
 </div>
@@ -6458,7 +6461,7 @@ server certificates and tell phpMyAdmin to use them:</p>
         <li class="right" >
           <a href="setup.html" title="Installation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 5.1.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
