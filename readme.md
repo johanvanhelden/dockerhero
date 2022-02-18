@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 3.2.1 (unreleased)
+## Version 3.3.0
 
 ### What is Dockerhero?
 

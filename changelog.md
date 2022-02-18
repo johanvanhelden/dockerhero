@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## 3.2.1 - 2021-12-20 [Unreleased]
+## 3.3.0 - 2022-02-18 [Unreleased]
 
+- [Workspace] Make Node 16 the new default version
+- [Workspace] Remove Node 10
+- [Workspace] Add Node 16 and 17
+- [Workspace] Add pcov extension
 - Fix docker-compose v3 issues
 - Update PHPMyAdmin to 5.1.1 for PHP 8.1 compatibility
 
