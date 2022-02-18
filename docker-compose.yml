@@ -34,7 +34,7 @@ services:
     volumes:
       - ../:/var/www/projects
       - ./.phpmyadmin/index.php:/var/www/phpmyadmin/index.php
-      - ./.phpredisadmin:/var/www/phpredisadmin
+      - ./.phpredisadmin/index.php:/var/www/phpredisadmin/index.php
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "9912:9912"
@@ -53,7 +53,7 @@ services:
     volumes:
       - ../:/var/www/projects
       - ./.phpmyadmin/index.php:/var/www/phpmyadmin/index.php
-      - ./.phpredisadmin:/var/www/phpredisadmin
+      - ./.phpredisadmin/index.php:/var/www/phpredisadmin/index.php
       - ./nginx/conf:/etc/nginx/conf.d/dockerhero/custom
       - nginx_logs:/var/log/nginx
       - /etc/localtime:/etc/localtime:ro
@@ -140,10 +140,27 @@ services:
       dockerhero:
         ipv4_address: 172.25.0.16
 
+  phpredisadmin:
+    container_name: dockerhero_redisadmin
+    image: erikdubbelboer/phpredisadmin
+    depends_on:
+      - redis
+    links:
+      - redis
+    restart: always
+    environment:
+      - REDIS_1_HOST=dockerhero_redis
+      - REDIS_1_PORT=6379
+    ports:
+      - 8027:80
+    networks:
+      dockerhero:
+        ipv4_address: 172.25.0.17
+
 networks:
   dockerhero:
     driver: bridge
     ipam:
       driver: default
       config:
-        - subnet: 172.25.0.0/16
+        - subnet: 172.25.0.0/17

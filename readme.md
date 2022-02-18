@@ -237,7 +237,7 @@ mySQL host: dockerhero_db
 mySQL port: 3306
 ```
 
-You can visit phpMyAdmin GUI by going to `http://localhost:8026/`
+You can visit phpMyAdmin by going to `http://localhost:8026/`
 
 If you want to import databases from the file system, place them in `./databases/upload`.
 
@@ -298,7 +298,7 @@ Redis host: dockerhero_redis
 Redis port: 6379
 ```
 
-You can visit phpRedisAdmin by going to `https://phpredisadmin.localtest.me`
+You can visit phpRedisAdmin by going to `http://localhost:8027`
 
 #### Using Redis with Laravel
 

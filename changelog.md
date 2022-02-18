@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## 3.3.0 - 2022-02-18 [Unreleased]
 
 - Switched to docker-based PHPMyAdmin
+- Switched to docker-based PHPRedisAdmin
 - [Workspace] Make Node 16 the new default version
 - [Workspace] Remove Node 10
 - [Workspace] Add Node 16 and 17
