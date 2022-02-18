@@ -33,8 +33,7 @@ services:
       - workspace
     volumes:
       - ../:/var/www/projects
-      - ./databases:/var/www/databases
-      - ./.phpmyadmin:/var/www/phpmyadmin
+      - ./.phpmyadmin/index.php:/var/www/phpmyadmin/index.php
       - ./.phpredisadmin:/var/www/phpredisadmin
       - /etc/localtime:/etc/localtime:ro
     ports:
@@ -53,8 +52,7 @@ services:
       - php
     volumes:
       - ../:/var/www/projects
-      - ./databases:/var/www/databases
-      - ./.phpmyadmin:/var/www/phpmyadmin
+      - ./.phpmyadmin/index.php:/var/www/phpmyadmin/index.php
       - ./.phpredisadmin:/var/www/phpredisadmin
       - ./nginx/conf:/etc/nginx/conf.d/dockerhero/custom
       - nginx_logs:/var/log/nginx
@@ -78,9 +76,10 @@ services:
       - /etc/localtime:/etc/localtime:ro
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: dockerhero
-      MYSQL_PASSWORD: dockerhero
-      MYSQL_DATABASE: dockerhero
+      - MYSQL_ROOT_PASSWORD=dockerhero
+      - MYSQL_PASSWORD=dockerhero
+      - MYSQL_DATABASE=dockerhero
+      - MYSQL_TCP_PORT=3306
     ports:
       - "3306:3306"
     networks:
@@ -112,6 +111,34 @@ services:
         ipv4_address: 172.25.0.15
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
+
+  phpmyadmin:
+    container_name: dockerhero_dbadmin
+    image: phpmyadmin
+    depends_on:
+      - db
+    links:
+      - db
+    restart: always
+    volumes:
+      - ./.phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+      - ./databases:/var/www/html/tmp/dockerhero_databases
+    environment:
+      - PMA_HOST=dockerhero_db
+      - PMA_ROOT_PASSWORD=dockerhero
+      - PMA_USER=root
+      - PMA_PASSWORD=dockerhero
+      - MYSQL_ROOT_PASSWORD=dockerhero
+      - MYSQL_PASSWORD=dockerhero
+      - MYSQL_DATABASE=dockerhero
+      - MAX_EXECUTION_TIME=600
+      - MEMORY_LIMIT=256M
+      - UPLOAD_LIMIT=2G
+    ports:
+      - 8026:80
+    networks:
+      dockerhero:
+        ipv4_address: 172.25.0.16
 
 networks:
   dockerhero:

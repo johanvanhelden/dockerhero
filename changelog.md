@@ -6,12 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## 3.3.0 - 2022-02-18 [Unreleased]
 
+- Switched to docker-based PHPMyAdmin
 - [Workspace] Make Node 16 the new default version
 - [Workspace] Remove Node 10
 - [Workspace] Add Node 16 and 17
 - [Workspace] Add pcov extension
 - Fix docker-compose v3 issues
-- Update PHPMyAdmin to 5.1.1 for PHP 8.1 compatibility
 
 ## 3.2.0 - 2021-12-03
 
