@@ -28,7 +28,7 @@ Dockerhero includes the following useful tools:
 - Mailhog
 - Composer
 - Xdebug (with remote debugging support)
-- NVM (pre-installed with node 10, 12 and 14 and the default version is 14)
+- NVM
 - NPM
 - Yarn
 - Vue-cli
