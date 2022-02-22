@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 3.3.0
+## Version 3.3.1
 
 ### What is Dockerhero?
 
@@ -78,7 +78,8 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
         1. [Starting Xdebug](#starting-xdebug)
         2. [Configuring the IDE](#configuring-the-ide)
 14. [Known issues](#known-issues)
-    1. [MacOS](#macos)
+    1. [General](#general)
+    2. [MacOS](#macos)
 15. [Contributing](#contributing)
     1. [Testing changes](#testing-changes)
 16. [Thank you](#thank-you)
@@ -520,6 +521,10 @@ This is a working config for VSCode for a Laravel project (but has also been tes
 ```
 
 ## Known issues
+
+### General
+There might be an error when you run `./scripts/xdebug/stop.sh`, and Xdebug will still be enabled in the workspace container.
+Please run the command again and Xdebug will be stopped.
 
 ### MacOS
 On MacOS there is an issue with linking the timezone. I do now own a Mac myself, so I am unable to produce a proper solution, but for now, I suggest you timezone links from the `volumes:` section for each container (`workspace`, `php`, `web`, `db`) that links the time-zones. If you are someone who owns a Mac, please let me know how I can properly address this, if you can.

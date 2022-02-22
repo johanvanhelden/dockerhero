@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - [Workspace] Add pcov extension
 - Fix docker-compose v3 issues
 
+## 3.3.1 - 2022-02-22
+
+- [Workspace:PHP8.0] Ensure PHP 8.0 is actually used
+- [PHP8.0] Migrate Xdebug config to 3.0
+- [PHP8.1] Migrate Xdebug config to 3.0
+
 ## 3.2.0 - 2021-12-03
 
 - Add PHP 8.1
