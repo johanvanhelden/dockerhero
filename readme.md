@@ -18,6 +18,8 @@ Dockerhero includes the following software (containers):
 - Redis (latest)
 - PHP (8.1-fpm by default, [or choose a different version](#picking-a-php-version))
 - Mailhog
+- phpMyAdmin
+- phpRedisAdmin
 - and more to come!
 
 Dockerhero includes the following useful tools:
