@@ -1,19 +1,19 @@
 # Dockerhero
 
-## Version 3.3.1
+## Version 3.3.2
 
 ### What is Dockerhero?
 
 Dockerhero is a local development tool. Out of the box, it should only take a "docker-compose start" to get **all your local PHP projects working**. Yes, all of them. **At the same time**.
 
 It has support for Laravel, Codeigniter, Wordpress and other PHP projects.
-It has dynamic docroot support for both `public` and `public_html`, depending on what folder is found in your project. **Zero setup needed!**
+It has dynamic docroot support for `public`, `public_html` and `html`, depending on what folder is found in your project. **Zero setup needed!**
 
-The goal is also to make it customizable. You can easily add your own nginx configurations, cronjobs and via phpMyAdmin you can create your own databases.
+The goal is also to make it customizable. You can easily add your own NGINX configurations, cronjobs and via phpMyAdmin you can create your own databases.
 
 Dockerhero includes the following software (containers):
 
-- nginx (latest)
+- NGINX (latest)
 - mySQL (5.7)
 - Redis (latest)
 - PHP (8.1-fpm by default, [or choose a different version](#picking-a-php-version))
@@ -63,7 +63,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
     2. [Redis](#redis)
         1. [Using Redis with Laravel](#using-redis-with-laravel)
 5. [CLI Access](#cli-access)
-6. [Custom nginx configs](#custom-nginx-configs)
+6. [Custom NGINX configs](#custom-nginx-configs)
 7. [Cronjobs](#cronjobs)
 8. [Mailhog](#mailhog)
 9. [Overriding default settings](#overriding-default-settings)
@@ -96,7 +96,7 @@ Follow the instructions on the docker website to install [docker](https://docs.d
 
 Next, it is essential to make sure Dockerhero is inside the folder containing all the projects you wish to use with Dockerhero. So if you want `https://mysuperproject.localtest.me` to be accessible, place and run Dockerhero inside the same folder `mysuperproject` is located. For example, if the path to `mysuperproject` is: `/home/john/webdev/mysuperproject` - Dockerhero needs to be located in `/home/john/webdev/dockerhero`.
 
-This is because dockhero mounts its parent folder (`./../`) as `/var/www/projects/`, which is the location nginx will look for when it receives a request on `http://*.localtest.me`
+This is because dockhero mounts its parent folder (`./../`) as `/var/www/projects/`, which is the location NGINX will look for when it receives a request on `http://*.localtest.me`
 
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
@@ -354,7 +354,7 @@ sshDockerhero() {
 
 Now, in a new terminal, you can simply execute `sshDockerhero` and you will be inside the container.
 
-## Custom nginx configs
+## Custom NGINX configs
 
 You can place your own `*.conf` files into the `nginx/conf` folder. They will be automatically included once the container starts.
 
@@ -420,7 +420,7 @@ extra_hosts:
 
 Where 172.25.0.12 is the IP of the dockerhero_web container.
 
-Now, if PHP attempts to connect to projectname.localtest.me, it will not connect to his localhost, but to the nginx container.
+Now, if PHP attempts to connect to projectname.localtest.me, it will not connect to his localhost, but to the NGINX container.
 
 ## Making a local website publicly available
 
@@ -564,7 +564,7 @@ Don't forget to stop and start Dockerhero again after reverting the `docker-comp
 
 - [Dockerhero - GitHub](https://github.com/johanvanhelden/dockerhero)
 - [Dockerhero - Workspace GitHub](https://github.com/johanvanhelden/dockerhero-workspace)
-- [Dockerhero - Nginx GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
+- [Dockerhero - NGINX GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
 - [Dockerhero - PHP 8.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.1-fpm)
 - [Dockerhero - PHP 8.0-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.0-fpm)
 - [Dockerhero - PHP 7.4-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.4-fpm)

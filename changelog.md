@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.3.2 - 2022-02-26
+
+- [NGINX] Add support for `html` root folder - @Strongleong
+
+## 3.3.1 - 2022-02-22
+
+- [Workspace:PHP8.0] Ensure PHP 8.0 is actually used
+- [PHP8.0] Migrate Xdebug config to 3.0
+- [PHP8.1] Migrate Xdebug config to 3.0
+
 ## 3.3.0 - 2022-02-18
 
 - Switched to docker-based PHPMyAdmin
@@ -13,12 +23,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - [Workspace] Add Node 16 and 17
 - [Workspace] Add pcov extension
 - Fix docker-compose v3 issues
-
-## 3.3.1 - 2022-02-22
-
-- [Workspace:PHP8.0] Ensure PHP 8.0 is actually used
-- [PHP8.0] Migrate Xdebug config to 3.0
-- [PHP8.1] Migrate Xdebug config to 3.0
 
 ## 3.2.0 - 2021-12-03
 
