@@ -86,7 +86,7 @@ services:
       dockerhero:
         ipv4_address: 172.25.0.13
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping"]
+      test: ["CMD", "mysqladmin", "-pdockerhero", "ping"]
 
   mail:
     container_name: dockerhero_mail
