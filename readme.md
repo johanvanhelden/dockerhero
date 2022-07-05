@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 3.3.3
+## Version 3.3.4
 
 ### What is Dockerhero?
 
@@ -20,6 +20,7 @@ Dockerhero includes the following software (containers):
 - Mailhog
 - phpMyAdmin
 - phpRedisAdmin
+- MinIO S3 object storage
 - and more to come!
 
 Dockerhero includes the following useful tools:
@@ -68,25 +69,26 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 6. [Custom NGINX configs](#custom-nginx-configs)
 7. [Cronjobs](#cronjobs)
 8. [Mailhog](#mailhog)
-9. [Overriding default settings](#overriding-default-settings)
+9. [MinIO](#minio)
+10. [Overriding default settings](#overriding-default-settings)
     1. [Adding more services](#adding-more-services)
-10. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
-11. [Making a local website publicly available](#making-a-local-website-publicly-available)
-12. [Connecting to a docker container from your host](#connecting-to-a-docker-container-from-your-host)
-13. [Miscellaneous](#miscellaneous)
+11. [Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)
+12. [Making a local website publicly available](#making-a-local-website-publicly-available)
+13. [Connecting to a docker container from your host](#connecting-to-a-docker-container-from-your-host)
+14. [Miscellaneous](#miscellaneous)
     1. [Laravel Dusk](#laravel-dusk)
     2. [laravel-dump-server](#laravel-dump-server)
     3. [Remote Xdebug](#remote-xdebug)
         1. [Starting Xdebug](#starting-xdebug)
         2. [Configuring the IDE](#configuring-the-ide)
-14. [Known issues](#known-issues)
+15. [Known issues](#known-issues)
     1. [General](#general)
     2. [MacOS](#macos)
-15. [Contributing](#contributing)
+16. [Contributing](#contributing)
     1. [Testing changes](#testing-changes)
-16. [Thank you](#thank-you)
-17. [Project links](#project-links)
-18. [Todo](#todo)
+17. [Thank you](#thank-you)
+18. [Project links](#project-links)
+19. [Todo](#todo)
 
 ## Installation
 
@@ -378,6 +380,24 @@ MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
 ```
+
+## MinIO
+
+To view, manage and configure the S3 storage buckets, visit the [MinIO GUI](http://localhost:9001)
+
+In order to make it work, you can set the .env settings like so:
+
+```
+AWS_ACCESS_KEY_ID=root
+AWS_SECRET_ACCESS_KEY=dockerhero
+AWS_DEFAULT_REGION=eu-west-1
+AWS_BUCKET=YOUR_BUCKET_NAME
+AWS_URL=http://minio:9000
+AWS_ENDPOINT=http://minio:9000
+AWS_USE_PATH_STYLE_ENDPOINT=true
+```
+
+Replace `YOUR_BUCKET_NAME` with the actual name of the bucket you have created in the GUI.
 
 ## Overriding default settings
 You can create a brand new `docker-compose.override.yml` in the root of Dockerhero to override default settings or customize things.

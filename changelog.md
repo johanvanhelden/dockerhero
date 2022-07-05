@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.3.4 - 2022-07-05
+
+- [General] Add MinIO container for S3 object storage
+
 ## 3.3.3 - 2022-03-21
 
 - [General] Fix authentication for MySQL health check - @janpaqt
