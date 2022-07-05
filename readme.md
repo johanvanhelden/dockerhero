@@ -383,7 +383,9 @@ MAIL_ENCRYPTION=null
 
 ## MinIO
 
-To view, manage and configure the S3 storage buckets, visit the [MinIO GUI](http://localhost:9001)
+To view, manage and configure the S3 storage buckets, visit the [MinIO GUI](http://localhost:9001).
+
+You can use username `root` and password `dockerhero`.
 
 In order to make it work, you can set the .env settings like so:
 
