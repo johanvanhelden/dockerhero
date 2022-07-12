@@ -166,7 +166,7 @@ This part is however entirely optional, and you do not have to do this. You can 
 ### WSL2
 
 Dockerhero works great with WSL2 but requires one additional setup step if you want to execute, for example, artisan commands or PHPUnit tests from outside Dockerhero.
-Simply add the following block to the Windows hosts file (`C:\Windows\System32\drivers\etc\hosts`):
+Simply add the following block at the top of the Windows hosts file (`C:\Windows\System32\drivers\etc\hosts`):
 
 ```
 ## DOCKERHERO HOSTS BLOCK START ##
@@ -176,7 +176,10 @@ Simply add the following block to the Windows hosts file (`C:\Windows\System32\d
 0.0.0.0 dockerhero_redis
 0.0.0.0 dockerhero_db
 0.0.0.0 dockerhero_mail
+0.0.0.0 dockerhero_minio
 ## DOCKERHERO HOSTS BLOCK END ##
+
+And (after making sure any Docker instance is closed) restart WSL2 using the Windows command prompt: `$ wsl --shutdown`.
 ```
 
 ## Updating
@@ -475,6 +478,7 @@ If you want to connect to a docker container from your host, for example to conn
 172.25.0.10 dockerhero_workspace
 172.25.0.15 dockerhero_redis
 172.25.0.14 dockerhero_mail
+172.25.0.18 dockerhero_minio
 ```
 
 Now, on your host, `dockerhero_db` should also point to the database container.
