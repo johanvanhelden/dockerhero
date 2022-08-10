@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 3.3.5 - 2022-08-10
+
+- [PHP7.4] Add `wkhtmltopdf`
+- [PHP8.0] Add `wkhtmltopdf`
+- [PHP8.1] Add `wkhtmltopdf`
+- [Workspace] Add `wkhtmltopdf`
+
 ## 3.3.4 - 2022-07-05
 
 - [General] Add MinIO container for S3 object storage

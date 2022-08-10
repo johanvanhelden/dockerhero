@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 3.3.4
+## Version 3.3.5
 
 ### What is Dockerhero?
 
@@ -38,6 +38,7 @@ Dockerhero includes the following useful tools:
 - Laravel Artisan autocompletion
 - Laravel Dusk support
 - laravel-dump-server support
+- Wkhtmltopdf
 - and more to come!
 
 Localtest.me is used to make everything work without editing your hosts file! Just like magic!
