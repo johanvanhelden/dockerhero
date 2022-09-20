@@ -556,7 +556,7 @@ There might be an error when you run `./scripts/xdebug/stop.sh`, and Xdebug will
 Please run the command again and Xdebug will be stopped.
 
 ### MacOS
-On MacOS there is an issue with linking the timezone. I do now own a Mac myself, so I am unable to produce a proper solution, but for now, I suggest you timezone links from the `volumes:` section for each container (`workspace`, `php`, `web`, `db`) that links the time-zones. If you are someone who owns a Mac, please let me know how I can properly address this, if you can.
+On MacOS there is an issue with linking the timezone. I do now own a Mac myself, so I am unable to produce a proper solution, but for now, I suggest you remove the timezone links from the `volumes:` section for each container (`workspace`, `php`, `web`, `db`) that links the time-zones. If you are someone who owns a Mac, please let me know how I can properly address this, if you can.
 
 ## Contributing
 
