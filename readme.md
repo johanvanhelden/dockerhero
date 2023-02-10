@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 3.3.5
+## Version 3.4.0
 
 ### What is Dockerhero?
 
@@ -16,7 +16,7 @@ Dockerhero includes the following software (containers):
 - NGINX (latest)
 - mySQL (5.7)
 - Redis (latest)
-- PHP (8.1-fpm by default, [or choose a different version](#picking-a-php-version))
+- PHP (8.2-fpm by default, [or choose a different version](#picking-a-php-version))
 - Mailhog
 - phpMyAdmin
 - phpRedisAdmin
@@ -106,7 +106,7 @@ This is because dockhero mounts its parent folder (`./../`) as `/var/www/project
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
 ### Picking a PHP version
-By default, PHP 8.1 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change the image.
+By default, PHP 8.2 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change the image.
 For example, if you want to use PHP 8.0, it might look like this:
 
 ```yml
@@ -123,11 +123,13 @@ For more information, please see this section: [Overriding default settings](#ov
 
 #### Available PHP Images:
 
+PHP 8.2: `johanvanhelden/dockerhero-php-8.2-fpm:latest`
+
 PHP 8.1: `johanvanhelden/dockerhero-php-8.1-fpm:latest`
 
 PHP 8.0: `johanvanhelden/dockerhero-php-8.0-fpm:latest`
 
-PHP 7.4: `johanvanhelden/dockerhero-php-7.4-fpm:latest`
+PHP 7.4: `johanvanhelden/dockerhero-php-7.4-fpm:latest` (No longer maintained)
 
 PHP 7.3: `johanvanhelden/dockerhero-php-7.3-fpm:latest` (No longer maintained)
 
@@ -142,11 +144,13 @@ PHP 5.4: `johanvanhelden/dockerhero-php-5.4-fpm:latest` (No longer maintained)
 #### Workspace images
 You should pick a matching workspace image for the PHP version you are using.
 
+PHP 8.2: `johanvanhelden/dockerhero-workspace:php8.2`
+
 PHP 8.1: `johanvanhelden/dockerhero-workspace:php8.1`
 
 PHP 8.0: `johanvanhelden/dockerhero-workspace:php8.0`
 
-PHP 7.4: `johanvanhelden/dockerhero-workspace:php7.4`
+PHP 7.4: `johanvanhelden/dockerhero-workspace:php7.4` (No longer maintained)
 
 PHP 7.3: `johanvanhelden/dockerhero-workspace:php7.3` (No longer maintained)
 
@@ -594,6 +598,7 @@ Don't forget to stop and start Dockerhero again after reverting the `docker-comp
 - [Dockerhero - GitHub](https://github.com/johanvanhelden/dockerhero)
 - [Dockerhero - Workspace GitHub](https://github.com/johanvanhelden/dockerhero-workspace)
 - [Dockerhero - NGINX GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
+- [Dockerhero - PHP 8.2-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.2-fpm)
 - [Dockerhero - PHP 8.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.1-fpm)
 - [Dockerhero - PHP 8.0-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.0-fpm)
 - [Dockerhero - PHP 7.4-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.4-fpm)
