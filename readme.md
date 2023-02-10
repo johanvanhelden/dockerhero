@@ -34,7 +34,6 @@ Dockerhero includes the following useful tools:
 - NVM
 - NPM
 - Yarn
-- Vue-cli
 - Laravel Artisan autocompletion
 - Laravel Dusk support
 - laravel-dump-server support
