@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Add PHP 8.2
 - Make PHP 8.2 the default version
+- [PHP8.1] Properly shutdown the container - @janpaqt
+- [PHP8.0] Properly shutdown the container
 
 ## 3.3.5 - 2022-08-10
 
