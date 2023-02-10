@@ -11,7 +11,7 @@ volumes:
 services:
   workspace:
     container_name: dockerhero_workspace
-    image: johanvanhelden/dockerhero-workspace:php8.1
+    image: johanvanhelden/dockerhero-workspace:php8.2
     volumes:
       - ./../:/var/www/projects
       - ./crons:/var/crons
@@ -24,7 +24,7 @@ services:
 
   php:
     container_name: dockerhero_php
-    image: johanvanhelden/dockerhero-php-8.1-fpm:latest
+    image: johanvanhelden/dockerhero-php-8.2-fpm:latest
     links:
       - db
       - workspace
