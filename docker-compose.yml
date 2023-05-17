@@ -12,6 +12,7 @@ services:
   workspace:
     container_name: dockerhero_workspace
     image: johanvanhelden/dockerhero-workspace:php8.2
+    restart: unless-stopped
     volumes:
       - ./../:/var/www/projects
       - ./crons:/var/crons
@@ -25,6 +26,7 @@ services:
   php:
     container_name: dockerhero_php
     image: johanvanhelden/dockerhero-php-8.2-fpm:latest
+    restart: unless-stopped
     links:
       - db
       - workspace
@@ -49,6 +51,7 @@ services:
   web:
     container_name: dockerhero_web
     image: johanvanhelden/dockerhero-nginx:latest
+    restart: unless-stopped
     links:
       - php
     volumes:
@@ -71,11 +74,11 @@ services:
   db:
     container_name: dockerhero_db
     image: mysql:5.7
+    restart: unless-stopped
     command: --sql_mode="NO_ENGINE_SUBSTITUTION"
     volumes:
       - "database:/var/lib/mysql"
       - /etc/localtime:/etc/localtime:ro
-    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=dockerhero
       - MYSQL_PASSWORD=dockerhero
@@ -87,11 +90,12 @@ services:
       dockerhero:
         ipv4_address: 172.25.0.13
     healthcheck:
-      test: ["CMD", "mysqladmin", "-pdockerhero", "ping"]
+      test: [ "CMD", "mysqladmin", "-pdockerhero", "ping" ]
 
   mail:
     container_name: dockerhero_mail
     image: mailhog/mailhog
+    restart: unless-stopped
     ports:
       - "1025:1025"
       - "8025:8025"
@@ -102,6 +106,7 @@ services:
   redis:
     container_name: dockerhero_redis
     image: redis:latest
+    restart: unless-stopped
     volumes:
       - redis:/data
     ports:
@@ -111,16 +116,16 @@ services:
       dockerhero:
         ipv4_address: 172.25.0.15
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
 
   phpmyadmin:
     container_name: dockerhero_dbadmin
     image: phpmyadmin
+    restart: unless-stopped
     depends_on:
       - db
     links:
       - db
-    restart: always
     volumes:
       - ./.phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
       - ./databases:/var/www/html/tmp/dockerhero_databases
@@ -144,11 +149,11 @@ services:
   phpredisadmin:
     container_name: dockerhero_redisadmin
     image: erikdubbelboer/phpredisadmin
+    restart: unless-stopped
     depends_on:
       - redis
     links:
       - redis
-    restart: always
     environment:
       - REDIS_1_HOST=dockerhero_redis
       - REDIS_1_PORT=6379
@@ -160,11 +165,12 @@ services:
 
   minio:
     container_name: dockerhero_minio
+    image: minio/minio:latest
+    restart: unless-stopped
     command: server /data --console-address ":9001"
     environment:
       - MINIO_ROOT_USER=root
       - MINIO_ROOT_PASSWORD=dockerhero
-    image: minio/minio:latest
     ports:
       - '9001:9001'
       - '9000:9000'
@@ -173,7 +179,6 @@ services:
         ipv4_address: 172.25.0.18
     volumes:
       - ./minio:/data
-    restart: unless-stopped
 
 networks:
   dockerhero:
