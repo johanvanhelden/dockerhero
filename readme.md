@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 3.4.0
+## Version 4.0.0
 
 ### What is Dockerhero?
 
@@ -13,32 +13,32 @@ The goal is also to make it customizable. You can easily add your own NGINX conf
 
 Dockerhero includes the following software (containers):
 
-- NGINX (latest)
-- mySQL (5.7)
-- Redis (latest)
-- PHP (8.2-fpm by default, [or choose a different version](#picking-a-php-version))
-- Mailhog
-- phpMyAdmin
-- phpRedisAdmin
-- MinIO S3 object storage
-- and more to come!
+-   NGINX (latest)
+-   mySQL (5.7)
+-   Redis (latest)
+-   PHP (8.2-fpm by default, [or choose a different version](#picking-a-php-version))
+-   Mailhog
+-   phpMyAdmin
+-   phpRedisAdmin
+-   MinIO S3 object storage
+-   and more to come!
 
 Dockerhero includes the following useful tools:
 
-- phpMyAdmin
-- phpRedisAdmin
-- Cron
-- Mailhog
-- Composer
-- Xdebug (with remote debugging support)
-- NVM
-- NPM
-- Yarn
-- Laravel Artisan autocompletion
-- Laravel Dusk support
-- laravel-dump-server support
-- Wkhtmltopdf
-- and more to come!
+-   phpMyAdmin
+-   phpRedisAdmin
+-   Cron
+-   Mailhog
+-   Composer
+-   Xdebug (with remote debugging support)
+-   NVM
+-   NPM
+-   Yarn
+-   Laravel Artisan autocompletion
+-   Laravel Dusk support
+-   laravel-dump-server support
+-   Wkhtmltopdf
+-   and more to come!
 
 Localtest.me is used to make everything work without editing your hosts file! Just like magic!
 
@@ -83,7 +83,6 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
         2. [Configuring the IDE](#configuring-the-ide)
 15. [Known issues](#known-issues)
     1. [General](#general)
-    2. [MacOS](#macos)
 16. [Contributing](#contributing)
     1. [Testing changes](#testing-changes)
 17. [Thank you](#thank-you)
@@ -104,64 +103,46 @@ This is because dockhero mounts its parent folder (`./../`) as `/var/www/project
 
 _Remember: anything you do inside the container is deleted upon closing docker! Only changes to mounted folders (like your projects, databases) are persisted because those changes are actually done on your system._
 
-### Picking a PHP version
+### Picking a PHP / workspace version
+
 By default, PHP 8.2 is active. If you would like to change this to another version, you can do so by overriding the option using the `docker-compose.override.yml` to change the image.
+
 For example, if you want to use PHP 8.0, it might look like this:
 
 ```yml
-version: '3'
+version: "3"
 
 services:
-  workspace:
-    image: johanvanhelden/dockerhero-workspace:php8.0
-  php:
-    image: johanvanhelden/dockerhero-php-8.0-fpm:latest
+    php:
+        build: ./php/8.0
+        # build: ./php/8.1
+        # build: ./php/8.2
+
+    workspace:
+        build: ./workspace/php8.0
+        # build: ./workspace/php8.1
+        # build: ./workspace/php8.2
 ```
+
+Available versions are: `8.2`, `8.1` and `8.0`.
+
+If you would like to use an even older PHP version, you can use one of the old images:
+`image: johanvanhelden/dockerhero-php-[VERSION_NUMBER]-fpm:latest`
+
+Replace `[VERSION_NUMBER]` with one of the following PHP versions: `7.4`, `7.3`, `7.2`, `7.1`, `5.6`, `5.4`
+
+The same goes for the workspace:
+`image: johanvanhelden/dockerhero-workspace:php[VERSION_NUMBER]`
+
+Replace `[VERSION_NUMBER]` with one of the following PHP versions: `7.4`, `7.3`, `7.2`, `7.1`
+
+If you are going to use an image, please comment out the `build:` lines in the `docker-compose.yml` file.
 
 For more information, please see this section: [Overriding default settings](#overriding-default-settings)
 
-#### Available PHP Images:
-
-PHP 8.2: `johanvanhelden/dockerhero-php-8.2-fpm:latest`
-
-PHP 8.1: `johanvanhelden/dockerhero-php-8.1-fpm:latest`
-
-PHP 8.0: `johanvanhelden/dockerhero-php-8.0-fpm:latest`
-
-PHP 7.4: `johanvanhelden/dockerhero-php-7.4-fpm:latest` (No longer maintained)
-
-PHP 7.3: `johanvanhelden/dockerhero-php-7.3-fpm:latest` (No longer maintained)
-
-PHP 7.2: `johanvanhelden/dockerhero-php-7.2-fpm:latest` (No longer maintained)
-
-PHP 7.1: `johanvanhelden/dockerhero-php-7.1-fpm:latest` (No longer maintained)
-
-PHP 5.6: `johanvanhelden/dockerhero-php-5.6-fpm:latest` (No longer maintained)
-
-PHP 5.4: `johanvanhelden/dockerhero-php-5.4-fpm:latest` (No longer maintained)
-
-#### Workspace images
-You should pick a matching workspace image for the PHP version you are using.
-
-PHP 8.2: `johanvanhelden/dockerhero-workspace:php8.2`
-
-PHP 8.1: `johanvanhelden/dockerhero-workspace:php8.1`
-
-PHP 8.0: `johanvanhelden/dockerhero-workspace:php8.0`
-
-PHP 7.4: `johanvanhelden/dockerhero-workspace:php7.4` (No longer maintained)
-
-PHP 7.3: `johanvanhelden/dockerhero-workspace:php7.3` (No longer maintained)
-
-PHP 7.2: `johanvanhelden/dockerhero-workspace:php7.2` (No longer maintained)
-
-PHP 7.1: `johanvanhelden/dockerhero-workspace:php7.1` (No longer maintained)
-
-There is also a latest tag, this one is used to remain backward compatible, but should not be actively used.
-
 ### Trusting the self-signed certificate
 
-Dockerhero has full support for https. This is done with a self-signed certificate. In order to skip the warning in your browser, you can trust the certificate by importing it in the browser or keychain. The certificate can be found [here](https://github.com/johanvanhelden/dockerhero-nginx/blob/master/.certs/localtest.crt).
+Dockerhero has full support for https. This is done with a self-signed certificate. In order to skip the warning in your browser, you can trust the certificate by importing it in the browser or keychain. The certificate can be found [here](https://github.com/johanvanhelden/dockerhero/blob/master/nginx/includes/.certs/localtest.crt).
 
 If you are on Windows and use Firefox, you should install the certificate in Windows and [allow Firefox to use Window's certificates](https://support.umbrella.com/hc/en-us/articles/115000669728-Configuring-Firefox-to-use-the-Windows-Certificate-Store).
 
@@ -190,14 +171,16 @@ And (after making sure any Docker instance is closed) restart WSL2 using the Win
 
 ### Dockerhero itself
 
-Simply download or pull the latest release from [GitHub](https://github.com/johanvanhelden/dockerhero) and [update the images](#dockerhero-images).
+Simply download or pull the latest release from [GitHub](https://github.com/johanvanhelden/dockerhero) and re-build the images: `docker-compose up --build`.
 
 ### Dockerhero images
 
 To ensure you have the latest images, you can run `docker-compose pull` in the Dockerhero folder.
 
 ## Usage
+
 ### Starting
+
 `$ cd` into the Dockerhero folder on your local machine and execute:
 
 ```bash
@@ -223,17 +206,18 @@ docker-compose stop
 ```
 
 ### Private composer packages
+
 If you need to access private composer packages, you might want to link your local `/home/username/.composer` folder (containing your auth.json file) and `/home/username/.ssh` folder (containing any SSH keys necessary to clone packages) to Dockerhero. You can do so by adding a new volume to the workspace image in your `docker-compose.override.yml` (if you do not have one,
 [please create it](#overriding-default-settings)) like so:
 
 ```yml
-version: '3'
+version: "3"
 
 services:
-  workspace:
-    volumes:
-      - /home/username/.composer:/home/dockerhero/.composer
-      - /home/username/.ssh:/home/dockerhero/.ssh
+    workspace:
+        volumes:
+            - /home/username/.composer:/home/dockerhero/.composer
+            - /home/username/.ssh:/home/dockerhero/.ssh
 ```
 
 You will now be able to install and update private packages inside Dockerhero.
@@ -269,17 +253,20 @@ DB_PASSWORD=my_project
 This assumes you created the proper database and user with the password using, for example, PHPMyAdmin.
 
 #### Changing the MySQL version
+
 If you would like to change the MySQL version, you can do so by editing the `docker-compose.override.yml` (if you do not
 have one, [please create it](#overriding-default-settings)) like so:
+
 ```yml
-version: '3'
+version: "3"
 
 services:
-  db:
-    image: mysql:5.6
+    db:
+        image: mysql:5.6
 ```
 
 #### Upgrading MySQL
+
 If you changed the MySQL image to a newer version, it will be necessary to upgrade your current databases.
 You can do so by logging into the database container and running the `mysql_upgrade` command, like so:
 `docker exec -it dockerhero_db bash`
@@ -290,15 +277,17 @@ Once inside the database container you need to run the following command:
 After the upgrade is done, please restart Dockerhero.
 
 #### Changing the SQL mode
+
 By default, I've set the same SQL mode as MySQL 5.6 to ensure maximum backwards compatibility. If you would like to
 set it to the 5.7 default setting, you can do so by editing the `docker-compose.override.yml` (if you do not have one,
 [please create it](#overriding-default-settings)) like so:
+
 ```yml
-version: '3'
+version: "3"
 
 services:
-  db:
-    command: --sql_mode="ONLY_FULL_GROUP_BY"
+    db:
+        command: --sql_mode="ONLY_FULL_GROUP_BY"
 ```
 
 ### Redis
@@ -367,7 +356,7 @@ Now, in a new terminal, you can simply execute `sshDockerhero` and you will be i
 
 ## Custom NGINX configs
 
-You can place your own `*.conf` files into the `nginx/conf` folder. They will be automatically included once the container starts.
+You can place your own `*.conf` files into the `./nginx/conf` folder. They will be automatically included once the container starts.
 
 ## Cronjobs
 
@@ -409,20 +398,22 @@ AWS_USE_PATH_STYLE_ENDPOINT=true
 Replace `YOUR_BUCKET_NAME` with the actual name of the bucket you have created in the GUI.
 
 ## Overriding default settings
+
 You can create a brand new `docker-compose.override.yml` in the root of Dockerhero to override default settings or customize things.
 It might look a bit like this:
 
 ```yml
-version: '3'
+version: "3"
 
 services:
-  php:
-    extra_hosts:
-      - "projectname.localtest.me:172.25.0.12"
-  workspace:
-    extra_hosts:
-      - "projectname.localtest.me:172.25.0.12"
+    php:
+        extra_hosts:
+            - "projectname.localtest.me:172.25.0.12"
+    workspace:
+        extra_hosts:
+            - "projectname.localtest.me:172.25.0.12"
 ```
+
 ### Adding more services
 
 Sometimes you might need to spin up more services, like for example an SFTP server.
@@ -430,15 +421,16 @@ You can easilly achieve this by adding these services to your `docker-compose.ov
 
 ```yml
 services:
-  sftp:
-    image: atmoz/sftp
-    volumes:
-      - ./sftp/storage:/home/sftpuser/storage
-    ports:
-      - "2222:22"
-    command: sftpuser:password:1001
+    sftp:
+        image: atmoz/sftp
+        volumes:
+            - ./sftp/storage:/home/sftpuser/storage
+        ports:
+            - "2222:22"
+        command: sftpuser:password:1001
 ```
-This snippet will add a lightweight SFTP server to your dockerhero installation, binds it to your local port 2222, and maps the local folder `sftp/storage` to the container (don't forget to create this folder). Files in this folder can now be accessed through sftp://sftpuser:password@localhost:2222/storage
+
+This snippet will add a lightweight SFTP server to your dockerhero installation, binds it to your local port 2222, and maps the local folder `./sftp/storage` to the container (don't forget to create this folder). Files in this folder can now be accessed through sftp://sftpuser:password@localhost:2222/storage
 
 ## Connecting from PHP to a local project via URL
 
@@ -446,7 +438,7 @@ Add the following entry to the `docker-compose.override.yml` file in the `php:` 
 
 ```yml
 extra_hosts:
-  - "projectname.localtest.me:172.25.0.12"
+    - "projectname.localtest.me:172.25.0.12"
 ```
 
 Where 172.25.0.12 is the IP of the dockerhero_web container.
@@ -459,9 +451,9 @@ If you are developing for an API, webhook or if you want to demonstrate somethin
 
 In order to do this:
 
-- Download ngrok from: <https://ngrok.com/>
-- Extract the zip file
-- Run the following command from the command line:
+-   Download ngrok from: <https://ngrok.com/>
+-   Extract the zip file
+-   Run the following command from the command line:
 
 ```bash
 ./ngrok http 127.0.0.1:80 -host-header=project.localtest.me
@@ -493,13 +485,14 @@ Pro-tip: so it's also possible now to execute a test suite on your host system u
 
 ### Laravel Dusk
 
-In order to make Laravel Dusk work, you need to add your Laravel project URL to the "extra_hosts" section of the docker compose workspace section, as explained in the "[Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)" section.
+In order to make Laravel Dusk work, you need to add your Laravel project URL to the "extra_hosts" section of the docker-compose workspace section, as explained in the "[Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)" section.
 
 ### laravel-dump-server
 
 [laravel-dump-server](https://github.com/beyondcode/laravel-dump-server) is a great package that allows you to capture dump contents so that it does not interfere with HTTP / API responses.
 
 In order to make it work with dockerhero, simply override the config and point it to the workspace container, like so:
+
 ```php
 'host' => 'tcp://dockerhero_workspace:9912',
 ```
@@ -509,8 +502,8 @@ Next, ssh into to workspace image, and simply run: `$ artisan dump-server` and s
 ### Remote Xdebug
 
 #### Starting Xdebug
-Xdebug is disabled per default to speed up PHP. If you want to start remote debugging, you would have to enable Xdebug first. To do this, execute the `xdebug/start.sh` script in the scripts folder.
-This enables Xdebug in the PHP and Workspace container.
+
+Xdebug is disabled per default to speed up PHP. If you want to start remote debugging, you would have to enable Xdebug first. To do this, execute the `./scriots/xdebug/start.sh` script. This enables Xdebug in the PHP and Workspace container.
 
 Make your life easier and create these functions in your ~/.bash_aliases file like so:
 
@@ -530,13 +523,14 @@ xdebugStart() {
 
 Now you can simply run `$ xdebugStart` and `$ xdebugStop`.
 
-
 #### Configuring the IDE
+
 It is possible to remotely debug your code using an IDE.
-You would have to set up your IDE to use port *9005*.
+You would have to set up your IDE to use port _9005_.
 And you would have to properly map your local path to Dockerhero (the project root is always `/var/www/projects` in Dockerhero).
 
 This is a working config for VSCode for a Laravel project (but has also been tested for CodeIgniter projects):
+
 ```json
 {
     "name": "Listen for XDebug",
@@ -555,30 +549,30 @@ This is a working config for VSCode for a Laravel project (but has also been tes
 ## Known issues
 
 ### General
+
 There might be an error when you run `./scripts/xdebug/stop.sh`, and Xdebug will still be enabled in the workspace container.
 Please run the command again and Xdebug will be stopped.
-
-### MacOS
-On MacOS there is an issue with linking the timezone. I do now own a Mac myself, so I am unable to produce a proper solution, but for now, I suggest you remove the timezone links from the `volumes:` section for each container (`workspace`, `php`, `web`, `db`) that links the time-zones. If you are someone who owns a Mac, please let me know how I can properly address this, if you can.
 
 ## Contributing
 
 Feel free to send in pull requests! Either to the image repos or the Dockerhero repo itself. Do keep the following in mind:
 
-- Everything needs to be as generic as possible, so do not try and add something that is super specific to your own use that no-one else will use.
-- Everyone needs to be able to use it out of the box, without additional configuration. However, it is fine if a feature would be disabled without configuring. As long as users can still just clone the project and "go".
-- If something needs documentation, add it to the readme.md.
-- Test, test and test your changes before you create the PR.
-- Always target your PR's to the `develop` branche.
+-   Everything needs to be as generic as possible, so do not try and add something that is super specific to your own use that no-one else will use.
+-   Everyone needs to be able to use it out of the box, without additional configuration. However, it is fine if a feature would be disabled without configuring. As long as users can still just clone the project and "go".
+-   If something needs documentation, add it to the readme.md.
+-   Test, test and test your changes before you create the PR.
+-   Always target your PR's to the `develop` branche.
 
 ### Testing changes
-To test changes to Dockerhero images, you can either follow the instructions from the README of the images or, if you want to test those changes in the Dockerhero system itself, you add the overwrite to the `docker-compose.override.yml` for the container you want to test. For example:
+
+To test changes to Dockerhero images, you can either follow the instructions from the README of the image or, if you want to test those changes in the Dockerhero system itself, you add the overwrite to the `docker-compose.override.yml` for the container you want to test. For example:
+
 ```yml
-version: '3'
+version: "3"
 
 services:
-  php:
-    build: ../dockerhero-php-7.3-fpm
+    php:
+        build: ../folder-with-the-dockerfile
 ```
 
 Next, start Dockerhero using the following command: `docker-compose up --build`.
@@ -589,28 +583,23 @@ Don't forget to stop and start Dockerhero again after reverting the `docker-comp
 
 ## Thank you
 
-- **localtest.me** - a big thank you goes out to localtest.me for providing a domain that points to 127.0.0.1\. You can visit their website [here](http://readme.localtest.me/)
-- **LaraDock** - also a huge shout out to LaraDock for providing me with a lot of sample code and inspiration. You can visit their GitHub page [here](https://github.com/LaraDock/laradock).
+-   **localtest.me** - a big thank you goes out to localtest.me for providing a domain that points to 127.0.0.1\. You can visit their website [here](http://readme.localtest.me/)
+-   **LaraDock** - also a huge shout out to LaraDock for providing me with a lot of sample code and inspiration. You can visit their GitHub page [here](https://github.com/LaraDock/laradock).
 
 ## Project links
 
-- [Dockerhero - GitHub](https://github.com/johanvanhelden/dockerhero)
-- [Dockerhero - Workspace GitHub](https://github.com/johanvanhelden/dockerhero-workspace)
-- [Dockerhero - NGINX GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
-- [Dockerhero - PHP 8.2-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.2-fpm)
-- [Dockerhero - PHP 8.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.1-fpm)
-- [Dockerhero - PHP 8.0-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.0-fpm)
-- [Dockerhero - PHP 7.4-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.4-fpm)
-- [Dockerhero - PHP 7.3-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.3-fpm)
-- [Dockerhero - PHP 7.2-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.2-fpm)
-- [Dockerhero - PHP 7.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.1-fpm)
-- [Dockerhero - PHP 5.6-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.6-fpm)
-- [Dockerhero - PHP 5.4-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.4-fpm)
+-   [Dockerhero - GitHub](https://github.com/johanvanhelden/dockerhero)
 
-## Todo
+### Archived repositories
 
-- Make the timezone a setting that can be overwritten when starting containers
-- Set up a GitHub page
-- Add badges to the other repos
-- PR hooks for automated builds to ensure everything passes
-- Automate testing of Dockerhero itself
+-   [Dockerhero - Workspace GitHub](https://github.com/johanvanhelden/dockerhero-workspace)
+-   [Dockerhero - NGINX GitHub](https://github.com/johanvanhelden/dockerhero-nginx)
+-   [Dockerhero - PHP 8.2-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.2-fpm)
+-   [Dockerhero - PHP 8.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.1-fpm)
+-   [Dockerhero - PHP 8.0-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-8.0-fpm)
+-   [Dockerhero - PHP 7.4-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.4-fpm)
+-   [Dockerhero - PHP 7.3-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.3-fpm)
+-   [Dockerhero - PHP 7.2-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.2-fpm)
+-   [Dockerhero - PHP 7.1-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-7.1-fpm)
+-   [Dockerhero - PHP 5.6-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.6-fpm)
+-   [Dockerhero - PHP 5.4-fpm GitHub](https://github.com/johanvanhelden/dockerhero-php-5.4-fpm)

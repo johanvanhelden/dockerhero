@@ -1,0 +1,22 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = dn
+
+[dn]
+C = NL
+ST = Dockerhero
+L = Dockerhero
+O = Dockerhero
+OU = Dockerhero
+emailAddress = fake@localhost
+CN = Dockerhero
+
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = *.localtest.me
+DNS.2 = localtest.me

@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  workspace:
+    container_name: dockerhero-workspace-testing
+    build: .
+    volumes:
+      - ./../:/var/www/projects
+    tty: true
+    dns: 8.8.8.8
