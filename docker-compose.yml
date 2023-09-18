@@ -11,12 +11,11 @@ volumes:
 services:
   workspace:
     container_name: dockerhero_workspace
-    image: johanvanhelden/dockerhero-workspace:php8.2
+    build: ./workspace/php8.2
     restart: unless-stopped
     volumes:
       - ./../:/var/www/projects
       - ./crons:/var/crons
-      - /etc/localtime:/etc/localtime:ro
     tty: true
     dns: 8.8.8.8
     networks:
@@ -25,7 +24,7 @@ services:
 
   php:
     container_name: dockerhero_php
-    image: johanvanhelden/dockerhero-php-8.2-fpm:latest
+    build: ./php/8.2
     restart: unless-stopped
     links:
       - db
@@ -38,7 +37,6 @@ services:
       - ../:/var/www/projects
       - ./.phpmyadmin/index.php:/var/www/phpmyadmin/index.php
       - ./.phpredisadmin/index.php:/var/www/phpredisadmin/index.php
-      - /etc/localtime:/etc/localtime:ro
     ports:
       - "9912:9912"
     expose:
@@ -50,7 +48,7 @@ services:
 
   web:
     container_name: dockerhero_web
-    image: johanvanhelden/dockerhero-nginx:latest
+    build: ./nginx
     restart: unless-stopped
     links:
       - php
@@ -60,7 +58,6 @@ services:
       - ./.phpredisadmin/index.php:/var/www/phpredisadmin/index.php
       - ./nginx/conf:/etc/nginx/conf.d/dockerhero/custom
       - nginx_logs:/var/log/nginx
-      - /etc/localtime:/etc/localtime:ro
     depends_on:
       - php
     ports:
@@ -78,7 +75,6 @@ services:
     command: --sql_mode="NO_ENGINE_SUBSTITUTION"
     volumes:
       - "database:/var/lib/mysql"
-      - /etc/localtime:/etc/localtime:ro
     environment:
       - MYSQL_ROOT_PASSWORD=dockerhero
       - MYSQL_PASSWORD=dockerhero
