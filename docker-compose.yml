@@ -86,7 +86,7 @@ services:
       dockerhero:
         ipv4_address: 172.25.0.13
     healthcheck:
-      test: [ "CMD", "mysqladmin", "-pdockerhero", "ping" ]
+      test: ["CMD", "mysqladmin", "-pdockerhero", "ping"]
 
   mail:
     container_name: dockerhero_mail
@@ -112,7 +112,7 @@ services:
       dockerhero:
         ipv4_address: 172.25.0.15
     healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
+      test: ["CMD", "redis-cli", "ping"]
 
   phpmyadmin:
     container_name: dockerhero_dbadmin
@@ -168,8 +168,8 @@ services:
       - MINIO_ROOT_USER=root
       - MINIO_ROOT_PASSWORD=dockerhero
     ports:
-      - '9001:9001'
-      - '9000:9000'
+      - "9001:9001"
+      - "9000:9000"
     networks:
       dockerhero:
         ipv4_address: 172.25.0.18
