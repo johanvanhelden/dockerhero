@@ -1,4 +1,4 @@
-FROM phusion/baseimage:master-amd64
+FROM phusion/baseimage:focal-1.0.0
 
 LABEL maintainer="Johan van Helden <johan@johanvanhelden.com>"
 
