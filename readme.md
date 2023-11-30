@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 4.0.0
+## Version 4.1.0
 
 ### What is Dockerhero?
 
@@ -117,14 +117,16 @@ services:
         build: ./php/8.0
         # build: ./php/8.1
         # build: ./php/8.2
+        # build: ./php/8.3
 
     workspace:
         build: ./workspace/php8.0
         # build: ./workspace/php8.1
         # build: ./workspace/php8.2
+        # build: ./workspace/php8.3
 ```
 
-Available versions are: `8.2`, `8.1` and `8.0`.
+Available versions are: `8.3`, `8.2`, `8.1` and `8.0`.
 
 If you would like to use an even older PHP version, you can use one of the old images:
 `image: johanvanhelden/dockerhero-php-[VERSION_NUMBER]-fpm:latest`
