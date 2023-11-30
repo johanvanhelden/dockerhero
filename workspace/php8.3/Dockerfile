@@ -47,7 +47,7 @@ RUN apt-get update && \
     php8.3-memcached \
     php8.3-gd \
     php8.3-redis \
-    php8.3-xdebug \
+    # php8.3-xdebug \
     php8.3-dev \
     php8.3-imagick \
     php-pear \
@@ -84,7 +84,7 @@ RUN update-alternatives --set php /usr/bin/php8.3 && \
     update-alternatives --set phar.phar /usr/bin/phar.phar8.3
 
 # Disable Xdebug per default
-RUN sed -i 's/^zend_extension=/;zend_extension=/g' /etc/php/8.3/cli/conf.d/20-xdebug.ini
+# RUN sed -i 's/^zend_extension=/;zend_extension=/g' /etc/php/8.3/cli/conf.d/20-xdebug.ini
 
 #Install chrome - needed for Laravel Dusk
 RUN curl -sS https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
