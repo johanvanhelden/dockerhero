@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 4.1.0
+## Version 4.2.0
 
 ### What is Dockerhero?
 
@@ -17,7 +17,7 @@ Dockerhero includes the following software (containers):
 -   mySQL (5.7)
 -   Redis (latest)
 -   PHP (8.2-fpm by default, [or choose a different version](#picking-a-php-version))
--   Mailhog
+-   Mailpit
 -   phpMyAdmin
 -   phpRedisAdmin
 -   MinIO S3 object storage
@@ -28,7 +28,7 @@ Dockerhero includes the following useful tools:
 -   phpMyAdmin
 -   phpRedisAdmin
 -   Cron
--   Mailhog
+-   Mailpit
 -   Composer
 -   Xdebug (with remote debugging support)
 -   NVM
@@ -68,7 +68,7 @@ Localtest.me is used to make everything work without editing your hosts file! Ju
 5. [CLI Access](#cli-access)
 6. [Custom NGINX configs](#custom-nginx-configs)
 7. [Cronjobs](#cronjobs)
-8. [Mailhog](#mailhog)
+8. [Mailpit](#mailpit)
 9. [MinIO](#minio)
 10. [Overriding default settings](#overriding-default-settings)
     1. [Adding more services](#adding-more-services)
@@ -364,14 +364,14 @@ You can place your own `*.conf` files into the `./nginx/conf` folder. They will 
 
 Create a new file in `./crons/` called `crons`. In this file, define all the cron lines you want. For an example, see the `./crons/crons.sample` file.
 
-## Mailhog
+## Mailpit
 
-All outgoing mail is caught by default. You do not need to configure anything. To view the e-mail that has been send, visit the [Mailhog GUI](http://localhost:8025)
+All outgoing mail is caught by default. You do not need to configure anything. To view the e-mail that has been send, visit the [Mailpit GUI](http://localhost:8025)
 
-For some reason, this autocatching does not work properly with Laravel artisan commands (like queue workers). In order to make it work, you can set the .env settings like so:
+If, for some reason, this auto catching does not work properly, you can set the `.env` settings for a Laravel project like so:
 
 ```
-MAIL_DRIVER=smtp
+MAIL_MAILER=smtp
 MAIL_HOST=dockerhero_mail
 MAIL_PORT=1025
 MAIL_USERNAME=null

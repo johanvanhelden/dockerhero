@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.2.0 - 2024-04-23
+
+-   Replace Mailhog with [Mailpit](https://mailpit.axllent.org/)
+
 ## 4.1.0 - 2023-11-30
 
 -   Add PHP 8.3 (without xdebug in the workspace as this is not available yet)

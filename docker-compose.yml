@@ -90,7 +90,7 @@ services:
 
   mail:
     container_name: dockerhero_mail
-    image: mailhog/mailhog
+    image: axllent/mailpit
     restart: unless-stopped
     ports:
       - "1025:1025"
