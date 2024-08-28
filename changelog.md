@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.3.0 - 2024-08-28
+
+-   Remove version attributes from docker compose yaml files as they are now obsolete.
+
 ## 4.2.0 - 2024-04-23
 
 -   Replace Mailhog with [Mailpit](https://mailpit.axllent.org/)
@@ -228,8 +232,6 @@ If you are not ready yet for this change, you can roll back to PHP 7.1 by adding
 the following contents:
 
 ```
-version: '2'
-
 services:
   php:
 	image: johanvanhelden/dockerhero-php-7.1-fpm:latest

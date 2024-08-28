@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 4.2.0
+## Version 4.3.0
 
 ### What is Dockerhero?
 
@@ -110,8 +110,6 @@ By default, PHP 8.2 is active. If you would like to change this to another versi
 For example, if you want to use PHP 8.0, it might look like this:
 
 ```yml
-version: "3"
-
 services:
     php:
         build: ./php/8.0
@@ -213,8 +211,6 @@ If you need to access private composer packages, you might want to link your loc
 [please create it](#overriding-default-settings)) like so:
 
 ```yml
-version: "3"
-
 services:
     workspace:
         volumes:
@@ -260,8 +256,6 @@ If you would like to change the MySQL version, you can do so by editing the `doc
 have one, [please create it](#overriding-default-settings)) like so:
 
 ```yml
-version: "3"
-
 services:
     db:
         image: mysql:5.6
@@ -285,8 +279,6 @@ set it to the 5.7 default setting, you can do so by editing the `docker-compose.
 [please create it](#overriding-default-settings)) like so:
 
 ```yml
-version: "3"
-
 services:
     db:
         command: --sql_mode="ONLY_FULL_GROUP_BY"
@@ -405,8 +397,6 @@ You can create a brand new `docker-compose.override.yml` in the root of Dockerhe
 It might look a bit like this:
 
 ```yml
-version: "3"
-
 services:
     php:
         extra_hosts:
@@ -570,8 +560,6 @@ Feel free to send in pull requests! Either to the image repos or the Dockerhero 
 To test changes to Dockerhero images, you can either follow the instructions from the README of the image or, if you want to test those changes in the Dockerhero system itself, you add the overwrite to the `docker-compose.override.yml` for the container you want to test. For example:
 
 ```yml
-version: "3"
-
 services:
     php:
         build: ../folder-with-the-dockerfile

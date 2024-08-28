@@ -1,5 +1,3 @@
-version: "3"
-
 services:
     workspace:
         container_name: dockerhero-php-8.3-fpm-testing
