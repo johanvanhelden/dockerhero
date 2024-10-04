@@ -1,10 +1,10 @@
 # Dockerhero
 
-## Version 4.3.0
+## Version 4.3.1
 
 ### What is Dockerhero?
 
-Dockerhero is a local development tool. Out of the box, it should only take a "docker-compose start" to get **all your local PHP projects working**. Yes, all of them. **At the same time**.
+Dockerhero is a local development tool. Out of the box, it should only take a `make start` to get **all your local PHP projects working**. Yes, all of them. **At the same time**.
 
 It has support for Laravel, Codeigniter, Wordpress and other PHP projects.
 It has dynamic docroot support for `public`, `public_html` and `html`, depending on what folder is found in your project. **Zero setup needed!**
@@ -171,39 +171,61 @@ And (after making sure any Docker instance is closed) restart WSL2 using the Win
 
 ### Dockerhero itself
 
-Simply download or pull the latest release from [GitHub](https://github.com/johanvanhelden/dockerhero) and re-build the images: `docker-compose up --build`.
+Simply download or pull the latest release from [GitHub](https://github.com/johanvanhelden/dockerhero) and re-build the images: `make up-build`.
 
 ### Dockerhero images
 
-To ensure you have the latest images, you can run `docker-compose pull` in the Dockerhero folder.
+To ensure you have the latest images, you can run `make pull` in the Dockerhero folder.
 
 ## Usage
 
 ### Starting
 
-`$ cd` into the Dockerhero folder on your local machine and execute:
+There a multiple ways to start Dockerhero. The most common way is to  `$ cd` into the Dockerhero folder on your local machine and execute:
 
-```bash
-docker-compose up
+```shell
+make up
 ```
 
-This will give you real-time log information and useful when debugging something. If anything fails, you can simply `ctrl-c` docker and it will shut down.
+This will start all Docker containers in the background.
 
-If you would rather prefer to run everything in the background, use:
+If you want real-time log information and see what the containers are doing, simply use:
 
-```bash
-docker-compose start
+```shell
+make up-verbose
+```
+
+If anything fails, or you want to shut it down, you can simply press `ctrl-c` in the CLI and it will shut down gracefully.
+
+If you want to ensure a fresh build of the containers is used, you can use:
+
+```shell
+make up-build
+```
+
+If you want to start docker using the previous state of the containers, you can use:
+
+```shell
+make start
 ```
 
 ### Stopping
 
-To stop the containers, simple stop the `docker-compose up` process using `ctrl-c`.
+To stop the containers, simple stop the `make up-verbose` process using `ctrl-c`.
 
 If you had it running in the background, you can use:
 
 ```bash
-docker-compose stop
+make stop
 ```
+
+Or if you would like Docker to remove the containers, networks, volumes and images, use:
+
+```bash
+make down
+```
+
+This is a good option if you are going to [update](#updating) the images.
 
 ### Private composer packages
 
@@ -322,7 +344,7 @@ REDIS_PORT=6379
 
 You can enter the bash environment of the containers by executing:
 
-```bash
+```sh
 docker exec -it --user=dockerhero dockerhero_workspace bash
 ```
 
@@ -447,7 +469,7 @@ In order to do this:
 -   Extract the zip file
 -   Run the following command from the command line:
 
-```bash
+```sh
 ./ngrok http 127.0.0.1:80 -host-header=project.localtest.me
 ```
 
@@ -477,7 +499,7 @@ Pro-tip: so it's also possible now to execute a test suite on your host system u
 
 ### Laravel Dusk
 
-In order to make Laravel Dusk work, you need to add your Laravel project URL to the "extra_hosts" section of the docker-compose workspace section, as explained in the "[Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)" section.
+In order to make Laravel Dusk work, you need to add your Laravel project URL to the "extra_hosts" section of the `docker-compose.yml` workspace section, as explained in the "[Connecting from PHP to a local project via URL](#connecting-from-php-to-a-local-project-via-url)" section.
 
 ### laravel-dump-server
 
@@ -565,11 +587,11 @@ services:
         build: ../folder-with-the-dockerfile
 ```
 
-Next, start Dockerhero using the following command: `docker-compose up --build`.
+Next, start Dockerhero using the following command: `make up-build`.
 
 Once everything is tested and works properly, you can revert the changes to the `docker-compose.yml` and create the PR.
 
-Don't forget to stop and start Dockerhero again after reverting the `docker-compose.yml` file, otherwise you keep using the local forked image. For the first time, after reverting the changes, I recommend to use `docker-compose up --build --no-cache` to ensure everything is fresh again.
+Don't forget to stop and start Dockerhero again after reverting the `docker-compose.yml` file, otherwise you keep using the local forked image. For the first time, after reverting the changes, I recommend to use `docker compose up --build --no-cache` to ensure everything is fresh again.
 
 ## Thank you
 

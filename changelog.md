@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.3.1 - 2024-10-04
+
+-   Add Makefile with several commands for a cleaner experience.
+
 ## 4.3.0 - 2024-08-28
 
 -   Remove version attributes from docker compose yaml files as they are now obsolete.
