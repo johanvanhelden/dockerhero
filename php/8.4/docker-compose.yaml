@@ -1,0 +1,8 @@
+services:
+    workspace:
+        container_name: dockerhero-php-8.4-fpm-testing
+        build: .
+        volumes:
+            - ./../:/var/www/projects
+        tty: true
+        dns: 8.8.8.8

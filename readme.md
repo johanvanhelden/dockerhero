@@ -1,6 +1,6 @@
 # Dockerhero
 
-## Version 4.3.1
+## Version 4.4.0
 
 ### What is Dockerhero?
 
@@ -16,7 +16,7 @@ Dockerhero includes the following software (containers):
 -   NGINX (latest)
 -   mySQL (5.7)
 -   Redis (latest)
--   PHP (8.2-fpm by default, [or choose a different version](#picking-a-php-version))
+-   PHP (8.3-fpm by default, [or choose a different version](#picking-a-php-version))
 -   Mailpit
 -   phpMyAdmin
 -   phpRedisAdmin
@@ -116,15 +116,17 @@ services:
         # build: ./php/8.1
         # build: ./php/8.2
         # build: ./php/8.3
+        # build: ./php/8.4
 
     workspace:
         build: ./workspace/php8.0
         # build: ./workspace/php8.1
         # build: ./workspace/php8.2
         # build: ./workspace/php8.3
+        # build: ./workspace/php8.4
 ```
 
-Available versions are: `8.3`, `8.2`, `8.1` and `8.0`.
+Available versions are: `8.4`, `8.3`, `8.2`, `8.1` and `8.0`.
 
 If you would like to use an even older PHP version, you can use one of the old images:
 `image: johanvanhelden/dockerhero-php-[VERSION_NUMBER]-fpm:latest`
@@ -246,12 +248,17 @@ You will now be able to install and update private packages inside Dockerhero.
 
 ### MySQL
 
-Via phpMyAdmin you can create new databases and users. The database host you would need to use in your projects would be:
+The database host you would need to use in your projects would be:
 
 ```
 mySQL host: dockerhero_db
 mySQL port: 3306
 ```
+#### GUI
+You can use any GUI you prefer. For example [DBeaver](https://dbeaver.io/).
+
+If you would prefer not to install any tools, you can also use the PHPMyAdmin tool that is bundled with Dockerhero.
+Make sure to start dockerhero with the `--profile phpmyadmin` flag to ensure PHPMyAdmin starts (`docker compose --profile phpmyadmin up`).
 
 You can visit phpMyAdmin by going to `http://localhost:8026/`
 
@@ -314,6 +321,12 @@ In order to use Redis in your projects, you need to define the following host:
 Redis host: dockerhero_redis
 Redis port: 6379
 ```
+
+#### GUI
+You can use any GUI you prefer. For example [Another Redis Desktop Manager](https://goanother.com/).
+
+If you would prefer not to install any tools, you can also use the phpRedisAdmin tool that is bundled with Dockerhero.
+Make sure to start dockerhero with the `--profile phpredisadmin` flag to ensure PHPMyAdmin starts (`docker compose --profile phpredisadmin up`).
 
 You can visit phpRedisAdmin by going to `http://localhost:8027`
 

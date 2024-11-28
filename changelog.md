@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 4.4.0 - 2024-11-28
+
+-   Add PHP 8.4 (without Xdebug as this is not available yet)
+-   Add Xdebug to PHP 8.3 Workspace as it's now supported
+-   Make PHPMyAdmin and phpRedisAdmin optional through profiles to save system resources for those who do not use it
+
 ## 4.3.1 - 2024-10-04
 
 -   Add Makefile with several commands for a cleaner experience.
@@ -18,7 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## 4.1.0 - 2023-11-30
 
--   Add PHP 8.3 (without xdebug in the workspace as this is not available yet)
+-   Add PHP 8.3 (without Xdebug in the workspace as this is not available yet)
 -   [Workspace] Changed `phusion/baseimage` to the `focal` tag
 
 ## 4.0.0 - 2023-09-18
@@ -407,7 +413,7 @@ services:
 
 -   Add the dns option to the workspace image to fix dns issues on OSX
 -   Add a better update section to the readme
--   Increased xdebug dumping depth to show everything when dumping data. (php-5.6-fpm image)
+-   Increased Xdebug dumping depth to show everything when dumping data. (php-5.6-fpm image)
 -   Ensure all e-mail is caught by Mailhog by default and update the readme to reflect this change. (php-5.6-fpm image)
 
 ## 1.0.2 - 2016-11-21
