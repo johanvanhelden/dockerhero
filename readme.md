@@ -257,6 +257,8 @@ mySQL port: 3306
 #### GUI
 You can use any GUI you prefer. For example [DBeaver](https://dbeaver.io/).
 
+Simply set up a new connection to host `127.0.0.1` on port `3306` with the `root` user using the password `dockerhero`.
+
 If you would prefer not to install any tools, you can also use the PHPMyAdmin tool that is bundled with Dockerhero.
 Make sure to start dockerhero with the `--profile phpmyadmin` flag to ensure PHPMyAdmin starts (`docker compose --profile phpmyadmin up`).
 
@@ -324,6 +326,8 @@ Redis port: 6379
 
 #### GUI
 You can use any GUI you prefer. For example [Another Redis Desktop Manager](https://goanother.com/).
+
+Simply set up a new connection to host `127.0.0.1` on port `6379`.
 
 If you would prefer not to install any tools, you can also use the phpRedisAdmin tool that is bundled with Dockerhero.
 Make sure to start dockerhero with the `--profile phpredisadmin` flag to ensure PHPMyAdmin starts (`docker compose --profile phpredisadmin up`).
